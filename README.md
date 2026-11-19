@@ -31,6 +31,7 @@
 - [Remote Package Installer 使用方法](#remote-package-installer-使用方法)
 - [汉化说明](#汉化说明)
 - [自行构建](#自行构建)
+- [打赏支持](#打赏支持)
 - [致谢与许可证](#致谢与许可证)
 
 ---
@@ -227,6 +228,25 @@ dotnet publish PS4PKGTool\PS4PKGTool.csproj -c Release
 ```
 
 > **关于 DarkUI 依赖**：`BUILDING.md` 原先指向的 `EthanBlazkowicz/DarkUI` 其 master 分支（`b09d852`）缺少 `DarkTextBox.RefreshScrollBars` 与 `Placeholder` 成员，用它构建会编译失败。请改用 `pearlxcore/DarkUI`（master `9609e4e`，包含上述成员与同样的 DPI 修复）。
+
+---
+
+## 打赏支持
+
+汉化与维护这个分支花了不少时间。如果它帮到了你，欢迎请我喝杯咖啡 ☕
+
+<p align="center">
+  <img src="docs/sponsor-qrcode.jpg" alt="赞赏码" width="260">
+</p>
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-yellow.svg" alt="Buy Me a Coffee" height="36"></a>
+</p>
+
+你的支持会用于持续跟进上游更新、修复问题并保持汉化同步。上游原作者的支持渠道同样有效：
+
+[![ko-fi](https://github.com/user-attachments/assets/93da7a03-e740-4f79-9add-8b3741239b2f)](https://ko-fi.com/R6R524N7X)
+[![paypal](https://user-images.githubusercontent.com/36906814/102657760-39d1ce00-41b1-11eb-96fe-c10e2d9b3f39.png)](https://www.paypal.com/paypalme/pearlxcoree)
 
 ---
 
