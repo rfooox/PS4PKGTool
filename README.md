@@ -39,9 +39,11 @@
 
 | 版本 | 说明 |
 |---|---|
-| [**中文版 Release（v1.9.2-zh）**](https://github.com/rfooox/PS4PKGTool/releases/tag/v1.9.2-zh) | 自包含版 **126.8 MB**（免运行时）/ 框架依赖版 **16.2 MB**（需 .NET 10 Desktop Runtime） |
+| [**中文版 Release（v1.9.2-zh）**](https://github.com/rfooox/PS4PKGTool/releases/tag/v1.9.2-zh) | `PS4PKGTool-v1.9.2-zh-standalone.exe`（**126.8 MB**，自包含，免运行时）<br>`PS4PKGTool-v1.9.2-zh-framework-dependent.exe`（**16.2 MB**，框架依赖，需 .NET 10 Desktop Runtime） |
 | [上游官方 Release（英文界面）](https://github.com/pearlxcore/PS4-PKG-Tool/releases/latest) | 由上游作者发布的官方版本 |
 | **本仓库源码** | 完整中文界面，可自行构建，见 [自行构建](#自行构建) |
+
+> Release 附件名使用 ASCII：GitHub 的附件上传接口不接受含空格与中文的文件名（返回 HTTP 404），附件名与程序界面的中文显示无关。
 
 ---
 
