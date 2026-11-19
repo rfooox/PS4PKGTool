@@ -12,7 +12,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
     /// One local test result, saved after a game session (or added manually).
     /// New session fields are OPTIONAL - old JSONL records without them
     /// deserialize fine (missing properties keep their defaults) and the UI
-    /// shows "Unknown" / "Not recorded" instead of failing.
+    /// shows "Unknown" / "未记录" instead of failing.
     /// </summary>
     public sealed class GameFeedbackEntry
     {
@@ -77,7 +77,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
     /// <summary>
     /// Display helpers for test results (runtime, exit, timestamps). Values
     /// are formatted from machine-stable primitives; missing data shows
-    /// "Unknown" / "Not recorded" instead of failing.
+    /// "Unknown" / "未记录" instead of failing.
     /// </summary>
     public static class TestResultDisplay
     {
@@ -95,9 +95,9 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                 : $"{minutes}m";
         }
 
-        /// <summary>"0xC0000005" - or "Not recorded".</summary>
+        /// <summary>"0xC0000005" - or "未记录".</summary>
         public static string FormatExitCode(int? exitCode)
-            => exitCode == null ? "Not recorded" : $"0x{unchecked((uint)exitCode.Value):X8}";
+            => exitCode == null ? "未记录" : $"0x{unchecked((uint)exitCode.Value):X8}";
 
         /// <summary>Local "yyyy-MM-dd HH:mm" or "-" for unparseable timestamps.</summary>
         public static string FormatWhen(string? timestampUtc)
@@ -167,34 +167,34 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         public static string FormatSubmissionText(GameFeedbackEntry e)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Game Name");
+            sb.AppendLine("游戏名称");
             sb.AppendLine(e.Title);
             sb.AppendLine();
-            sb.AppendLine("Game serial");
+            sb.AppendLine("游戏序列号");
             sb.AppendLine(e.TitleId);
             sb.AppendLine();
-            sb.AppendLine("Game version");
+            sb.AppendLine("游戏版本");
             sb.AppendLine(e.GameVersion);
             sb.AppendLine();
             sb.AppendLine("Used emulator's version (only major released versions are acceptable)");
             sb.AppendLine(e.EmulatorVersion);
             sb.AppendLine();
-            sb.AppendLine("Current status");
+            sb.AppendLine("当前状态");
             sb.AppendLine(CompatibilityReport.NormalizeStatus(e.Status));
             sb.AppendLine();
-            sb.AppendLine("Operating System");
+            sb.AppendLine("操作系统");
             sb.AppendLine(e.Os);
             sb.AppendLine();
-            sb.AppendLine("Processor");
+            sb.AppendLine("处理器");
             sb.AppendLine(e.Processor);
             sb.AppendLine();
-            sb.AppendLine("Graphics Card");
+            sb.AppendLine("显卡");
             sb.AppendLine(e.GraphicsCard);
             sb.AppendLine();
-            sb.AppendLine("Error");
+            sb.AppendLine("错误");
             sb.AppendLine(e.Error);
             sb.AppendLine();
-            sb.AppendLine("Description");
+            sb.AppendLine("描述");
             sb.Append(e.Comment);
             return sb.ToString().TrimEnd();
         }

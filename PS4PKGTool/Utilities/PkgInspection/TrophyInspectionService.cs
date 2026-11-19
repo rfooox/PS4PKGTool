@@ -101,7 +101,7 @@ namespace PS4PKGTool.Utilities.PkgInspection
                     return new PkgTrophyResourceResult
                     {
                         Status = PkgTrophyResourceStatus.NotFound,
-                        Message = "No trophy data was found in this package."
+                        Message = "该安装包中未找到奖杯数据。"
                     };
                 }
 
@@ -110,7 +110,7 @@ namespace PS4PKGTool.Utilities.PkgInspection
                     return new PkgTrophyResourceResult
                     {
                         Status = PkgTrophyResourceStatus.Inaccessible,
-                        Message = "The package contains trophy data, but its TRP entry is encrypted and cannot be accessed."
+                        Message = "该安装包包含奖杯数据，但其 TRP 条目已加密，无法访问。"
                     };
                 }
 
@@ -316,7 +316,7 @@ namespace PS4PKGTool.Utilities.PkgInspection
             {
                 return State(
                     TrophyInspectionStatus.Failed,
-                    "Trophy information could not be read. " + ex.Message);
+                    "无法读取奖杯信息。 " + ex.Message);
             }
             finally
             {
@@ -329,7 +329,7 @@ namespace PS4PKGTool.Utilities.PkgInspection
 
         private static string SafeFailureMessage(string message) =>
             string.IsNullOrWhiteSpace(message)
-                ? "Trophy information could not be read."
+                ? "无法读取奖杯信息。"
                 : message;
 
         private static void TryDeleteTemporaryDirectory(string directory)

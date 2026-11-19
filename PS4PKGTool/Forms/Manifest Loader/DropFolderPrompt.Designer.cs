@@ -33,7 +33,7 @@ namespace PS4PKGTool
             darkLabelTitle.Name = "darkLabelTitle";
             darkLabelTitle.Size = new System.Drawing.Size(380, 22);
             darkLabelTitle.TabIndex = 0;
-            darkLabelTitle.Text = "Folder Dropped";
+            darkLabelTitle.Text = "已拖入文件夹";
             // 
             // darkLabelPath
             // 
@@ -61,7 +61,7 @@ namespace PS4PKGTool
             chkRecursive.Name = "chkRecursive";
             chkRecursive.Size = new System.Drawing.Size(250, 22);
             chkRecursive.TabIndex = 3;
-            chkRecursive.Text = "Scan subfolders recursively";
+            chkRecursive.Text = "递归扫描子文件夹";
             // 
             // chkAddToDirectories
             // 
@@ -71,7 +71,7 @@ namespace PS4PKGTool
             chkAddToDirectories.Name = "chkAddToDirectories";
             chkAddToDirectories.Size = new System.Drawing.Size(380, 22);
             chkAddToDirectories.TabIndex = 4;
-            chkAddToDirectories.Text = "Add to saved directories";
+            chkAddToDirectories.Text = "添加到已保存的目录";
             // 
             // btnScan
             // 
@@ -80,7 +80,7 @@ namespace PS4PKGTool
             btnScan.Name = "btnScan";
             btnScan.Size = new System.Drawing.Size(100, 30);
             btnScan.TabIndex = 5;
-            btnScan.Text = "Scan";
+            btnScan.Text = "扫描";
             btnScan.Click += btnScan_Click;
             // 
             // btnCancel
@@ -90,7 +90,7 @@ namespace PS4PKGTool
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(100, 30);
             btnCancel.TabIndex = 6;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "取消";
             btnCancel.Click += btnCancel_Click;
             // 
             // DropFolderPrompt
@@ -111,7 +111,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "DropFolderPrompt";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Add PKG Folder";
+            Text = "添加 PKG 文件夹";
             ResumeLayout(false);
         }
 

@@ -121,7 +121,7 @@ public static class ParamJsonProjector
     /// <c>choose_title</c>: prefer <c>TITLE</c>, then <c>TITLE_NN</c> at
     /// <paramref name="preferredIndex"/>, then <c>TITLE_01</c>, then the first
     /// non-empty <c>TITLE_NN</c>, then <c>CONTENT_ID</c> / <c>TITLE_ID</c>, and
-    /// finally <c>"Unknown Game"</c>.
+    /// finally <c>"未知游戏"</c>.
     /// </summary>
     public static string ChooseTitle(ParamSfo sfo, int? preferredIndex = null)
     {
@@ -157,7 +157,7 @@ public static class ParamJsonProjector
                 return fallback.Trim();
         }
 
-        return "Unknown Game";
+        return "未知游戏";
     }
 
     /// <summary>
@@ -172,16 +172,16 @@ public static class ParamJsonProjector
         ArgumentNullException.ThrowIfNull(expectedTitleId);
 
         if (HasUtf8Bom(data))
-            throw new FormatException("param.json must not contain a UTF-8 BOM.");
+            throw new FormatException("param.json 不能包含 UTF-8 BOM。");
 
         JsonObject payload = ParseExisting(data) ??
-            throw new FormatException("param.json is not a valid JSON object.");
+            throw new FormatException("param.json 不是有效的 JSON 对象。");
 
         string? titleId = TryGetString(payload, "titleId") ?? TryGetString(payload, "title_id");
         if (!string.Equals(titleId, expectedTitleId, StringComparison.Ordinal))
             throw new FormatException($"param.json titleId mismatch: {titleId ?? "<missing>"}");
         if (titleId.Length != 9)
-            throw new FormatException("param.json titleId must contain exactly 9 characters.");
+            throw new FormatException("param.json 的 titleId 必须正好包含 9 个字符。");
 
         string? titleName = TryGetString(payload, "titleName");
         if (string.IsNullOrEmpty(titleName) && payload["localizedParameters"] is JsonObject localized)
@@ -191,7 +191,7 @@ public static class ParamJsonProjector
                 : null;
         }
         if (string.IsNullOrEmpty(titleName))
-            throw new FormatException("param.json does not expose titleName to ShadowMountPlus.");
+            throw new FormatException("param.json 未向 ShadowMountPlus 暴露 titleName。");
 
         return payload;
     }

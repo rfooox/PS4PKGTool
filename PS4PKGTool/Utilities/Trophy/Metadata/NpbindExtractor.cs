@@ -27,7 +27,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             CancellationToken cancellationToken = default)
         {
             if (!File.Exists(pkgPath))
-                return Failure("The selected PKG was not found.");
+                return Failure("未找到所选的 PKG。");
 
             try
             {
@@ -39,12 +39,12 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
 
                 string? id = _resolver.ResolveFromBytes(npbindBytes);
                 return id == null
-                    ? Failure("npbind.dat was read, but no valid NPWRxxxxx_00 value was found.")
+                    ? Failure("已读取 npbind.dat，但未找到有效的 NPWRxxxxx_00 值。")
                     : new NpbindExtractionResult { NpCommunicationId = id };
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
             {
-                return Failure("NP Communication ID extraction was cancelled.");
+                return Failure("NP Communication ID 提取已取消。");
             }
             catch (Exception ex)
             {

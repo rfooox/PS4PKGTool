@@ -69,11 +69,11 @@ namespace PS4PKGTool
             {
                 string runtime = TestResultDisplay.FormatRuntime(context.RuntimeSeconds);
                 string termination = IsCrashed(context)
-                    ? "Crash " + TestResultDisplay.FormatExitCode(context.ExitCode)
-                    : "Normal exit";
-                return "Runtime: " + runtime + "   " + termination;
+                    ? "崩溃 " + TestResultDisplay.FormatExitCode(context.ExitCode)
+                    : "正常退出";
+                return "运行时：" + runtime + "   " + termination;
             }
-            return "Manual test result  ·  No launch session is associated with this entry.";
+            return "手动测试结果  ·  此条目没有关联的启动会话。";
         }
 
         private static bool IsCrashed(GameFeedbackContext context)
@@ -147,7 +147,7 @@ namespace PS4PKGTool
             if (!IsCrashed(context)) return context.ErrorPrefill ?? "";
             string exit = TestResultDisplay.FormatExitCode(context.ExitCode);
             string name = string.IsNullOrEmpty(context.ExitStatusName) ? "" : " (" + context.ExitStatusName + ")";
-            return "Crash " + exit + name;
+            return "崩溃 " + exit + name;
         }
 
         private void btnFeedbackSave_Click(object sender, EventArgs e)
@@ -196,12 +196,12 @@ namespace PS4PKGTool
                 // inline so the diagnostic text is not lost. The result is
                 // still saved either way.
                 entry.Error = (entry.Error + "\n\n" + _context.ErrorPrefill).Trim();
-                Logger.LogWarning("Could not preserve the session log; the log tail was kept in the result instead.");
+                Logger.LogWarning("无法保存会话日志，已改为在结果中保留日志尾部。");
             }
 
             GameFeedbackStore.Append(entry);
             _savedEntry = entry;
-            Logger.LogInformation($"Test result saved for {_context.TitleId} ({entry.Status}).");
+            Logger.LogInformation($"已保存 {_context.TitleId} 的测试结果（{entry.Status}）。");
         }
     }
 }

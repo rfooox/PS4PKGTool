@@ -106,7 +106,7 @@ public sealed class UnitySerializedFileHandler : IAssetHandler, IAssetPreviewPro
 
         // Nothing decodeable - fall back to the object listing.
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"Unity serialized file: {objects.Count} objects");
+        sb.AppendLine($"Unity 序列化文件：{objects.Count} 个对象");
         sb.AppendLine($"Backend: {_backend.Name}");
         sb.AppendLine();
         foreach (var g in objects.GroupBy(o => o.ClassId).OrderByDescending(g => g.Count()))
@@ -158,12 +158,12 @@ public sealed class UnitySerializedFileHandler : IAssetHandler, IAssetPreviewPro
         var withBytes = LoadTextureBytes(objectSource.Parent, tex);
         if (withBytes == null)
             throw new UnsupportedAssetException(
-                $"Texture '{tex.Name}' streams its data to '{tex.StreamPath}' - the .resS companion is not available.");
+                $"纹理 '{tex.Name}' 的数据位于 '{tex.StreamPath}'——对应的 .resS 文件不可用。");
 
         var decoded = _backend.DecodeTexture(withBytes);
         if (decoded == null)
             throw new UnsupportedAssetException(
-                $"Texture format {tex.Format} is not decodeable yet - metadata only, raw export available.");
+                $"暂无法解码纹理格式 {tex.Format}——仅提供元数据，可导出原始数据。");
 
         var preview = new AssetPreview
         {

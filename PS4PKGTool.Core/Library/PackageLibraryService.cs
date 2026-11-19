@@ -33,7 +33,7 @@ public sealed class PackageMetadataService : IPackageMetadataService
     {
         cancellationToken.ThrowIfCancellationRequested();
         string fullPath = Path.GetFullPath(packagePath);
-        if (!File.Exists(fullPath)) throw new FileNotFoundException("Package file was not found.", fullPath);
+        if (!File.Exists(fullPath)) throw new FileNotFoundException("未找到安装包文件。", fullPath);
         var metadata = includeIcon ? PkgMetadataReader.ReadQuick(fullPath) : PkgMetadataReader.ReadMetadataOnly(fullPath);
         cancellationToken.ThrowIfCancellationRequested();
         string contentId = string.IsNullOrWhiteSpace(metadata.SfoContentId) ? metadata.Content_ID : metadata.SfoContentId;

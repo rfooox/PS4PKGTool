@@ -30,7 +30,7 @@
             btnOk.Name = "btnOk";
             btnOk.Size = new System.Drawing.Size(90, 28);
             btnOk.TabIndex = 1;
-            btnOk.Text = "Install";
+            btnOk.Text = "安装";
             btnOk.Click += btnOk_Click;
             //
             // btnCancel
@@ -39,7 +39,7 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(90, 28);
             btnCancel.TabIndex = 2;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "取消";
             btnCancel.Click += btnCancel_Click;
             //
             // Shadps4VersionPicker
@@ -56,7 +56,7 @@
             this.MinimizeBox = false;
             this.Name = "Shadps4VersionPicker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Choose shadPS4 Core Version";
+            this.Text = "选择 shadPS4 核心版本";
             this.ResumeLayout(false);
         }
 

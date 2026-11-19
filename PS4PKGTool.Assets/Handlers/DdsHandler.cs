@@ -27,7 +27,7 @@ public sealed class DdsHandler : IAssetHandler, IAssetPreviewProvider
         var head = new byte[stream.Length];
         stream.ReadExactly(head);
 
-        if (!DdsDecoder.HasDdsMagic(head)) throw new CorruptAssetException("Missing DDS magic.");
+        if (!DdsDecoder.HasDdsMagic(head)) throw new CorruptAssetException("缺少 DDS 魔数。");
         var info = DdsDecoder.ReadHeader(head);
 
         var meta = new Dictionary<string, string>

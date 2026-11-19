@@ -55,7 +55,7 @@ namespace PS4PKGTool
             this.lblVersion.Location = new Point(100, 46);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new Size(280, 20);
-            this.lblVersion.Text = "Version ...";
+            this.lblVersion.Text = "版本……";
             //
             // lblCopyright
             //
@@ -64,7 +64,7 @@ namespace PS4PKGTool
             this.lblCopyright.Location = new Point(100, 66);
             this.lblCopyright.Name = "lblCopyright";
             this.lblCopyright.Size = new Size(280, 20);
-            this.lblCopyright.Text = "Copyright © pearlxcore";
+            this.lblCopyright.Text = "版权所有 © pearlxcore";
             //
             // lblCredits
             //
@@ -73,7 +73,7 @@ namespace PS4PKGTool
             this.lblCredits.Location = new Point(20, 104);
             this.lblCredits.Name = "lblCredits";
             this.lblCredits.Size = new Size(360, 60);
-            this.lblCredits.Text = "Credit to Robin Perris (DarkUI),\r\nxXxTheDarkprogramerxXx, Maxton (RIP), leecherman, Andshrew,\r\nSony <3";
+            this.lblCredits.Text = "致谢 Robin Perris (DarkUI)、\r\nxXxTheDarkprogramerxXx、Maxton (RIP)、leecherman、Andshrew、\r\nSony <3";
             //
             // lblLicense
             //
@@ -82,7 +82,7 @@ namespace PS4PKGTool
             this.lblLicense.Location = new Point(20, 170);
             this.lblLicense.Name = "lblLicense";
             this.lblLicense.Size = new Size(360, 20);
-            this.lblLicense.Text = "Licensed under the GNU General Public License v3.0 (GPL-3.0)";
+            this.lblLicense.Text = "基于 GNU General Public License v3.0 (GPL-3.0) 授权";
             //
             // btnGitHub
             //
@@ -111,7 +111,7 @@ namespace PS4PKGTool
             this.btnBug.Name = "btnBug";
             this.btnBug.Size = new Size(85, 30);
             this.btnBug.TabIndex = 2;
-            this.btnBug.Text = "Report Bug";
+            this.btnBug.Text = "报告问题";
             this.btnBug.Click += new System.EventHandler(this.btnBug_Click);
             //
             // btnClose
@@ -121,7 +121,7 @@ namespace PS4PKGTool
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new Size(85, 30);
             this.btnClose.TabIndex = 3;
-            this.btnClose.Text = "Close";
+            this.btnClose.Text = "关闭";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             //
             // AboutForm
@@ -145,7 +145,7 @@ namespace PS4PKGTool
             this.MinimizeBox = false;
             this.Name = "AboutForm";
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.Text = "About PS4 PKG Tool";
+            this.Text = "关于 PS4 PKG Tool";
             ((System.ComponentModel.ISupportInitialize)(this.picAppIcon)).EndInit();
             this.ResumeLayout(false);
         }

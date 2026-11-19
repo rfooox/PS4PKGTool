@@ -248,7 +248,7 @@
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new System.Drawing.Size(680, 17);
             lblSubtitle.TabIndex = 2;
-            lblSubtitle.Text = "Reading package metadata...";
+            lblSubtitle.Text = "正在读取安装包元数据……";
             // 
             // lblTitle
             // 
@@ -257,7 +257,7 @@
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new System.Drawing.Size(636, 27);
             lblTitle.TabIndex = 1;
-            lblTitle.Text = "PKG Viewer";
+            lblTitle.Text = "PKG 查看器";
             // 
             // picIcon
             // 
@@ -302,7 +302,7 @@
             tabOverview.Padding = new System.Windows.Forms.Padding(12);
             tabOverview.Size = new System.Drawing.Size(996, 408);
             tabOverview.TabIndex = 0;
-            tabOverview.Text = "Overview";
+            tabOverview.Text = "概览";
             // 
             // darkSectionPanel1
             // 
@@ -332,7 +332,7 @@
             // colSfoKey
             // 
             colSfoKey.FillWeight = 35F;
-            colSfoKey.HeaderText = "Key";
+            colSfoKey.HeaderText = "键";
             colSfoKey.Name = "colSfoKey";
             colSfoKey.ReadOnly = true;
             colSfoKey.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -340,7 +340,7 @@
             // colSfoValue
             // 
             colSfoValue.FillWeight = 65F;
-            colSfoValue.HeaderText = "Value";
+            colSfoValue.HeaderText = "值";
             colSfoValue.Name = "colSfoValue";
             colSfoValue.ReadOnly = true;
             colSfoValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -352,7 +352,7 @@
             overviewPanel.Margin = new System.Windows.Forms.Padding(6);
             overviewPanel.Name = "overviewPanel";
             overviewPanel.Padding = new System.Windows.Forms.Padding(16, 12, 16, 16);
-            overviewPanel.SectionHeader = "Package Summary";
+            overviewPanel.SectionHeader = "安装包摘要";
             overviewPanel.Size = new System.Drawing.Size(481, 386);
             overviewPanel.TabIndex = 0;
             // 
@@ -403,7 +403,7 @@
             lblOverviewTitleCaption.Name = "lblOverviewTitleCaption";
             lblOverviewTitleCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewTitleCaption.TabIndex = 0;
-            lblOverviewTitleCaption.Text = "Title";
+            lblOverviewTitleCaption.Text = "标题";
             // 
             // lblOverviewTitle
             // 
@@ -414,7 +414,7 @@
             lblOverviewTitle.Name = "lblOverviewTitle";
             lblOverviewTitle.Size = new System.Drawing.Size(311, 30);
             lblOverviewTitle.TabIndex = 1;
-            lblOverviewTitle.Text = "Not available";
+            lblOverviewTitle.Text = "不可用";
             // 
             // lblOverviewTitleIdCaption
             // 
@@ -425,7 +425,7 @@
             lblOverviewTitleIdCaption.Name = "lblOverviewTitleIdCaption";
             lblOverviewTitleIdCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewTitleIdCaption.TabIndex = 2;
-            lblOverviewTitleIdCaption.Text = "Title ID";
+            lblOverviewTitleIdCaption.Text = "标题 ID";
             // 
             // lblOverviewTitleId
             // 
@@ -436,7 +436,7 @@
             lblOverviewTitleId.Name = "lblOverviewTitleId";
             lblOverviewTitleId.Size = new System.Drawing.Size(311, 30);
             lblOverviewTitleId.TabIndex = 3;
-            lblOverviewTitleId.Text = "Not available";
+            lblOverviewTitleId.Text = "不可用";
             // 
             // lblOverviewContentIdCaption
             // 
@@ -447,7 +447,7 @@
             lblOverviewContentIdCaption.Name = "lblOverviewContentIdCaption";
             lblOverviewContentIdCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewContentIdCaption.TabIndex = 4;
-            lblOverviewContentIdCaption.Text = "Content ID";
+            lblOverviewContentIdCaption.Text = "内容 ID";
             // 
             // lblOverviewContentId
             // 
@@ -458,7 +458,7 @@
             lblOverviewContentId.Name = "lblOverviewContentId";
             lblOverviewContentId.Size = new System.Drawing.Size(311, 30);
             lblOverviewContentId.TabIndex = 5;
-            lblOverviewContentId.Text = "Not available";
+            lblOverviewContentId.Text = "不可用";
             // 
             // lblOverviewCategoryCaption
             // 
@@ -469,7 +469,7 @@
             lblOverviewCategoryCaption.Name = "lblOverviewCategoryCaption";
             lblOverviewCategoryCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewCategoryCaption.TabIndex = 6;
-            lblOverviewCategoryCaption.Text = "Category";
+            lblOverviewCategoryCaption.Text = "分类";
             // 
             // lblOverviewCategory
             // 
@@ -480,7 +480,7 @@
             lblOverviewCategory.Name = "lblOverviewCategory";
             lblOverviewCategory.Size = new System.Drawing.Size(311, 30);
             lblOverviewCategory.TabIndex = 7;
-            lblOverviewCategory.Text = "Not available";
+            lblOverviewCategory.Text = "不可用";
             // 
             // lblOverviewStateCaption
             // 
@@ -491,7 +491,7 @@
             lblOverviewStateCaption.Name = "lblOverviewStateCaption";
             lblOverviewStateCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewStateCaption.TabIndex = 8;
-            lblOverviewStateCaption.Text = "Package state";
+            lblOverviewStateCaption.Text = "安装包状态";
             // 
             // lblOverviewState
             // 
@@ -502,7 +502,7 @@
             lblOverviewState.Name = "lblOverviewState";
             lblOverviewState.Size = new System.Drawing.Size(311, 30);
             lblOverviewState.TabIndex = 9;
-            lblOverviewState.Text = "Not available";
+            lblOverviewState.Text = "不可用";
             // 
             // lblOverviewAppVersionCaption
             // 
@@ -513,7 +513,7 @@
             lblOverviewAppVersionCaption.Name = "lblOverviewAppVersionCaption";
             lblOverviewAppVersionCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewAppVersionCaption.TabIndex = 10;
-            lblOverviewAppVersionCaption.Text = "Application version";
+            lblOverviewAppVersionCaption.Text = "应用版本";
             // 
             // lblOverviewAppVersion
             // 
@@ -524,7 +524,7 @@
             lblOverviewAppVersion.Name = "lblOverviewAppVersion";
             lblOverviewAppVersion.Size = new System.Drawing.Size(311, 30);
             lblOverviewAppVersion.TabIndex = 11;
-            lblOverviewAppVersion.Text = "Not available";
+            lblOverviewAppVersion.Text = "不可用";
             // 
             // lblOverviewPkgVersionCaption
             // 
@@ -535,7 +535,7 @@
             lblOverviewPkgVersionCaption.Name = "lblOverviewPkgVersionCaption";
             lblOverviewPkgVersionCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewPkgVersionCaption.TabIndex = 12;
-            lblOverviewPkgVersionCaption.Text = "Package version";
+            lblOverviewPkgVersionCaption.Text = "安装包版本";
             // 
             // lblOverviewPkgVersion
             // 
@@ -546,7 +546,7 @@
             lblOverviewPkgVersion.Name = "lblOverviewPkgVersion";
             lblOverviewPkgVersion.Size = new System.Drawing.Size(311, 30);
             lblOverviewPkgVersion.TabIndex = 13;
-            lblOverviewPkgVersion.Text = "Not available";
+            lblOverviewPkgVersion.Text = "不可用";
             // 
             // lblOverviewFirmwareCaption
             // 
@@ -557,7 +557,7 @@
             lblOverviewFirmwareCaption.Name = "lblOverviewFirmwareCaption";
             lblOverviewFirmwareCaption.Size = new System.Drawing.Size(124, 30);
             lblOverviewFirmwareCaption.TabIndex = 14;
-            lblOverviewFirmwareCaption.Text = "Required firmware";
+            lblOverviewFirmwareCaption.Text = "所需固件";
             // 
             // lblOverviewFirmware
             // 
@@ -568,7 +568,7 @@
             lblOverviewFirmware.Name = "lblOverviewFirmware";
             lblOverviewFirmware.Size = new System.Drawing.Size(311, 30);
             lblOverviewFirmware.TabIndex = 15;
-            lblOverviewFirmware.Text = "Not available";
+            lblOverviewFirmware.Text = "不可用";
             // 
             // lblOverviewSizeCaption
             // 
@@ -579,7 +579,7 @@
             lblOverviewSizeCaption.Name = "lblOverviewSizeCaption";
             lblOverviewSizeCaption.Size = new System.Drawing.Size(124, 38);
             lblOverviewSizeCaption.TabIndex = 16;
-            lblOverviewSizeCaption.Text = "Package size";
+            lblOverviewSizeCaption.Text = "安装包大小";
             // 
             // lblOverviewSize
             // 
@@ -590,7 +590,7 @@
             lblOverviewSize.Name = "lblOverviewSize";
             lblOverviewSize.Size = new System.Drawing.Size(311, 38);
             lblOverviewSize.TabIndex = 17;
-            lblOverviewSize.Text = "Not available";
+            lblOverviewSize.Text = "不可用";
             // 
             // tabPackage
             // 
@@ -600,7 +600,7 @@
             tabPackage.Padding = new System.Windows.Forms.Padding(12);
             tabPackage.Size = new System.Drawing.Size(996, 408);
             tabPackage.TabIndex = 2;
-            tabPackage.Text = "PKG Internals";
+            tabPackage.Text = "PKG 内部结构";
             // 
             // packageTabs
             // 
@@ -625,7 +625,7 @@
             tabPackageHeader.Name = "tabPackageHeader";
             tabPackageHeader.Size = new System.Drawing.Size(964, 348);
             tabPackageHeader.TabIndex = 0;
-            tabPackageHeader.Text = "Header";
+            tabPackageHeader.Text = "标头";
             // 
             // dgvPackageHeader
             // 
@@ -645,7 +645,7 @@
             // colHeaderName
             // 
             colHeaderName.FillWeight = 38F;
-            colHeaderName.HeaderText = "Field";
+            colHeaderName.HeaderText = "字段";
             colHeaderName.Name = "colHeaderName";
             colHeaderName.ReadOnly = true;
             colHeaderName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -653,7 +653,7 @@
             // colHeaderValue
             // 
             colHeaderValue.FillWeight = 62F;
-            colHeaderValue.HeaderText = "Value";
+            colHeaderValue.HeaderText = "值";
             colHeaderValue.Name = "colHeaderValue";
             colHeaderValue.ReadOnly = true;
             colHeaderValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -665,7 +665,7 @@
             tabPackageBuildInfo.Name = "tabPackageBuildInfo";
             tabPackageBuildInfo.Size = new System.Drawing.Size(964, 348);
             tabPackageBuildInfo.TabIndex = 1;
-            tabPackageBuildInfo.Text = "Build Info";
+            tabPackageBuildInfo.Text = "构建信息";
             // 
             // dgvBuildInfo
             // 
@@ -685,7 +685,7 @@
             // colBuildName
             // 
             colBuildName.FillWeight = 38F;
-            colBuildName.HeaderText = "Field";
+            colBuildName.HeaderText = "字段";
             colBuildName.Name = "colBuildName";
             colBuildName.ReadOnly = true;
             colBuildName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -693,7 +693,7 @@
             // colBuildValue
             // 
             colBuildValue.FillWeight = 62F;
-            colBuildValue.HeaderText = "Value";
+            colBuildValue.HeaderText = "值";
             colBuildValue.Name = "colBuildValue";
             colBuildValue.ReadOnly = true;
             colBuildValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -705,7 +705,7 @@
             tabPackageEntries.Name = "tabPackageEntries";
             tabPackageEntries.Size = new System.Drawing.Size(964, 348);
             tabPackageEntries.TabIndex = 2;
-            tabPackageEntries.Text = "Entries";
+            tabPackageEntries.Text = "条目";
             // 
             // dgvEntries
             // 
@@ -725,7 +725,7 @@
             // colEntryName
             // 
             colEntryName.FillWeight = 24F;
-            colEntryName.HeaderText = "Name";
+            colEntryName.HeaderText = "名称";
             colEntryName.Name = "colEntryName";
             colEntryName.ReadOnly = true;
             colEntryName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -733,7 +733,7 @@
             // colEntryOffset
             // 
             colEntryOffset.FillWeight = 17F;
-            colEntryOffset.HeaderText = "Offset";
+            colEntryOffset.HeaderText = "偏移";
             colEntryOffset.Name = "colEntryOffset";
             colEntryOffset.ReadOnly = true;
             colEntryOffset.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -741,7 +741,7 @@
             // colEntrySize
             // 
             colEntrySize.FillWeight = 17F;
-            colEntrySize.HeaderText = "Size";
+            colEntrySize.HeaderText = "大小";
             colEntrySize.Name = "colEntrySize";
             colEntrySize.ReadOnly = true;
             colEntrySize.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -749,7 +749,7 @@
             // colEntryFlags1
             // 
             colEntryFlags1.FillWeight = 14F;
-            colEntryFlags1.HeaderText = "Flags 1";
+            colEntryFlags1.HeaderText = "标志 1";
             colEntryFlags1.Name = "colEntryFlags1";
             colEntryFlags1.ReadOnly = true;
             colEntryFlags1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -757,7 +757,7 @@
             // colEntryFlags2
             // 
             colEntryFlags2.FillWeight = 14F;
-            colEntryFlags2.HeaderText = "Flags 2";
+            colEntryFlags2.HeaderText = "标志 2";
             colEntryFlags2.Name = "colEntryFlags2";
             colEntryFlags2.ReadOnly = true;
             colEntryFlags2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -765,7 +765,7 @@
             // colEntryEncrypted
             // 
             colEntryEncrypted.FillWeight = 14F;
-            colEntryEncrypted.HeaderText = "Encrypted?";
+            colEntryEncrypted.HeaderText = "已加密？";
             colEntryEncrypted.Name = "colEntryEncrypted";
             colEntryEncrypted.ReadOnly = true;
             colEntryEncrypted.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -779,7 +779,7 @@
             tabTrophy.Padding = new System.Windows.Forms.Padding(12);
             tabTrophy.Size = new System.Drawing.Size(996, 408);
             tabTrophy.TabIndex = 3;
-            tabTrophy.Text = "Trophy";
+            tabTrophy.Text = "奖杯";
             // 
             // dgvTrophies
             // 
@@ -801,7 +801,7 @@
             // colTrophyIcon
             // 
             colTrophyIcon.FillWeight = 10F;
-            colTrophyIcon.HeaderText = "Icon";
+            colTrophyIcon.HeaderText = "图标";
             colTrophyIcon.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             colTrophyIcon.Name = "colTrophyIcon";
             colTrophyIcon.ReadOnly = true;
@@ -818,7 +818,7 @@
             // colTrophyName
             // 
             colTrophyName.FillWeight = 23F;
-            colTrophyName.HeaderText = "Name";
+            colTrophyName.HeaderText = "名称";
             colTrophyName.Name = "colTrophyName";
             colTrophyName.ReadOnly = true;
             colTrophyName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -826,7 +826,7 @@
             // colTrophyDescription
             // 
             colTrophyDescription.FillWeight = 39F;
-            colTrophyDescription.HeaderText = "Description";
+            colTrophyDescription.HeaderText = "描述";
             colTrophyDescription.Name = "colTrophyDescription";
             colTrophyDescription.ReadOnly = true;
             colTrophyDescription.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -834,7 +834,7 @@
             // colTrophyType
             // 
             colTrophyType.FillWeight = 12F;
-            colTrophyType.HeaderText = "Type";
+            colTrophyType.HeaderText = "类型";
             colTrophyType.Name = "colTrophyType";
             colTrophyType.ReadOnly = true;
             colTrophyType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -842,7 +842,7 @@
             // colTrophyHidden
             // 
             colTrophyHidden.FillWeight = 8F;
-            colTrophyHidden.HeaderText = "Hidden";
+            colTrophyHidden.HeaderText = "隐藏";
             colTrophyHidden.Name = "colTrophyHidden";
             colTrophyHidden.ReadOnly = true;
             colTrophyHidden.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -856,7 +856,7 @@
             lblTrophyState.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
             lblTrophyState.Size = new System.Drawing.Size(972, 30);
             lblTrophyState.TabIndex = 0;
-            lblTrophyState.Text = "Trophy information loads when this page is selected.";
+            lblTrophyState.Text = "选择此页面时才会加载奖杯信息。";
             // 
             // tabFiles
             // 
@@ -867,7 +867,7 @@
             tabFiles.Padding = new System.Windows.Forms.Padding(12);
             tabFiles.Size = new System.Drawing.Size(996, 408);
             tabFiles.TabIndex = 4;
-            tabFiles.Text = "File Browser";
+            tabFiles.Text = "文件浏览器";
             // 
             // fileBrowserLayout
             // 
@@ -947,7 +947,7 @@
             _filePreviewPanel.Location = new System.Drawing.Point(630, 0);
             _filePreviewPanel.Margin = new System.Windows.Forms.Padding(8, 0, 0, 0);
             _filePreviewPanel.Name = "_filePreviewPanel";
-            _filePreviewPanel.SectionHeader = "File Preview";
+            _filePreviewPanel.SectionHeader = "文件预览";
             _filePreviewPanel.Size = new System.Drawing.Size(342, 356);
             _filePreviewPanel.TabIndex = 2;
             // 
@@ -960,7 +960,7 @@
             _filePreviewInfo.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             _filePreviewInfo.Size = new System.Drawing.Size(340, 34);
             _filePreviewInfo.TabIndex = 0;
-            _filePreviewInfo.Text = "Double-click a file to preview it.";
+            _filePreviewInfo.Text = "双击文件即可预览。";
             _filePreviewInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // _filePreviewBody
@@ -1023,17 +1023,17 @@
             // 
             // colAssetName
             // 
-            colAssetName.Text = "Name";
+            colAssetName.Text = "名称";
             colAssetName.Width = 190;
             // 
             // colAssetType
             // 
-            colAssetType.Text = "Type";
+            colAssetType.Text = "类型";
             colAssetType.Width = 90;
             // 
             // colAssetSize
             // 
-            colAssetSize.Text = "Size";
+            colAssetSize.Text = "大小";
             colAssetSize.Width = 75;
             // 
             // _filePreviewBackButton
@@ -1043,7 +1043,7 @@
             _filePreviewBackButton.Name = "_filePreviewBackButton";
             _filePreviewBackButton.Size = new System.Drawing.Size(338, 28);
             _filePreviewBackButton.TabIndex = 3;
-            _filePreviewBackButton.Text = "Back to asset list";
+            _filePreviewBackButton.Text = "返回资源列表";
             _filePreviewBackButton.Visible = false;
             _filePreviewBackButton.Click += filePreviewBackButton_Click;
             // 
@@ -1052,7 +1052,7 @@
             tbFilterFiles.Dock = System.Windows.Forms.DockStyle.Top;
             tbFilterFiles.Location = new System.Drawing.Point(12, 12);
             tbFilterFiles.Name = "tbFilterFiles";
-            tbFilterFiles.Placeholder = "Filter filename here";
+            tbFilterFiles.Placeholder = "在此输入文件名筛选";
             tbFilterFiles.Size = new System.Drawing.Size(972, 28);
             tbFilterFiles.TabIndex = 2;
             tbFilterFiles.SearchTextChanged += tbFilterFiles_SearchTextChanged;
@@ -1065,7 +1065,7 @@
             tabArtwork.Padding = new System.Windows.Forms.Padding(12);
             tabArtwork.Size = new System.Drawing.Size(996, 408);
             tabArtwork.TabIndex = 5;
-            tabArtwork.Text = "Artwork";
+            tabArtwork.Text = "图片";
             // 
             // artworkTable
             // 
@@ -1103,7 +1103,7 @@
             lblNoPic0.Name = "lblNoPic0";
             lblNoPic0.Size = new System.Drawing.Size(452, 336);
             lblNoPic0.TabIndex = 0;
-            lblNoPic0.Text = "No PIC0 image in this package.";
+            lblNoPic0.Text = "此安装包中没有 PIC0 图片。";
             lblNoPic0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picPic0
@@ -1138,7 +1138,7 @@
             lblNoPic1.Name = "lblNoPic1";
             lblNoPic1.Size = new System.Drawing.Size(452, 336);
             lblNoPic1.TabIndex = 0;
-            lblNoPic1.Text = "No PIC1 image in this package.";
+            lblNoPic1.Text = "此安装包中没有 PIC1 图片。";
             lblNoPic1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picPic1
@@ -1165,14 +1165,14 @@
             fileMenu.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             fileMenu.Name = "fileMenu";
             fileMenu.Size = new System.Drawing.Size(102, 22);
-            fileMenu.Text = "File";
+            fileMenu.Text = "文件";
             // 
             // copyMenu
             // 
             copyMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { copyTitleIdItem, copyContentIdItem, copyTitleItem, copyFilenameItem });
             copyMenu.Name = "copyMenu";
             copyMenu.Size = new System.Drawing.Size(141, 22);
-            copyMenu.Text = "Copy";
+            copyMenu.Text = "复制";
             // 
             // copyTitleIdItem
             // 
@@ -1216,7 +1216,7 @@
             renameMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { renameItem1, renameItem2, renameItem3, renameItem4, renameItem5, renameItem6, renameItem7, renameItem8, renameItem9, renameItem10, renameItem11 });
             renameMenu.Name = "renameMenu";
             renameMenu.Size = new System.Drawing.Size(141, 22);
-            renameMenu.Text = "Rename PKG";
+            renameMenu.Text = "重命名 PKG";
             // 
             // renameItem1
             // 
@@ -1315,7 +1315,7 @@
             // 
             deleteItem.Name = "deleteItem";
             deleteItem.Size = new System.Drawing.Size(141, 22);
-            deleteItem.Text = "Delete PKG";
+            deleteItem.Text = "删除 PKG";
             deleteItem.Click += DeletePkgItem_Click;
             // 
             // toolsMenu
@@ -1324,21 +1324,21 @@
             toolsMenu.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolsMenu.Name = "toolsMenu";
             toolsMenu.Size = new System.Drawing.Size(102, 22);
-            toolsMenu.Text = "Tools";
+            toolsMenu.Text = "工具";
             // 
             // artworkMenu
             // 
             artworkMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { artworkAllItem, artworkImagesItem, artworkIconItem });
             artworkMenu.Name = "artworkMenu";
             artworkMenu.Size = new System.Drawing.Size(191, 22);
-            artworkMenu.Text = "Save artwork";
+            artworkMenu.Text = "保存图片";
             // 
             // artworkAllItem
             // 
             artworkAllItem.Name = "artworkAllItem";
             artworkAllItem.Size = new System.Drawing.Size(180, 22);
             artworkAllItem.Tag = "ALL";
-            artworkAllItem.Text = "Backgrounds + Icon";
+            artworkAllItem.Text = "背景 + 图标";
             artworkAllItem.Click += SaveArtworkItem_Click;
             // 
             // artworkImagesItem
@@ -1346,7 +1346,7 @@
             artworkImagesItem.Name = "artworkImagesItem";
             artworkImagesItem.Size = new System.Drawing.Size(180, 22);
             artworkImagesItem.Tag = "IMAGE";
-            artworkImagesItem.Text = "Backgrounds only";
+            artworkImagesItem.Text = "仅背景";
             artworkImagesItem.Click += SaveArtworkItem_Click;
             // 
             // artworkIconItem
@@ -1354,14 +1354,14 @@
             artworkIconItem.Name = "artworkIconItem";
             artworkIconItem.Size = new System.Drawing.Size(180, 22);
             artworkIconItem.Tag = "ICON";
-            artworkIconItem.Text = "Icon only";
+            artworkIconItem.Text = "仅图标";
             artworkIconItem.Click += SaveArtworkItem_Click;
             // 
             // extractFullPkgItem
             // 
             extractFullPkgItem.Name = "extractFullPkgItem";
             extractFullPkgItem.Size = new System.Drawing.Size(191, 22);
-            extractFullPkgItem.Text = "Extract Full PKG...";
+            extractFullPkgItem.Text = "提取完整 PKG……";
             extractFullPkgItem.Click += ExtractFullPkgItem_Click;
             // 
             // sepChangeInfo
@@ -1373,27 +1373,27 @@
             // 
             changeInfoItem.Name = "changeInfoItem";
             changeInfoItem.Size = new System.Drawing.Size(191, 22);
-            changeInfoItem.Text = "View PKG Change Info";
+            changeInfoItem.Text = "查看 PKG 变更信息";
             changeInfoItem.Click += ViewChangeInfoItem_Click;
             // 
             // colFileName
             // 
-            colFileName.Text = "Name";
+            colFileName.Text = "名称";
             colFileName.Width = 143;
             // 
             // colFileType
             // 
-            colFileType.Text = "Type";
+            colFileType.Text = "类型";
             colFileType.Width = 143;
             // 
             // colFilePath
             // 
-            colFilePath.Text = "Path";
+            colFilePath.Text = "路径";
             colFilePath.Width = 143;
             // 
             // colFileSize
             // 
-            colFileSize.Text = "Size";
+            colFileSize.Text = "大小";
             colFileSize.Width = 143;
             // 
             // toolStripSeparator13
@@ -1416,7 +1416,7 @@
             tbCopyMenu.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             tbCopyMenu.Name = "tbCopyMenu";
             tbCopyMenu.Size = new System.Drawing.Size(141, 22);
-            tbCopyMenu.Text = "Copy";
+            tbCopyMenu.Text = "复制";
             // 
             // tbCopyTitleIdItem
             // 
@@ -1455,7 +1455,7 @@
             tbRenameMenu.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             tbRenameMenu.Name = "tbRenameMenu";
             tbRenameMenu.Size = new System.Drawing.Size(141, 22);
-            tbRenameMenu.Text = "Rename PKG";
+            tbRenameMenu.Text = "重命名 PKG";
             // 
             // tbRenameItem1
             // 
@@ -1543,7 +1543,7 @@
             tbArtworkMenu.Name = "tbArtworkMenu";
             tbArtworkMenu.Size = new System.Drawing.Size(210, 22);
             tbArtworkMenu.Tag = "ALL";
-            tbArtworkMenu.Text = "Save Artwork";
+            tbArtworkMenu.Text = "保存图片";
             tbArtworkMenu.Click += SaveArtworkItem_Click;
             // 
             // tbSepChangeInfo
@@ -1558,7 +1558,7 @@
             tbChangeInfoItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             tbChangeInfoItem.Name = "tbChangeInfoItem";
             tbChangeInfoItem.Size = new System.Drawing.Size(210, 22);
-            tbChangeInfoItem.Text = "View Change Info";
+            tbChangeInfoItem.Text = "查看变更信息";
             tbChangeInfoItem.Click += ViewChangeInfoItem_Click;
             // 
             // tbDownloadUpdateItem
@@ -1566,7 +1566,7 @@
             tbDownloadUpdateItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             tbDownloadUpdateItem.Name = "tbDownloadUpdateItem";
             tbDownloadUpdateItem.Size = new System.Drawing.Size(210, 22);
-            tbDownloadUpdateItem.Text = "Download Official Update";
+            tbDownloadUpdateItem.Text = "下载官方更新";
             tbDownloadUpdateItem.Visible = false;
             tbDownloadUpdateItem.Click += DownloadUpdateItem_Click;
             // 
@@ -1575,7 +1575,7 @@
             tbExtractFullPkgItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             tbExtractFullPkgItem.Name = "tbExtractFullPkgItem";
             tbExtractFullPkgItem.Size = new System.Drawing.Size(210, 22);
-            tbExtractFullPkgItem.Text = "Extract PKG";
+            tbExtractFullPkgItem.Text = "提取 PKG";
             tbExtractFullPkgItem.Click += ExtractFullPkgItem_Click;
             // 
             // tbSepExit
@@ -1589,14 +1589,14 @@
             helpToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            helpToolStripMenuItem.Text = "Help";
+            helpToolStripMenuItem.Text = "帮助";
             // 
             // helpAboutItem
             // 
             helpAboutItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             helpAboutItem.Name = "helpAboutItem";
             helpAboutItem.Size = new System.Drawing.Size(165, 22);
-            helpAboutItem.Text = "About";
+            helpAboutItem.Text = "关于";
             helpAboutItem.Click += HelpAboutItem_Click;
             // 
             // helpCoffeeItem
@@ -1604,7 +1604,7 @@
             helpCoffeeItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             helpCoffeeItem.Name = "helpCoffeeItem";
             helpCoffeeItem.Size = new System.Drawing.Size(165, 22);
-            helpCoffeeItem.Text = "Buy me a coffee";
+            helpCoffeeItem.Text = "请我喝杯咖啡";
             helpCoffeeItem.Click += HelpCoffeeItem_Click;
             // 
             // helpUpdateItem
@@ -1612,7 +1612,7 @@
             helpUpdateItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             helpUpdateItem.Name = "helpUpdateItem";
             helpUpdateItem.Size = new System.Drawing.Size(165, 22);
-            helpUpdateItem.Text = "Check for update";
+            helpUpdateItem.Text = "检查更新";
             helpUpdateItem.Click += HelpUpdateItem_Click;
             // 
             // ctxFileList
@@ -1627,7 +1627,7 @@
             ctxExtractItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxExtractItem.Name = "ctxExtractItem";
             ctxExtractItem.Size = new System.Drawing.Size(273, 22);
-            ctxExtractItem.Text = "Extract selected item";
+            ctxExtractItem.Text = "提取选中项";
             ctxExtractItem.Click += CtxExtractItem_Click;
             // 
             // ctxExtractFolderItem
@@ -1635,7 +1635,7 @@
             ctxExtractFolderItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxExtractFolderItem.Name = "ctxExtractFolderItem";
             ctxExtractFolderItem.Size = new System.Drawing.Size(273, 22);
-            ctxExtractFolderItem.Text = "Extract selected (with folder structure)";
+            ctxExtractFolderItem.Text = "提取选中项（保留文件夹结构）";
             ctxExtractFolderItem.Click += CtxExtractFolderItem_Click;
             // 
             // sepListExtract
@@ -1650,7 +1650,7 @@
             ctxCopyPathItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxCopyPathItem.Name = "ctxCopyPathItem";
             ctxCopyPathItem.Size = new System.Drawing.Size(273, 22);
-            ctxCopyPathItem.Text = "Copy path";
+            ctxCopyPathItem.Text = "复制路径";
             ctxCopyPathItem.Click += CtxCopyPathItem_Click;
             // 
             // ctxCopyNameItem
@@ -1658,7 +1658,7 @@
             ctxCopyNameItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxCopyNameItem.Name = "ctxCopyNameItem";
             ctxCopyNameItem.Size = new System.Drawing.Size(273, 22);
-            ctxCopyNameItem.Text = "Copy filename";
+            ctxCopyNameItem.Text = "复制文件名";
             ctxCopyNameItem.Click += CtxCopyNameItem_Click;
             // 
             // darkStatusStrip1
@@ -1710,7 +1710,7 @@
             btnStopExtract.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             btnStopExtract.Name = "btnStopExtract";
             btnStopExtract.Size = new System.Drawing.Size(72, 19);
-            btnStopExtract.Text = "Stop Extract";
+            btnStopExtract.Text = "停止提取";
             btnStopExtract.Visible = false;
             btnStopExtract.Click += BtnStopExtract_Click;
             // 
@@ -1737,14 +1737,14 @@
             fileToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Text = "文件";
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Text = "退出";
             exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
             // 
             // toolsToolStripMenuItem
@@ -1753,14 +1753,14 @@
             toolsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            toolsToolStripMenuItem.Text = "Tools";
+            toolsToolStripMenuItem.Text = "工具";
             // 
             // exitToolStripMenuItem1
             // 
             exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            exitToolStripMenuItem1.Text = "Exit";
+            exitToolStripMenuItem1.Text = "退出";
             // 
             // MiniPkgViewerForm
             // 

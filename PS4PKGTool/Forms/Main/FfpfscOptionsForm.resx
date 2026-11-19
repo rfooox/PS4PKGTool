@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="_lblNote.Text" xml:space="preserve">
-    <value>The source PKG is not changed. A .ffpfsc image is created for ShadowMountPlus. The work location is used only as a parent for a temporary extraction folder. For best results, set the work location and output to a local disk (C: or an internal SSD); network/Samba shares can cause filesystem errors during extraction and image building.</value>
+    <value>源 PKG 不会被修改。工具会为 ShadowMountPlus 生成一个 .ffpfsc 镜像。工作目录仅用作临时解压文件夹的上级目录。为获得最佳效果，请将工作目录与输出路径设置到本地磁盘（C: 或内置 SSD）；网络 / Samba 共享在解压和构建镜像时可能引发文件系统错误。</value>
   </data>
 </root>

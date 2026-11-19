@@ -517,7 +517,7 @@ namespace PS4PKGTool
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openGameFolderToolStripMenuItem, refreshContentToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Text = "文件";
             // 
             // openGameFolderToolStripMenuItem
             // 
@@ -539,7 +539,7 @@ namespace PS4PKGTool
             toolToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gameToolStripMenuItem, viewTrophyListToolStripMenuItem, exportPKGListToExcelToolStripMenuItem });
             toolToolStripMenuItem.Name = "toolToolStripMenuItem";
             toolToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            toolToolStripMenuItem.Text = "Tool";
+            toolToolStripMenuItem.Text = "工具";
             // 
             // gameToolStripMenuItem
             // 
@@ -547,7 +547,7 @@ namespace PS4PKGTool
             gameToolStripMenuItem.Enabled = false;
             gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             gameToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            gameToolStripMenuItem.Text = "Rename PKG";
+            gameToolStripMenuItem.Text = "重命名 PKG";
             // 
             // renamePKGToTITLEToolStripMenuItem
             // 
@@ -621,14 +621,14 @@ namespace PS4PKGTool
             toolStripMenuItem94.Name = "toolStripMenuItem94";
             toolStripMenuItem94.ShowShortcutKeys = false;
             toolStripMenuItem94.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem94.Text = "Global Action";
+            toolStripMenuItem94.Text = "全局操作";
             // 
             // checkForDuplicatePKGToolStripMenuItem2
             // 
             checkForDuplicatePKGToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             checkForDuplicatePKGToolStripMenuItem2.Name = "checkForDuplicatePKGToolStripMenuItem2";
             checkForDuplicatePKGToolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            checkForDuplicatePKGToolStripMenuItem2.Text = "Check for duplicate PKG";
+            checkForDuplicatePKGToolStripMenuItem2.Text = "检查重复 PKG";
             checkForDuplicatePKGToolStripMenuItem2.Click += CheckForDuplicatePKG_Click;
             // 
             // checkForPatchesMissingBasePKGToolStripMenuItem2
@@ -636,7 +636,7 @@ namespace PS4PKGTool
             checkForPatchesMissingBasePKGToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             checkForPatchesMissingBasePKGToolStripMenuItem2.Name = "checkForPatchesMissingBasePKGToolStripMenuItem2";
             checkForPatchesMissingBasePKGToolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            checkForPatchesMissingBasePKGToolStripMenuItem2.Text = "Check patches missing base PKG";
+            checkForPatchesMissingBasePKGToolStripMenuItem2.Text = "检查缺少本体游戏的补丁";
             checkForPatchesMissingBasePKGToolStripMenuItem2.Click += CheckForPatchesMissingBasePKG_Click;
             // 
             // globalExportPKGListToExcelToolStripMenuItem2
@@ -646,7 +646,7 @@ namespace PS4PKGTool
             globalExportPKGListToExcelToolStripMenuItem2.Name = "globalExportPKGListToExcelToolStripMenuItem2";
             globalExportPKGListToExcelToolStripMenuItem2.ShowShortcutKeys = false;
             globalExportPKGListToExcelToolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            globalExportPKGListToExcelToolStripMenuItem2.Text = "Export PKG list as excel file";
+            globalExportPKGListToExcelToolStripMenuItem2.Text = "将 PKG 列表导出为 Excel 文件";
             globalExportPKGListToExcelToolStripMenuItem2.Click += ExportPKGToExcel_Click;
             // 
             // toolStripMenuItem3
@@ -657,14 +657,14 @@ namespace PS4PKGTool
             toolStripMenuItem3.Name = "toolStripMenuItem3";
             toolStripMenuItem3.ShowShortcutKeys = false;
             toolStripMenuItem3.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem3.Text = "Save artwork";
+            toolStripMenuItem3.Text = "保存图片";
             // 
             // globalExtractImagesAndIconToolStripMenuItem2
             // 
             globalExtractImagesAndIconToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExtractImagesAndIconToolStripMenuItem2.Name = "globalExtractImagesAndIconToolStripMenuItem2";
             globalExtractImagesAndIconToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            globalExtractImagesAndIconToolStripMenuItem2.Text = "Backgrounds + Icon";
+            globalExtractImagesAndIconToolStripMenuItem2.Text = "背景 + 图标";
             globalExtractImagesAndIconToolStripMenuItem2.Click += ExtractImageIcon_Click;
             // 
             // globalExtractImageOnlyToolStripMenuItem2
@@ -672,7 +672,7 @@ namespace PS4PKGTool
             globalExtractImageOnlyToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExtractImageOnlyToolStripMenuItem2.Name = "globalExtractImageOnlyToolStripMenuItem2";
             globalExtractImageOnlyToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            globalExtractImageOnlyToolStripMenuItem2.Text = "Backgrounds only";
+            globalExtractImageOnlyToolStripMenuItem2.Text = "仅背景";
             globalExtractImageOnlyToolStripMenuItem2.Click += ExtractImageIcon_Click;
             // 
             // globalExtractIconOnlyToolStripMenuItem2
@@ -680,7 +680,7 @@ namespace PS4PKGTool
             globalExtractIconOnlyToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExtractIconOnlyToolStripMenuItem2.Name = "globalExtractIconOnlyToolStripMenuItem2";
             globalExtractIconOnlyToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            globalExtractIconOnlyToolStripMenuItem2.Text = "Icon only";
+            globalExtractIconOnlyToolStripMenuItem2.Text = "仅图标";
             globalExtractIconOnlyToolStripMenuItem2.Click += ExtractImageIcon_Click;
             // 
             // toolStripMenuItem111
@@ -691,7 +691,7 @@ namespace PS4PKGTool
             toolStripMenuItem111.Name = "toolStripMenuItem111";
             toolStripMenuItem111.ShowShortcutKeys = false;
             toolStripMenuItem111.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem111.Text = "Rename all PKG";
+            toolStripMenuItem111.Text = "重命名全部 PKG";
             // 
             // renameAllPkg1ToolStripMenuItem2
             // 
@@ -797,14 +797,14 @@ namespace PS4PKGTool
             toolStripMenuItem38.Name = "toolStripMenuItem38";
             toolStripMenuItem38.ShowShortcutKeys = false;
             toolStripMenuItem38.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem38.Text = "Move PKG";
+            toolStripMenuItem38.Text = "移动 PKG";
             // 
             // movePkgTitleToolStripMenuItem2
             // 
             movePkgTitleToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgTitleToolStripMenuItem2.Name = "movePkgTitleToolStripMenuItem2";
             movePkgTitleToolStripMenuItem2.Size = new System.Drawing.Size(314, 22);
-            movePkgTitleToolStripMenuItem2.Text = "Move by PKG Title";
+            movePkgTitleToolStripMenuItem2.Text = "按 PKG 标题移动";
             movePkgTitleToolStripMenuItem2.Click += MovePkg_Click;
             // 
             // moveByPkgTitleIdToolStripMenuItem
@@ -812,7 +812,7 @@ namespace PS4PKGTool
             moveByPkgTitleIdToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             moveByPkgTitleIdToolStripMenuItem.Name = "moveByPkgTitleIdToolStripMenuItem";
             moveByPkgTitleIdToolStripMenuItem.Size = new System.Drawing.Size(314, 22);
-            moveByPkgTitleIdToolStripMenuItem.Text = "Move by PKG Title Id";
+            moveByPkgTitleIdToolStripMenuItem.Text = "按 PKG 标题 ID 移动";
             moveByPkgTitleIdToolStripMenuItem.Click += MovePkg_Click;
             // 
             // movePkgTypeToolStripMenuItem2
@@ -820,7 +820,7 @@ namespace PS4PKGTool
             movePkgTypeToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgTypeToolStripMenuItem2.Name = "movePkgTypeToolStripMenuItem2";
             movePkgTypeToolStripMenuItem2.Size = new System.Drawing.Size(314, 22);
-            movePkgTypeToolStripMenuItem2.Text = "Move by PKG Category (Base/Update/Addon)";
+            movePkgTypeToolStripMenuItem2.Text = "按 PKG 分类移动（本体/更新/附加）";
             movePkgTypeToolStripMenuItem2.Click += MovePkg_Click;
             // 
             // movePkgCategoryToolStripMenuItem2
@@ -828,7 +828,7 @@ namespace PS4PKGTool
             movePkgCategoryToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgCategoryToolStripMenuItem2.Name = "movePkgCategoryToolStripMenuItem2";
             movePkgCategoryToolStripMenuItem2.Size = new System.Drawing.Size(314, 22);
-            movePkgCategoryToolStripMenuItem2.Text = "Move by PKG Type (Fake/Official)";
+            movePkgCategoryToolStripMenuItem2.Text = "按 PKG 类型移动（Fake/Official）";
             movePkgCategoryToolStripMenuItem2.Click += MovePkg_Click;
             // 
             // movePkgRegionToolStripMenuItem2
@@ -836,7 +836,7 @@ namespace PS4PKGTool
             movePkgRegionToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgRegionToolStripMenuItem2.Name = "movePkgRegionToolStripMenuItem2";
             movePkgRegionToolStripMenuItem2.Size = new System.Drawing.Size(314, 22);
-            movePkgRegionToolStripMenuItem2.Text = "Move by PKG Region";
+            movePkgRegionToolStripMenuItem2.Text = "按 PKG 区域移动";
             movePkgRegionToolStripMenuItem2.Click += MovePkg_Click;
             // 
             // movePkgSingleFolderToolStripMenuItem2
@@ -844,7 +844,7 @@ namespace PS4PKGTool
             movePkgSingleFolderToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgSingleFolderToolStripMenuItem2.Name = "movePkgSingleFolderToolStripMenuItem2";
             movePkgSingleFolderToolStripMenuItem2.Size = new System.Drawing.Size(314, 22);
-            movePkgSingleFolderToolStripMenuItem2.Text = "Move all to single folder";
+            movePkgSingleFolderToolStripMenuItem2.Text = "全部移动到同一文件夹";
             movePkgSingleFolderToolStripMenuItem2.Click += MovePkg_Click;
             // 
             // toolStripSeparator2
@@ -873,7 +873,7 @@ namespace PS4PKGTool
             toolStripMenuItem127.Name = "toolStripMenuItem127";
             toolStripMenuItem127.ShowShortcutKeys = false;
             toolStripMenuItem127.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem127.Text = "Copy";
+            toolStripMenuItem127.Text = "复制";
             // 
             // copyTitleIdtoolStripMenuItem2
             // 
@@ -913,14 +913,14 @@ namespace PS4PKGTool
             backportToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             backportToolStripMenuItem.Name = "backportToolStripMenuItem";
             backportToolStripMenuItem.Size = new System.Drawing.Size(305, 22);
-            backportToolStripMenuItem.Text = "Backport";
+            backportToolStripMenuItem.Text = "回移植";
             // 
             // setBackportedToolStripMenuItem2
             // 
             setBackportedToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             setBackportedToolStripMenuItem2.Name = "setBackportedToolStripMenuItem2";
             setBackportedToolStripMenuItem2.Size = new System.Drawing.Size(208, 22);
-            setBackportedToolStripMenuItem2.Text = "Set as backported";
+            setBackportedToolStripMenuItem2.Text = "标记为回移植";
             setBackportedToolStripMenuItem2.Click += Backport_Click;
             // 
             // setBackportRemarksToolStripMenuItem
@@ -929,7 +929,7 @@ namespace PS4PKGTool
             setBackportRemarksToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             setBackportRemarksToolStripMenuItem.Name = "setBackportRemarksToolStripMenuItem";
             setBackportRemarksToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            setBackportRemarksToolStripMenuItem.Text = "Set backport remarks";
+            setBackportRemarksToolStripMenuItem.Text = "设置回移植备注";
             // 
             // backportRemarkTextboxtoolStripTextBox2
             // 
@@ -941,7 +941,7 @@ namespace PS4PKGTool
             setRemarktoolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             setRemarktoolStripMenuItem2.Name = "setRemarktoolStripMenuItem2";
             setRemarktoolStripMenuItem2.Size = new System.Drawing.Size(240, 22);
-            setRemarktoolStripMenuItem2.Text = "Set remarks";
+            setRemarktoolStripMenuItem2.Text = "设置备注";
             setRemarktoolStripMenuItem2.Click += Backport_Click;
             // 
             // toolStripSeparator9
@@ -956,7 +956,7 @@ namespace PS4PKGTool
             removeBackportedToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             removeBackportedToolStripMenuItem2.Name = "removeBackportedToolStripMenuItem2";
             removeBackportedToolStripMenuItem2.Size = new System.Drawing.Size(208, 22);
-            removeBackportedToolStripMenuItem2.Text = "Remove backported label";
+            removeBackportedToolStripMenuItem2.Text = "移除回移植标签";
             removeBackportedToolStripMenuItem2.Click += Backport_Click;
             // 
             // deletePkgtoolStripMenuItem2
@@ -966,7 +966,7 @@ namespace PS4PKGTool
             deletePkgtoolStripMenuItem2.Name = "deletePkgtoolStripMenuItem2";
             deletePkgtoolStripMenuItem2.ShowShortcutKeys = false;
             deletePkgtoolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            deletePkgtoolStripMenuItem2.Text = "Delete PKG";
+            deletePkgtoolStripMenuItem2.Text = "删除 PKG";
             deletePkgtoolStripMenuItem2.Click += DeletePKG_Click;
             // 
             // selectedExportPKGListToExcelToolStripMenuItem2
@@ -976,7 +976,7 @@ namespace PS4PKGTool
             selectedExportPKGListToExcelToolStripMenuItem2.Name = "selectedExportPKGListToExcelToolStripMenuItem2";
             selectedExportPKGListToExcelToolStripMenuItem2.ShowShortcutKeys = false;
             selectedExportPKGListToExcelToolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            selectedExportPKGListToExcelToolStripMenuItem2.Text = "Export as excel file";
+            selectedExportPKGListToExcelToolStripMenuItem2.Text = "导出为 Excel 文件";
             selectedExportPKGListToExcelToolStripMenuItem2.Click += ExportPKGToExcel_Click;
             // 
             // mergeSelectedBaseAndUpdateToolStripMenuItem
@@ -984,7 +984,7 @@ namespace PS4PKGTool
             mergeSelectedBaseAndUpdateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             mergeSelectedBaseAndUpdateToolStripMenuItem.Name = "mergeSelectedBaseAndUpdateToolStripMenuItem";
             mergeSelectedBaseAndUpdateToolStripMenuItem.Size = new System.Drawing.Size(305, 22);
-            mergeSelectedBaseAndUpdateToolStripMenuItem.Text = "Merge selected base + update";
+            mergeSelectedBaseAndUpdateToolStripMenuItem.Text = "合并所选本体 + 更新";
             mergeSelectedBaseAndUpdateToolStripMenuItem.Click += MergeSelectedBaseAndUpdate_Click;
             // 
             // convertSelectedToFfpfscToolStripMenuItem
@@ -992,7 +992,7 @@ namespace PS4PKGTool
             convertSelectedToFfpfscToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             convertSelectedToFfpfscToolStripMenuItem.Name = "convertSelectedToFfpfscToolStripMenuItem";
             convertSelectedToFfpfscToolStripMenuItem.Size = new System.Drawing.Size(305, 22);
-            convertSelectedToFfpfscToolStripMenuItem.Text = "Convert to FFPFSC (PS5 ShadowMountPlus)";
+            convertSelectedToFfpfscToolStripMenuItem.Text = "转换为 FFPFSC（PS5 ShadowMountPlus）";
             convertSelectedToFfpfscToolStripMenuItem.Click += ConvertSelectedToFfpfsc_Click;
             // 
             // extractSelectedFullPkgToolStripMenuItem
@@ -1000,7 +1000,7 @@ namespace PS4PKGTool
             extractSelectedFullPkgToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             extractSelectedFullPkgToolStripMenuItem.Name = "extractSelectedFullPkgToolStripMenuItem";
             extractSelectedFullPkgToolStripMenuItem.Size = new System.Drawing.Size(305, 22);
-            extractSelectedFullPkgToolStripMenuItem.Text = "Extract Full PKG";
+            extractSelectedFullPkgToolStripMenuItem.Text = "提取完整 PKG";
             extractSelectedFullPkgToolStripMenuItem.Click += ExtractSelectedFullPkg_Click;
             // 
             // GroupActionExtacrtImageToolStripMenuItem
@@ -1011,14 +1011,14 @@ namespace PS4PKGTool
             GroupActionExtacrtImageToolStripMenuItem.Name = "GroupActionExtacrtImageToolStripMenuItem";
             GroupActionExtacrtImageToolStripMenuItem.ShowShortcutKeys = false;
             GroupActionExtacrtImageToolStripMenuItem.Size = new System.Drawing.Size(305, 22);
-            GroupActionExtacrtImageToolStripMenuItem.Text = "Save artwork";
+            GroupActionExtacrtImageToolStripMenuItem.Text = "保存图片";
             // 
             // selectedExtractImagesAndIconToolStripMenuItem2
             // 
             selectedExtractImagesAndIconToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             selectedExtractImagesAndIconToolStripMenuItem2.Name = "selectedExtractImagesAndIconToolStripMenuItem2";
             selectedExtractImagesAndIconToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            selectedExtractImagesAndIconToolStripMenuItem2.Text = "Backgrounds + Icon";
+            selectedExtractImagesAndIconToolStripMenuItem2.Text = "背景 + 图标";
             selectedExtractImagesAndIconToolStripMenuItem2.Click += ExtractImageIcon_Click;
             // 
             // selectedExtractImageOnlyToolStripMenuItem2
@@ -1026,7 +1026,7 @@ namespace PS4PKGTool
             selectedExtractImageOnlyToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             selectedExtractImageOnlyToolStripMenuItem2.Name = "selectedExtractImageOnlyToolStripMenuItem2";
             selectedExtractImageOnlyToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            selectedExtractImageOnlyToolStripMenuItem2.Text = "Backgrounds only";
+            selectedExtractImageOnlyToolStripMenuItem2.Text = "仅背景";
             selectedExtractImageOnlyToolStripMenuItem2.Click += ExtractImageIcon_Click;
             // 
             // selectedExtractIconOnlyToolStripMenuItem2
@@ -1034,7 +1034,7 @@ namespace PS4PKGTool
             selectedExtractIconOnlyToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             selectedExtractIconOnlyToolStripMenuItem2.Name = "selectedExtractIconOnlyToolStripMenuItem2";
             selectedExtractIconOnlyToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            selectedExtractIconOnlyToolStripMenuItem2.Text = "Icon only";
+            selectedExtractIconOnlyToolStripMenuItem2.Text = "仅图标";
             selectedExtractIconOnlyToolStripMenuItem2.Click += ExtractImageIcon_Click;
             // 
             // toolStripMenuItem133
@@ -1045,7 +1045,7 @@ namespace PS4PKGTool
             toolStripMenuItem133.Name = "toolStripMenuItem133";
             toolStripMenuItem133.ShowShortcutKeys = false;
             toolStripMenuItem133.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem133.Text = "Rename PKG";
+            toolStripMenuItem133.Text = "重命名 PKG";
             // 
             // renameSelectedPkg1ToolStripMenuItem2
             // 
@@ -1150,7 +1150,7 @@ namespace PS4PKGTool
             viewPkgChangeInfotoolStripMenuItem2.Name = "viewPkgChangeInfotoolStripMenuItem2";
             viewPkgChangeInfotoolStripMenuItem2.ShowShortcutKeys = false;
             viewPkgChangeInfotoolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            viewPkgChangeInfotoolStripMenuItem2.Text = "View PKG Change Info";
+            viewPkgChangeInfotoolStripMenuItem2.Text = "查看 PKG 变更信息";
             viewPkgChangeInfotoolStripMenuItem2.Click += ViewPatchChangelog_Click;
             // 
             // viewPkgExplorerStripMenuItem2
@@ -1160,7 +1160,7 @@ namespace PS4PKGTool
             viewPkgExplorerStripMenuItem2.Name = "viewPkgExplorerStripMenuItem2";
             viewPkgExplorerStripMenuItem2.ShowShortcutKeys = false;
             viewPkgExplorerStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            viewPkgExplorerStripMenuItem2.Text = "View PKG in Explorer";
+            viewPkgExplorerStripMenuItem2.Text = "在资源管理器中查看 PKG";
             viewPkgExplorerStripMenuItem2.Click += ViewPKGExplorer_Click;
             // 
             // downloadOfficialUpdateToolStripMenuItem2
@@ -1171,7 +1171,7 @@ namespace PS4PKGTool
             downloadOfficialUpdateToolStripMenuItem2.Name = "downloadOfficialUpdateToolStripMenuItem2";
             downloadOfficialUpdateToolStripMenuItem2.ShowShortcutKeys = false;
             downloadOfficialUpdateToolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            downloadOfficialUpdateToolStripMenuItem2.Text = "Download official update";
+            downloadOfficialUpdateToolStripMenuItem2.Text = "下载官方更新";
             downloadOfficialUpdateToolStripMenuItem2.Click += DownloadOfficialUpdate_Click;
             // 
             // toolStripSeparator7
@@ -1190,7 +1190,7 @@ namespace PS4PKGTool
             toolStripMenuItem18.Name = "toolStripMenuItem18";
             toolStripMenuItem18.ShowShortcutKeys = false;
             toolStripMenuItem18.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem18.Text = "Remote PKG Installer | Status : Idle";
+            toolStripMenuItem18.Text = "远程安装包安装器 | 状态：空闲";
             // 
             // RpiCheckPkgInstalledtoolStripMenuItem2
             // 
@@ -1199,7 +1199,7 @@ namespace PS4PKGTool
             RpiCheckPkgInstalledtoolStripMenuItem2.Name = "RpiCheckPkgInstalledtoolStripMenuItem2";
             RpiCheckPkgInstalledtoolStripMenuItem2.ShowShortcutKeys = false;
             RpiCheckPkgInstalledtoolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            RpiCheckPkgInstalledtoolStripMenuItem2.Text = "Check if base PKG installed on PS4";
+            RpiCheckPkgInstalledtoolStripMenuItem2.Text = "检查本体 PKG 是否已安装在 PS4 上";
             RpiCheckPkgInstalledtoolStripMenuItem2.Click += Rpi_Click;
             // 
             // RpiSendPkgtoolStripMenuItem2
@@ -1209,7 +1209,7 @@ namespace PS4PKGTool
             RpiSendPkgtoolStripMenuItem2.Name = "RpiSendPkgtoolStripMenuItem2";
             RpiSendPkgtoolStripMenuItem2.ShowShortcutKeys = false;
             RpiSendPkgtoolStripMenuItem2.Size = new System.Drawing.Size(305, 22);
-            RpiSendPkgtoolStripMenuItem2.Text = "Send PKG to PS4";
+            RpiSendPkgtoolStripMenuItem2.Text = "发送 PKG 到 PS4";
             RpiSendPkgtoolStripMenuItem2.Click += Rpi_Click;
             // 
             // toolStripMenuItem21
@@ -1220,14 +1220,14 @@ namespace PS4PKGTool
             toolStripMenuItem21.Name = "toolStripMenuItem21";
             toolStripMenuItem21.ShowShortcutKeys = false;
             toolStripMenuItem21.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItem21.Text = "Uninstall PKG from PS4";
+            toolStripMenuItem21.Text = "从 PS4 卸载 PKG";
             // 
             // RpiUninstallBasePKGToolStripMenuItem2
             // 
             RpiUninstallBasePKGToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallBasePKGToolStripMenuItem2.Name = "RpiUninstallBasePKGToolStripMenuItem2";
             RpiUninstallBasePKGToolStripMenuItem2.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallBasePKGToolStripMenuItem2.Text = "Uninstall base PKG";
+            RpiUninstallBasePKGToolStripMenuItem2.Text = "卸载本体 PKG";
             RpiUninstallBasePKGToolStripMenuItem2.Click += Rpi_Click;
             // 
             // RpiUninstallPatchPKGToolStripMenuItem2
@@ -1235,7 +1235,7 @@ namespace PS4PKGTool
             RpiUninstallPatchPKGToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallPatchPKGToolStripMenuItem2.Name = "RpiUninstallPatchPKGToolStripMenuItem2";
             RpiUninstallPatchPKGToolStripMenuItem2.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallPatchPKGToolStripMenuItem2.Text = "Uninstall patch PKG";
+            RpiUninstallPatchPKGToolStripMenuItem2.Text = "卸载补丁 PKG";
             RpiUninstallPatchPKGToolStripMenuItem2.Click += Rpi_Click;
             // 
             // RpiUninstallDlcPKGToolStripMenuItem2
@@ -1243,7 +1243,7 @@ namespace PS4PKGTool
             RpiUninstallDlcPKGToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallDlcPKGToolStripMenuItem2.Name = "RpiUninstallDlcPKGToolStripMenuItem2";
             RpiUninstallDlcPKGToolStripMenuItem2.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallDlcPKGToolStripMenuItem2.Text = "Uninstall addon PKG (DLC)";
+            RpiUninstallDlcPKGToolStripMenuItem2.Text = "卸载附加 PKG（DLC）";
             RpiUninstallDlcPKGToolStripMenuItem2.Click += Rpi_Click;
             // 
             // RpiUninstallThemePKGToolStripMenuItem2
@@ -1251,7 +1251,7 @@ namespace PS4PKGTool
             RpiUninstallThemePKGToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallThemePKGToolStripMenuItem2.Name = "RpiUninstallThemePKGToolStripMenuItem2";
             RpiUninstallThemePKGToolStripMenuItem2.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallThemePKGToolStripMenuItem2.Text = "Uninstall addon PKG (Theme)";
+            RpiUninstallThemePKGToolStripMenuItem2.Text = "卸载附加 PKG（主题）";
             RpiUninstallThemePKGToolStripMenuItem2.Click += Rpi_Click;
             // 
             // toolStripSeparatorShadps4
@@ -1274,7 +1274,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4Launch.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4Launch.Name = "toolStripMenuItemShadps4Launch";
             toolStripMenuItemShadps4Launch.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItemShadps4Launch.Text = "Launch";
+            toolStripMenuItemShadps4Launch.Text = "启动";
             toolStripMenuItemShadps4Launch.Click += toolStripMenuItemShadps4Launch_Click;
             // 
             // toolStripMenuItemShadps4Install
@@ -1282,7 +1282,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4Install.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4Install.Name = "toolStripMenuItemShadps4Install";
             toolStripMenuItemShadps4Install.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItemShadps4Install.Text = "Install to shadPS4...";
+            toolStripMenuItemShadps4Install.Text = "安装到 shadPS4……";
             toolStripMenuItemShadps4Install.Click += toolStripMenuItemShadps4Install_Click;
             // 
             // toolStripMenuItemShadps4Uninstall
@@ -1290,7 +1290,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4Uninstall.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4Uninstall.Name = "toolStripMenuItemShadps4Uninstall";
             toolStripMenuItemShadps4Uninstall.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItemShadps4Uninstall.Text = "Uninstall game";
+            toolStripMenuItemShadps4Uninstall.Text = "卸载游戏";
             toolStripMenuItemShadps4Uninstall.Visible = false;
             toolStripMenuItemShadps4Uninstall.Click += toolStripMenuItemShadps4Uninstall_Click;
             // 
@@ -1299,7 +1299,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4OpenManager.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4OpenManager.Name = "toolStripMenuItemShadps4OpenManager";
             toolStripMenuItemShadps4OpenManager.Size = new System.Drawing.Size(305, 22);
-            toolStripMenuItemShadps4OpenManager.Text = "Open shadPS4 Manager";
+            toolStripMenuItemShadps4OpenManager.Text = "打开 shadPS4 管理器";
             toolStripMenuItemShadps4OpenManager.Click += toolStripMenuItemShadps4OpenManager_Click;
             // 
             // toolStripMenuItemShadps4InstallSetup
@@ -1307,7 +1307,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4InstallSetup.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4InstallSetup.Name = "toolStripMenuItemShadps4InstallSetup";
             toolStripMenuItemShadps4InstallSetup.Size = new System.Drawing.Size(239, 22);
-            toolStripMenuItemShadps4InstallSetup.Text = "Install shadPS4 Setup...";
+            toolStripMenuItemShadps4InstallSetup.Text = "安装 shadPS4 设置向导……";
             toolStripMenuItemShadps4InstallSetup.Click += toolStripMenuItemShadps4InstallSetup_Click;
             // 
             // toolStripMenuItemShadps4OpenLauncher
@@ -1315,7 +1315,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4OpenLauncher.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4OpenLauncher.Name = "toolStripMenuItemShadps4OpenLauncher";
             toolStripMenuItemShadps4OpenLauncher.Size = new System.Drawing.Size(239, 22);
-            toolStripMenuItemShadps4OpenLauncher.Text = "Open shadPS4 Launcher";
+            toolStripMenuItemShadps4OpenLauncher.Text = "打开 shadPS4 启动器";
             toolStripMenuItemShadps4OpenLauncher.Click += toolStripMenuItemShadps4OpenLauncher_Click;
             // 
             // toolStripMenuItemShadps4Configure
@@ -1323,7 +1323,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4Configure.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4Configure.Name = "toolStripMenuItemShadps4Configure";
             toolStripMenuItemShadps4Configure.Size = new System.Drawing.Size(239, 22);
-            toolStripMenuItemShadps4Configure.Text = "Configure shadPS4...";
+            toolStripMenuItemShadps4Configure.Text = "配置 shadPS4……";
             toolStripMenuItemShadps4Configure.Click += toolStripMenuItemShadps4Configure_Click;
             // 
             // toolStripMenuItemShadps4Manager
@@ -1331,7 +1331,7 @@ namespace PS4PKGTool
             toolStripMenuItemShadps4Manager.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemShadps4Manager.Name = "toolStripMenuItemShadps4Manager";
             toolStripMenuItemShadps4Manager.Size = new System.Drawing.Size(168, 22);
-            toolStripMenuItemShadps4Manager.Text = "shadPS4 Manager";
+            toolStripMenuItemShadps4Manager.Text = "shadPS4 管理器";
             toolStripMenuItemShadps4Manager.Click += toolStripMenuItemShadps4Manager_Click;
             // 
             // toolStripMenuItemTools
@@ -1340,14 +1340,14 @@ namespace PS4PKGTool
             toolStripMenuItemTools.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItemTools.Name = "toolStripMenuItemTools";
             toolStripMenuItemTools.Size = new System.Drawing.Size(47, 20);
-            toolStripMenuItemTools.Text = "Tools";
+            toolStripMenuItemTools.Text = "工具";
             // 
             // openAppDataDirectoryToolStripMenuItem2
             // 
             openAppDataDirectoryToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             openAppDataDirectoryToolStripMenuItem2.Name = "openAppDataDirectoryToolStripMenuItem2";
             openAppDataDirectoryToolStripMenuItem2.Size = new System.Drawing.Size(249, 22);
-            openAppDataDirectoryToolStripMenuItem2.Text = "Open App Data Folder";
+            openAppDataDirectoryToolStripMenuItem2.Text = "打开 App 数据文件夹";
             openAppDataDirectoryToolStripMenuItem2.Click += OpenAppDataDirectory_Click;
             // 
             // toolStripMenuItem34
@@ -1357,7 +1357,7 @@ namespace PS4PKGTool
             toolStripMenuItem34.Name = "toolStripMenuItem34";
             toolStripMenuItem34.ShowShortcutKeys = false;
             toolStripMenuItem34.Size = new System.Drawing.Size(249, 22);
-            toolStripMenuItem34.Text = "Settings";
+            toolStripMenuItem34.Text = "设置";
             toolStripMenuItem34.Click += toolStripMenuItem34_Click;
             // 
             // toolStripSeparator1
@@ -1415,7 +1415,7 @@ namespace PS4PKGTool
             fileToolStripMenuItem2.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             fileToolStripMenuItem2.Name = "fileToolStripMenuItem2";
             fileToolStripMenuItem2.Size = new System.Drawing.Size(37, 20);
-            fileToolStripMenuItem2.Text = "File";
+            fileToolStripMenuItem2.Text = "文件";
             // 
             // managePS4PKGToolStripMenuItem
             // 
@@ -1423,7 +1423,7 @@ namespace PS4PKGTool
             managePS4PKGToolStripMenuItem.Name = "managePS4PKGToolStripMenuItem";
             managePS4PKGToolStripMenuItem.ShowShortcutKeys = false;
             managePS4PKGToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            managePS4PKGToolStripMenuItem.Text = "Open PKG Directory Settings";
+            managePS4PKGToolStripMenuItem.Text = "打开 PKG 目录设置";
             managePS4PKGToolStripMenuItem.Visible = false;
             managePS4PKGToolStripMenuItem.Click += managePS4PKGToolStripMenuItem_Click;
             // 
@@ -1432,7 +1432,7 @@ namespace PS4PKGTool
             settingstoolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             settingstoolStripMenuItem.Name = "settingstoolStripMenuItem";
             settingstoolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            settingstoolStripMenuItem.Text = "Settings";
+            settingstoolStripMenuItem.Text = "设置";
             settingstoolStripMenuItem.Click += settingstoolStripMenuItem_Click;
             // 
             // loadFromDirectoryToolStripMenuItem
@@ -1440,7 +1440,7 @@ namespace PS4PKGTool
             loadFromDirectoryToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             loadFromDirectoryToolStripMenuItem.Name = "loadFromDirectoryToolStripMenuItem";
             loadFromDirectoryToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            loadFromDirectoryToolStripMenuItem.Text = "Load from saved directory";
+            loadFromDirectoryToolStripMenuItem.Text = "从已保存目录加载";
             loadFromDirectoryToolStripMenuItem.Click += loadFromDirectoryToolStripMenuItem_Click;
             // 
             // loadFromManifestToolStripMenuItem
@@ -1448,7 +1448,7 @@ namespace PS4PKGTool
             loadFromManifestToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             loadFromManifestToolStripMenuItem.Name = "loadFromManifestToolStripMenuItem";
             loadFromManifestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            loadFromManifestToolStripMenuItem.Text = "Load Manifest From...";
+            loadFromManifestToolStripMenuItem.Text = "从...加载清单";
             loadFromManifestToolStripMenuItem.Click += loadFromManifestToolStripMenuItem_Click;
             // 
             // saveManifestToolStripMenuItem
@@ -1456,7 +1456,7 @@ namespace PS4PKGTool
             saveManifestToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             saveManifestToolStripMenuItem.Name = "saveManifestToolStripMenuItem";
             saveManifestToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            saveManifestToolStripMenuItem.Text = "Save Manifest As...";
+            saveManifestToolStripMenuItem.Text = "清单另存为...";
             saveManifestToolStripMenuItem.Click += saveManifestToolStripMenuItem_Click;
             // 
             // emptyListToolStripMenuItem
@@ -1464,7 +1464,7 @@ namespace PS4PKGTool
             emptyListToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             emptyListToolStripMenuItem.Name = "emptyListToolStripMenuItem";
             emptyListToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            emptyListToolStripMenuItem.Text = "Empty list";
+            emptyListToolStripMenuItem.Text = "清空列表";
             emptyListToolStripMenuItem.Click += emptyListToolStripMenuItem_Click;
             // 
             // toolStripSeparator11
@@ -1480,7 +1480,7 @@ namespace PS4PKGTool
             exitToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             exitToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
-            exitToolStripMenuItem1.Text = "Exit";
+            exitToolStripMenuItem1.Text = "退出";
             exitToolStripMenuItem1.Click += toolStripMenuItem78_Click;
             // 
             // toolStripMenuItem144
@@ -1489,14 +1489,14 @@ namespace PS4PKGTool
             toolStripMenuItem144.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem144.Name = "toolStripMenuItem144";
             toolStripMenuItem144.Size = new System.Drawing.Size(44, 20);
-            toolStripMenuItem144.Text = "Help";
+            toolStripMenuItem144.Text = "帮助";
             // 
             // toolStripMenuItem159
             // 
             toolStripMenuItem159.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem159.Name = "toolStripMenuItem159";
             toolStripMenuItem159.Size = new System.Drawing.Size(165, 22);
-            toolStripMenuItem159.Text = "About";
+            toolStripMenuItem159.Text = "关于";
             toolStripMenuItem159.Click += toolStripMenuItem159_Click;
             // 
             // toolStripMenuItem160
@@ -1504,7 +1504,7 @@ namespace PS4PKGTool
             toolStripMenuItem160.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem160.Name = "toolStripMenuItem160";
             toolStripMenuItem160.Size = new System.Drawing.Size(165, 22);
-            toolStripMenuItem160.Text = "Buy me a coffee";
+            toolStripMenuItem160.Text = "请我喝杯咖啡";
             toolStripMenuItem160.Click += toolStripMenuItem160_Click;
             // 
             // toolStripMenuItem158
@@ -1512,7 +1512,7 @@ namespace PS4PKGTool
             toolStripMenuItem158.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem158.Name = "toolStripMenuItem158";
             toolStripMenuItem158.Size = new System.Drawing.Size(165, 22);
-            toolStripMenuItem158.Text = "Check for update";
+            toolStripMenuItem158.Text = "检查更新";
             toolStripMenuItem158.Click += toolStripMenuItem158_Click;
             // 
             // toolStripSeparator12
@@ -1529,14 +1529,14 @@ namespace PS4PKGTool
             globalActionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(153, 153, 153);
             globalActionToolStripMenuItem.Name = "globalActionToolStripMenuItem";
             globalActionToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            globalActionToolStripMenuItem.Text = "Global Action";
+            globalActionToolStripMenuItem.Text = "全局操作";
             // 
             // checkForDuplicatePKGToolStripMenuItem1
             // 
             checkForDuplicatePKGToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             checkForDuplicatePKGToolStripMenuItem1.Name = "checkForDuplicatePKGToolStripMenuItem1";
             checkForDuplicatePKGToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            checkForDuplicatePKGToolStripMenuItem1.Text = "Check for duplicate PKG";
+            checkForDuplicatePKGToolStripMenuItem1.Text = "检查重复 PKG";
             checkForDuplicatePKGToolStripMenuItem1.Click += CheckForDuplicatePKG_Click;
             // 
             // globalExportPKGListToExcelToolStripMenuItem1
@@ -1544,7 +1544,7 @@ namespace PS4PKGTool
             globalExportPKGListToExcelToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExportPKGListToExcelToolStripMenuItem1.Name = "globalExportPKGListToExcelToolStripMenuItem1";
             globalExportPKGListToExcelToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            globalExportPKGListToExcelToolStripMenuItem1.Text = "Export PKG list as excel file";
+            globalExportPKGListToExcelToolStripMenuItem1.Text = "将 PKG 列表导出为 Excel 文件";
             globalExportPKGListToExcelToolStripMenuItem1.Click += ExportPKGToExcel_Click;
             // 
             // extractImageAndBackgroundToolStripMenuItem
@@ -1553,14 +1553,14 @@ namespace PS4PKGTool
             extractImageAndBackgroundToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             extractImageAndBackgroundToolStripMenuItem.Name = "extractImageAndBackgroundToolStripMenuItem";
             extractImageAndBackgroundToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            extractImageAndBackgroundToolStripMenuItem.Text = "Save artwork";
+            extractImageAndBackgroundToolStripMenuItem.Text = "保存图片";
             // 
             // globalExtractImagesAndIconToolStripMenuItem1
             // 
             globalExtractImagesAndIconToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExtractImagesAndIconToolStripMenuItem1.Name = "globalExtractImagesAndIconToolStripMenuItem1";
             globalExtractImagesAndIconToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            globalExtractImagesAndIconToolStripMenuItem1.Text = "Backgrounds + Icon";
+            globalExtractImagesAndIconToolStripMenuItem1.Text = "背景 + 图标";
             globalExtractImagesAndIconToolStripMenuItem1.Click += ExtractImageIcon_Click;
             // 
             // globalExtractImageOnlyToolStripMenuItem1
@@ -1568,7 +1568,7 @@ namespace PS4PKGTool
             globalExtractImageOnlyToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExtractImageOnlyToolStripMenuItem1.Name = "globalExtractImageOnlyToolStripMenuItem1";
             globalExtractImageOnlyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            globalExtractImageOnlyToolStripMenuItem1.Text = "Backgrounds only";
+            globalExtractImageOnlyToolStripMenuItem1.Text = "仅背景";
             globalExtractImageOnlyToolStripMenuItem1.Click += ExtractImageIcon_Click;
             // 
             // globalExtractIconOnlyToolStripMenuItem1
@@ -1576,7 +1576,7 @@ namespace PS4PKGTool
             globalExtractIconOnlyToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalExtractIconOnlyToolStripMenuItem1.Name = "globalExtractIconOnlyToolStripMenuItem1";
             globalExtractIconOnlyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            globalExtractIconOnlyToolStripMenuItem1.Text = "Icon only";
+            globalExtractIconOnlyToolStripMenuItem1.Text = "仅图标";
             globalExtractIconOnlyToolStripMenuItem1.Click += ExtractImageIcon_Click;
             // 
             // renameToolStripMenuItem
@@ -1585,7 +1585,7 @@ namespace PS4PKGTool
             renameToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             renameToolStripMenuItem.Name = "renameToolStripMenuItem";
             renameToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            renameToolStripMenuItem.Text = "Rename all PKG";
+            renameToolStripMenuItem.Text = "重命名全部 PKG";
             // 
             // renameAllPkg1ToolStripMenuItem1
             // 
@@ -1689,14 +1689,14 @@ namespace PS4PKGTool
             seperateAndMovePKGByTypeIntoFolderToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             seperateAndMovePKGByTypeIntoFolderToolStripMenuItem.Name = "seperateAndMovePKGByTypeIntoFolderToolStripMenuItem";
             seperateAndMovePKGByTypeIntoFolderToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            seperateAndMovePKGByTypeIntoFolderToolStripMenuItem.Text = "Move PKG";
+            seperateAndMovePKGByTypeIntoFolderToolStripMenuItem.Text = "移动 PKG";
             // 
             // movePkgTitleToolStripMenuItem1
             // 
             movePkgTitleToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgTitleToolStripMenuItem1.Name = "movePkgTitleToolStripMenuItem1";
             movePkgTitleToolStripMenuItem1.Size = new System.Drawing.Size(312, 22);
-            movePkgTitleToolStripMenuItem1.Text = "Move by PKG title";
+            movePkgTitleToolStripMenuItem1.Text = "按 PKG 标题移动";
             movePkgTitleToolStripMenuItem1.Click += MovePkg_Click;
             // 
             // movePkgCategoryToolStripMenuItem1
@@ -1704,7 +1704,7 @@ namespace PS4PKGTool
             movePkgCategoryToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgCategoryToolStripMenuItem1.Name = "movePkgCategoryToolStripMenuItem1";
             movePkgCategoryToolStripMenuItem1.Size = new System.Drawing.Size(312, 22);
-            movePkgCategoryToolStripMenuItem1.Text = "Move by PKG category (Base/Update/Addon)";
+            movePkgCategoryToolStripMenuItem1.Text = "按 PKG 分类移动（本体/更新/附加）";
             movePkgCategoryToolStripMenuItem1.Click += MovePkg_Click;
             // 
             // movePkgTypeToolStripMenuItem1
@@ -1712,7 +1712,7 @@ namespace PS4PKGTool
             movePkgTypeToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgTypeToolStripMenuItem1.Name = "movePkgTypeToolStripMenuItem1";
             movePkgTypeToolStripMenuItem1.Size = new System.Drawing.Size(312, 22);
-            movePkgTypeToolStripMenuItem1.Text = "Move by PKG type (Fake/Official)";
+            movePkgTypeToolStripMenuItem1.Text = "按 PKG 类型移动（自制/官方）";
             movePkgTypeToolStripMenuItem1.Click += MovePkg_Click;
             // 
             // movePkgRegionToolStripMenuItem1
@@ -1720,7 +1720,7 @@ namespace PS4PKGTool
             movePkgRegionToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgRegionToolStripMenuItem1.Name = "movePkgRegionToolStripMenuItem1";
             movePkgRegionToolStripMenuItem1.Size = new System.Drawing.Size(312, 22);
-            movePkgRegionToolStripMenuItem1.Text = "Move by PKG region";
+            movePkgRegionToolStripMenuItem1.Text = "按 PKG 区域移动";
             movePkgRegionToolStripMenuItem1.Click += MovePkg_Click;
             // 
             // movePkgSingleFolderToolStripMenuItem1
@@ -1728,7 +1728,7 @@ namespace PS4PKGTool
             movePkgSingleFolderToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             movePkgSingleFolderToolStripMenuItem1.Name = "movePkgSingleFolderToolStripMenuItem1";
             movePkgSingleFolderToolStripMenuItem1.Size = new System.Drawing.Size(312, 22);
-            movePkgSingleFolderToolStripMenuItem1.Text = "Move all to single folder";
+            movePkgSingleFolderToolStripMenuItem1.Text = "全部移动到同一文件夹";
             movePkgSingleFolderToolStripMenuItem1.Click += MovePkg_Click;
             // 
             // toolStripSeparator4
@@ -1753,7 +1753,7 @@ namespace PS4PKGTool
             globalCopyStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             globalCopyStripMenuItem.Name = "globalCopyStripMenuItem";
             globalCopyStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            globalCopyStripMenuItem.Text = "Copy";
+            globalCopyStripMenuItem.Text = "复制";
             // 
             // copyTitleIdtoolStripMenuItem1
             // 
@@ -1793,14 +1793,14 @@ namespace PS4PKGTool
             toolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            toolStripMenuItem1.Text = "Backport";
+            toolStripMenuItem1.Text = "回移植";
             // 
             // setBackportedtoolStripMenuItem1
             // 
             setBackportedtoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             setBackportedtoolStripMenuItem1.Name = "setBackportedtoolStripMenuItem1";
             setBackportedtoolStripMenuItem1.Size = new System.Drawing.Size(208, 22);
-            setBackportedtoolStripMenuItem1.Text = "Set as backported";
+            setBackportedtoolStripMenuItem1.Text = "标记为回移植";
             setBackportedtoolStripMenuItem1.Click += Backport_Click;
             // 
             // toolStripMenuItem4
@@ -1809,7 +1809,7 @@ namespace PS4PKGTool
             toolStripMenuItem4.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem4.Name = "toolStripMenuItem4";
             toolStripMenuItem4.Size = new System.Drawing.Size(208, 22);
-            toolStripMenuItem4.Text = "Set backport remarks";
+            toolStripMenuItem4.Text = "设置回移植备注";
             // 
             // backportRemarkTextboxtoolStripTextBox1
             // 
@@ -1821,7 +1821,7 @@ namespace PS4PKGTool
             setRemarktoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             setRemarktoolStripMenuItem1.Name = "setRemarktoolStripMenuItem1";
             setRemarktoolStripMenuItem1.Size = new System.Drawing.Size(240, 22);
-            setRemarktoolStripMenuItem1.Text = "Set remarks";
+            setRemarktoolStripMenuItem1.Text = "设置备注";
             setRemarktoolStripMenuItem1.Click += Backport_Click;
             // 
             // toolStripSeparator10
@@ -1836,7 +1836,7 @@ namespace PS4PKGTool
             removeBackportedtoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             removeBackportedtoolStripMenuItem1.Name = "removeBackportedtoolStripMenuItem1";
             removeBackportedtoolStripMenuItem1.Size = new System.Drawing.Size(208, 22);
-            removeBackportedtoolStripMenuItem1.Text = "Remove backported label";
+            removeBackportedtoolStripMenuItem1.Text = "移除回移植标签";
             removeBackportedtoolStripMenuItem1.Click += Backport_Click;
             // 
             // deletePKGtoolStripMenuItem1
@@ -1844,7 +1844,7 @@ namespace PS4PKGTool
             deletePKGtoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             deletePKGtoolStripMenuItem1.Name = "deletePKGtoolStripMenuItem1";
             deletePKGtoolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            deletePKGtoolStripMenuItem1.Text = "Delete PKG";
+            deletePKGtoolStripMenuItem1.Text = "删除 PKG";
             deletePKGtoolStripMenuItem1.Click += DeletePKG_Click;
             // 
             // selectedExportPKGListToExcelToolStripMenuItem1
@@ -1854,7 +1854,7 @@ namespace PS4PKGTool
             selectedExportPKGListToExcelToolStripMenuItem1.Name = "selectedExportPKGListToExcelToolStripMenuItem1";
             selectedExportPKGListToExcelToolStripMenuItem1.ShowShortcutKeys = false;
             selectedExportPKGListToExcelToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            selectedExportPKGListToExcelToolStripMenuItem1.Text = "Export as excel file";
+            selectedExportPKGListToExcelToolStripMenuItem1.Text = "导出为 Excel 文件";
             selectedExportPKGListToExcelToolStripMenuItem1.Click += ExportPKGToExcel_Click;
             // 
             // toolStripMenuItem28
@@ -1865,14 +1865,14 @@ namespace PS4PKGTool
             toolStripMenuItem28.Name = "toolStripMenuItem28";
             toolStripMenuItem28.ShowShortcutKeys = false;
             toolStripMenuItem28.Size = new System.Drawing.Size(254, 22);
-            toolStripMenuItem28.Text = "Save artwork";
+            toolStripMenuItem28.Text = "保存图片";
             // 
             // selectedExtractImagesAndIconToolStripMenuItem1
             // 
             selectedExtractImagesAndIconToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             selectedExtractImagesAndIconToolStripMenuItem1.Name = "selectedExtractImagesAndIconToolStripMenuItem1";
             selectedExtractImagesAndIconToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            selectedExtractImagesAndIconToolStripMenuItem1.Text = "Backgrounds + Icon";
+            selectedExtractImagesAndIconToolStripMenuItem1.Text = "背景 + 图标";
             selectedExtractImagesAndIconToolStripMenuItem1.Click += ExtractImageIcon_Click;
             // 
             // selectedExtractImageOnlyToolStripMenuItem1
@@ -1880,7 +1880,7 @@ namespace PS4PKGTool
             selectedExtractImageOnlyToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             selectedExtractImageOnlyToolStripMenuItem1.Name = "selectedExtractImageOnlyToolStripMenuItem1";
             selectedExtractImageOnlyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            selectedExtractImageOnlyToolStripMenuItem1.Text = "Backgrounds only";
+            selectedExtractImageOnlyToolStripMenuItem1.Text = "仅背景";
             selectedExtractImageOnlyToolStripMenuItem1.Click += ExtractImageIcon_Click;
             // 
             // selectedExtractIconOnlyToolStripMenuItem1
@@ -1888,7 +1888,7 @@ namespace PS4PKGTool
             selectedExtractIconOnlyToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             selectedExtractIconOnlyToolStripMenuItem1.Name = "selectedExtractIconOnlyToolStripMenuItem1";
             selectedExtractIconOnlyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            selectedExtractIconOnlyToolStripMenuItem1.Text = "Icon only";
+            selectedExtractIconOnlyToolStripMenuItem1.Text = "仅图标";
             selectedExtractIconOnlyToolStripMenuItem1.Click += ExtractImageIcon_Click;
             // 
             // renameCurrentPKGStripMenuItem
@@ -1897,7 +1897,7 @@ namespace PS4PKGTool
             renameCurrentPKGStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             renameCurrentPKGStripMenuItem.Name = "renameCurrentPKGStripMenuItem";
             renameCurrentPKGStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            renameCurrentPKGStripMenuItem.Text = "Rename PKG";
+            renameCurrentPKGStripMenuItem.Text = "重命名 PKG";
             // 
             // renameSelectedPkg1ToolStripMenuItem1
             // 
@@ -2000,7 +2000,7 @@ namespace PS4PKGTool
             viewPkgChangeInfotoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             viewPkgChangeInfotoolStripMenuItem1.Name = "viewPkgChangeInfotoolStripMenuItem1";
             viewPkgChangeInfotoolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            viewPkgChangeInfotoolStripMenuItem1.Text = "View PKG Change Info";
+            viewPkgChangeInfotoolStripMenuItem1.Text = "查看 PKG 变更信息";
             viewPkgChangeInfotoolStripMenuItem1.Click += ViewPatchChangelog_Click;
             // 
             // viewPkgExplorerStripMenuItem1
@@ -2008,7 +2008,7 @@ namespace PS4PKGTool
             viewPkgExplorerStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             viewPkgExplorerStripMenuItem1.Name = "viewPkgExplorerStripMenuItem1";
             viewPkgExplorerStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            viewPkgExplorerStripMenuItem1.Text = "View PKG in Explorer";
+            viewPkgExplorerStripMenuItem1.Text = "在资源管理器中查看 PKG";
             viewPkgExplorerStripMenuItem1.Click += ViewPKGExplorer_Click;
             // 
             // toolStripSeparator8
@@ -2024,7 +2024,7 @@ namespace PS4PKGTool
             downloadOfficialUpdateToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             downloadOfficialUpdateToolStripMenuItem1.Name = "downloadOfficialUpdateToolStripMenuItem1";
             downloadOfficialUpdateToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            downloadOfficialUpdateToolStripMenuItem1.Text = "Download official update";
+            downloadOfficialUpdateToolStripMenuItem1.Text = "下载官方更新";
             downloadOfficialUpdateToolStripMenuItem1.Click += DownloadOfficialUpdate_Click;
             // 
             // toolStripMenuItem16
@@ -2034,14 +2034,14 @@ namespace PS4PKGTool
             toolStripMenuItem16.ForeColor = System.Drawing.Color.FromArgb(153, 153, 153);
             toolStripMenuItem16.Name = "toolStripMenuItem16";
             toolStripMenuItem16.Size = new System.Drawing.Size(254, 22);
-            toolStripMenuItem16.Text = "Remote PKG Installer | Status : Idle";
+            toolStripMenuItem16.Text = "远程安装包安装器 | 状态：空闲";
             // 
             // RpiCheckPkgInstalledtoolStripMenuItem1
             // 
             RpiCheckPkgInstalledtoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiCheckPkgInstalledtoolStripMenuItem1.Name = "RpiCheckPkgInstalledtoolStripMenuItem1";
             RpiCheckPkgInstalledtoolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            RpiCheckPkgInstalledtoolStripMenuItem1.Text = "Check if base PKG installed on PS4";
+            RpiCheckPkgInstalledtoolStripMenuItem1.Text = "检查本体 PKG 是否已安装在 PS4 上";
             RpiCheckPkgInstalledtoolStripMenuItem1.Click += Rpi_Click;
             // 
             // RpiSendPkgtoolStripMenuItem1
@@ -2049,7 +2049,7 @@ namespace PS4PKGTool
             RpiSendPkgtoolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiSendPkgtoolStripMenuItem1.Name = "RpiSendPkgtoolStripMenuItem1";
             RpiSendPkgtoolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
-            RpiSendPkgtoolStripMenuItem1.Text = "Send PKG to PS4";
+            RpiSendPkgtoolStripMenuItem1.Text = "发送 PKG 到 PS4";
             RpiSendPkgtoolStripMenuItem1.Click += Rpi_Click;
             // 
             // uninstallPKGFromPS4ToolStripMenuItem
@@ -2058,14 +2058,14 @@ namespace PS4PKGTool
             uninstallPKGFromPS4ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             uninstallPKGFromPS4ToolStripMenuItem.Name = "uninstallPKGFromPS4ToolStripMenuItem";
             uninstallPKGFromPS4ToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            uninstallPKGFromPS4ToolStripMenuItem.Text = "Uninstall PKG from PS4";
+            uninstallPKGFromPS4ToolStripMenuItem.Text = "从 PS4 卸载 PKG";
             // 
             // RpiUninstallBasePKGToolStripMenuItem1
             // 
             RpiUninstallBasePKGToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallBasePKGToolStripMenuItem1.Name = "RpiUninstallBasePKGToolStripMenuItem1";
             RpiUninstallBasePKGToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallBasePKGToolStripMenuItem1.Text = "Uninstall base PKG";
+            RpiUninstallBasePKGToolStripMenuItem1.Text = "卸载本体 PKG";
             RpiUninstallBasePKGToolStripMenuItem1.Click += Rpi_Click;
             // 
             // RpiUninstallPatchPKGToolStripMenuItem1
@@ -2073,7 +2073,7 @@ namespace PS4PKGTool
             RpiUninstallPatchPKGToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallPatchPKGToolStripMenuItem1.Name = "RpiUninstallPatchPKGToolStripMenuItem1";
             RpiUninstallPatchPKGToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallPatchPKGToolStripMenuItem1.Text = "Uninstall patch PKG";
+            RpiUninstallPatchPKGToolStripMenuItem1.Text = "卸载补丁 PKG";
             RpiUninstallPatchPKGToolStripMenuItem1.Click += Rpi_Click;
             // 
             // RpiUninstallDlcPKGToolStripMenuItem1
@@ -2081,7 +2081,7 @@ namespace PS4PKGTool
             RpiUninstallDlcPKGToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallDlcPKGToolStripMenuItem1.Name = "RpiUninstallDlcPKGToolStripMenuItem1";
             RpiUninstallDlcPKGToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallDlcPKGToolStripMenuItem1.Text = "Uninstall addon PKG (DLC)";
+            RpiUninstallDlcPKGToolStripMenuItem1.Text = "卸载附加 PKG（DLC）";
             RpiUninstallDlcPKGToolStripMenuItem1.Click += Rpi_Click;
             // 
             // RpiUninstallThemePKGToolStripMenuItem1
@@ -2089,7 +2089,7 @@ namespace PS4PKGTool
             RpiUninstallThemePKGToolStripMenuItem1.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             RpiUninstallThemePKGToolStripMenuItem1.Name = "RpiUninstallThemePKGToolStripMenuItem1";
             RpiUninstallThemePKGToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
-            RpiUninstallThemePKGToolStripMenuItem1.Text = "Uninstall addon PKG (Theme)";
+            RpiUninstallThemePKGToolStripMenuItem1.Text = "卸载附加 PKG（主题）";
             RpiUninstallThemePKGToolStripMenuItem1.Click += Rpi_Click;
             // 
             // darkStatusStrip1
@@ -2174,7 +2174,7 @@ namespace PS4PKGTool
             ExtractTrophyImageToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ExtractTrophyImageToolStripMenuItem.Name = "ExtractTrophyImageToolStripMenuItem";
             ExtractTrophyImageToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            ExtractTrophyImageToolStripMenuItem.Text = "Extract trophy icon";
+            ExtractTrophyImageToolStripMenuItem.Text = "提取奖杯图标";
             ExtractTrophyImageToolStripMenuItem.Click += ExtractTrophyImageToolStripMenuItem_Click;
             // 
             // contextMenuEntry
@@ -2189,7 +2189,7 @@ namespace PS4PKGTool
             ExtractAllEntryToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ExtractAllEntryToolStripMenuItem.Name = "ExtractAllEntryToolStripMenuItem";
             ExtractAllEntryToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            ExtractAllEntryToolStripMenuItem.Text = "Extract all item";
+            ExtractAllEntryToolStripMenuItem.Text = "提取所有条目";
             ExtractAllEntryToolStripMenuItem.Click += ExtractAllEntryToolStripMenuItem_Click;
             // 
             // ExtractDecryptedEntryToolStripMenuItem
@@ -2197,7 +2197,7 @@ namespace PS4PKGTool
             ExtractDecryptedEntryToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ExtractDecryptedEntryToolStripMenuItem.Name = "ExtractDecryptedEntryToolStripMenuItem";
             ExtractDecryptedEntryToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            ExtractDecryptedEntryToolStripMenuItem.Text = "Extract all decrypted entry";
+            ExtractDecryptedEntryToolStripMenuItem.Text = "提取所有已解密条目";
             ExtractDecryptedEntryToolStripMenuItem.Click += ExtractDecryptedEntryToolStripMenuItem_Click;
             // 
             // imageList1
@@ -2218,14 +2218,14 @@ namespace PS4PKGTool
             copyURLToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             copyURLToolStripMenuItem.Name = "copyURLToolStripMenuItem";
             copyURLToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            copyURLToolStripMenuItem.Text = "Copy all url";
+            copyURLToolStripMenuItem.Text = "复制全部 URL";
             // 
             // downloadSelectedPKGUpdateToolStripMenuItem
             // 
             downloadSelectedPKGUpdateToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             downloadSelectedPKGUpdateToolStripMenuItem.Name = "downloadSelectedPKGUpdateToolStripMenuItem";
             downloadSelectedPKGUpdateToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            downloadSelectedPKGUpdateToolStripMenuItem.Text = "Download selected update";
+            downloadSelectedPKGUpdateToolStripMenuItem.Text = "下载所选更新";
             // 
             // contextMenuBackgroundImage
             // 
@@ -2239,7 +2239,7 @@ namespace PS4PKGTool
             saveImageToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             saveImageToolStripMenuItem.Name = "saveImageToolStripMenuItem";
             saveImageToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            saveImageToolStripMenuItem.Text = "Save background art";
+            saveImageToolStripMenuItem.Text = "保存背景图";
             saveImageToolStripMenuItem.Click += ContextMenuBackgroundImage_Click;
             // 
             // SetImageAsDesktopBackgroundToolStripMenuItem
@@ -2247,7 +2247,7 @@ namespace PS4PKGTool
             SetImageAsDesktopBackgroundToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             SetImageAsDesktopBackgroundToolStripMenuItem.Name = "SetImageAsDesktopBackgroundToolStripMenuItem";
             SetImageAsDesktopBackgroundToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            SetImageAsDesktopBackgroundToolStripMenuItem.Text = "Set as desktop wallpaper";
+            SetImageAsDesktopBackgroundToolStripMenuItem.Text = "设为桌面壁纸";
             SetImageAsDesktopBackgroundToolStripMenuItem.Click += ContextMenuBackgroundImage_Click;
             // 
             // contextMenuExtractNode
@@ -2285,7 +2285,7 @@ namespace PS4PKGTool
             expandAllToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
             expandAllToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            expandAllToolStripMenuItem.Text = "Expand all node";
+            expandAllToolStripMenuItem.Text = "展开全部节点";
             expandAllToolStripMenuItem.Click += expandAllToolStripMenuItem_Click;
             // 
             // collapseAllNodeToolStripMenuItem
@@ -2293,7 +2293,7 @@ namespace PS4PKGTool
             collapseAllNodeToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             collapseAllNodeToolStripMenuItem.Name = "collapseAllNodeToolStripMenuItem";
             collapseAllNodeToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            collapseAllNodeToolStripMenuItem.Text = "Collapse all node";
+            collapseAllNodeToolStripMenuItem.Text = "折叠全部节点";
             collapseAllNodeToolStripMenuItem.Click += collapseAllNodeToolStripMenuItem_Click;
             // 
             // extractNodeToolStripMenuItem
@@ -2301,24 +2301,24 @@ namespace PS4PKGTool
             extractNodeToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             extractNodeToolStripMenuItem.Name = "extractNodeToolStripMenuItem";
             extractNodeToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            extractNodeToolStripMenuItem.Text = "Extract selected item";
+            extractNodeToolStripMenuItem.Text = "提取所选条目";
             extractNodeToolStripMenuItem.Visible = false;
             extractNodeToolStripMenuItem.Click += extractToToolStripMenuItem_Click;
             // 
             // columnHeader1
             // 
-            columnHeader1.Text = "Name";
+            columnHeader1.Text = "名称";
             columnHeader1.Width = 123;
             // 
             // columnHeader5
             // 
-            columnHeader5.Text = "Type";
+            columnHeader5.Text = "类型";
             columnHeader5.TextAlign = HorizontalAlignment.Center;
             columnHeader5.Width = 123;
             // 
             // columnHeader6
             // 
-            columnHeader6.Text = "Path";
+            columnHeader6.Text = "路径";
             columnHeader6.TextAlign = HorizontalAlignment.Center;
             columnHeader6.Width = 123;
             // 
@@ -2345,7 +2345,7 @@ namespace PS4PKGTool
             toolStripMenuItem32.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             toolStripMenuItem32.Name = "toolStripMenuItem32";
             toolStripMenuItem32.Size = new System.Drawing.Size(273, 22);
-            toolStripMenuItem32.Text = "Extract selected item";
+            toolStripMenuItem32.Text = "提取所选条目";
             toolStripMenuItem32.Click += toolStripMenuItem32_Click;
             // 
             // ctxExtractFolder
@@ -2353,7 +2353,7 @@ namespace PS4PKGTool
             ctxExtractFolder.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxExtractFolder.Name = "ctxExtractFolder";
             ctxExtractFolder.Size = new System.Drawing.Size(273, 22);
-            ctxExtractFolder.Text = "Extract selected (with folder structure)";
+            ctxExtractFolder.Text = "提取所选内容（保留目录结构）";
             ctxExtractFolder.Click += CtxExtractFolder_Click;
             // 
             // ctxListSeparator
@@ -2368,7 +2368,7 @@ namespace PS4PKGTool
             ctxCopyPath.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxCopyPath.Name = "ctxCopyPath";
             ctxCopyPath.Size = new System.Drawing.Size(273, 22);
-            ctxCopyPath.Text = "Copy path";
+            ctxCopyPath.Text = "复制路径";
             ctxCopyPath.Click += CtxCopyPath_Click;
             // 
             // ctxCopyName
@@ -2376,7 +2376,7 @@ namespace PS4PKGTool
             ctxCopyName.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             ctxCopyName.Name = "ctxCopyName";
             ctxCopyName.Size = new System.Drawing.Size(273, 22);
-            ctxCopyName.Text = "Copy filename";
+            ctxCopyName.Text = "复制文件名";
             ctxCopyName.Click += CtxCopyName_Click;
             // 
             // mainTabControl
@@ -2413,7 +2413,7 @@ namespace PS4PKGTool
             tabPage1.Padding = new Padding(12);
             tabPage1.Size = new System.Drawing.Size(1186, 712);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "PKG List";
+            tabPage1.Text = "PKG 列表";
             // 
             // darkSectionPanel10
             // 
@@ -2459,7 +2459,7 @@ namespace PS4PKGTool
             grpFilter.Size = new System.Drawing.Size(884, 127);
             grpFilter.TabIndex = 92;
             grpFilter.TabStop = false;
-            grpFilter.Text = "Filters";
+            grpFilter.Text = "筛选";
             grpFilter.Resize += grpFilter_Resize;
             // 
             // flpFilter
@@ -2492,7 +2492,7 @@ namespace PS4PKGTool
             lblCategory.Name = "lblCategory";
             lblCategory.Size = new System.Drawing.Size(60, 15);
             lblCategory.TabIndex = 0;
-            lblCategory.Text = "Category";
+            lblCategory.Text = "分类";
             // 
             // ccbCategory
             // 
@@ -2512,7 +2512,7 @@ namespace PS4PKGTool
             lblRegion.Name = "lblRegion";
             lblRegion.Size = new System.Drawing.Size(48, 15);
             lblRegion.TabIndex = 2;
-            lblRegion.Text = "Region";
+            lblRegion.Text = "区域";
             // 
             // ccbRegion
             // 
@@ -2535,7 +2535,7 @@ namespace PS4PKGTool
             // center on its textbox. 120 keeps it on one line.
             lblFilterSysVer.Size = new System.Drawing.Size(120, 15);
             lblFilterSysVer.TabIndex = 4;
-            lblFilterSysVer.Text = "Required Firmware ≥";
+            lblFilterSysVer.Text = "所需固件 ≥";
             // 
             // tbFilterSysVer
             // 
@@ -2555,7 +2555,7 @@ namespace PS4PKGTool
             lblType.Name = "lblType";
             lblType.Size = new System.Drawing.Size(38, 15);
             lblType.TabIndex = 6;
-            lblType.Text = "Type";
+            lblType.Text = "类型";
             // 
             // ccbType
             // 
@@ -2575,7 +2575,7 @@ namespace PS4PKGTool
             lblShadps4.Name = "lblShadps4";
             lblShadps4.Size = new System.Drawing.Size(132, 15);
             lblShadps4.TabIndex = 8;
-            lblShadps4.Text = "ShadPS4 Compatibility";
+            lblShadps4.Text = "shadPS4 兼容性";
             // 
             // ccbShadps4
             // 
@@ -2596,7 +2596,7 @@ namespace PS4PKGTool
             chkShadps4Installed.Name = "chkShadps4Installed";
             chkShadps4Installed.Size = new System.Drawing.Size(129, 19);
             chkShadps4Installed.TabIndex = 10;
-            chkShadps4Installed.Text = "ShadPS4 Installed";
+            chkShadps4Installed.Text = "已安装 shadPS4";
             chkShadps4Installed.CheckedChanged += chkShadps4Installed_CheckedChanged;
             // 
             // tbSearchGame
@@ -2618,7 +2618,7 @@ namespace PS4PKGTool
             btnFilterClear.Name = "btnFilterClear";
             btnFilterClear.Size = new System.Drawing.Size(80, 24);
             btnFilterClear.TabIndex = 87;
-            btnFilterClear.Text = "Clear";
+            btnFilterClear.Text = "清除";
             btnFilterClear.Click += btnFilterClear_Click;
             // 
             // flowChips
@@ -2662,7 +2662,7 @@ namespace PS4PKGTool
             tabPageTable.Name = "tabPageTable";
             tabPageTable.Size = new System.Drawing.Size(876, 505);
             tabPageTable.TabIndex = 0;
-            tabPageTable.Text = "Table";
+            tabPageTable.Text = "表格";
             // 
             // PKGGridView
             // 
@@ -2704,7 +2704,7 @@ namespace PS4PKGTool
             tabPageGroup.Name = "tabPageGroup";
             tabPageGroup.Size = new System.Drawing.Size(876, 505);
             tabPageGroup.TabIndex = 1;
-            tabPageGroup.Text = "Grouped";
+            tabPageGroup.Text = "分组视图";
             // 
             // groupedListView
             // 
@@ -2734,7 +2734,7 @@ namespace PS4PKGTool
             btnGroupExpand.Name = "btnGroupExpand";
             btnGroupExpand.Size = new System.Drawing.Size(89, 23);
             btnGroupExpand.TabIndex = 103;
-            btnGroupExpand.Text = "Expand All";
+            btnGroupExpand.Text = "全部展开";
             btnGroupExpand.Click += BtnGroupExpand_Click;
             // 
             // cbGroupBy
@@ -2757,7 +2757,7 @@ namespace PS4PKGTool
             // 68 (was 55): "Group by:" clipped to "Group" at high DPI.
             darkLabelGroupBy.Size = new System.Drawing.Size(68, 15);
             darkLabelGroupBy.TabIndex = 106;
-            darkLabelGroupBy.Text = "Group by:";
+            darkLabelGroupBy.Text = "分组方式：";
             // 
             // darkLabelGroupCount
             // 
@@ -2782,7 +2782,7 @@ namespace PS4PKGTool
             darkSectionPanel8.Location = new System.Drawing.Point(910, 18);
             darkSectionPanel8.Margin = new Padding(6);
             darkSectionPanel8.Name = "darkSectionPanel8";
-            darkSectionPanel8.SectionHeader = "Avatar";
+            darkSectionPanel8.SectionHeader = "头像";
             darkSectionPanel8.Size = new System.Drawing.Size(260, 272);
             darkSectionPanel8.TabIndex = 88;
             darkSectionPanel8.Tag = "";
@@ -2829,7 +2829,7 @@ namespace PS4PKGTool
             darkSectionPanel9.Location = new System.Drawing.Point(910, 302);
             darkSectionPanel9.Margin = new Padding(6);
             darkSectionPanel9.Name = "darkSectionPanel9";
-            darkSectionPanel9.SectionHeader = "Title";
+            darkSectionPanel9.SectionHeader = "标题";
             darkSectionPanel9.Size = new System.Drawing.Size(259, 75);
             darkSectionPanel9.TabIndex = 89;
             // 
@@ -2865,7 +2865,7 @@ namespace PS4PKGTool
             tabPage2.Padding = new Padding(3, 2, 3, 2);
             tabPage2.Size = new System.Drawing.Size(1186, 712);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Trophy";
+            tabPage2.Text = "奖杯";
             // 
             // TrophyGridView
             // 
@@ -2895,7 +2895,7 @@ namespace PS4PKGTool
             tabPage3.Padding = new Padding(12);
             tabPage3.Size = new System.Drawing.Size(1186, 712);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "Background Art";
+            tabPage3.Text = "背景图";
             // 
             // flatTabControlBgi
             // 
@@ -2968,7 +2968,7 @@ namespace PS4PKGTool
             tabPage4.Padding = new Padding(12);
             tabPage4.Size = new System.Drawing.Size(1186, 712);
             tabPage4.TabIndex = 3;
-            tabPage4.Text = "PKG Internals";
+            tabPage4.Text = "PKG 内部结构";
             // 
             // panel7
             // 
@@ -2989,7 +2989,7 @@ namespace PS4PKGTool
             darkSectionPanel2.Location = new System.Drawing.Point(255, 92);
             darkSectionPanel2.Margin = new Padding(3, 2, 3, 2);
             darkSectionPanel2.Name = "darkSectionPanel2";
-            darkSectionPanel2.SectionHeader = "Entry List";
+            darkSectionPanel2.SectionHeader = "条目列表";
             darkSectionPanel2.Size = new System.Drawing.Size(907, 597);
             darkSectionPanel2.TabIndex = 95;
             // 
@@ -3017,7 +3017,7 @@ namespace PS4PKGTool
             darkSectionPanel3.Location = new System.Drawing.Point(255, 0);
             darkSectionPanel3.Margin = new Padding(3, 2, 3, 2);
             darkSectionPanel3.Name = "darkSectionPanel3";
-            darkSectionPanel3.SectionHeader = "Build Information";
+            darkSectionPanel3.SectionHeader = "构建信息";
             darkSectionPanel3.Size = new System.Drawing.Size(907, 76);
             darkSectionPanel3.TabIndex = 95;
             // 
@@ -3045,7 +3045,7 @@ namespace PS4PKGTool
             darkSectionPanel1.Location = new System.Drawing.Point(0, 0);
             darkSectionPanel1.Margin = new Padding(3, 2, 3, 2);
             darkSectionPanel1.Name = "darkSectionPanel1";
-            darkSectionPanel1.SectionHeader = "Advanced PKG Header";
+            darkSectionPanel1.SectionHeader = "高级 PKG 头部";
             darkSectionPanel1.Size = new System.Drawing.Size(240, 688);
             darkSectionPanel1.TabIndex = 94;
             // 
@@ -3075,7 +3075,7 @@ namespace PS4PKGTool
             tabPage7.Padding = new Padding(3, 2, 3, 2);
             tabPage7.Size = new System.Drawing.Size(1186, 712);
             tabPage7.TabIndex = 5;
-            tabPage7.Text = "File Browser";
+            tabPage7.Text = "文件浏览器";
             // 
             // panel6
             // 
@@ -3177,7 +3177,7 @@ namespace PS4PKGTool
             tbFilterTreeView.Location = new System.Drawing.Point(0, 0);
             tbFilterTreeView.Margin = new Padding(3, 2, 3, 2);
             tbFilterTreeView.Name = "tbFilterTreeView";
-            tbFilterTreeView.Placeholder = "Filter filename here";
+            tbFilterTreeView.Placeholder = "在此筛选文件名";
             tbFilterTreeView.Size = new System.Drawing.Size(390, 28);
             tbFilterTreeView.TabIndex = 100;
             tbFilterTreeView.SearchTextChanged += TbFilterTreeView_SearchTextChanged;
@@ -3200,7 +3200,7 @@ namespace PS4PKGTool
             sectionFileViewer.Location = new System.Drawing.Point(0, 0);
             sectionFileViewer.Margin = new Padding(6);
             sectionFileViewer.Name = "sectionFileViewer";
-            sectionFileViewer.SectionHeader = "File Viewer";
+            sectionFileViewer.SectionHeader = "文件查看器";
             sectionFileViewer.Size = new System.Drawing.Size(390, 658);
             sectionFileViewer.TabIndex = 2;
             // 
@@ -3213,7 +3213,7 @@ namespace PS4PKGTool
             btnAssetBack.Name = "btnAssetBack";
             btnAssetBack.Size = new System.Drawing.Size(70, 24);
             btnAssetBack.TabIndex = 3;
-            btnAssetBack.Text = "Back to list";
+            btnAssetBack.Text = "返回列表";
             btnAssetBack.Visible = false;
             btnAssetBack.Click += btnAssetBack_Click;
             // 
@@ -3226,7 +3226,7 @@ namespace PS4PKGTool
             btnExportTextures.Name = "btnExportTextures";
             btnExportTextures.Size = new System.Drawing.Size(104, 24);
             btnExportTextures.TabIndex = 4;
-            btnExportTextures.Text = "Export Textures";
+            btnExportTextures.Text = "导出贴图";
             btnExportTextures.Visible = false;
             btnExportTextures.Click += btnExportTextures_Click;
             // 
@@ -3316,7 +3316,7 @@ namespace PS4PKGTool
             lblFileViewerInfo.Padding = new Padding(8, 0, 8, 0);
             lblFileViewerInfo.Size = new System.Drawing.Size(388, 34);
             lblFileViewerInfo.TabIndex = 1;
-            lblFileViewerInfo.Text = "Select a file to preview it.";
+            lblFileViewerInfo.Text = "选择要预览的文件。";
             lblFileViewerInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // darkHeaderBar1
@@ -3341,7 +3341,7 @@ namespace PS4PKGTool
             darkLabel5.Name = "darkLabel5";
             darkLabel5.Size = new System.Drawing.Size(65, 15);
             darkLabel5.TabIndex = 96;
-            darkLabel5.Text = "Passcode:";
+            darkLabel5.Text = "通行密码：";
             // 
             // tbPasscode
             // 
@@ -3365,7 +3365,7 @@ namespace PS4PKGTool
             btnExportTreeView.Name = "btnExportTreeView";
             btnExportTreeView.Size = new System.Drawing.Size(108, 23);
             btnExportTreeView.TabIndex = 101;
-            btnExportTreeView.Text = "Export Tree View";
+            btnExportTreeView.Text = "导出树视图";
             btnExportTreeView.Click += btnExportTreeView_Click;
             // 
             // btnExtractFullPKG
@@ -3376,7 +3376,7 @@ namespace PS4PKGTool
             btnExtractFullPKG.Name = "btnExtractFullPKG";
             btnExtractFullPKG.Size = new System.Drawing.Size(108, 23);
             btnExtractFullPKG.TabIndex = 100;
-            btnExtractFullPKG.Text = "Extract full PKG";
+            btnExtractFullPKG.Text = "提取完整 PKG";
             btnExtractFullPKG.Click += btnExtractFullPKG_Click;
             // 
             // btnViewPKGData
@@ -3387,7 +3387,7 @@ namespace PS4PKGTool
             btnViewPKGData.Name = "btnViewPKGData";
             btnViewPKGData.Size = new System.Drawing.Size(119, 23);
             btnViewPKGData.TabIndex = 94;
-            btnViewPKGData.Text = "View PKG files";
+            btnViewPKGData.Text = "查看 PKG 文件";
             btnViewPKGData.Click += btnViewPKGData_Click;
             // 
             // _tabLog
@@ -3397,7 +3397,7 @@ namespace PS4PKGTool
             _tabLog.Name = "_tabLog";
             _tabLog.Size = new System.Drawing.Size(1186, 712);
             _tabLog.TabIndex = 7;
-            _tabLog.Text = "Log";
+            _tabLog.Text = "日志";
             // 
             // _tbLogBox
             // 
@@ -3448,7 +3448,7 @@ namespace PS4PKGTool
             _tasksTab.Padding = new Padding(12);
             _tasksTab.Size = new System.Drawing.Size(1186, 712);
             _tasksTab.TabIndex = 7;
-            _tasksTab.Text = "Tasks";
+            _tasksTab.Text = "任务";
             // 
             // _tasksGrid
             // 
@@ -3472,7 +3472,7 @@ namespace PS4PKGTool
             // 
             // taskTypeColumn
             // 
-            taskTypeColumn.HeaderText = "Type";
+            taskTypeColumn.HeaderText = "类型";
             taskTypeColumn.Name = "taskTypeColumn";
             taskTypeColumn.ReadOnly = true;
             taskTypeColumn.FillWeight = 25F;
@@ -3482,13 +3482,13 @@ namespace PS4PKGTool
             // 
             taskNameColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             taskNameColumn.FillWeight = 25F;
-            taskNameColumn.HeaderText = "Task";
+            taskNameColumn.HeaderText = "任务";
             taskNameColumn.Name = "taskNameColumn";
             taskNameColumn.ReadOnly = true;
             // 
             // taskStatusColumn
             // 
-            taskStatusColumn.HeaderText = "Status";
+            taskStatusColumn.HeaderText = "状态";
             taskStatusColumn.Name = "taskStatusColumn";
             taskStatusColumn.ReadOnly = true;
             taskStatusColumn.FillWeight = 25F;
@@ -3496,7 +3496,7 @@ namespace PS4PKGTool
             // 
             // taskProgressColumn
             // 
-            taskProgressColumn.HeaderText = "Progress";
+            taskProgressColumn.HeaderText = "进度";
             taskProgressColumn.Name = "taskProgressColumn";
             taskProgressColumn.ReadOnly = true;
             taskProgressColumn.FillWeight = 25F;
@@ -3538,7 +3538,7 @@ namespace PS4PKGTool
             _taskStageLabel.Name = "_taskStageLabel";
             _taskStageLabel.Size = new System.Drawing.Size(1162, 15);
             _taskStageLabel.TabIndex = 0;
-            _taskStageLabel.Text = "Select a task to see details.";
+            _taskStageLabel.Text = "选择任务以查看详情。";
             // 
             // _taskProgressLabel
             // 
@@ -3548,7 +3548,7 @@ namespace PS4PKGTool
             _taskProgressLabel.Name = "_taskProgressLabel";
             _taskProgressLabel.Size = new System.Drawing.Size(1162, 32);
             _taskProgressLabel.TabIndex = 3;
-            _taskProgressLabel.Text = "Current task";
+            _taskProgressLabel.Text = "当前任务";
             // 
             // _taskCurrentProgress
             // 
@@ -3576,7 +3576,7 @@ namespace PS4PKGTool
             _taskOverallLabel.Name = "_taskOverallLabel";
             _taskOverallLabel.Size = new System.Drawing.Size(1162, 23);
             _taskOverallLabel.TabIndex = 1;
-            _taskOverallLabel.Text = "Overall progress";
+            _taskOverallLabel.Text = "总进度";
             // 
             // _taskOverallProgress
             // 
@@ -3620,7 +3620,7 @@ namespace PS4PKGTool
             _taskCancel.Name = "_taskCancel";
             _taskCancel.Size = new System.Drawing.Size(100, 26);
             _taskCancel.TabIndex = 0;
-            _taskCancel.Text = "Cancel task";
+            _taskCancel.Text = "取消任务";
             _taskCancel.Click += taskCancel_Click;
             // 
             // _taskRetry
@@ -3629,7 +3629,7 @@ namespace PS4PKGTool
             _taskRetry.Name = "_taskRetry";
             _taskRetry.Size = new System.Drawing.Size(100, 26);
             _taskRetry.TabIndex = 1;
-            _taskRetry.Text = "Retry";
+            _taskRetry.Text = "重试";
             _taskRetry.Click += taskRetry_Click;
             // 
             // _taskOpenOutput
@@ -3638,7 +3638,7 @@ namespace PS4PKGTool
             _taskOpenOutput.Name = "_taskOpenOutput";
             _taskOpenOutput.Size = new System.Drawing.Size(100, 26);
             _taskOpenOutput.TabIndex = 2;
-            _taskOpenOutput.Text = "Open output";
+            _taskOpenOutput.Text = "打开输出";
             _taskOpenOutput.Click += taskOpenOutput_Click;
             // 
             // _taskRemove
@@ -3647,7 +3647,7 @@ namespace PS4PKGTool
             _taskRemove.Name = "_taskRemove";
             _taskRemove.Size = new System.Drawing.Size(100, 26);
             _taskRemove.TabIndex = 3;
-            _taskRemove.Text = "Remove";
+            _taskRemove.Text = "移除";
             _taskRemove.Click += taskRemove_Click;
             // 
             // _taskCopyLog
@@ -3656,7 +3656,7 @@ namespace PS4PKGTool
             _taskCopyLog.Name = "_taskCopyLog";
             _taskCopyLog.Size = new System.Drawing.Size(100, 26);
             _taskCopyLog.TabIndex = 4;
-            _taskCopyLog.Text = "Copy log";
+            _taskCopyLog.Text = "复制日志";
             _taskCopyLog.Click += taskCopyLog_Click;
             // 
             // tasksToolbar
@@ -3679,7 +3679,7 @@ namespace PS4PKGTool
             _taskAutoStart.Name = "_taskAutoStart";
             _taskAutoStart.Size = new System.Drawing.Size(116, 19);
             _taskAutoStart.TabIndex = 0;
-            _taskAutoStart.Text = "Auto-start queue";
+            _taskAutoStart.Text = "自动启动队列";
             _taskAutoStart.CheckedChanged += taskAutoStart_CheckedChanged;
             // 
             // _taskStartNext
@@ -3688,7 +3688,7 @@ namespace PS4PKGTool
             _taskStartNext.Name = "_taskStartNext";
             _taskStartNext.Size = new System.Drawing.Size(128, 26);
             _taskStartNext.TabIndex = 1;
-            _taskStartNext.Text = "Start next";
+            _taskStartNext.Text = "开始下一个";
             _taskStartNext.Click += taskStartNext_Click;
             // 
             // _taskClearFinished
@@ -3697,41 +3697,41 @@ namespace PS4PKGTool
             _taskClearFinished.Name = "_taskClearFinished";
             _taskClearFinished.Size = new System.Drawing.Size(128, 26);
             _taskClearFinished.TabIndex = 2;
-            _taskClearFinished.Text = "Clear Completed";
+            _taskClearFinished.Text = "清除已完成";
             _taskClearFinished.Click += taskClearFinished_Click;
             // 
             // columnHeader7
             // 
-            columnHeader7.Text = "Name";
+            columnHeader7.Text = "名称";
             columnHeader7.Width = 128;
             // 
             // columnHeader8
             // 
-            columnHeader8.Text = "Type";
+            columnHeader8.Text = "类型";
             columnHeader8.Width = 128;
             // 
             // columnHeader9
             // 
-            columnHeader9.Text = "Path";
+            columnHeader9.Text = "路径";
             columnHeader9.Width = 128;
             // 
             // columnHeader10
             // 
-            columnHeader10.Text = "Size";
+            columnHeader10.Text = "大小";
             columnHeader10.Width = 30;
             // 
             // assetNameColumn
             // 
-            assetNameColumn.Text = "Name";
+            assetNameColumn.Text = "名称";
             assetNameColumn.Width = 110;
             // 
             // assetTypeColumn
             // 
-            assetTypeColumn.Text = "Type";
+            assetTypeColumn.Text = "类型";
             // 
             // assetSizeColumn
             // 
-            assetSizeColumn.Text = "Size";
+            assetSizeColumn.Text = "大小";
             assetSizeColumn.Width = 214;
             // 
             // tabPage5
@@ -3752,7 +3752,7 @@ namespace PS4PKGTool
             tabPage5.Padding = new Padding(3, 2, 3, 2);
             tabPage5.Size = new System.Drawing.Size(951, 556);
             tabPage5.TabIndex = 6;
-            tabPage5.Text = "Official Update";
+            tabPage5.Text = "官方更新";
             // 
             // darkSectionPanel11
             // 
@@ -3762,7 +3762,7 @@ namespace PS4PKGTool
             darkSectionPanel11.Margin = new Padding(3, 2, 3, 2);
             darkSectionPanel11.Name = "darkSectionPanel11";
             darkSectionPanel11.Padding = new Padding(12);
-            darkSectionPanel11.SectionHeader = "Update Package Files";
+            darkSectionPanel11.SectionHeader = "更新包文件";
             darkSectionPanel11.Size = new System.Drawing.Size(927, 496);
             darkSectionPanel11.TabIndex = 109;
             // 
@@ -3791,7 +3791,7 @@ namespace PS4PKGTool
             lblUpdateInfo.Name = "lblUpdateInfo";
             lblUpdateInfo.Size = new System.Drawing.Size(927, 16);
             lblUpdateInfo.TabIndex = 110;
-            lblUpdateInfo.Text = "Select a Game or Patch PKG to view available updates.";
+            lblUpdateInfo.Text = "选择游戏或补丁 PKG 以查看可用更新。";
             // 
             // lblVersion
             // 
@@ -3800,7 +3800,7 @@ namespace PS4PKGTool
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new System.Drawing.Size(140, 16);
             lblVersion.TabIndex = 111;
-            lblVersion.Text = "Version: ...";
+            lblVersion.Text = "版本：...";
             // 
             // lblSysVer
             // 
@@ -3809,7 +3809,7 @@ namespace PS4PKGTool
             lblSysVer.Name = "lblSysVer";
             lblSysVer.Size = new System.Drawing.Size(130, 16);
             lblSysVer.TabIndex = 112;
-            lblSysVer.Text = "System: ...";
+            lblSysVer.Text = "系统：...";
             // 
             // lblUpdType
             // 
@@ -3818,7 +3818,7 @@ namespace PS4PKGTool
             lblUpdType.Name = "lblUpdType";
             lblUpdType.Size = new System.Drawing.Size(100, 16);
             lblUpdType.TabIndex = 113;
-            lblUpdType.Text = "Type: ...";
+            lblUpdType.Text = "类型：...";
             // 
             // lblMand
             // 
@@ -3827,7 +3827,7 @@ namespace PS4PKGTool
             lblMand.Name = "lblMand";
             lblMand.Size = new System.Drawing.Size(110, 16);
             lblMand.TabIndex = 114;
-            lblMand.Text = "Mandatory: ...";
+            lblMand.Text = "必需：...";
             // 
             // lblRemaster
             // 
@@ -3836,7 +3836,7 @@ namespace PS4PKGTool
             lblRemaster.Name = "lblRemaster";
             lblRemaster.Size = new System.Drawing.Size(110, 16);
             lblRemaster.TabIndex = 115;
-            lblRemaster.Text = "Remaster: ...";
+            lblRemaster.Text = "重制：...";
             // 
             // lblFiles
             // 
@@ -3845,7 +3845,7 @@ namespace PS4PKGTool
             lblFiles.Name = "lblFiles";
             lblFiles.Size = new System.Drawing.Size(80, 16);
             lblFiles.TabIndex = 116;
-            lblFiles.Text = "Files: ...";
+            lblFiles.Text = "文件：...";
             // 
             // lblSize
             // 
@@ -3854,7 +3854,7 @@ namespace PS4PKGTool
             lblSize.Name = "lblSize";
             lblSize.Size = new System.Drawing.Size(120, 16);
             lblSize.TabIndex = 117;
-            lblSize.Text = "Size: ...";
+            lblSize.Text = "大小：...";
             // 
             // panel8
             // 
@@ -3967,7 +3967,7 @@ namespace PS4PKGTool
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(122, 15);
             label5.TabIndex = 98;
-            label5.Text = "System requirement";
+            label5.Text = "系统要求";
             // 
             // label12
             // 
@@ -3977,7 +3977,7 @@ namespace PS4PKGTool
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(92, 15);
             label12.TabIndex = 95;
-            label12.Text = "Update version";
+            label12.Text = "更新版本";
             // 
             // label9
             // 
@@ -3996,7 +3996,7 @@ namespace PS4PKGTool
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(55, 15);
             label11.TabIndex = 96;
-            label11.Text = "Total file";
+            label11.Text = "文件总数";
             // 
             // label4
             // 
@@ -4015,7 +4015,7 @@ namespace PS4PKGTool
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(58, 15);
             label10.TabIndex = 97;
-            label10.Text = "Total size";
+            label10.Text = "总大小";
             // 
             // label7
             // 
@@ -4170,7 +4170,7 @@ namespace PS4PKGTool
 
         private void ConfigureGlvContextMenu()
         {
-            contextMenuGLV.Items.Add(CreateGlvHeader("Global Operations"));
+            contextMenuGLV.Items.Add(CreateGlvHeader("全局操作"));
             contextMenuGLV.Items.Add(CreateForwardingMenu(checkForDuplicatePKGToolStripMenuItem2));
             contextMenuGLV.Items.Add(CreateForwardingMenu(checkForPatchesMissingBasePKGToolStripMenuItem2));
             contextMenuGLV.Items.Add(CreateForwardingMenu(globalExportPKGListToExcelToolStripMenuItem2));
@@ -4178,23 +4178,23 @@ namespace PS4PKGTool
             contextMenuGLV.Items.Add(CreateForwardingMenu(toolStripMenuItem111));
             contextMenuGLV.Items.Add(CreateForwardingMenu(toolStripMenuItem38));
 
-            _glvGroupTitleMenu = CreateGlvHeader("Group Operations");
+            _glvGroupTitleMenu = CreateGlvHeader("分组操作");
             _glvTitleIdOnlyMenuItems = new ToolStripItem[]
             {
                 new DarkUI.Controls.DarkToolStripSeparator(),
                 _glvGroupTitleMenu,
                 CreateGlvForwardingMenu(GroupActionExtacrtImageToolStripMenuItem),
                 CreateGlvForwardingMenu(toolStripMenuItem133),
-                CreateGlvAction("Export this group as excel file", () => RunWithGlvGroupSelection(() => selectedExportPKGListToExcelToolStripMenuItem2.PerformClick())),
-                CreateGlvAction("Delete group PKGs", GlvDeletePkg),
-                CreateGlvAction("Merge base + latest update", GlvMergeBaseAndLatestUpdate),
+                CreateGlvAction("将此分组导出为 Excel 文件", () => RunWithGlvGroupSelection(() => selectedExportPKGListToExcelToolStripMenuItem2.PerformClick())),
+                CreateGlvAction("删除分组中的 PKG", GlvDeletePkg),
+                CreateGlvAction("合并本体 + 最新更新", GlvMergeBaseAndLatestUpdate),
                 new DarkUI.Controls.DarkToolStripSeparator(),
                 CreateGlvHeader("shadPS4"),
-                CreateGlvAction("Install base game", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.GAME, () => toolStripMenuItemShadps4Install.PerformClick())),
-                CreateGlvAction("Install latest update", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.PATCH, () => toolStripMenuItemShadps4Install.PerformClick())),
-                CreateGlvAction("Launch installed game", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.GAME, () => toolStripMenuItemShadps4Launch.PerformClick())),
-                _glvShadps4UninstallMenu = CreateGlvAction("Uninstall game", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.GAME, () => toolStripMenuItemShadps4Uninstall.PerformClick())),
-                CreateGlvAction("Open shadPS4 Manager", () => toolStripMenuItemShadps4OpenManager.PerformClick())
+                CreateGlvAction("安装本体游戏", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.GAME, () => toolStripMenuItemShadps4Install.PerformClick())),
+                CreateGlvAction("安装最新更新", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.PATCH, () => toolStripMenuItemShadps4Install.PerformClick())),
+                CreateGlvAction("启动已安装的游戏", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.GAME, () => toolStripMenuItemShadps4Launch.PerformClick())),
+                _glvShadps4UninstallMenu = CreateGlvAction("卸载游戏", () => RunWithGlvCategorySelection(Util.Constants.PKGCategory.GAME, () => toolStripMenuItemShadps4Uninstall.PerformClick())),
+                CreateGlvAction("打开 shadPS4 管理器", () => toolStripMenuItemShadps4OpenManager.PerformClick())
             };
             contextMenuGLV.Items.AddRange(_glvTitleIdOnlyMenuItems);
         }

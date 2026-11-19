@@ -106,7 +106,7 @@ namespace PS4PKGTool.Utilities.Settings
             }
             catch (Exception ex)
             {
-                ShowError("Error saving settings: " + ex.Message, true);
+                ShowError("保存设置出错：" + ex.Message, true);
             }
             finally
             {
@@ -405,7 +405,7 @@ namespace PS4PKGTool.Utilities.Settings
             catch (Exception ex)
             {
                 // Handle exceptions appropriately
-                ShowError("Error loading settings: " + ex.Message, true);
+                ShowError("加载设置出错：" + ex.Message, true);
             }
 
             NormalizePkgDirectories(appSettings_.PkgDirectories);

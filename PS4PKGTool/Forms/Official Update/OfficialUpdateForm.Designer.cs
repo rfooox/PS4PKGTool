@@ -35,7 +35,7 @@ namespace PS4PKGTool
             lblSummary.Name = "lblSummary";
             lblSummary.Size = new Size(893, 44);
             lblSummary.TabIndex = 0;
-            lblSummary.Text = "Select a Game or Patch PKG to view updates.";
+            lblSummary.Text = "选择一个 Game 或 Patch 类型的 PKG 以查看更新。";
             lblSummary.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dgvParts
@@ -67,7 +67,7 @@ namespace PS4PKGTool
             ctxCopyUrl.ForeColor = Color.FromArgb(220, 220, 220);
             ctxCopyUrl.Name = "ctxCopyUrl";
             ctxCopyUrl.Size = new Size(227, 22);
-            ctxCopyUrl.Text = "Copy URL";
+            ctxCopyUrl.Text = "复制 URL";
             ctxCopyUrl.Click += ctxCopyUrl_Click;
             // 
             // ctxDownload
@@ -76,7 +76,7 @@ namespace PS4PKGTool
             ctxDownload.ForeColor = Color.FromArgb(220, 220, 220);
             ctxDownload.Name = "ctxDownload";
             ctxDownload.Size = new Size(227, 22);
-            ctxDownload.Text = "Download selected update(s)";
+            ctxDownload.Text = "下载选中的更新";
             ctxDownload.Click += ctxDownload_Click;
             // 
             // btnDownloadSelected
@@ -87,7 +87,7 @@ namespace PS4PKGTool
             btnDownloadSelected.Name = "btnDownloadSelected";
             btnDownloadSelected.Size = new Size(130, 30);
             btnDownloadSelected.TabIndex = 2;
-            btnDownloadSelected.Text = "Download Selected";
+            btnDownloadSelected.Text = "下载选中项";
             btnDownloadSelected.Click += btnDownloadSelected_Click;
             // 
             // btnDownloadAll
@@ -98,7 +98,7 @@ namespace PS4PKGTool
             btnDownloadAll.Name = "btnDownloadAll";
             btnDownloadAll.Size = new Size(100, 30);
             btnDownloadAll.TabIndex = 3;
-            btnDownloadAll.Text = "Download All";
+            btnDownloadAll.Text = "全部下载";
             btnDownloadAll.Click += btnDownloadAll_Click;
             // 
             // btnClose
@@ -109,7 +109,7 @@ namespace PS4PKGTool
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 30);
             btnClose.TabIndex = 4;
-            btnClose.Text = "Close";
+            btnClose.Text = "关闭";
             btnClose.Click += btnClose_Click;
             // 
             // lblStatus
@@ -150,7 +150,7 @@ namespace PS4PKGTool
             MinimumSize = new Size(700, 530);
             Name = "OfficialUpdateForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Official Update Downloader";
+            Text = "官方更新下载器";
             FormClosing += OfficialUpdateForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dgvParts).EndInit();
             ctxMenuParts.ResumeLayout(false);

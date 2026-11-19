@@ -20,7 +20,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             {
                 string normalized = explicitValue.Trim().ToUpperInvariant();
                 if (!IsValid(normalized))
-                    throw new ArgumentException("NP Communication ID must match NPWRxxxxx_00.", nameof(explicitValue));
+                    throw new ArgumentException("NP Communication ID 必须匹配 NPWRxxxxx_00。", nameof(explicitValue));
                 return normalized;
             }
 
@@ -42,7 +42,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
                 string? candidate = ResolveFromFile(path);
                 if (candidate == null) continue;
                 if (found != null && !string.Equals(found, candidate, StringComparison.Ordinal))
-                    throw new InvalidDataException($"Conflicting NP Communication IDs were found: {found} and {candidate}.");
+                    throw new InvalidDataException($"发现互相冲突的 NP Communication ID：{found} 与 {candidate}。");
                 found = candidate;
             }
             return found;
@@ -67,7 +67,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             string? ascii = FindId(Encoding.ASCII.GetString(bytes));
             string? unicode = bytes.Length >= 2 ? FindId(Encoding.Unicode.GetString(bytes)) : null;
             if (ascii != null && unicode != null && ascii != unicode)
-                throw new InvalidDataException($"Conflicting NP Communication IDs were found inside the data.");
+                throw new InvalidDataException($"数据中发现互相冲突的 NP Communication ID。");
             return ascii ?? unicode;
         }
 
@@ -78,7 +78,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             string first = matches[0].Value;
             for (int index = 1; index < matches.Count; index++)
                 if (!string.Equals(first, matches[index].Value, StringComparison.Ordinal))
-                    throw new InvalidDataException("More than one NP Communication ID was found in a candidate file.");
+                    throw new InvalidDataException("在候选文件中找到多个 NP Communication ID。");
             return first;
         }
 

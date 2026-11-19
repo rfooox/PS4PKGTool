@@ -20,12 +20,12 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             if (metadataEntry == null)
                 return Result(archive, null, null, false, false, false,
                     TrophyMetadataFailureKind.MissingMetadata,
-                    "Metadata unavailable: no trophy XML or ESFM entry was found.");
+                    "元数据不可用：未找到奖杯 XML 或 ESFM 条目。");
 
             if (metadataEntry.Size > 32 * 1024 * 1024)
                 return Result(archive, metadataEntry, null, true, false, false,
                     TrophyMetadataFailureKind.UnsupportedMetadata,
-                    $"Metadata unavailable: {metadataEntry.Name} exceeds the 32 MiB safety limit.");
+                    $"元数据不可用：{metadataEntry.Name} 超过 32 MiB 安全上限。");
 
             byte[] payload = _reader.ReadEntry(archive, metadataEntry);
             TrophyResourceKind kind = _detector.Detect(payload, metadataEntry);
@@ -34,7 +34,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             if (kind != TrophyResourceKind.EncryptedEsfm)
                 return Result(archive, metadataEntry, null, true, false, false,
                     TrophyMetadataFailureKind.UnsupportedMetadata,
-                    $"Metadata unavailable: {metadataEntry.Name} is {kind}, not a supported ESFM payload.");
+                    $"元数据不可用：{metadataEntry.Name} 是 {kind}，不是受支持的 ESFM 数据。");
 
             string? npCommunicationId;
             try
@@ -45,12 +45,12 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             {
                 return Result(archive, metadataEntry, null, true, false, false,
                     TrophyMetadataFailureKind.MissingNpCommunicationId,
-                    $"Metadata unavailable: {ex.Message}");
+                    $"元数据不可用：{ex.Message}");
             }
             if (npCommunicationId == null)
                 return Result(archive, metadataEntry, null, true, false, false,
                     TrophyMetadataFailureKind.MissingNpCommunicationId,
-                    "Metadata unavailable: NP Communication ID is required (NPWRxxxxx_00). No value was found in nearby npbind.dat, nptitle.dat, or param.sfo files.");
+                    "元数据不可用：需要 NP Communication ID（NPWRxxxxx_00）。在附近的 npbind.dat、nptitle.dat 或 param.sfo 中未找到该值。");
 
             try
             {
@@ -61,7 +61,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             {
                 return Result(archive, metadataEntry, npCommunicationId, true, true, false,
                     TrophyMetadataFailureKind.DecryptionFailed,
-                    $"Metadata unavailable: {ex.Message}");
+                    $"元数据不可用：{ex.Message}");
             }
         }
 
@@ -81,14 +81,14 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
                     DecryptionAttempted = decryptionAttempted,
                     DecryptionSucceeded = decryptionAttempted,
                     FailureKind = TrophyMetadataFailureKind.None,
-                    StatusMessage = $"Loaded {trophies.Count} trophies from {entry.Name}."
+                    StatusMessage = $"已从 {entry.Name} 加载 {trophies.Count} 个奖杯。"
                 };
             }
             catch (Exception ex)
             {
                 return Result(archive, entry, expectedId, true, decryptionAttempted, false,
                     TrophyMetadataFailureKind.ParseFailed,
-                    $"Metadata unavailable: {ex.Message}");
+                    $"元数据不可用：{ex.Message}");
             }
         }
 

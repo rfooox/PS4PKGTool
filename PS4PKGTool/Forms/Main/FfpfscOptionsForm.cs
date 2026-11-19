@@ -39,16 +39,16 @@ namespace PS4PKGTool.Forms.Main
         public FfpfscOptionsForm(IReadOnlyList<string> pkgPaths)
         {
             if (pkgPaths == null || pkgPaths.Count == 0)
-                throw new ArgumentException("At least one PKG path is required.", nameof(pkgPaths));
+                throw new ArgumentException("至少需要一个 PKG 路径。", nameof(pkgPaths));
 
             InitializeComponent();
             _isBatch = true;
-            _txtSource.Text = $"{pkgPaths.Count} PKGs selected";
-            _txtTitle.Text = "Multiple PKGs";
-            _txtTitleId.Text = "Multiple";
-            _txtVersion.Text = "Multiple";
-            _lblSource.Text = "Sources";
-            _lblOutput.Text = "Output folder";
+            _txtSource.Text = $"已选择 {pkgPaths.Count} 个 PKG";
+            _txtTitle.Text = "多个 PKG";
+            _txtTitleId.Text = "多个";
+            _txtVersion.Text = "多个";
+            _lblSource.Text = "源文件";
+            _lblOutput.Text = "输出文件夹";
             _outputPath.Text = Path.GetDirectoryName(pkgPaths[0]) ?? "";
             _workParent.Text = PS4PKGTool.Utilities.PS4PKGToolHelper.Helper.ResolveTempRoot();
             _pkgSize = pkgPaths.Sum(GetFileSize);
@@ -85,12 +85,12 @@ namespace PS4PKGTool.Forms.Main
                 if (free < needed)
                 {
                     _lblSpaceWarning.ForeColor = System.Drawing.Color.OrangeRed;
-                    _lblSpaceWarning.Text = $"Low disk space: only {freeText} free on the work drive, but ~{needText} is estimated to be needed.";
+                    _lblSpaceWarning.Text = $"磁盘空间不足：工作盘仅剩 {freeText}，预计需要约 {needText}。";
                 }
                 else
                 {
                     _lblSpaceWarning.ForeColor = System.Drawing.Color.Silver;
-                    _lblSpaceWarning.Text = $"{freeText} free · ~{needText} estimated needed.";
+                    _lblSpaceWarning.Text = $"{freeText} 可用 · 预计需要约 {needText}。";
                 }
             }
             catch
@@ -119,7 +119,7 @@ namespace PS4PKGTool.Forms.Main
 
             using var dialog = new SaveFileDialog
             {
-                Filter = "FFPFSC image (*.ffpfsc)|*.ffpfsc|All Files (*.*)|*.*",
+                Filter = "FFPFSC 镜像 (*.ffpfsc)|*.ffpfsc|所有文件 (*.*)|*.*",
                 FileName = fileName,
                 InitialDirectory = string.IsNullOrWhiteSpace(initialDirectory) ? Environment.CurrentDirectory : initialDirectory
             };
@@ -142,12 +142,12 @@ namespace PS4PKGTool.Forms.Main
             string workParent = _workParent.Text.Trim();
             if (string.IsNullOrWhiteSpace(output) || (!_isBatch && !output.EndsWith(".ffpfsc", StringComparison.OrdinalIgnoreCase)))
             {
-                ShowWarning(_isBatch ? "Choose an output folder." : "Choose an output .ffpfsc filename.", false);
+                ShowWarning(_isBatch ? "请选择输出文件夹。" : "请选择输出 .ffpfsc 文件名。", false);
                 return;
             }
             if (string.IsNullOrWhiteSpace(workParent))
             {
-                ShowWarning("Choose a work location.", false);
+                ShowWarning("请选择工作目录。", false);
                 return;
             }
 
@@ -163,7 +163,7 @@ namespace PS4PKGTool.Forms.Main
             }
             catch (Exception ex)
             {
-                ShowWarning("The work location could not be created:\n" + ex.Message, false);
+                ShowWarning("无法创建工作目录：\n" + ex.Message, false);
                 return;
             }
 

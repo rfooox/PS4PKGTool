@@ -53,11 +53,11 @@ namespace PS4PKGTool.Utilities.Shadps4
         public static (bool IsValid, string? Error) ValidateSelectedExecutablePath(string? path)
         {
             if (string.IsNullOrWhiteSpace(path))
-                return (false, "No executable selected.");
+                return (false, "未选择可执行文件。");
             if (!File.Exists(path))
-                return (false, "The selected file does not exist.");
+                return (false, "所选文件不存在。");
             if (!Path.GetExtension(path).Equals(".exe", StringComparison.OrdinalIgnoreCase))
-                return (false, "The selected file is not an executable (.exe).");
+                return (false, "所选文件不是可执行文件（.exe）。");
             return (true, null);
         }
 
@@ -75,7 +75,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             if (!string.IsNullOrWhiteSpace(selectedExecutablePath))
             {
                 if (!File.Exists(selectedExecutablePath))
-                    warnings.Add($"Selected shadPS4 executable does not exist: {selectedExecutablePath}");
+                    warnings.Add($"所选的 shadPS4 可执行文件不存在：{selectedExecutablePath}");
                 selectedDir = Path.GetDirectoryName(selectedExecutablePath);
             }
 
@@ -107,11 +107,11 @@ namespace PS4PKGTool.Utilities.Shadps4
             }
             if (core != null && !string.Equals(coreDir, selectedDir, StringComparison.OrdinalIgnoreCase))
             {
-                warnings.Add($"shadPS4 core detected in a parent folder: {core}");
+                warnings.Add($"在上级目录中检测到 shadPS4 核心：{core}");
                 // Real incident: the launcher was a 9-day-newer nightly than the
                 // core it found in the parent folder, and the game crashed in
                 // the emulator. The versions may not match - say how to fix it.
-                warnings.Add("The core and the selected launcher may be from different builds. If games fail to boot, place the matching shadPS4.exe next to the launcher and select it in Settings.");
+                warnings.Add("核心与所选启动器可能来自不同版本。若游戏无法启动，请把匹配的 shadPS4.exe 放到启动器旁边，并在「设置」中选中它。");
             }
 
             var distribution = (core != null, launcher != null) switch
@@ -122,7 +122,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 _ => Shadps4DistributionType.Unknown,
             };
             if (distribution == Shadps4DistributionType.Unknown)
-                warnings.Add("Neither shadPS4.exe nor shadPS4QtLauncher.exe was found beside the selected executable.");
+                warnings.Add("在所选可执行文件旁未找到 shadPS4.exe 或 shadPS4QtLauncher.exe。");
 
             // Config candidates in precedence order: shared AppData first
             // (the launcher and current builds read it), then the portable
@@ -148,7 +148,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             // Ambiguous: valid configs in both layouts - no silent pick.
             if (appDataFound != null && portableFound != null)
             {
-                warnings.Add("Multiple shadPS4 configurations were found:");
+                warnings.Add("发现多份 shadPS4 配置：");
                 warnings.Add($"  AppData:  {appDataFound.Value.Config}");
                 warnings.Add($"  Portable: {portableFound.Value.Config}");
                 return Build(selectedExecutablePath, core, launcher, distribution,
@@ -166,7 +166,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 var values = found.Value.Values;
 
                 if (!isPortable && portableFolderPresent)
-                    warnings.Add($"Ignored stale portable user folder (no readable config): {portableUserDir}");
+                    warnings.Add($"已忽略失效的便携版用户目录（无可读配置）：{portableUserDir}");
 
                 bool hasCore = core != null && File.Exists(core);
                 var dirs = ResolveInstallDirectories(values, userDir, warnings);
@@ -186,7 +186,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             foreach (var (dir, present) in new[] { (appDataUserDir, appDataFolderPresent), (portableUserDir, portableFolderPresent) })
             {
                 if (dir == null || !present) continue;
-                warnings.Add($"shadPS4 user folder found without a readable config: {dir} (layout defaults assumed)");
+                warnings.Add($"发现 shadPS4 用户文件夹但无法读取配置：{dir}（将采用默认目录结构）");
                 return Build(selectedExecutablePath, core, launcher, distribution,
                     dir, null, Shadps4ConfigFormat.Unknown, Shadps4UserDirectoryMode.Custom,
                     Shadps4DetectionConfidence.Low, Array.Empty<string>(),
@@ -225,7 +225,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                         var values = reader.Read(path);
                         if (values == null)
                         {
-                            warnings.Add($"Unreadable shadPS4 config ignored: {path}");
+                            warnings.Add($"已忽略无法读取的 shadPS4 配置：{path}");
                             continue;
                         }
                         var format = name == "config.json"
@@ -252,10 +252,10 @@ namespace PS4PKGTool.Utilities.Shadps4
                 string normalized = NormalizeConfiguredPath(d.Path, userDir, warnings);
                 dirs.Add(normalized);
                 if (!Directory.Exists(normalized))
-                    warnings.Add($"Configured game directory does not currently exist: {normalized}");
+                    warnings.Add($"配置的游戏目录当前不存在：{normalized}");
             }
             if (dirs.Count == 0)
-                warnings.Add("shadPS4 has no enabled game libraries configured.");
+                warnings.Add("shadPS4 未配置任何已启用的游戏库。");
             return dirs;
         }
 
@@ -277,7 +277,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             if (p.Contains('%') || p.Contains("${"))
             {
                 try { p = Environment.ExpandEnvironmentVariables(p); }
-                catch { warnings.Add($"Could not expand environment variables in configured path: {path}"); }
+                catch { warnings.Add($"无法展开配置路径中的环境变量：{path}"); }
             }
             p = p.Trim();
             p = p.Replace('/', '\\'); // verified: configs mix separators ("C:/games" style forward slashes)
@@ -286,7 +286,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 p += '\\'; // bare drive letter "<drive>:" -> "<drive>:\"
             if (!Path.IsPathRooted(p))
             {
-                warnings.Add($"Relative configured path resolved against the user directory: {path}");
+                warnings.Add($"相对配置路径已基于用户目录解析：{path}");
                 p = Path.GetFullPath(Path.Combine(userDir, p));
             }
             return p;

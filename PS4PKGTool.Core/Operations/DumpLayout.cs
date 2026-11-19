@@ -103,7 +103,7 @@ public static class DumpLayout
             rootFull += Path.DirectorySeparatorChar;
         if (!full.StartsWith(rootFull, StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException(
-                $"Path traversal detected: '{relative}' resolves outside the extraction directory.");
+                $"检测到路径穿越：'{relative}' 指向解压目录之外。");
         return full;
     }
 

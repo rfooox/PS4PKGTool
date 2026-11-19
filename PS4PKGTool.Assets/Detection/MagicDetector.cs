@@ -44,11 +44,11 @@ public sealed class MagicDetector : IAssetDetector
             if (format == "riff-container")
             {
                 if (head.Length >= 12 && head[8] == 'W' && head[9] == 'A' && head[10] == 'V' && head[11] == 'E')
-                    return new AssetDetectionResult { Format = "wav", Confidence = 0.95, Evidence = new[] { "RIFF/WAVE magic" } };
-                return new AssetDetectionResult { Format = "riff", Confidence = 0.5, Evidence = new[] { "RIFF magic (unknown sub-format)" } };
+                    return new AssetDetectionResult { Format = "wav", Confidence = 0.95, Evidence = new[] { "RIFF/WAVE 魔数" } };
+                return new AssetDetectionResult { Format = "riff", Confidence = 0.5, Evidence = new[] { "RIFF 魔数（未知子格式）" } };
             }
 
-            return new AssetDetectionResult { Format = format, Engine = engine, Confidence = 0.95, Evidence = new[] { $"{format} magic bytes" } };
+            return new AssetDetectionResult { Format = format, Engine = engine, Confidence = 0.95, Evidence = new[] { $"{format} 魔数" } };
         }
 
         return null;

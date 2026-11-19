@@ -28,7 +28,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             }
             if (parsed.Source == Shadps4ComponentSource.Adopted)
                 return Path.GetFileName(parsed.Value);
-            return "(not set)";
+            return "（未设置）";
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace PS4PKGTool.Utilities.Shadps4
         /// <summary>
         /// Raw active-component setting for settings-style textboxes:
         /// managed builds show "Build &lt;id&gt;", adopted installations show
-        /// the path itself, unset shows "(not set)".
+        /// the path itself, unset shows "（未设置）".
         /// </summary>
         public static string DescribeActiveSetting(string? setting)
         {
@@ -49,14 +49,14 @@ namespace PS4PKGTool.Utilities.Shadps4
             {
                 Shadps4ComponentSource.Managed => "Build " + r.Value,
                 Shadps4ComponentSource.Adopted => r.Value,
-                _ => "(not set)",
+                _ => "（未设置）",
             };
         }
 
         /// <summary>Path shortened for detection-style reports (tail kept).</summary>
         public static string ShortenPath(string? path)
         {
-            if (string.IsNullOrWhiteSpace(path)) return "(not found)";
+            if (string.IsNullOrWhiteSpace(path)) return "（未找到）";
             return path.Length <= 70 ? path : "..." + path.Substring(path.Length - 67);
         }
 

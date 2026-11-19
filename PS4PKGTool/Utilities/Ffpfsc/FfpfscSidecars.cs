@@ -20,7 +20,7 @@ public sealed record FfpfscConvertOptions(
 
 /// <summary>
 /// Progress report for the converter pipeline. <c>Stage</c> is a short label
-/// shown in the UI ("Extracting PKG", "Building FFPFSC image", "Verifying");
+/// shown in the UI ("正在提取 PKG", "正在构建 FFPFSC 镜像", "Verifying");
 /// sub-progress is carried either as item counts (<c>ItemsProcessed/ItemsTotal</c>,
 /// e.g. extracted files) or byte counts (<c>BytesProcessed/TotalBytes</c>,
 /// e.g. PFSC compression); whichever is non-zero drives the current bar.
@@ -53,12 +53,12 @@ public sealed record FfpfscConvertResult(
 /// <summary>Step labels for the <c>FfpfscConvertProgress.Stage</c> field.</summary>
 public static class FfpfscConvertStages
 {
-    public const string Extracting = "Extracting PKG";
-    public const string Restructuring = "Restructuring system files";
-    public const string ProjectingParamJson = "Projecting param.json";
-    public const string RepairingNpbind = "Repairing npbind.dat footer";
-    public const string Building = "Building FFPFSC image";
-    public const string Verifying = "Verifying FFPFSC";
-    public const string CleaningUp = "Cleaning up";
+    public const string Extracting = "正在提取 PKG";
+    public const string Restructuring = "正在重构系统文件";
+    public const string ProjectingParamJson = "正在生成 param.json";
+    public const string RepairingNpbind = "正在修复 npbind.dat 尾部";
+    public const string Building = "正在构建 FFPFSC 镜像";
+    public const string Verifying = "正在校验 FFPFSC";
+    public const string CleaningUp = "正在清理";
     public const string Done = "Done";
 }

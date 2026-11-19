@@ -105,7 +105,7 @@ public static class NpbindFooterRepair
             throw new InvalidDataException($"npbind.dat {report.StatusDetail}.");
         if (!report.FooterValid)
             throw new InvalidDataException(
-                $"npbind.dat SHA-1 footer mismatch: stored digest does not match recomputed SHA-1.");
+                $"npbind.dat SHA-1 尾部不匹配：存储的摘要与重新计算的 SHA-1 不一致。");
         return report;
     }
 
@@ -122,7 +122,7 @@ public static class NpbindFooterRepair
 
         NpbindReport report = Inspect(data);
         if (report.Status == "invalid")
-            throw new InvalidDataException($"npbind.dat is structurally invalid: {report.StatusDetail}");
+            throw new InvalidDataException($"npbind.dat 结构无效：{report.StatusDetail}");
         if (report.FooterValid)
             return data; // already correct — no copy needed
 

@@ -222,7 +222,7 @@ namespace PS4PKGTool
             lblManagerHeaderState.Name = "lblManagerHeaderState";
             lblManagerHeaderState.Size = new System.Drawing.Size(364, 18);
             lblManagerHeaderState.TabIndex = 2;
-            lblManagerHeaderState.Text = "Loading environment...";
+            lblManagerHeaderState.Text = "正在加载环境信息……";
             lblManagerHeaderState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ctxHeaderMore
@@ -237,7 +237,7 @@ namespace PS4PKGTool
             miHeaderConfigFolder.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miHeaderConfigFolder.Name = "miHeaderConfigFolder";
             miHeaderConfigFolder.Size = new System.Drawing.Size(227, 22);
-            miHeaderConfigFolder.Text = "Open Config Folder";
+            miHeaderConfigFolder.Text = "打开配置文件夹";
             miHeaderConfigFolder.Click += miHeaderConfigFolder_Click;
             // 
             // miHeaderManagedBuilds
@@ -245,7 +245,7 @@ namespace PS4PKGTool
             miHeaderManagedBuilds.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miHeaderManagedBuilds.Name = "miHeaderManagedBuilds";
             miHeaderManagedBuilds.Size = new System.Drawing.Size(227, 22);
-            miHeaderManagedBuilds.Text = "Open Managed Builds Folder";
+            miHeaderManagedBuilds.Text = "打开托管版本文件夹";
             miHeaderManagedBuilds.Click += miHeaderManagedBuilds_Click;
             // 
             // miHeaderGameLibrary
@@ -253,7 +253,7 @@ namespace PS4PKGTool
             miHeaderGameLibrary.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miHeaderGameLibrary.Name = "miHeaderGameLibrary";
             miHeaderGameLibrary.Size = new System.Drawing.Size(227, 22);
-            miHeaderGameLibrary.Text = "Open Game Library";
+            miHeaderGameLibrary.Text = "打开游戏库";
             miHeaderGameLibrary.Click += miHeaderGameLibrary_Click;
             // 
             // miHeaderCopyEnvironmentInfo
@@ -261,7 +261,7 @@ namespace PS4PKGTool
             miHeaderCopyEnvironmentInfo.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miHeaderCopyEnvironmentInfo.Name = "miHeaderCopyEnvironmentInfo";
             miHeaderCopyEnvironmentInfo.Size = new System.Drawing.Size(227, 22);
-            miHeaderCopyEnvironmentInfo.Text = "Copy Environment Info";
+            miHeaderCopyEnvironmentInfo.Text = "复制环境信息";
             miHeaderCopyEnvironmentInfo.Click += miHeaderCopyEnvironmentInfo_Click;
             // 
             // darkHeaderBar1
@@ -317,7 +317,7 @@ namespace PS4PKGTool
             tabManagerOverview.Padding = new System.Windows.Forms.Padding(12);
             tabManagerOverview.Size = new System.Drawing.Size(765, 816);
             tabManagerOverview.TabIndex = 0;
-            tabManagerOverview.Text = "Overview";
+            tabManagerOverview.Text = "概览";
             // 
             // grpOverviewDetails
             // 
@@ -327,7 +327,7 @@ namespace PS4PKGTool
             grpOverviewDetails.Margin = new System.Windows.Forms.Padding(6);
             grpOverviewDetails.Name = "grpOverviewDetails";
             grpOverviewDetails.Padding = new System.Windows.Forms.Padding(12);
-            grpOverviewDetails.SectionHeader = "Environment Details";
+            grpOverviewDetails.SectionHeader = "环境详情";
             grpOverviewDetails.Size = new System.Drawing.Size(738, 175);
             grpOverviewDetails.TabIndex = 5;
             // 
@@ -339,7 +339,7 @@ namespace PS4PKGTool
             lblOverviewEnvDetails.Name = "lblOverviewEnvDetails";
             lblOverviewEnvDetails.Size = new System.Drawing.Size(561, 125);
             lblOverviewEnvDetails.TabIndex = 0;
-            lblOverviewEnvDetails.Text = "Loading...";
+            lblOverviewEnvDetails.Text = "正在加载……";
             // 
             // btnManagerCopyEnvironmentInfo
             // 
@@ -347,7 +347,7 @@ namespace PS4PKGTool
             btnManagerCopyEnvironmentInfo.Name = "btnManagerCopyEnvironmentInfo";
             btnManagerCopyEnvironmentInfo.Size = new System.Drawing.Size(145, 26);
             btnManagerCopyEnvironmentInfo.TabIndex = 1;
-            btnManagerCopyEnvironmentInfo.Text = "Copy Environment Info";
+            btnManagerCopyEnvironmentInfo.Text = "复制环境信息";
             btnManagerCopyEnvironmentInfo.Click += btnManagerCopyEnvironmentInfo_Click;
             // 
             // grpOverviewReports
@@ -356,7 +356,7 @@ namespace PS4PKGTool
             grpOverviewReports.Location = new System.Drawing.Point(12, 286);
             grpOverviewReports.Margin = new System.Windows.Forms.Padding(6);
             grpOverviewReports.Name = "grpOverviewReports";
-            grpOverviewReports.SectionHeader = "Latest Reports";
+            grpOverviewReports.SectionHeader = "最近的报告";
             grpOverviewReports.Size = new System.Drawing.Size(738, 334);
             grpOverviewReports.TabIndex = 4;
             // 
@@ -376,28 +376,28 @@ namespace PS4PKGTool
             // 
             // colReportTitle
             // 
-            colReportTitle.HeaderText = "Title";
+            colReportTitle.HeaderText = "标题";
             colReportTitle.Name = "colReportTitle";
             colReportTitle.ReadOnly = true;
             // 
             // colReportDate
             // 
             colReportDate.FillWeight = 30F;
-            colReportDate.HeaderText = "Date";
+            colReportDate.HeaderText = "日期";
             colReportDate.Name = "colReportDate";
             colReportDate.ReadOnly = true;
             // 
             // colReportStatus
             // 
             colReportStatus.FillWeight = 30F;
-            colReportStatus.HeaderText = "Status";
+            colReportStatus.HeaderText = "状态";
             colReportStatus.Name = "colReportStatus";
             colReportStatus.ReadOnly = true;
             // 
             // colReportCore
             // 
             colReportCore.FillWeight = 40F;
-            colReportCore.HeaderText = "Core";
+            colReportCore.HeaderText = "核心";
             colReportCore.Name = "colReportCore";
             colReportCore.ReadOnly = true;
             // 
@@ -419,7 +419,7 @@ namespace PS4PKGTool
             lblOverviewCounts.Name = "lblOverviewCounts";
             lblOverviewCounts.Size = new System.Drawing.Size(712, 18);
             lblOverviewCounts.TabIndex = 0;
-            lblOverviewCounts.Text = "Loading...";
+            lblOverviewCounts.Text = "正在加载……";
             // 
             // grpOverviewActions
             // 
@@ -430,7 +430,7 @@ namespace PS4PKGTool
             grpOverviewActions.Margin = new System.Windows.Forms.Padding(6);
             grpOverviewActions.Name = "grpOverviewActions";
             grpOverviewActions.Padding = new System.Windows.Forms.Padding(12);
-            grpOverviewActions.SectionHeader = "Quick Actions";
+            grpOverviewActions.SectionHeader = "快捷操作";
             grpOverviewActions.Size = new System.Drawing.Size(738, 76);
             grpOverviewActions.TabIndex = 2;
             // 
@@ -440,7 +440,7 @@ namespace PS4PKGTool
             btnOverviewInstallUpdate.Name = "btnOverviewInstallUpdate";
             btnOverviewInstallUpdate.Size = new System.Drawing.Size(200, 26);
             btnOverviewInstallUpdate.TabIndex = 0;
-            btnOverviewInstallUpdate.Text = "Install/Update shadPS4...";
+            btnOverviewInstallUpdate.Text = "安装/更新 shadPS4……";
             btnOverviewInstallUpdate.Click += btnOverviewInstallUpdate_Click;
             // 
             // btnOverviewOpenLibrary
@@ -449,7 +449,7 @@ namespace PS4PKGTool
             btnOverviewOpenLibrary.Name = "btnOverviewOpenLibrary";
             btnOverviewOpenLibrary.Size = new System.Drawing.Size(160, 26);
             btnOverviewOpenLibrary.TabIndex = 1;
-            btnOverviewOpenLibrary.Text = "Open Game Library";
+            btnOverviewOpenLibrary.Text = "打开游戏库";
             btnOverviewOpenLibrary.Click += btnOverviewOpenLibrary_Click;
             // 
             // btnOverviewOpenShadps4Folder
@@ -458,7 +458,7 @@ namespace PS4PKGTool
             btnOverviewOpenShadps4Folder.Name = "btnOverviewOpenShadps4Folder";
             btnOverviewOpenShadps4Folder.Size = new System.Drawing.Size(150, 26);
             btnOverviewOpenShadps4Folder.TabIndex = 2;
-            btnOverviewOpenShadps4Folder.Text = "Open shadPS4 Folder";
+            btnOverviewOpenShadps4Folder.Text = "打开 shadPS4 文件夹";
             btnOverviewOpenShadps4Folder.Click += btnOverviewOpenShadps4Folder_Click;
             // 
             // grpOverviewLauncher
@@ -481,7 +481,7 @@ namespace PS4PKGTool
             lblOverviewLauncherInfo.Name = "lblOverviewLauncherInfo";
             lblOverviewLauncherInfo.Size = new System.Drawing.Size(210, 44);
             lblOverviewLauncherInfo.TabIndex = 0;
-            lblOverviewLauncherInfo.Text = "(not set)";
+            lblOverviewLauncherInfo.Text = "（未设置）";
             // 
             // btnOverviewLauncherOpenFolder
             // 
@@ -489,7 +489,7 @@ namespace PS4PKGTool
             btnOverviewLauncherOpenFolder.Name = "btnOverviewLauncherOpenFolder";
             btnOverviewLauncherOpenFolder.Size = new System.Drawing.Size(120, 26);
             btnOverviewLauncherOpenFolder.TabIndex = 1;
-            btnOverviewLauncherOpenFolder.Text = "Open Folder";
+            btnOverviewLauncherOpenFolder.Text = "打开文件夹";
             btnOverviewLauncherOpenFolder.Click += btnOverviewLauncherOpenFolder_Click;
             // 
             // grpOverviewCore
@@ -512,7 +512,7 @@ namespace PS4PKGTool
             lblOverviewCoreInfo.Name = "lblOverviewCoreInfo";
             lblOverviewCoreInfo.Size = new System.Drawing.Size(210, 44);
             lblOverviewCoreInfo.TabIndex = 0;
-            lblOverviewCoreInfo.Text = "(not set)";
+            lblOverviewCoreInfo.Text = "（未设置）";
             // 
             // btnOverviewCoreOpenFolder
             // 
@@ -520,7 +520,7 @@ namespace PS4PKGTool
             btnOverviewCoreOpenFolder.Name = "btnOverviewCoreOpenFolder";
             btnOverviewCoreOpenFolder.Size = new System.Drawing.Size(120, 26);
             btnOverviewCoreOpenFolder.TabIndex = 1;
-            btnOverviewCoreOpenFolder.Text = "Open Folder";
+            btnOverviewCoreOpenFolder.Text = "打开文件夹";
             btnOverviewCoreOpenFolder.Click += btnOverviewCoreOpenFolder_Click;
             // 
             // tabManagerGames
@@ -552,7 +552,7 @@ namespace PS4PKGTool
             tabManagerGames.Padding = new System.Windows.Forms.Padding(12);
             tabManagerGames.Size = new System.Drawing.Size(765, 816);
             tabManagerGames.TabIndex = 1;
-            tabManagerGames.Text = "Games";
+            tabManagerGames.Text = "游戏";
             // 
             // grpInstallActivity
             // 
@@ -578,7 +578,7 @@ namespace PS4PKGTool
             btnInstallDismiss.Name = "btnInstallDismiss";
             btnInstallDismiss.Size = new System.Drawing.Size(84, 24);
             btnInstallDismiss.TabIndex = 7;
-            btnInstallDismiss.Text = "Dismiss";
+            btnInstallDismiss.Text = "关闭";
             btnInstallDismiss.Click += btnInstallDismiss_Click;
             // 
             // btnInstallOpenFolder
@@ -587,7 +587,7 @@ namespace PS4PKGTool
             btnInstallOpenFolder.Name = "btnInstallOpenFolder";
             btnInstallOpenFolder.Size = new System.Drawing.Size(100, 24);
             btnInstallOpenFolder.TabIndex = 6;
-            btnInstallOpenFolder.Text = "Open Folder";
+            btnInstallOpenFolder.Text = "打开文件夹";
             btnInstallOpenFolder.Click += btnInstallOpenFolder_Click;
             // 
             // btnInstallCancel
@@ -596,7 +596,7 @@ namespace PS4PKGTool
             btnInstallCancel.Name = "btnInstallCancel";
             btnInstallCancel.Size = new System.Drawing.Size(84, 24);
             btnInstallCancel.TabIndex = 4;
-            btnInstallCancel.Text = "Cancel";
+            btnInstallCancel.Text = "取消";
             btnInstallCancel.Click += btnInstallCancel_Click;
             // 
             // prgInstallProgress
@@ -642,7 +642,7 @@ namespace PS4PKGTool
             lblManagerGamesHint.Name = "lblManagerGamesHint";
             lblManagerGamesHint.Size = new System.Drawing.Size(752, 16);
             lblManagerGamesHint.TabIndex = 14;
-            lblManagerGamesHint.Text = "Installed games in the install directory.";
+            lblManagerGamesHint.Text = "安装目录中已安装的游戏。";
             // 
             // btnManagerGamesRefresh
             // 
@@ -650,7 +650,7 @@ namespace PS4PKGTool
             btnManagerGamesRefresh.Name = "btnManagerGamesRefresh";
             btnManagerGamesRefresh.Size = new System.Drawing.Size(94, 26);
             btnManagerGamesRefresh.TabIndex = 16;
-            btnManagerGamesRefresh.Text = "Refresh";
+            btnManagerGamesRefresh.Text = "刷新";
             btnManagerGamesRefresh.Click += btnManagerGamesRefresh_Click;
             // 
             // btnManagerGameMore
@@ -668,7 +668,7 @@ namespace PS4PKGTool
             btnManagerGameOpenFolder.Name = "btnManagerGameOpenFolder";
             btnManagerGameOpenFolder.Size = new System.Drawing.Size(118, 26);
             btnManagerGameOpenFolder.TabIndex = 14;
-            btnManagerGameOpenFolder.Text = "Open Folder";
+            btnManagerGameOpenFolder.Text = "打开文件夹";
             btnManagerGameOpenFolder.Click += btnManagerGameOpenFolder_Click;
             // 
             // btnManagerGameReports
@@ -677,7 +677,7 @@ namespace PS4PKGTool
             btnManagerGameReports.Name = "btnManagerGameReports";
             btnManagerGameReports.Size = new System.Drawing.Size(84, 26);
             btnManagerGameReports.TabIndex = 13;
-            btnManagerGameReports.Text = "Results";
+            btnManagerGameReports.Text = "结果";
             btnManagerGameReports.Click += btnManagerGameReports_Click;
             // 
             // btnManagerGameCreateReport
@@ -686,7 +686,7 @@ namespace PS4PKGTool
             btnManagerGameCreateReport.Name = "btnManagerGameCreateReport";
             btnManagerGameCreateReport.Size = new System.Drawing.Size(131, 26);
             btnManagerGameCreateReport.TabIndex = 12;
-            btnManagerGameCreateReport.Text = "Create Report";
+            btnManagerGameCreateReport.Text = "创建报告";
             btnManagerGameCreateReport.Click += btnManagerGameCreateReport_Click;
             // 
             // btnManagerGameAddFeedback
@@ -695,7 +695,7 @@ namespace PS4PKGTool
             btnManagerGameAddFeedback.Name = "btnManagerGameAddFeedback";
             btnManagerGameAddFeedback.Size = new System.Drawing.Size(131, 26);
             btnManagerGameAddFeedback.TabIndex = 11;
-            btnManagerGameAddFeedback.Text = "Add Test Result";
+            btnManagerGameAddFeedback.Text = "添加测试结果";
             btnManagerGameAddFeedback.Click += btnManagerGameAddFeedback_Click;
             // 
             // btnManagerGameLaunch
@@ -704,7 +704,7 @@ namespace PS4PKGTool
             btnManagerGameLaunch.Name = "btnManagerGameLaunch";
             btnManagerGameLaunch.Size = new System.Drawing.Size(271, 26);
             btnManagerGameLaunch.TabIndex = 10;
-            btnManagerGameLaunch.Text = "Launch";
+            btnManagerGameLaunch.Text = "启动";
             btnManagerGameLaunch.Click += btnManagerGameLaunch_Click;
             // 
             // lblGameDetailRecent
@@ -722,7 +722,7 @@ namespace PS4PKGTool
             lblGameDetailRecentHeader.Name = "lblGameDetailRecentHeader";
             lblGameDetailRecentHeader.Size = new System.Drawing.Size(280, 16);
             lblGameDetailRecentHeader.TabIndex = 16;
-            lblGameDetailRecentHeader.Text = "Recent Results";
+            lblGameDetailRecentHeader.Text = "最近结果";
             // 
             // lblGameDetailPath
             // 
@@ -788,7 +788,7 @@ namespace PS4PKGTool
             lblGameDetailTitle.Name = "lblGameDetailTitle";
             lblGameDetailTitle.Size = new System.Drawing.Size(158, 40);
             lblGameDetailTitle.TabIndex = 2;
-            lblGameDetailTitle.Text = "Select a game";
+            lblGameDetailTitle.Text = "选择一个游戏";
             // 
             // picManagerGameIcon
             // 
@@ -836,7 +836,7 @@ namespace PS4PKGTool
             tabManagerBuilds.Padding = new System.Windows.Forms.Padding(12);
             tabManagerBuilds.Size = new System.Drawing.Size(765, 816);
             tabManagerBuilds.TabIndex = 2;
-            tabManagerBuilds.Text = "Builds";
+            tabManagerBuilds.Text = "版本";
             // 
             // grpInstalledBuilds
             // 
@@ -849,7 +849,7 @@ namespace PS4PKGTool
             grpInstalledBuilds.Margin = new System.Windows.Forms.Padding(6);
             grpInstalledBuilds.Name = "grpInstalledBuilds";
             grpInstalledBuilds.Padding = new System.Windows.Forms.Padding(12);
-            grpInstalledBuilds.SectionHeader = "Installed Builds";
+            grpInstalledBuilds.SectionHeader = "已安装的版本";
             grpInstalledBuilds.Size = new System.Drawing.Size(739, 422);
             grpInstalledBuilds.TabIndex = 3;
             // 
@@ -859,8 +859,8 @@ namespace PS4PKGTool
             btnBuildRemove.Name = "btnBuildRemove";
             btnBuildRemove.Size = new System.Drawing.Size(110, 26);
             btnBuildRemove.TabIndex = 3;
-            btnBuildRemove.Text = "Remove";
-            toolTipBuilds.SetToolTip(btnBuildRemove, "Delete the selected build folder. The active build cannot be removed.");
+            btnBuildRemove.Text = "移除";
+            toolTipBuilds.SetToolTip(btnBuildRemove, "将删除所选的版本目录。启用的版本无法删除。");
             btnBuildRemove.Click += btnBuildRemove_Click;
             // 
             // btnBuildOpenFolder
@@ -869,7 +869,7 @@ namespace PS4PKGTool
             btnBuildOpenFolder.Name = "btnBuildOpenFolder";
             btnBuildOpenFolder.Size = new System.Drawing.Size(110, 26);
             btnBuildOpenFolder.TabIndex = 2;
-            btnBuildOpenFolder.Text = "Open Folder";
+            btnBuildOpenFolder.Text = "打开文件夹";
             btnBuildOpenFolder.Click += btnBuildOpenFolder_Click;
             // 
             // btnBuildActivate
@@ -878,8 +878,8 @@ namespace PS4PKGTool
             btnBuildActivate.Name = "btnBuildActivate";
             btnBuildActivate.Size = new System.Drawing.Size(110, 26);
             btnBuildActivate.TabIndex = 1;
-            btnBuildActivate.Text = "Activate";
-            toolTipBuilds.SetToolTip(btnBuildActivate, "Make the selected build the active core or launcher. Switching back is always possible.");
+            btnBuildActivate.Text = "启用";
+            toolTipBuilds.SetToolTip(btnBuildActivate, "将所选版本设为启用的核心或启动器。随时可以切回。");
             btnBuildActivate.Click += btnBuildActivate_Click;
             // 
             // tabsBuilds
@@ -905,7 +905,7 @@ namespace PS4PKGTool
             tabPageCore.Padding = new System.Windows.Forms.Padding(3);
             tabPageCore.Size = new System.Drawing.Size(705, 304);
             tabPageCore.TabIndex = 0;
-            tabPageCore.Text = "Core";
+            tabPageCore.Text = "核心";
             // 
             // lstCoreBuilds
             // 
@@ -927,7 +927,7 @@ namespace PS4PKGTool
             tabPageLauncher.Padding = new System.Windows.Forms.Padding(3);
             tabPageLauncher.Size = new System.Drawing.Size(704, 304);
             tabPageLauncher.TabIndex = 1;
-            tabPageLauncher.Text = "Launcher";
+            tabPageLauncher.Text = "启动器";
             // 
             // lstLauncherBuilds
             // 
@@ -950,7 +950,7 @@ namespace PS4PKGTool
             grpCurrentSetup.Margin = new System.Windows.Forms.Padding(6);
             grpCurrentSetup.Name = "grpCurrentSetup";
             grpCurrentSetup.Padding = new System.Windows.Forms.Padding(12);
-            grpCurrentSetup.SectionHeader = "Current Setup";
+            grpCurrentSetup.SectionHeader = "当前配置";
             grpCurrentSetup.Size = new System.Drawing.Size(739, 145);
             grpCurrentSetup.TabIndex = 2;
             // 
@@ -966,7 +966,7 @@ namespace PS4PKGTool
             grpCoreCard.Size = new System.Drawing.Size(351, 95);
             grpCoreCard.TabIndex = 0;
             grpCoreCard.TabStop = false;
-            grpCoreCard.Text = "Core";
+            grpCoreCard.Text = "核心";
             // 
             // lblCoreCardState
             // 
@@ -975,7 +975,7 @@ namespace PS4PKGTool
             lblCoreCardState.Name = "lblCoreCardState";
             lblCoreCardState.Size = new System.Drawing.Size(180, 18);
             lblCoreCardState.TabIndex = 0;
-            lblCoreCardState.Text = "Not set";
+            lblCoreCardState.Text = "未设置";
             // 
             // lblCoreCardDate
             // 
@@ -985,7 +985,7 @@ namespace PS4PKGTool
             lblCoreCardDate.Name = "lblCoreCardDate";
             lblCoreCardDate.Size = new System.Drawing.Size(200, 18);
             lblCoreCardDate.TabIndex = 1;
-            lblCoreCardDate.Text = "(not set)";
+            lblCoreCardDate.Text = "（未设置）";
             // 
             // lblCoreCardSha
             // 
@@ -1003,7 +1003,7 @@ namespace PS4PKGTool
             btnCoreCardOpenFolder.Name = "btnCoreCardOpenFolder";
             btnCoreCardOpenFolder.Size = new System.Drawing.Size(96, 26);
             btnCoreCardOpenFolder.TabIndex = 3;
-            btnCoreCardOpenFolder.Text = "Open Folder";
+            btnCoreCardOpenFolder.Text = "打开文件夹";
             btnCoreCardOpenFolder.Click += btnCoreCardOpenFolder_Click;
             // 
             // grpLauncherCard
@@ -1018,7 +1018,7 @@ namespace PS4PKGTool
             grpLauncherCard.Size = new System.Drawing.Size(352, 95);
             grpLauncherCard.TabIndex = 1;
             grpLauncherCard.TabStop = false;
-            grpLauncherCard.Text = "Launcher";
+            grpLauncherCard.Text = "启动器";
             // 
             // lblLauncherCardState
             // 
@@ -1027,7 +1027,7 @@ namespace PS4PKGTool
             lblLauncherCardState.Name = "lblLauncherCardState";
             lblLauncherCardState.Size = new System.Drawing.Size(180, 18);
             lblLauncherCardState.TabIndex = 0;
-            lblLauncherCardState.Text = "Not set";
+            lblLauncherCardState.Text = "未设置";
             // 
             // lblLauncherCardDate
             // 
@@ -1037,7 +1037,7 @@ namespace PS4PKGTool
             lblLauncherCardDate.Name = "lblLauncherCardDate";
             lblLauncherCardDate.Size = new System.Drawing.Size(200, 18);
             lblLauncherCardDate.TabIndex = 1;
-            lblLauncherCardDate.Text = "(not set)";
+            lblLauncherCardDate.Text = "（未设置）";
             // 
             // lblLauncherCardSha
             // 
@@ -1055,7 +1055,7 @@ namespace PS4PKGTool
             btnLauncherCardOpenFolder.Name = "btnLauncherCardOpenFolder";
             btnLauncherCardOpenFolder.Size = new System.Drawing.Size(96, 26);
             btnLauncherCardOpenFolder.TabIndex = 3;
-            btnLauncherCardOpenFolder.Text = "Open Folder";
+            btnLauncherCardOpenFolder.Text = "打开文件夹";
             btnLauncherCardOpenFolder.Click += btnLauncherCardOpenFolder_Click;
             // 
             // btnInstallShadps4
@@ -1065,7 +1065,7 @@ namespace PS4PKGTool
             btnInstallShadps4.Name = "btnInstallShadps4";
             btnInstallShadps4.Size = new System.Drawing.Size(160, 26);
             btnInstallShadps4.TabIndex = 4;
-            btnInstallShadps4.Text = "Install Build...";
+            btnInstallShadps4.Text = "安装版本……";
             btnInstallShadps4.Click += btnInstallShadps4_Click;
             // 
             // btnChooseCoreVersion
@@ -1075,7 +1075,7 @@ namespace PS4PKGTool
             btnChooseCoreVersion.Name = "btnChooseCoreVersion";
             btnChooseCoreVersion.Size = new System.Drawing.Size(190, 26);
             btnChooseCoreVersion.TabIndex = 5;
-            btnChooseCoreVersion.Text = "Browse Available Builds";
+            btnChooseCoreVersion.Text = "浏览可用版本";
             btnChooseCoreVersion.Click += btnChooseCoreVersion_Click;
             // 
             // btnMaintenance
@@ -1085,7 +1085,7 @@ namespace PS4PKGTool
             btnMaintenance.Name = "btnMaintenance";
             btnMaintenance.Size = new System.Drawing.Size(108, 26);
             btnMaintenance.TabIndex = 6;
-            btnMaintenance.Text = "Maintenance ▾";
+            btnMaintenance.Text = "维护 ▾";
             btnMaintenance.Click += btnMaintenance_Click;
             // 
             // lblStatus
@@ -1097,7 +1097,7 @@ namespace PS4PKGTool
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new System.Drawing.Size(723, 24);
             lblStatus.TabIndex = 7;
-            lblStatus.Text = "Managed builds are kept locally so you can switch back to an older build.";
+            lblStatus.Text = "托管版本保存在本地，方便你切换回旧版本。";
             // 
             // tabManagerSaves
             // 
@@ -1118,7 +1118,7 @@ namespace PS4PKGTool
             tabManagerSaves.Padding = new System.Windows.Forms.Padding(12);
             tabManagerSaves.Size = new System.Drawing.Size(765, 816);
             tabManagerSaves.TabIndex = 3;
-            tabManagerSaves.Text = "Saves";
+            tabManagerSaves.Text = "存档";
             // 
             // grpSavesSelected
             // 
@@ -1130,7 +1130,7 @@ namespace PS4PKGTool
             grpSavesSelected.Margin = new System.Windows.Forms.Padding(6);
             grpSavesSelected.Name = "grpSavesSelected";
             grpSavesSelected.Padding = new System.Windows.Forms.Padding(12);
-            grpSavesSelected.SectionHeader = "Selected Save";
+            grpSavesSelected.SectionHeader = "选中的存档";
             grpSavesSelected.Size = new System.Drawing.Size(738, 122);
             grpSavesSelected.TabIndex = 10;
             // 
@@ -1142,7 +1142,7 @@ namespace PS4PKGTool
             lblSaveGameTitle.Name = "lblSaveGameTitle";
             lblSaveGameTitle.Size = new System.Drawing.Size(673, 18);
             lblSaveGameTitle.TabIndex = 0;
-            lblSaveGameTitle.Text = "No save selected";
+            lblSaveGameTitle.Text = "未选择存档";
             // 
             // lblSaveGameUser
             // 
@@ -1177,7 +1177,7 @@ namespace PS4PKGTool
             lblManagerSavesHint.Name = "lblManagerSavesHint";
             lblManagerSavesHint.Size = new System.Drawing.Size(752, 44);
             lblManagerSavesHint.TabIndex = 9;
-            lblManagerSavesHint.Text = "Save games in the shadPS4 user directory.";
+            lblManagerSavesHint.Text = "存档保存在 shadPS4 用户目录中。";
             // 
             // btnSavesRestore
             // 
@@ -1185,7 +1185,7 @@ namespace PS4PKGTool
             btnSavesRestore.Name = "btnSavesRestore";
             btnSavesRestore.Size = new System.Drawing.Size(121, 26);
             btnSavesRestore.TabIndex = 8;
-            btnSavesRestore.Text = "Restore Backup...";
+            btnSavesRestore.Text = "恢复备份……";
             btnSavesRestore.Click += btnSavesRestore_Click;
             // 
             // lstManagerSavesBackups
@@ -1206,7 +1206,7 @@ namespace PS4PKGTool
             lblSavesBackupsHeader.Name = "lblSavesBackupsHeader";
             lblSavesBackupsHeader.Size = new System.Drawing.Size(110, 16);
             lblSavesBackupsHeader.TabIndex = 6;
-            lblSavesBackupsHeader.Text = "Backups";
+            lblSavesBackupsHeader.Text = "备份";
             // 
             // lstManagerSavesSlots
             // 
@@ -1225,7 +1225,7 @@ namespace PS4PKGTool
             lblSavesSlotsHeader.Name = "lblSavesSlotsHeader";
             lblSavesSlotsHeader.Size = new System.Drawing.Size(110, 16);
             lblSavesSlotsHeader.TabIndex = 4;
-            lblSavesSlotsHeader.Text = "Slots";
+            lblSavesSlotsHeader.Text = "存档位";
             // 
             // btnSavesOpenFolder
             // 
@@ -1233,7 +1233,7 @@ namespace PS4PKGTool
             btnSavesOpenFolder.Name = "btnSavesOpenFolder";
             btnSavesOpenFolder.Size = new System.Drawing.Size(121, 26);
             btnSavesOpenFolder.TabIndex = 3;
-            btnSavesOpenFolder.Text = "Open Save Folder";
+            btnSavesOpenFolder.Text = "打开存档文件夹";
             btnSavesOpenFolder.Click += btnSavesOpenFolder_Click;
             // 
             // btnSavesBackup
@@ -1242,7 +1242,7 @@ namespace PS4PKGTool
             btnSavesBackup.Name = "btnSavesBackup";
             btnSavesBackup.Size = new System.Drawing.Size(121, 26);
             btnSavesBackup.TabIndex = 2;
-            btnSavesBackup.Text = "Create Backup";
+            btnSavesBackup.Text = "创建备份";
             btnSavesBackup.Click += btnSavesBackup_Click;
             // 
             // lstManagerSaves
@@ -1263,7 +1263,7 @@ namespace PS4PKGTool
             lblSavesHeader.Name = "lblSavesHeader";
             lblSavesHeader.Size = new System.Drawing.Size(110, 16);
             lblSavesHeader.TabIndex = 0;
-            lblSavesHeader.Text = "Saves";
+            lblSavesHeader.Text = "存档";
             // 
             // tabManagerPatches
             // 
@@ -1282,7 +1282,7 @@ namespace PS4PKGTool
             tabManagerPatches.Padding = new System.Windows.Forms.Padding(12);
             tabManagerPatches.Size = new System.Drawing.Size(765, 816);
             tabManagerPatches.TabIndex = 4;
-            tabManagerPatches.Text = "Patches & Cheats";
+            tabManagerPatches.Text = "补丁与作弊码";
             tabManagerPatches.Visible = false;
             // 
             // grpPatchesDefinitions
@@ -1293,7 +1293,7 @@ namespace PS4PKGTool
             grpPatchesDefinitions.Margin = new System.Windows.Forms.Padding(6);
             grpPatchesDefinitions.Name = "grpPatchesDefinitions";
             grpPatchesDefinitions.Padding = new System.Windows.Forms.Padding(12);
-            grpPatchesDefinitions.SectionHeader = "Local definitions";
+            grpPatchesDefinitions.SectionHeader = "本地定义";
             grpPatchesDefinitions.Size = new System.Drawing.Size(739, 610);
             grpPatchesDefinitions.TabIndex = 6;
             // 
@@ -1319,7 +1319,7 @@ namespace PS4PKGTool
             tabCheatsDefinitions.Padding = new System.Windows.Forms.Padding(3);
             tabCheatsDefinitions.Size = new System.Drawing.Size(705, 524);
             tabCheatsDefinitions.TabIndex = 0;
-            tabCheatsDefinitions.Text = "Cheats";
+            tabCheatsDefinitions.Text = "作弊码";
             // 
             // dgvPatchesCheats
             // 
@@ -1338,31 +1338,31 @@ namespace PS4PKGTool
             // colCheatName
             // 
             colCheatName.FillWeight = 180F;
-            colCheatName.HeaderText = "Name";
+            colCheatName.HeaderText = "名称";
             colCheatName.Name = "colCheatName";
             colCheatName.ReadOnly = true;
             // 
             // colCheatVersion
             // 
-            colCheatVersion.HeaderText = "Version";
+            colCheatVersion.HeaderText = "版本";
             colCheatVersion.Name = "colCheatVersion";
             colCheatVersion.ReadOnly = true;
             // 
             // colCheatAuthor
             // 
-            colCheatAuthor.HeaderText = "Author";
+            colCheatAuthor.HeaderText = "作者";
             colCheatAuthor.Name = "colCheatAuthor";
             colCheatAuthor.ReadOnly = true;
             // 
             // colCheatOperations
             // 
-            colCheatOperations.HeaderText = "Operations";
+            colCheatOperations.HeaderText = "操作";
             colCheatOperations.Name = "colCheatOperations";
             colCheatOperations.ReadOnly = true;
             // 
             // colCheatStatus
             // 
-            colCheatStatus.HeaderText = "Status";
+            colCheatStatus.HeaderText = "状态";
             colCheatStatus.Name = "colCheatStatus";
             colCheatStatus.ReadOnly = true;
             // 
@@ -1374,7 +1374,7 @@ namespace PS4PKGTool
             tabPatchDefinitions.Padding = new System.Windows.Forms.Padding(3);
             tabPatchDefinitions.Size = new System.Drawing.Size(704, 524);
             tabPatchDefinitions.TabIndex = 1;
-            tabPatchDefinitions.Text = "Patches";
+            tabPatchDefinitions.Text = "补丁";
             // 
             // dgvPatches
             // 
@@ -1394,25 +1394,25 @@ namespace PS4PKGTool
             // colPatchEnabled
             // 
             colPatchEnabled.FillWeight = 55F;
-            colPatchEnabled.HeaderText = "Enabled";
+            colPatchEnabled.HeaderText = "启用";
             colPatchEnabled.Name = "colPatchEnabled";
             // 
             // colPatchName
             // 
             colPatchName.FillWeight = 180F;
-            colPatchName.HeaderText = "Name";
+            colPatchName.HeaderText = "名称";
             colPatchName.Name = "colPatchName";
             colPatchName.ReadOnly = true;
             // 
             // colPatchVersion
             // 
-            colPatchVersion.HeaderText = "App version";
+            colPatchVersion.HeaderText = "应用版本";
             colPatchVersion.Name = "colPatchVersion";
             colPatchVersion.ReadOnly = true;
             // 
             // colPatchAuthor
             // 
-            colPatchAuthor.HeaderText = "Author";
+            colPatchAuthor.HeaderText = "作者";
             colPatchAuthor.Name = "colPatchAuthor";
             colPatchAuthor.ReadOnly = true;
             // 
@@ -1424,13 +1424,13 @@ namespace PS4PKGTool
             // 
             // colPatchOperations
             // 
-            colPatchOperations.HeaderText = "Operations";
+            colPatchOperations.HeaderText = "操作";
             colPatchOperations.Name = "colPatchOperations";
             colPatchOperations.ReadOnly = true;
             // 
             // colPatchStatus
             // 
-            colPatchStatus.HeaderText = "Status";
+            colPatchStatus.HeaderText = "状态";
             colPatchStatus.Name = "colPatchStatus";
             colPatchStatus.ReadOnly = true;
             // 
@@ -1440,7 +1440,7 @@ namespace PS4PKGTool
             btnPatchesDownload.Name = "btnPatchesDownload";
             btnPatchesDownload.Size = new System.Drawing.Size(142, 26);
             btnPatchesDownload.TabIndex = 2;
-            btnPatchesDownload.Text = "Download / Update";
+            btnPatchesDownload.Text = "下载 / 更新";
             btnPatchesDownload.Click += btnPatchesDownload_Click;
             // 
             // btnPatchesApply
@@ -1449,7 +1449,7 @@ namespace PS4PKGTool
             btnPatchesApply.Name = "btnPatchesApply";
             btnPatchesApply.Size = new System.Drawing.Size(80, 26);
             btnPatchesApply.TabIndex = 5;
-            btnPatchesApply.Text = "Apply";
+            btnPatchesApply.Text = "应用";
             btnPatchesApply.Click += btnPatchesApply_Click;
             // 
             // btnPatchesRevert
@@ -1458,7 +1458,7 @@ namespace PS4PKGTool
             btnPatchesRevert.Name = "btnPatchesRevert";
             btnPatchesRevert.Size = new System.Drawing.Size(80, 26);
             btnPatchesRevert.TabIndex = 6;
-            btnPatchesRevert.Text = "Revert";
+            btnPatchesRevert.Text = "还原";
             btnPatchesRevert.Click += btnPatchesRevert_Click;
             // 
             // btnPatchesOpenData
@@ -1467,7 +1467,7 @@ namespace PS4PKGTool
             btnPatchesOpenData.Name = "btnPatchesOpenData";
             btnPatchesOpenData.Size = new System.Drawing.Size(128, 26);
             btnPatchesOpenData.TabIndex = 3;
-            btnPatchesOpenData.Text = "Open Data Folder";
+            btnPatchesOpenData.Text = "打开数据文件夹";
             btnPatchesOpenData.Click += btnPatchesOpenData_Click;
             // 
             // btnPatchesOpenQtLauncher
@@ -1476,7 +1476,7 @@ namespace PS4PKGTool
             btnPatchesOpenQtLauncher.Name = "btnPatchesOpenQtLauncher";
             btnPatchesOpenQtLauncher.Size = new System.Drawing.Size(128, 26);
             btnPatchesOpenQtLauncher.TabIndex = 4;
-            btnPatchesOpenQtLauncher.Text = "Open QtLauncher";
+            btnPatchesOpenQtLauncher.Text = "打开 QtLauncher";
             btnPatchesOpenQtLauncher.Click += btnPatchesOpenQtLauncher_Click;
             // 
             // lblPatchesHint
@@ -1487,7 +1487,7 @@ namespace PS4PKGTool
             lblPatchesHint.Name = "lblPatchesHint";
             lblPatchesHint.Size = new System.Drawing.Size(700, 16);
             lblPatchesHint.TabIndex = 1;
-            lblPatchesHint.Text = "Source: official shadPS4. Definitions are read only here. Enable state is managed by QtLauncher.";
+            lblPatchesHint.Text = "来源：官方 shadPS4。此处仅只读显示定义，启用状态由 QtLauncher 管理。";
             // 
             // lblPatchesGame
             // 
@@ -1495,7 +1495,7 @@ namespace PS4PKGTool
             lblPatchesGame.Name = "lblPatchesGame";
             lblPatchesGame.Size = new System.Drawing.Size(48, 20);
             lblPatchesGame.TabIndex = 0;
-            lblPatchesGame.Text = "Game:";
+            lblPatchesGame.Text = "游戏：";
             // 
             // cmbPatchesGame
             // 
@@ -1516,7 +1516,7 @@ namespace PS4PKGTool
             tabManagerSettings.Padding = new System.Windows.Forms.Padding(12);
             tabManagerSettings.Size = new System.Drawing.Size(765, 816);
             tabManagerSettings.TabIndex = 5;
-            tabManagerSettings.Text = "Settings";
+            tabManagerSettings.Text = "设置";
             // 
             // grpSettingsDetection
             // 
@@ -1536,7 +1536,7 @@ namespace PS4PKGTool
             btncopyDetectioninfo.Name = "btncopyDetectioninfo";
             btncopyDetectioninfo.Size = new System.Drawing.Size(145, 26);
             btncopyDetectioninfo.TabIndex = 2;
-            btncopyDetectioninfo.Text = "Copy";
+            btncopyDetectioninfo.Text = "复制";
             btncopyDetectioninfo.Click += btncopyDetectioninfo_Click;
             // 
             // lblSettingsDetect
@@ -1547,7 +1547,7 @@ namespace PS4PKGTool
             lblSettingsDetect.Name = "lblSettingsDetect";
             lblSettingsDetect.Size = new System.Drawing.Size(690, 207);
             lblSettingsDetect.TabIndex = 0;
-            lblSettingsDetect.Text = "Detection: not configured";
+            lblSettingsDetect.Text = "检测：未配置";
             // 
             // grpSettingsUpdate
             // 
@@ -1566,7 +1566,7 @@ namespace PS4PKGTool
             btnSettingsCheckUpdates.Name = "btnSettingsCheckUpdates";
             btnSettingsCheckUpdates.Size = new System.Drawing.Size(160, 26);
             btnSettingsCheckUpdates.TabIndex = 0;
-            btnSettingsCheckUpdates.Text = "Check for Updates";
+            btnSettingsCheckUpdates.Text = "检查更新";
             btnSettingsCheckUpdates.Click += btnSettingsCheckUpdates_Click;
             // 
             // grpSettingsPaths
@@ -1596,7 +1596,7 @@ namespace PS4PKGTool
             btnSettingsConfigFolder.Name = "btnSettingsConfigFolder";
             btnSettingsConfigFolder.Size = new System.Drawing.Size(160, 26);
             btnSettingsConfigFolder.TabIndex = 10;
-            btnSettingsConfigFolder.Text = "Open Config Folder";
+            btnSettingsConfigFolder.Text = "打开配置文件夹";
             btnSettingsConfigFolder.Click += btnSettingsConfigFolder_Click;
             // 
             // btnSettingsInstallDirBrowse
@@ -1605,7 +1605,7 @@ namespace PS4PKGTool
             btnSettingsInstallDirBrowse.Name = "btnSettingsInstallDirBrowse";
             btnSettingsInstallDirBrowse.Size = new System.Drawing.Size(90, 26);
             btnSettingsInstallDirBrowse.TabIndex = 9;
-            btnSettingsInstallDirBrowse.Text = "Browse...";
+            btnSettingsInstallDirBrowse.Text = "浏览……";
             btnSettingsInstallDirBrowse.Click += btnSettingsInstallDirBrowse_Click;
             // 
             // tbSettingsInstallDir
@@ -1622,7 +1622,7 @@ namespace PS4PKGTool
             darkLabelSettingsInstallDir.Name = "darkLabelSettingsInstallDir";
             darkLabelSettingsInstallDir.Size = new System.Drawing.Size(130, 15);
             darkLabelSettingsInstallDir.TabIndex = 7;
-            darkLabelSettingsInstallDir.Text = "Install directory:";
+            darkLabelSettingsInstallDir.Text = "安装目录：";
             // 
             // btnSettingsLauncherOpen
             // 
@@ -1630,7 +1630,7 @@ namespace PS4PKGTool
             btnSettingsLauncherOpen.Name = "btnSettingsLauncherOpen";
             btnSettingsLauncherOpen.Size = new System.Drawing.Size(90, 26);
             btnSettingsLauncherOpen.TabIndex = 6;
-            btnSettingsLauncherOpen.Text = "Open";
+            btnSettingsLauncherOpen.Text = "打开";
             btnSettingsLauncherOpen.Click += btnSettingsLauncherOpen_Click;
             // 
             // btnSettingsLauncherBrowse
@@ -1639,7 +1639,7 @@ namespace PS4PKGTool
             btnSettingsLauncherBrowse.Name = "btnSettingsLauncherBrowse";
             btnSettingsLauncherBrowse.Size = new System.Drawing.Size(90, 26);
             btnSettingsLauncherBrowse.TabIndex = 5;
-            btnSettingsLauncherBrowse.Text = "Browse...";
+            btnSettingsLauncherBrowse.Text = "浏览……";
             btnSettingsLauncherBrowse.Click += btnSettingsLauncherBrowse_Click;
             // 
             // tbSettingsLauncher
@@ -1656,7 +1656,7 @@ namespace PS4PKGTool
             darkLabelSettingsLauncher.Name = "darkLabelSettingsLauncher";
             darkLabelSettingsLauncher.Size = new System.Drawing.Size(130, 15);
             darkLabelSettingsLauncher.TabIndex = 3;
-            darkLabelSettingsLauncher.Text = "QtLauncher:";
+            darkLabelSettingsLauncher.Text = "QtLauncher：";
             // 
             // btnSettingsCoreBrowse
             // 
@@ -1664,7 +1664,7 @@ namespace PS4PKGTool
             btnSettingsCoreBrowse.Name = "btnSettingsCoreBrowse";
             btnSettingsCoreBrowse.Size = new System.Drawing.Size(90, 26);
             btnSettingsCoreBrowse.TabIndex = 2;
-            btnSettingsCoreBrowse.Text = "Browse...";
+            btnSettingsCoreBrowse.Text = "浏览……";
             btnSettingsCoreBrowse.Click += btnSettingsCoreBrowse_Click;
             // 
             // tbSettingsCore
@@ -1681,26 +1681,26 @@ namespace PS4PKGTool
             darkLabelSettingsCore.Name = "darkLabelSettingsCore";
             darkLabelSettingsCore.Size = new System.Drawing.Size(130, 15);
             darkLabelSettingsCore.TabIndex = 0;
-            darkLabelSettingsCore.Text = "Active shadPS4 Core:";
+            darkLabelSettingsCore.Text = "当前 shadPS4 核心：";
             // 
             // colGameTitle
             // 
-            colGameTitle.Text = "Title";
+            colGameTitle.Text = "标题";
             colGameTitle.Width = 111;
             // 
             // colGameTitleId
             // 
-            colGameTitleId.Text = "Title ID";
+            colGameTitleId.Text = "标题 ID";
             colGameTitleId.Width = 111;
             // 
             // colGameVersion
             // 
-            colGameVersion.Text = "Version";
+            colGameVersion.Text = "版本";
             colGameVersion.Width = 111;
             // 
             // colGameLastTest
             // 
-            colGameLastTest.Text = "Last Test";
+            colGameLastTest.Text = "上次测试";
             colGameLastTest.Width = 111;
             // 
             // ctxGameMore
@@ -1715,7 +1715,7 @@ namespace PS4PKGTool
             miGameAddReport.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miGameAddReport.Name = "miGameAddReport";
             miGameAddReport.Size = new System.Drawing.Size(202, 22);
-            miGameAddReport.Text = "Add Test Result";
+            miGameAddReport.Text = "添加测试结果";
             miGameAddReport.Click += miGameAddReport_Click;
             // 
             // miGameCopyInfo
@@ -1723,7 +1723,7 @@ namespace PS4PKGTool
             miGameCopyInfo.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miGameCopyInfo.Name = "miGameCopyInfo";
             miGameCopyInfo.Size = new System.Drawing.Size(202, 22);
-            miGameCopyInfo.Text = "Copy Game Information";
+            miGameCopyInfo.Text = "复制游戏信息";
             miGameCopyInfo.Click += miGameCopyInfo_Click;
             // 
             // miGameUninstall
@@ -1731,7 +1731,7 @@ namespace PS4PKGTool
             miGameUninstall.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miGameUninstall.Name = "miGameUninstall";
             miGameUninstall.Size = new System.Drawing.Size(202, 22);
-            miGameUninstall.Text = "Uninstall Game...";
+            miGameUninstall.Text = "卸载游戏……";
             miGameUninstall.Click += miGameUninstall_Click;
             // 
             // ctxMaintenance
@@ -1746,7 +1746,7 @@ namespace PS4PKGTool
             miMaintenanceReset.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miMaintenanceReset.Name = "miMaintenanceReset";
             miMaintenanceReset.Size = new System.Drawing.Size(227, 22);
-            miMaintenanceReset.Text = "Reset Managed Setup...";
+            miMaintenanceReset.Text = "重置托管配置……";
             miMaintenanceReset.Click += miMaintenanceReset_Click;
             // 
             // miMaintenanceRemoveAll
@@ -1754,7 +1754,7 @@ namespace PS4PKGTool
             miMaintenanceRemoveAll.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miMaintenanceRemoveAll.Name = "miMaintenanceRemoveAll";
             miMaintenanceRemoveAll.Size = new System.Drawing.Size(227, 22);
-            miMaintenanceRemoveAll.Text = "Remove All shadPS4 Data...";
+            miMaintenanceRemoveAll.Text = "移除所有 shadPS4 数据……";
             miMaintenanceRemoveAll.Click += miMaintenanceRemoveAll_Click;
             // 
             // miMaintenanceOpenFolder
@@ -1762,7 +1762,7 @@ namespace PS4PKGTool
             miMaintenanceOpenFolder.ForeColor = System.Drawing.Color.FromArgb(220, 220, 220);
             miMaintenanceOpenFolder.Name = "miMaintenanceOpenFolder";
             miMaintenanceOpenFolder.Size = new System.Drawing.Size(227, 22);
-            miMaintenanceOpenFolder.Text = "Open Managed Builds Folder";
+            miMaintenanceOpenFolder.Text = "打开托管版本文件夹";
             miMaintenanceOpenFolder.Click += miMaintenanceOpenFolder_Click;
             // 
             // Shadps4Manager

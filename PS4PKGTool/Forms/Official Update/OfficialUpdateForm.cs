@@ -37,7 +37,7 @@ namespace PS4PKGTool
         {
             if (_downloadWorker?.IsBusy == true)
             {
-                lblStatus.Text = "Finish or stop the current download before loading another game.";
+                lblStatus.Text = "请先完成或停止当前下载，再加载其他游戏。";
                 return;
             }
             _ = Handle;
@@ -47,12 +47,12 @@ namespace PS4PKGTool
 
             if (pkgType != "Game" && pkgType != "Patch")
             {
-                lblSummary.Text = "Updates are only available for Game and Patch PKGs.";
+                lblSummary.Text = "只有 Game 和 Patch 类型的 PKG 才能查询更新。";
                 dgvParts.DataSource = null;
                 return;
             }
 
-            lblSummary.Text = $"Loading updates for {titleId}...";
+            lblSummary.Text = $"正在加载 {titleId} 的更新……";
             dgvParts.DataSource = null;
             btnDownloadSelected.Enabled = false;
             btnDownloadAll.Enabled = false;
@@ -66,8 +66,8 @@ namespace PS4PKGTool
                     if (updateInfo?.Tag?.Package?.ManifestItem?.Pieces != null)
                     {
                         var dt = new DataTable();
-                        dt.Columns.Add("Part");
-                        dt.Columns.Add("File Size");
+                        dt.Columns.Add("分卷");
+                        dt.Columns.Add("文件大小");
                         dt.Columns.Add("SHA256");
                         dt.Columns.Add("URL");
                         dt.Columns.Add("RawSize", typeof(long));
@@ -99,7 +99,7 @@ namespace PS4PKGTool
 
                         ApplyLookupResult(lookupGeneration, () =>
                         {
-                            lblSummary.Text = $"Version: {version}  |  System: {sysVer}  |  Type: {type}  |  Mandatory: {mandatory}  |  Remaster: {remaster}  |  Files: {fileCount}  |  Size: {sizeStr}";
+                            lblSummary.Text = $"版本：{version}  |  系统：{sysVer}  |  类型：{type}  |  强制：{mandatory}  |  重制版：{remaster}  |  文件数：{fileCount}  |  大小：{sizeStr}";
                             dgvParts.DataSource = dt;
                             if (dgvParts.Columns.Count > 4)
                                 dgvParts.Columns[4].Visible = false;
@@ -111,7 +111,7 @@ namespace PS4PKGTool
                     {
                         ApplyLookupResult(lookupGeneration, () =>
                         {
-                            lblSummary.Text = $"No updates available for {titleId}.";
+                            lblSummary.Text = $"没有 {titleId} 可用的更新。";
                             dgvParts.DataSource = null;
                             btnDownloadSelected.Enabled = false;
                             btnDownloadAll.Enabled = false;
@@ -122,7 +122,7 @@ namespace PS4PKGTool
                 {
                     ApplyLookupResult(lookupGeneration, () =>
                     {
-                        lblSummary.Text = $"Failed to check updates: {ex.Message}";
+                        lblSummary.Text = $"检查更新失败：{ex.Message}";
                         btnDownloadSelected.Enabled = false;
                         btnDownloadAll.Enabled = false;
                     });
@@ -149,9 +149,9 @@ namespace PS4PKGTool
                 }
             }
 
-            if (downloads.Count == 0) { lblStatus.Text = "No URLs to download."; return; }
-            if (string.IsNullOrEmpty(downloadDir)) { lblStatus.Text = "No download directory configured."; return; }
-            try { Directory.CreateDirectory(downloadDir); } catch (Exception ex) { lblStatus.Text = "Failed to create download directory: " + ex.Message; return; }
+            if (downloads.Count == 0) { lblStatus.Text = "没有可下载的 URL。"; return; }
+            if (string.IsNullOrEmpty(downloadDir)) { lblStatus.Text = "未配置下载目录。"; return; }
+            try { Directory.CreateDirectory(downloadDir); } catch (Exception ex) { lblStatus.Text = "创建下载目录失败：" + ex.Message; return; }
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13 | SecurityProtocolType.Tls11;
 
@@ -169,7 +169,7 @@ namespace PS4PKGTool
             {
                 int total = downloads.Count;
                 int done = 0, failed = 0;
-                _logCallback?.Invoke($"Download official update: {total} part(s) for {titleId}");
+                _logCallback?.Invoke($"下载官方更新：{titleId} 共 {total} 个分卷");
 
                 for (int i = 0; i < total; i++)
                 {
@@ -179,7 +179,7 @@ namespace PS4PKGTool
                     string outPath = Path.Combine(downloadDir, filename);
                     string partialPath = outPath + "." + Guid.NewGuid().ToString("N") + ".part";
 
-                    bg.ReportProgress((done + failed) * 10000 / total, $"Downloading {i + 1}/{total}...");
+                    bg.ReportProgress((done + failed) * 10000 / total, $"正在下载 {i + 1}/{total}……");
 
                     try
                     {
@@ -219,7 +219,7 @@ namespace PS4PKGTool
                                         lastPct = pct;
                                         bg.ReportProgress(
                                             (int)Math.Min((done + failed) * 10000 / total + pct * 100 / total, 10000),
-                                            $"Downloading {i + 1}/{total} ({pct}%)..."
+                                            $"正在下载 {i + 1}/{total}（{pct}%）……"
                                         );
                                     }
                                 }
@@ -235,7 +235,7 @@ namespace PS4PKGTool
                                 partialPath, bytesWritten, expectedSize, expectedSha256);
                             File.Move(partialPath, outPath, true);
                             done++;
-                            _logCallback?.Invoke($"Download part {i + 1}/{total}: {filename}");
+                            _logCallback?.Invoke($"下载分卷 {i + 1}/{total}：{filename}");
                             bg.ReportProgress(Math.Min((done + failed) * 10000 / total, 10000));
                         }
                     }
@@ -252,7 +252,7 @@ namespace PS4PKGTool
                             break;
                         }
                         failed++;
-                        _logCallback?.Invoke($"Download failed for {filename}: {ex.Message}");
+                        _logCallback?.Invoke($"下载 {filename} 失败：{ex.Message}");
                         TryDeletePartial(partialPath);
                     }
                     finally
@@ -264,18 +264,18 @@ namespace PS4PKGTool
                 string finalText;
                 if (bg.CancellationPending)
                 {
-                    finalText = "Download stopped.";
-                    _logCallback?.Invoke($"Download official update for {titleId}: stopped by user.");
+                    finalText = "下载已停止。";
+                    _logCallback?.Invoke($"下载 {titleId} 的官方更新：已被用户停止。");
                 }
                 else if (failed > 0)
                 {
-                    finalText = $"Downloaded {done} file(s). {failed} failed.";
-                    _logCallback?.Invoke($"Download official update for {titleId}: {done} OK, {failed} failed.");
+                    finalText = $"已下载 {done} 个文件，{failed} 个失败。";
+                    _logCallback?.Invoke($"下载 {titleId} 的官方更新：{done} 个成功，{failed} 个失败。");
                 }
                 else
                 {
-                    finalText = $"Downloaded {done} file(s).";
-                    _logCallback?.Invoke($"Download official update for {titleId}: {done} part(s) downloaded.");
+                    finalText = $"已下载 {done} 个文件。";
+                    _logCallback?.Invoke($"下载 {titleId} 的官方更新：已下载 {done} 个分卷。");
                 }
 
                 bg.ReportProgress(10000, finalText);
@@ -323,14 +323,14 @@ namespace PS4PKGTool
         private static void TryDeletePartial(string path)
         {
             try { if (File.Exists(path)) File.Delete(path); }
-            catch (Exception ex) { Logger.LogWarning("Failed to delete partial download: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("删除未完成的下载文件失败：" + ex.Message); }
         }
 
         private void btnDownloadSelected_Click(object sender, EventArgs e)
         {
             if (dgvParts.SelectedRows.Count == 0)
             {
-                lblStatus.Text = "No rows selected.";
+                lblStatus.Text = "未选中任何行。";
                 return;
             }
             DownloadParts(dgvParts.SelectedRows.Cast<DataGridViewRow>());
@@ -357,7 +357,7 @@ namespace PS4PKGTool
             if (urls.Count > 0)
             {
                 Clipboard.SetText(string.Join("\n", urls));
-                lblStatus.Text = $"{urls.Count} URL(s) copied.";
+                lblStatus.Text = $"已复制 {urls.Count} 个 URL。";
             }
         }
 
@@ -403,7 +403,7 @@ namespace PS4PKGTool
             var bg = _downloadWorker;
             if (bg == null || !bg.IsBusy) return;
 
-            var result = MessageBoxHelper.DialogResultYesNo("A download is in progress. Stop and close?");
+            var result = MessageBoxHelper.DialogResultYesNo("正在下载中。要停止并关闭吗？");
 
             if (result != DialogResult.Yes)
             {

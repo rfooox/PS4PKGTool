@@ -75,7 +75,7 @@ namespace PS4PKGTool.Utilities.Shadps4
     /// - Caches parsed releases in a JSON file (TTL, default 1 hour) so the
     ///   wizard/update checks do not hammer the rate-limited API.
     /// - A GitHub refusal (403/429, incl. secondary rate limits) is surfaced
-    ///   generically: "GitHub temporarily refused the request. Try again later."
+    ///   generically: "GitHub 暂时拒绝了请求，请稍后重试。"
     /// - Asset hashes come from GitHub's own `digest` field when present.
     /// </summary>
     public sealed class Shadps4ReleaseFeed : IShadps4FeedClient
@@ -119,7 +119,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             catch (OperationCanceledException) { throw; }
             catch (Exception ex)
             {
-                return new Shadps4FeedResult(null, $"Could not reach GitHub: {ex.Message}");
+                return new Shadps4FeedResult(null, $"无法连接 GitHub：{ex.Message}");
             }
 
             using (response)
@@ -128,12 +128,12 @@ namespace PS4PKGTool.Utilities.Shadps4
                     || response.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
                 {
                     return new Shadps4FeedResult(null,
-                        "GitHub temporarily refused the request. Try again later.");
+                        "GitHub 暂时拒绝了请求，请稍后重试。");
                 }
                 if (!response.IsSuccessStatusCode)
                 {
                     return new Shadps4FeedResult(null,
-                        $"GitHub returned {(int)response.StatusCode} for {repository}.");
+                        $"GitHub 对 {repository} 返回 {(int)response.StatusCode}。");
                 }
 
                 string json;
@@ -143,7 +143,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 }
                 catch (Exception ex)
                 {
-                    return new Shadps4FeedResult(null, $"Could not read the GitHub response: {ex.Message}");
+                    return new Shadps4FeedResult(null, $"无法读取 GitHub 响应：{ex.Message}");
                 }
 
                 var releases = ParseReleases(json, feed, repository, _clock.UtcNow);

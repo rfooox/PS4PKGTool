@@ -64,7 +64,7 @@
             lblWizardIntro.Name = "lblWizardIntro";
             lblWizardIntro.Size = new System.Drawing.Size(572, 120);
             lblWizardIntro.TabIndex = 0;
-            lblWizardIntro.Text = "shadPS4 is not configured.";
+            lblWizardIntro.Text = "shadPS4 尚未配置。";
             //
             // btnWizardRecommended
             //
@@ -72,7 +72,7 @@
             btnWizardRecommended.Name = "btnWizardRecommended";
             btnWizardRecommended.Size = new System.Drawing.Size(240, 34);
             btnWizardRecommended.TabIndex = 1;
-            btnWizardRecommended.Text = "Install Recommended shadPS4 Setup";
+            btnWizardRecommended.Text = "安装推荐的 shadPS4 配置";
             btnWizardRecommended.Click += btnWizardRecommended_Click;
             //
             // btnWizardChooseVersion
@@ -81,7 +81,7 @@
             btnWizardChooseVersion.Name = "btnWizardChooseVersion";
             btnWizardChooseVersion.Size = new System.Drawing.Size(240, 34);
             btnWizardChooseVersion.TabIndex = 2;
-            btnWizardChooseVersion.Text = "Choose Core Version...";
+            btnWizardChooseVersion.Text = "选择核心版本……";
             btnWizardChooseVersion.Click += btnWizardChooseVersion_Click;
             //
             // btnWizardUseExisting
@@ -90,7 +90,7 @@
             btnWizardUseExisting.Name = "btnWizardUseExisting";
             btnWizardUseExisting.Size = new System.Drawing.Size(240, 34);
             btnWizardUseExisting.TabIndex = 3;
-            btnWizardUseExisting.Text = "Use Existing Installation";
+            btnWizardUseExisting.Text = "使用现有安装";
             btnWizardUseExisting.Click += btnWizardUseExisting_Click;
             //
             // btnWizardCancel1
@@ -99,7 +99,7 @@
             btnWizardCancel1.Name = "btnWizardCancel1";
             btnWizardCancel1.Size = new System.Drawing.Size(90, 28);
             btnWizardCancel1.TabIndex = 4;
-            btnWizardCancel1.Text = "Cancel";
+            btnWizardCancel1.Text = "取消";
             btnWizardCancel1.Click += btnWizardCancel1_Click;
             //
             // panelStep2
@@ -129,7 +129,7 @@
             lblManagedRoot.Name = "lblManagedRoot";
             lblManagedRoot.Size = new System.Drawing.Size(572, 40);
             lblManagedRoot.TabIndex = 0;
-            lblManagedRoot.Text = "Managed builds folder (chosen once, all versions install under it):";
+            lblManagedRoot.Text = "托管版本文件夹（只需选择一次，所有版本都安装在其下）：";
             //
             // tbManagedRoot
             //
@@ -145,7 +145,7 @@
             btnBrowseRoot.Name = "btnBrowseRoot";
             btnBrowseRoot.Size = new System.Drawing.Size(90, 26);
             btnBrowseRoot.TabIndex = 2;
-            btnBrowseRoot.Text = "Browse...";
+            btnBrowseRoot.Text = "浏览……";
             btnBrowseRoot.Click += btnBrowseRoot_Click;
             //
             // lblInstallDir
@@ -156,7 +156,7 @@
             lblInstallDir.Name = "lblInstallDir";
             lblInstallDir.Size = new System.Drawing.Size(572, 16);
             lblInstallDir.TabIndex = 7;
-            lblInstallDir.Text = "Install directory (games installed by PS4 PKG Tool):";
+            lblInstallDir.Text = "安装目录（PS4 PKG Tool 安装的游戏）：";
             //
             // tbInstallDir
             //
@@ -172,7 +172,7 @@
             btnBrowseInstallDir.Name = "btnBrowseInstallDir";
             btnBrowseInstallDir.Size = new System.Drawing.Size(90, 26);
             btnBrowseInstallDir.TabIndex = 9;
-            btnBrowseInstallDir.Text = "Browse...";
+            btnBrowseInstallDir.Text = "浏览……";
             btnBrowseInstallDir.Click += btnBrowseInstallDir_Click;
             //
             // chkInstallLauncher
@@ -186,7 +186,7 @@
             chkInstallLauncher.Name = "chkInstallLauncher";
             chkInstallLauncher.Size = new System.Drawing.Size(380, 19);
             chkInstallLauncher.TabIndex = 3;
-            chkInstallLauncher.Text = "Install QtLauncher for emulator settings, cheats and patches";
+            chkInstallLauncher.Text = "安装 QtLauncher 以配置模拟器设置、作弊码和补丁";
             //
             // lblLauncherHint
             //
@@ -196,7 +196,7 @@
             lblLauncherHint.Name = "lblLauncherHint";
             lblLauncherHint.Size = new System.Drawing.Size(540, 40);
             lblLauncherHint.TabIndex = 4;
-            lblLauncherHint.Text = "shadPS4 Core is required for launching games directly from PS4 PKG Tool. The QtLauncher configures graphics, controllers, audio, cheats and patches. PS4 PKG Tool never writes shadPS4's own configuration.";
+            lblLauncherHint.Text = "需要 shadPS4 核心才能直接在 PS4 PKG Tool 中启动游戏。QtLauncher 用于配置画面、手柄、音频、作弊码和补丁。PS4 PKG Tool 不会修改 shadPS4 自身的配置。";
             //
             // btnBack2
             //
@@ -204,7 +204,7 @@
             btnBack2.Name = "btnBack2";
             btnBack2.Size = new System.Drawing.Size(90, 28);
             btnBack2.TabIndex = 5;
-            btnBack2.Text = "Back";
+            btnBack2.Text = "返回";
             btnBack2.Click += btnBack2_Click;
             //
             // btnNext2
@@ -213,7 +213,7 @@
             btnNext2.Name = "btnNext2";
             btnNext2.Size = new System.Drawing.Size(90, 28);
             btnNext2.TabIndex = 6;
-            btnNext2.Text = "Install";
+            btnNext2.Text = "安装";
             btnNext2.Click += btnNext2_Click;
             //
             // panelStep3
@@ -236,7 +236,7 @@
             lblProgress.Name = "lblProgress";
             lblProgress.Size = new System.Drawing.Size(572, 40);
             lblProgress.TabIndex = 0;
-            lblProgress.Text = "Preparing download...";
+            lblProgress.Text = "正在准备下载……";
             //
             // pbInstall
             //
@@ -251,7 +251,7 @@
             btnCancelInstall.Name = "btnCancelInstall";
             btnCancelInstall.Size = new System.Drawing.Size(90, 28);
             btnCancelInstall.TabIndex = 2;
-            btnCancelInstall.Text = "Cancel";
+            btnCancelInstall.Text = "取消";
             btnCancelInstall.Click += btnCancelInstall_Click;
             //
             // panelStep4
@@ -274,7 +274,7 @@
             lblComplete.Name = "lblComplete";
             lblComplete.Size = new System.Drawing.Size(572, 300);
             lblComplete.TabIndex = 0;
-            lblComplete.Text = "shadPS4 Setup Complete";
+            lblComplete.Text = "shadPS4 配置完成";
             //
             // btnOpenLauncher4
             //
@@ -282,7 +282,7 @@
             btnOpenLauncher4.Name = "btnOpenLauncher4";
             btnOpenLauncher4.Size = new System.Drawing.Size(120, 28);
             btnOpenLauncher4.TabIndex = 1;
-            btnOpenLauncher4.Text = "Open QtLauncher";
+            btnOpenLauncher4.Text = "打开 QtLauncher";
             btnOpenLauncher4.Click += btnOpenLauncher4_Click;
             //
             // btnDone
@@ -291,7 +291,7 @@
             btnDone.Name = "btnDone";
             btnDone.Size = new System.Drawing.Size(90, 28);
             btnDone.TabIndex = 2;
-            btnDone.Text = "Done";
+            btnDone.Text = "完成";
             btnDone.Click += btnDone_Click;
             //
             // Shadps4SetupWizard
@@ -309,7 +309,7 @@
             this.MinimizeBox = false;
             this.Name = "Shadps4SetupWizard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "shadPS4 Setup";
+            this.Text = "shadPS4 配置";
             panelStep1.ResumeLayout(false);
             panelStep2.ResumeLayout(false);
             panelStep2.PerformLayout();

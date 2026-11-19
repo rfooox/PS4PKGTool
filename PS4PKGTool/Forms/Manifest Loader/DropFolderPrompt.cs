@@ -20,7 +20,7 @@ namespace PS4PKGTool
             InitializeComponent();
             FolderPaths = folderPaths;
 
-            darkLabelTitle.Text = folderPaths.Count == 1 ? "Folder Dropped" : $"{folderPaths.Count} Folders Dropped";
+            darkLabelTitle.Text = folderPaths.Count == 1 ? "已拖入文件夹" : $"已拖入 {folderPaths.Count} 个文件夹";
 
             string first = folderPaths[0];
             if (first.Length > 70)
@@ -28,7 +28,7 @@ namespace PS4PKGTool
             darkLabelPath.Text = first;
             darkLabelPath2.Text = folderPaths.Count == 1
                 ? Path.GetDirectoryName(first)
-                : $"+ {folderPaths.Count - 1} more folder{(folderPaths.Count == 2 ? "" : "s")}";
+                : $"+ 另外 {folderPaths.Count - 1} 个文件夹";
 
             chkRecursive.Checked = true;
             chkAddToDirectories.Checked = true;

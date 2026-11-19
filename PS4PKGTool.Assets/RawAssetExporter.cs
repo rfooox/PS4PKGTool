@@ -23,5 +23,5 @@ public sealed class RawAssetExporter : IAssetExporter
     }
 
     public Task ExportConvertedAsync(IAssetSource source, AssetDescriptor descriptor, string destinationPath, CancellationToken ct = default)
-        => throw new Errors.UnsupportedAssetException($"No converted export available for format '{descriptor.Format}'.");
+        => throw new Errors.UnsupportedAssetException($"格式 '{descriptor.Format}' 没有可用的转换导出。");
 }

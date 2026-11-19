@@ -39,11 +39,11 @@ namespace PS4PKGTool
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            lblWizardIntro.Text = "shadPS4 is not configured.\n\n" +
-                "PS4 PKG Tool can install shadPS4 for you - the core (shadPS4.exe) launches " +
-                "games directly from this tool, and the optional QtLauncher is where you " +
-                "configure graphics, controllers, audio, cheats and patches.\n\n" +
-                "If you already have shadPS4, choose Use Existing Installation.";
+            lblWizardIntro.Text = "shadPS4 尚未配置。\n\n" +
+                "PS4 PKG Tool 可以代你安装 shadPS4——核心（shadPS4.exe）负责启动 " +
+                "，可直接从本工具启动游戏；可选的 QtLauncher 则是你 " +
+                "配置画面、手柄、音频、作弊码和补丁。\n\n" +
+                "如果你已经装有 shadPS4，请选择「使用现有安装」。";
         }
 
         private void ShowStep(int step)
@@ -81,8 +81,8 @@ namespace PS4PKGTool
                 if (rec.Core == null)
                 {
                     var choice = AppMessageBox.Show("shadPS4 Setup",
-                        "The recommended shadPS4 core could not be determined right now.\n\n" +
-                        "Open the official download page instead?",
+                        "暂时无法确定推荐的 shadPS4 核心。\n\n" +
+                        "改为打开官方下载页面？",
                         AppMessageType.Warning, AppMessageButtons.YesNo);
                     if (choice == DialogResult.Yes) Helper.Tool.OpenWebLink("https://github.com/shadps4-emu/shadPS4/releases");
                     return;
@@ -92,7 +92,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Could not load the recommended shadPS4 setup: " + ex.Message, false);
+                MessageBoxHelper.ShowWarning("无法加载推荐的 shadPS4 配置：" + ex.Message, false);
             }
             finally
             {
@@ -115,7 +115,7 @@ namespace PS4PKGTool
 
                 if (releases.Count == 0)
                 {
-                    MessageBoxHelper.ShowWarning("No core versions could be loaded.\n\n" + (stable.Error ?? nightly.Error ?? ""), false);
+                    MessageBoxHelper.ShowWarning("无法加载任何核心版本。\n\n" + (stable.Error ?? nightly.Error ?? ""), false);
                     return;
                 }
 
@@ -127,7 +127,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Could not load core versions: " + ex.Message, false);
+                MessageBoxHelper.ShowWarning("无法加载核心版本：" + ex.Message, false);
             }
             finally
             {
@@ -164,7 +164,7 @@ namespace PS4PKGTool
             string previous = tbManagedRoot.Text.Trim();
             using var fbd = new FolderBrowserDialog
             {
-                Description = "Choose the managed shadPS4 builds folder",
+                Description = "选择 shadPS4 托管版本目录",
                 ShowNewFolderButton = true,
             };
             if (Directory.Exists(previous)) fbd.SelectedPath = previous;
@@ -187,7 +187,7 @@ namespace PS4PKGTool
         {
             using var fbd = new FolderBrowserDialog
             {
-                Description = "Choose where PS4 PKG Tool installs games for shadPS4",
+                Description = "选择 PS4 PKG Tool 为 shadPS4 安装游戏的位置",
                 ShowNewFolderButton = true,
             };
             if (Directory.Exists(tbInstallDir.Text.Trim())) fbd.SelectedPath = tbInstallDir.Text.Trim();
@@ -205,7 +205,7 @@ namespace PS4PKGTool
             string root = tbManagedRoot.Text.Trim();
             if (string.IsNullOrWhiteSpace(root))
             {
-                MessageBoxHelper.ShowWarning("Choose a managed builds folder first.", false);
+                MessageBoxHelper.ShowWarning("请先选择托管版本目录。", false);
                 return;
             }
             try
@@ -214,7 +214,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("The folder is not usable: " + ex.Message, false);
+                MessageBoxHelper.ShowWarning("该目录不可用：" + ex.Message, false);
                 return;
             }
 
@@ -227,11 +227,11 @@ namespace PS4PKGTool
                 _installDirApplied = true;
                 string installDir = tbInstallDir.Text.Trim();
                 _settings.Shadps4InstallDirectory = installDir;
-                Logger.LogInformation($"Shadps4Wizard: install dir chosen = '{installDir}'");
+                Logger.LogInformation($"Shadps4Wizard：已选择安装目录 '{installDir}'");
                 if (!string.IsNullOrWhiteSpace(installDir))
                 {
                     try { Directory.CreateDirectory(installDir); }
-                    catch (Exception ex) { Logger.LogWarning("Wizard: install dir could not be created: " + ex.Message); }
+                    catch (Exception ex) { Logger.LogWarning("向导：无法创建安装目录：" + ex.Message); }
                 }
                 SettingsManager.SaveSettings(_settings, SettingsManager.SettingFilePath);
                 _store = new Shadps4ManagedBuilds(root);
@@ -244,8 +244,8 @@ namespace PS4PKGTool
             {
                 // RunInstallAsync handles its own failures; this guards the
                 // settings/save path so a bad disk state can never crash the app.
-                Logger.LogError("shadPS4 wizard could not start the install", ex);
-                MessageBoxHelper.ShowWarning("The setup could not continue: " + ex.Message, false);
+                Logger.LogError("shadPS4 向导无法启动安装", ex);
+                MessageBoxHelper.ShowWarning("配置无法继续：" + ex.Message, false);
                 btnNext2.Enabled = true;
                 ShowStep(2);
             }
@@ -259,7 +259,7 @@ namespace PS4PKGTool
             _installCts = new CancellationTokenSource();
             pbInstall.Style = ProgressBarStyle.Marquee;
             pbInstall.Visible = true;
-            lblProgress.Text = "Preparing...";
+            lblProgress.Text = "正在准备……";
 
             try
             {
@@ -303,7 +303,7 @@ namespace PS4PKGTool
                     {
                         lblProgress.Text = launcherResult.Message;
                         MessageBoxHelper.ShowWarning(
-                            "The core installed, but the QtLauncher failed:\n\n" + launcherResult.Message, false);
+                            "核心已安装，但 QtLauncher 启动失败：\n\n" + launcherResult.Message, false);
                     }
                     else
                     {
@@ -330,7 +330,7 @@ namespace PS4PKGTool
                 {
                     string defaultInstallDir = Path.Combine(_settings.Shadps4ManagedRoot, "Data");
                     try { Directory.CreateDirectory(defaultInstallDir); }
-                    catch (Exception ex) { Logger.LogWarning("Wizard: default install dir could not be created: " + ex.Message); }
+                    catch (Exception ex) { Logger.LogWarning("向导：无法创建默认安装目录：" + ex.Message); }
                     _settings.Shadps4InstallDirectory = defaultInstallDir;
                 }
                 SettingsManager.SaveSettings(_settings, SettingsManager.SettingFilePath);
@@ -345,7 +345,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Installation failed: " + ex.Message, false);
+                MessageBoxHelper.ShowWarning("安装失败：" + ex.Message, false);
                 ShowStep(2);
             }
             finally
@@ -357,7 +357,7 @@ namespace PS4PKGTool
         private void btnCancelInstall_Click(object sender, EventArgs e)
         {
             _installCts?.Cancel();
-            lblProgress.Text = "Cancelling...";
+            lblProgress.Text = "正在取消……";
         }
 
         // ── step 4 ──
@@ -366,32 +366,32 @@ namespace PS4PKGTool
         {
             var env = Shadps4EnvironmentResolver.Resolve(_settings.Shadps4ExecutablePath);
             string configState = env.IsValid
-                ? (env.ConfigPath ?? "configuration detected")
-                : "Not initialized (start shadPS4 once and it is created)";
+                ? (env.ConfigPath ?? " 检测到配置")
+                : "尚未初始化（启动一次 shadPS4 即可创建）";
 
             string libs = env.InstallDirectories.Count == 0
-                ? "Not configured - set up game folders in QtLauncher"
+                ? "未配置——请在 QtLauncher 中设置游戏目录"
                 : string.Join(" | ", env.InstallDirectories);
 
             string installTarget = string.IsNullOrWhiteSpace(_settings.Shadps4InstallDirectory)
-                ? "(not set)"
+                ? "（未设置）"
                 : _settings.Shadps4InstallDirectory;
 
             string compatibility = "Unknown";
-            string compNote = "The upstream project does not publish a compatibility mapping between core and launcher builds.";
+            string compNote = "上游项目未发布核心与启动器版本之间的兼容性对照表。";
 
             lblComplete.Text =
-                "shadPS4 Setup Complete\n\n" +
-                $"Active Core:\n{(_installedCore?.ExecutablePath ?? "(none)")}\n" +
+                "shadPS4 配置完成\n\n" +
+                $"启用的核心：\n{(_installedCore?.ExecutablePath ?? "(none)")}\n" +
                 $"Build: {(_installedCore?.DisplayName ?? "-")}\n\n" +
                 $"QtLauncher:\n{(_installedLauncher?.ExecutablePath ?? "Not installed")}\n" +
                 $"Build: {(_installedLauncher?.DisplayName ?? "-")}\n\n" +
                 $"Configuration: {configState}\n" +
-                $"Game libraries: {libs}\n" +
-                $"PS4 PKG Tool install target: {installTarget}\n\n" +
-                $"Direct Play: {(_installedCore != null ? "Ready" : "Not ready - a core is required")}\n" +
-                $"Core/Launcher compatibility: {compatibility} ({compNote})\n\n" +
-                "Emulator settings, cheats and patches: configure using QtLauncher.";
+                $"游戏库：{libs}\n" +
+                $"PS4 PKG Tool 安装目标：{installTarget}\n\n" +
+                $"直接运行：{(_installedCore != null ? "Ready" : "Not ready - a core is required")}\n" +
+                $"核心/启动器兼容性：{compatibility}（{compNote}）\n\n" +
+                "模拟器设置、作弊码和补丁：请使用 QtLauncher 配置。";
         }
 
         private void btnOpenLauncher4_Click(object sender, EventArgs e)
@@ -412,7 +412,7 @@ namespace PS4PKGTool
                 }
                 catch (Exception ex)
                 {
-                    MessageBoxHelper.ShowWarning("Failed to open the QtLauncher: " + ex.Message, false);
+                    MessageBoxHelper.ShowWarning("打开 QtLauncher 失败：" + ex.Message, false);
                 }
             }
         }

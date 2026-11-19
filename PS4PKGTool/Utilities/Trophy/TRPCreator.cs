@@ -51,7 +51,7 @@ namespace TRPViewer
     public void Create(string filename, ArrayList contents)
     {
       if (this._setversion < 1 | this._setversion > 3)
-        throw new Exception("File version must be one of these { 1, 2, 3 }.");
+        throw new Exception("文件版本必须是 { 1, 2, 3 } 之一。");
       this._trophyList.Clear();
       contents = this.SortList(contents);
       MemoryStream memoryStream = new MemoryStream();
@@ -91,7 +91,7 @@ namespace TRPViewer
     public void CreateFromList(string filename, List<Archiver> contents)
     {
       if (this._setversion < 1 | this._setversion > 3)
-        throw new Exception("File version must be one of these { 1, 2, 3 }.");
+        throw new Exception("文件版本必须是 { 1, 2, 3 } 之一。");
       this._trophyList.Clear();
       MemoryStream memoryStream = new MemoryStream();
       int num1 = 0;

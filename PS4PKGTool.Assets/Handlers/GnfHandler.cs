@@ -43,7 +43,7 @@ public sealed class GnfHandler : IAssetHandler, IAssetPreviewProvider
         stream.ReadExactly(head);
 
         if (head.Length < 32 || head[0] != 'G' || head[1] != 'N' || head[2] != 'F' || head[3] != 0)
-            throw new CorruptAssetException("Missing GNF magic.");
+            throw new CorruptAssetException("缺少 GNF 魔数。");
 
         uint version = BitConverter.ToUInt32(head, 4);
         uint textureType = BitConverter.ToUInt32(head, 8);
@@ -80,12 +80,12 @@ public sealed class GnfHandler : IAssetHandler, IAssetPreviewProvider
         // Metadata text preview (no texture decode in Phase 2A).
         var descriptor = InspectAsync(source, detection, ct).GetAwaiter().GetResult();
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"GNF Texture: {descriptor.Metadata["Pixel Format"]}");
+        sb.AppendLine($"GNF 纹理：{descriptor.Metadata["Pixel Format"]}");
         sb.AppendLine($"Size: {descriptor.Metadata["Width"]} x {descriptor.Metadata["Height"]} x {descriptor.Metadata["Depth"]}");
-        sb.AppendLine($"Mip Maps: {descriptor.Metadata["Mip Maps"]}");
+        sb.AppendLine($"Mipmap 层级：{descriptor.Metadata["Mip Maps"]}");
         sb.AppendLine($"Version: {descriptor.Metadata["Version"]}");
         sb.AppendLine();
-        sb.AppendLine("Texture decode (deswizzle + BC) arrives in a later phase.");
+        sb.AppendLine("纹理解码（deswizzle + BC）将在后续阶段加入。");
         return Task.FromResult<AssetPreview?>(AssetPreview.ForText(sb.ToString()));
     }
 

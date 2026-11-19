@@ -71,7 +71,7 @@ namespace PS4PKGTool.Utilities
             try
             {
                 DateTime now = DateTime.Now;
-                string shortLabel = level.ToString().Replace("Information", "INFO").Replace("Warning","WARN").Replace("Error","ERR");
+                string shortLabel = level.ToString().Replace("Information", "INFO").Replace("Warning","WARN").Replace("错误","ERR");
                 string logMessage = $"{now:G} : [{shortLabel}] {msg}";
                 string displayMessage = $"{now:HH:mm:ss}  [{shortLabel}] {msg}";
 

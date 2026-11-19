@@ -28,7 +28,7 @@ namespace PS4PKGTool.Shell
             // height let the grown label cover the text box below it.
             lblShellFormatLabel.Size = new System.Drawing.Size(476, 38);
             lblShellFormatLabel.TabIndex = 0;
-            lblShellFormatLabel.Text = "Rename format (placeholders: {TITLE} {TITLE_ID} {CONTENT_ID} {APP_VERSION} {VERSION} {CATEGORY} {REGION} {SYSTEM_VERSION})";
+            lblShellFormatLabel.Text = "重命名格式（占位符：{TITLE} {TITLE_ID} {CONTENT_ID} {APP_VERSION} {VERSION} {CATEGORY} {REGION} {SYSTEM_VERSION}）";
             //
             // txtShellFormat
             //
@@ -43,7 +43,7 @@ namespace PS4PKGTool.Shell
             btnShellOk.Name = "btnShellOk";
             btnShellOk.Size = new System.Drawing.Size(90, 30);
             btnShellOk.TabIndex = 2;
-            btnShellOk.Text = "Rename";
+            btnShellOk.Text = "重命名";
             btnShellOk.Click += btnShellOk_Click;
             //
             // btnShellCancel
@@ -52,7 +52,7 @@ namespace PS4PKGTool.Shell
             btnShellCancel.Name = "btnShellCancel";
             btnShellCancel.Size = new System.Drawing.Size(90, 30);
             btnShellCancel.TabIndex = 3;
-            btnShellCancel.Text = "Cancel";
+            btnShellCancel.Text = "取消";
             btnShellCancel.Click += btnShellCancel_Click;
             //
             // ShellRenameDialog
@@ -70,7 +70,7 @@ namespace PS4PKGTool.Shell
             MinimizeBox = false;
             Name = "ShellRenameDialog";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Custom Rename Format";
+            Text = "自定义重命名格式";
             ResumeLayout(false);
         }
 

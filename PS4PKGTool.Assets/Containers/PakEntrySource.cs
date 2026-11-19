@@ -27,7 +27,7 @@ public sealed class PakEntrySource : IAssetSource
 
     public long Length => Entry.UncompressedSize;
 
-    public string? SourceDescription => $"PAK entry ({Entry.Compression}) in {_parent.Name}";
+    public string? SourceDescription => $"PAK 条目（{Entry.Compression}），位于 {_parent.Name}";
 
     public Stream OpenRead() => _backend.OpenEntryStream(_parent, Entry);
 

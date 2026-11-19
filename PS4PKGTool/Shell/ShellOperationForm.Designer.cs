@@ -84,7 +84,7 @@
             btnShellCancel.Name = "btnShellCancel";
             btnShellCancel.Size = new System.Drawing.Size(92, 30);
             btnShellCancel.TabIndex = 7;
-            btnShellCancel.Text = "Cancel";
+            btnShellCancel.Text = "取消";
             btnShellCancel.Click += btnShellCancel_Click;
             //
             // btnShellDetails
@@ -93,7 +93,7 @@
             btnShellDetails.Name = "btnShellDetails";
             btnShellDetails.Size = new System.Drawing.Size(90, 30);
             btnShellDetails.TabIndex = 8;
-            btnShellDetails.Text = "View Details";
+            btnShellDetails.Text = "查看详情";
             btnShellDetails.Visible = false;
             btnShellDetails.Click += btnShellDetails_Click;
             //
@@ -103,7 +103,7 @@
             btnShellCopyResult.Name = "btnShellCopyResult";
             btnShellCopyResult.Size = new System.Drawing.Size(90, 30);
             btnShellCopyResult.TabIndex = 9;
-            btnShellCopyResult.Text = "Copy Result";
+            btnShellCopyResult.Text = "复制结果";
             btnShellCopyResult.Visible = false;
             btnShellCopyResult.Click += btnShellCopyResult_Click;
             //
@@ -113,7 +113,7 @@
             btnShellOpenFolder.Name = "btnShellOpenFolder";
             btnShellOpenFolder.Size = new System.Drawing.Size(104, 30);
             btnShellOpenFolder.TabIndex = 10;
-            btnShellOpenFolder.Text = "Open Folder";
+            btnShellOpenFolder.Text = "打开文件夹";
             btnShellOpenFolder.Visible = false;
             btnShellOpenFolder.Click += btnShellOpenFolder_Click;
             //
@@ -123,7 +123,7 @@
             btnShellClose.Name = "btnShellClose";
             btnShellClose.Size = new System.Drawing.Size(92, 30);
             btnShellClose.TabIndex = 11;
-            btnShellClose.Text = "Close";
+            btnShellClose.Text = "关闭";
             btnShellClose.Visible = false;
             btnShellClose.Click += btnShellClose_Click;
             //

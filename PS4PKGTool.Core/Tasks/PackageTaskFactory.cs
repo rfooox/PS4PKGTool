@@ -25,17 +25,17 @@ public sealed class PackageTaskFactory(IPackageExtractionService? extractionServ
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(packagePath);
         ArgumentException.ThrowIfNullOrWhiteSpace(outputDirectory);
-        var task = new QueuedPackageTask("Full Extract", displayName ?? $"Extract: {Path.GetFileName(packagePath)}", packagePath, outputDirectory,
+        var task = new QueuedPackageTask("Full Extract", displayName ?? $"提取：{Path.GetFileName(packagePath)}", packagePath, outputDirectory,
             async (queued, cancellationToken) =>
             {
                 var progress = new Progress<(int Current, int Total, string CurrentFile)>(p =>
                 {
                     string file = layout == ExtractLayout.Merged ? DumpLayout.MapToLogical(p.CurrentFile) : p.CurrentFile;
-                    queued.Report(new QueueTaskProgress("Extracting PKG", 1, 1, CurrentItems: p.Current + 1, TotalItems: p.Total, CurrentFile: file));
+                    queued.Report(new QueueTaskProgress("正在提取 PKG", 1, 1, CurrentItems: p.Current + 1, TotalItems: p.Total, CurrentFile: file));
                 });
-                var stage = new Progress<string>(message => queued.Log($"Extract: {message}"));
+                var stage = new Progress<string>(message => queued.Log($"提取：{message}"));
                 var result = await _extractionService.ExtractFullAsync(packagePath, outputDirectory, stage, cancellationToken, progress, logCompletion: true, layout: layout).ConfigureAwait(false);
-                queued.Log(result.Succeeded ? "Extract finished." : "Extract failed: " + result.Message);
+                queued.Log(result.Succeeded ? "提取完成。" : "Extract failed: " + result.Message);
                 return new QueueTaskExecutionResult(result.Succeeded, result.Message, outputDirectory);
             }, JsonSerializer.Serialize(new ExtractionTaskPayload { OutputDirectory = outputDirectory, Layout = layout }), id);
         if (saved is not null) task.RestoreState(saved);
@@ -67,19 +67,19 @@ public sealed class PackageTaskFactory(IPackageExtractionService? extractionServ
                 if (!string.Equals(p.Stage, lastStage, StringComparison.Ordinal))
                 {
                     lastStage = p.Stage;
-                    queued.Log($"Merge: {p.Stage}" + (p.TotalSteps > 0 ? $" (step {p.Step}/{p.TotalSteps})" : ""));
+                    queued.Log($"合并：{p.Stage}" + (p.TotalSteps > 0 ? $"（步骤 {p.Step}/{p.TotalSteps}）" : ""));
                 }
             });
-            queued.Log($"Merge started: {request.BasePkgPath} + {request.UpdatePkgPath}");
+            queued.Log($"合并已开始：{request.BasePkgPath} + {request.UpdatePkgPath}");
             try
             {
                 var result = await Task.Run(() => new PkgMergeService().Merge(request with { Progress = progress, CancellationToken = ct }), ct).ConfigureAwait(false);
-                queued.Log($"Merge finished: {result.OutputPkgPath} ({result.OutputSize / 1e9:F2} GB, {result.Elapsed.TotalSeconds:F0}s)");
-                return new QueueTaskExecutionResult(true, "Merged PKG created.", result.OutputPkgPath);
+                queued.Log($"合并完成：{result.OutputPkgPath}（{result.OutputSize / 1e9:F2} GB，{result.Elapsed.TotalSeconds:F0} 秒）");
+                return new QueueTaskExecutionResult(true, "已生成合并后的 PKG。", result.OutputPkgPath);
             }
             catch (OperationCanceledException)
             {
-                queued.Log("Merge cancelled.");
+                queued.Log("合并已取消。");
                 throw;
             }
             catch (Exception ex)
@@ -102,13 +102,13 @@ public sealed class PackageTaskFactory(IPackageExtractionService? extractionServ
                 if (!string.Equals(p.Stage, lastStage, StringComparison.Ordinal))
                 {
                     lastStage = p.Stage;
-                    queued.Log($"FFPFSC: {p.Stage}");
+                    queued.Log($"FFPFSC：{p.Stage}");
                 }
             });
             var result = await new Ps4FfpfscConverterService().ConvertAsync(options, progress, ct).ConfigureAwait(false);
             queued.Log(result.Succeeded
-                ? "FFPFSC finished: " + (result.Result?.OutputPath ?? options.OutputPath)
-                : "FFPFSC failed: " + result.Message);
+                ? "FFPFSC 完成：" + (result.Result?.OutputPath ?? options.OutputPath)
+                : "FFPFSC 失败：" + result.Message);
             return new QueueTaskExecutionResult(result.Succeeded, result.Message, result.Result?.OutputPath ?? options.OutputPath);
         }, JsonSerializer.Serialize(options with { Passcode = null }), id); if (saved is not null) task.RestoreState(saved); return task;
     }

@@ -69,7 +69,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             {
                 // Never throws by contract - but a version list that is empty
                 // for an invisible reason reads as "no versions exist".
-                Logger.LogWarning("Release versions: stable feed cache unreadable: " + ex.Message);
+                Logger.LogWarning("版本信息：无法读取稳定版源缓存：" + ex.Message);
             }
 
             // Installed managed core builds with a release manifest tag.
@@ -82,7 +82,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             catch (Exception ex)
             {
                 // Managed root may simply not be configured yet (first run).
-                Logger.LogWarning("Release versions: managed builds unreadable: " + ex.Message);
+                Logger.LogWarning("版本信息：无法读取托管版本：" + ex.Message);
             }
 
             return versions.OrderByDescending(v => v, VersionComparer.Instance).ToList();

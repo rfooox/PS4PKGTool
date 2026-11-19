@@ -240,7 +240,7 @@ namespace PS4_Trophy_xdpx
                 trphy = hdr;
                 if (!Utils.ByteArraysEqual(hdr.magic, new byte[] { 220, 162, 77, 0 }))
                 {
-                    throw new Exception("This file is not supported!");
+                    throw new Exception("不支持该文件！");
                 }
                 ReadContent(fileStream);
                 if (Version > 1)
@@ -329,7 +329,7 @@ namespace PS4_Trophy_xdpx
                 {
                     this.ReadHeader(fs);
                     //if (!this.ByteArraysEqual(this._hdr.magic, this._hdrmagic))
-                    //    throw new Exception("This file is not supported!");
+                    //    throw new Exception("不支持该文件！");
                     this.ReadContent(fs);
                     if (this.Version > 1)
                         this._calculatedsha1 = this.CalculateSHA1Hash();
@@ -382,7 +382,7 @@ namespace PS4_Trophy_xdpx
                     trphy = hdr;
                     if (!Utils.ByteArraysEqual(hdr.magic, new byte[] { 220, 162, 77, 0 }))
                     {
-                        throw new Exception("This file is not supported!");
+                        throw new Exception("不支持该文件！");
                     }
                     ReadContent(memoryStream);
                     if (Version > 1)

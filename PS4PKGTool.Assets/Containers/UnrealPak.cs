@@ -107,7 +107,7 @@ public sealed class UnrealPak
     {
         long len = source.Length;
         if (!TryFindTrailer(source, out long magicPos, out uint magic))
-            throw new CorruptAssetException("PAK trailer magic not found (encrypted index or unsupported layout).");
+            throw new CorruptAssetException("未找到 PAK 尾部魔数（索引已加密或布局不受支持）。");
 
         int trailerSize = (int)(len - magicPos);
         byte[] t;
@@ -121,9 +121,9 @@ public sealed class UnrealPak
         long indexOffset = BitConverter.ToInt64(t, 8);
         long indexSize = BitConverter.ToInt64(t, 16);
         if (version < 1 || version > 12)
-            throw new CorruptAssetException($"Unsupported PAK version {version}.");
+            throw new CorruptAssetException($"不支持的 PAK 版本 {version}。");
         if (indexOffset < 0 || indexOffset + indexSize > len)
-            throw new CorruptAssetException("PAK index lies outside the file.");
+            throw new CorruptAssetException("PAK 索引位于文件之外。");
 
         // Header-stripped detection: try the FPakInfo header at file start.
         bool stripped = true;
@@ -149,13 +149,13 @@ public sealed class UnrealPak
     public static IReadOnlyList<PakEntryRef> ReadIndex(IAssetSource source, PakHeader header)
     {
         if (header.IndexSize > MaxIndexSize)
-            throw new UnsupportedAssetException($"PAK index is {header.IndexSize} bytes - over the {MaxIndexSize} safety cap.");
+            throw new UnsupportedAssetException($"PAK 索引为 {header.IndexSize} 字节，超过 {MaxIndexSize} 的安全上限。");
         if (header.IndexSize < 4)
-            throw new UnsupportedAssetException($"PAK index size {header.IndexSize} is too small to contain an index.");
+            throw new UnsupportedAssetException($"PAK 索引大小 {header.IndexSize} 过小，无法容纳索引。");
         if (header.Version is < 1 or > 12)
-            throw new UnsupportedAssetException($"PAK version {header.Version} is not supported yet.");
+            throw new UnsupportedAssetException($"暂不支持 PAK 版本 {header.Version}。");
         if (header.Version >= 9)
-            throw new UnsupportedAssetException($"PAK version {header.Version} entry layout is not supported yet (versions 3-8 verified).");
+            throw new UnsupportedAssetException($"暂不支持 PAK 版本 {header.Version} 的条目布局（已验证版本 3-8）。");
 
         byte[] idx;
         using (var s = source.OpenRead(header.IndexOffset, header.IndexSize))
@@ -169,7 +169,7 @@ public sealed class UnrealPak
             int pos = 0;
             string mountPoint = ReadIndexString(idx, ref pos);
             int count = ReadI32(idx, ref pos);
-            if (count < 0 || count > MaxEntries) throw new CorruptAssetException($"Invalid PAK entry count {count}.");
+            if (count < 0 || count > MaxEntries) throw new CorruptAssetException($"PAK 条目数量 {count} 无效。");
 
             var entries = new List<PakEntryRef>(count);
             int skipped = 0;
@@ -206,7 +206,7 @@ public sealed class UnrealPak
                     if (method != 0)
                     {
                         int blockCount = ReadI32(idx, ref pos);
-                        if (blockCount < 0 || blockCount > 1 << 20) throw new CorruptAssetException("PAK compression block count out of range.");
+                        if (blockCount < 0 || blockCount > 1 << 20) throw new CorruptAssetException("PAK 压缩块数量超出范围。");
                         blocks = new List<(long, long)>(blockCount);
                         for (int b = 0; b < blockCount; b++)
                         {
@@ -249,7 +249,7 @@ public sealed class UnrealPak
             // BitConverter throws ArgumentOutOfRangeException (an ArgumentException)
             // on a truncated index, not IndexOutOfRangeException.
             throw new UnsupportedAssetException(
-                "PAK index is encrypted (AES-256-ECB) - an AES key is required to browse this pak.");
+                "PAK 索引已加密（AES-256-ECB）——浏览此 pak 需要 AES 密钥。");
         }
     }
 
@@ -262,7 +262,7 @@ public sealed class UnrealPak
         int len = ReadI32(d, ref p);
         if (len <= 0) return "";
         if (len > 1 << 20 || p + len > d.Length)
-            throw new CorruptAssetException("PAK index string is out of range.");
+            throw new CorruptAssetException("PAK 索引字符串超出范围。");
         string s = System.Text.Encoding.UTF8.GetString(d, p, len - 1); // strip the null
         p += len;
         return s;
@@ -300,7 +300,7 @@ public sealed class UnrealPak
         int len = ReadI32(d, ref p);
         if (len <= 0) return "";
         if (len > 1 << 20 || p + len * 2 > d.Length)
-            throw new CorruptAssetException("PAK entry path string is out of range.");
+            throw new CorruptAssetException("PAK 条目路径字符串超出范围。");
         string s = System.Text.Encoding.Unicode.GetString(d, p, len * 2);
         p += len * 2;
         return s;

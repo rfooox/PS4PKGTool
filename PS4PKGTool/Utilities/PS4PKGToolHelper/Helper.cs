@@ -44,7 +44,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                 if (_appIcon == null)
                 {
                     try { _appIcon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); }
-                    catch (Exception ex) { Logger.LogWarning("AppIcon extract failed: " + ex.Message); }
+                    catch (Exception ex) { Logger.LogWarning("AppIcon 提取失败：" + ex.Message); }
                     if (_appIcon == null) _appIcon = SystemIcons.Application;
                 }
                 return _appIcon;
@@ -86,7 +86,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("Configured PKG temporary directory is unavailable. Using the Windows temporary directory: " + ex.Message);
+                Logger.LogWarning("配置的 PKG 临时目录不可用。改用 Windows 临时目录：" + ex.Message);
                 return Path.GetTempPath();
             }
         }
@@ -144,7 +144,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         b => b.Backported,
                         StringComparer.OrdinalIgnoreCase);
                 }
-                catch (Exception ex) { Logger.LogWarning("Error loading backport cache: " + ex.Message); return null; }
+                catch (Exception ex) { Logger.LogWarning("加载回移缓存出错：" + ex.Message); return null; }
             }
 
             public static void SaveData(DarkDataGridView dataGridView)
@@ -792,7 +792,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogWarning("BGM extract failed for " + pkgFile + ": " + ex.Message);
+                            Logger.LogWarning("BGM 提取失败：" + pkgFile + ": " + ex.Message);
                         }
                     }
                 }
@@ -833,14 +833,14 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                             }
                             catch (Exception ex)
                             {
-                                Logger.LogError("Error playing AT9 file: " + ex.Message);
+                                Logger.LogError("播放 AT9 文件出错：" + ex.Message);
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Error loading package: " + ex.Message);
+                    Logger.LogError("加载安装包出错：" + ex.Message);
                 }
             }
         }
@@ -1343,33 +1343,33 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
             public static string CheckRequirement()
             {
                 if (appSettings_.NodeJsInstalled == false || appSettings_.HttpServerInstalled == false)
-                    return "Node.js or https server module is not installed.";
+                    return "未安装 Node.js 或 https server 模块。";
 
                 StackTrace stackTrace = new StackTrace();
                 if (stackTrace.GetFrame(1).GetMethod().Name == "SendPKG") // run this checks only if this method called from SendPKG()
                 {
                     //check if pkg is splitted _0 (not supoorted atm)
                     if (PKG.SelectedPKGFilename.Contains("_0.pkg"))
-                        return "Splitted PKG update is not supported at this moment.";
+                        return "当前不支持拆分 PKG 更新。";
                 }
 
                 //check if curl.exe exists
                 if (!File.Exists(AppDataDirectory + @"curl.exe"))
-                    return "Missing curl.exe in AppData";
+                    return "AppData 中缺少 curl.exe";
 
 
                 //return if server and ps4 is set up
                 if (appSettings_.Ps4Ip == string.Empty || appSettings_.LocalServerIp == string.Empty)
-                    return "PS4 IP address or Server IP address has not been set. Set the IP address in Settings.";
+                    return "尚未设置 PS4 IP 地址或服务器 IP 地址。请在设置中填写 IP 地址。";
 
 
                 //check if ps4 ip valid
                 if (Tool.CheckForPS4Connection(appSettings_.Ps4Ip) != true)
-                    return "PS4 not detected. Make sure PS4 is discoverable and check if the IP is correct.";
+                    return "未检测到 PS4。请确认 PS4 可被发现，并检查 IP 是否正确。";
 
                 //checked if server ip valid
                 if (Tool.CheckLocalServerConnection(appSettings_.LocalServerIp) != true)
-                    return "Server IP not valid. Update the new server IP in program settings.";
+                    return "服务器 IP 无效。请在程序设置中更新服务器 IP。";
 
                 return "OK";
             }
@@ -1386,7 +1386,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                     // Kill so a hung curl can never leak an orphan process.
                     // Kill itself can throw once the process is already gone.
                     try { proc.Kill(); proc.WaitForExit(); }
-                    catch (Exception ex) { Logger.LogWarning("curl timeout kill failed: " + ex.Message); }
+                    catch (Exception ex) { Logger.LogWarning("curl 超时终止失败：" + ex.Message); }
                 }
                 return readTask.Result;
             }
@@ -1417,7 +1417,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         json = JsonConvert.DeserializeObject(line);
                     }
                 }
-                catch (Exception ex) { Logger.LogWarning("CheckIfPkgInstalled failed: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("CheckIfPkgInstalled 失败：" + ex.Message); }
 
 
                 return json;
@@ -1451,7 +1451,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogWarning("StopTask failed: " + ex.Message);
+                    Logger.LogWarning("StopTask 失败：" + ex.Message);
                 }
 
 
@@ -1486,7 +1486,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         json = JsonConvert.DeserializeObject(line);
                     }
                 }
-                catch (Exception ex) { Logger.LogWarning("UninstallAddonTheme failed: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("UninstallAddonTheme 失败：" + ex.Message); }
 
                 return json;
             }
@@ -1516,7 +1516,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         json = JsonConvert.DeserializeObject(line);
                     }
                 }
-                catch (Exception ex) { Logger.LogWarning("UninstallPatch failed: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("UninstallPatch 失败：" + ex.Message); }
 
                 return json;
             }
@@ -1546,7 +1546,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         json = JsonConvert.DeserializeObject(line);
                     }
                 }
-                catch (Exception ex) { Logger.LogWarning("GetTaskProgress failed: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("GetTaskProgress 失败：" + ex.Message); }
 
                 return json;
             }
@@ -1612,7 +1612,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         json = JsonConvert.DeserializeObject(line);
                     }
                 }
-                catch (Exception ex) { Logger.LogWarning("UninstallGame failed: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("UninstallGame 失败：" + ex.Message); }
 
                 return json;
 

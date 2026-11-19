@@ -15,13 +15,13 @@ The solution references two external projects **by relative path**, so they must
 ```
 <your-dev-folder>\
 ├── PS4PKGTool\        ← this repository
-├── DarkUI\            ← https://github.com/EthanBlazkowicz/DarkUI (fork with the DPI fixes)
+├── DarkUI\            ← https://github.com/pearlxcore/DarkUI (fork with the DPI fixes)
 └── OrbisPkgTool\      ← https://github.com/pearlxcore/OrbisPkgTool
 ```
 
 ```bash
 cd <your-dev-folder>
-git clone https://github.com/EthanBlazkowicz/DarkUI.git
+git clone https://github.com/pearlxcore/DarkUI.git
 git clone https://github.com/pearlxcore/OrbisPkgTool.git
 ```
 
@@ -33,6 +33,8 @@ Why:
 | **OrbisPkgTool** | Project reference in Debug builds; for Release publish, MSBuild builds it as a library automatically and bundles the DLL. Just **clone it** — no manual build needed. |
 
 > Upstream note: these paths live in `PS4PKGTool\PS4PKGTool.csproj`. The original DarkUI (RobinPerris) will not work here — the fork targets `net10.0-windows` and carries the per-monitor v2 DPI fixes this app depends on.
+
+> **Use `pearlxcore/DarkUI`, not `EthanBlazkowicz/DarkUI`.** The latter's `master` branch (`b09d852`) is missing `DarkTextBox.RefreshScrollBars` and `DarkTextBox.Placeholder`, so the build fails with CS0117 / CS1061. `pearlxcore/DarkUI` (`master` = `9609e4e`) carries the same DPI fixes plus those members, and is what this repository is built and verified against.
 
 ## 2. Build the app (Debug)
 
@@ -88,4 +90,5 @@ To recreate it: a console csproj targeting `net10.0-windows` with `UseWindowsFor
 | `error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0` | Install the .NET 10 SDK (an older one, e.g. 9.x, is active). |
 | `error NU1201: Project OrbisPkgTool is not compatible with net10.0` | `PS4PKGTool.Core` was reverted to a plain `net10.0` TFM — set it back to `net10.0-windows`. |
 | Project `..\..\DarkUI\DarkUI\DarkUI.csproj` not found | The DarkUI sibling folder is missing or misnamed: redo step 1, keeping the exact folder names. |
+| `error CS0117` / `CS1061` on `DarkTextBox.RefreshScrollBars` or `DarkTextBox.Placeholder` | You cloned `EthanBlazkowicz/DarkUI`, whose `master` is missing those members. Re-clone `pearlxcore/DarkUI` instead. |
 | Published exe won't start on another PC | Install the .NET 10 Desktop Runtime there (framework-dependent build). |

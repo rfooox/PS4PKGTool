@@ -16,12 +16,12 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         /// <summary>The checklist statements, in template order.</summary>
         public static readonly string[] ChecklistItems =
         {
-            "Tested on required release build",
-            "Checked for an existing report",
-            "Own and unmodified game dump",
-            "Required firmware modules installed",
-            "Sync logging enabled",
-            "Default emulation settings used",
+            "已在要求的正式版本上测试",
+            "已确认没有同类报告",
+            "使用自己未修改的游戏 dump",
+            "已安装所需固件模块",
+            "已启用同步日志",
+            "使用默认模拟设置",
         };
 
         /// <summary>
@@ -35,32 +35,32 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("### Checklist");
+            sb.AppendLine("### 检查清单");
             for (int i = 0; i < ChecklistItems.Length; i++)
             {
                 bool done = checklist != null && i < checklist.Count && checklist[i];
                 sb.AppendLine($"- [{(done ? "x" : " ")}] {ChecklistItems[i]}");
             }
 
-            AppendSection(sb, "Game Name", entry.Title);
-            AppendSection(sb, "Game serial", entry.TitleId);
-            AppendSection(sb, "Game version", VersionDisplay(entry.GameVersion));
-            AppendSection(sb, "Used emulator's version", entry.EmulatorVersion);
-            AppendSection(sb, "Current status", NormalizeStatus(entry.Status));
-            AppendSection(sb, "Operating System", entry.Os);
-            AppendSection(sb, "Processor", entry.Processor);
-            AppendSection(sb, "Graphics Card", entry.GraphicsCard);
-            AppendSection(sb, "Error", entry.Error);
-            AppendSection(sb, "Description", entry.Comment);
-            sb.AppendLine("### Screenshots");
+            AppendSection(sb, "游戏名称", entry.Title);
+            AppendSection(sb, "游戏序列号", entry.TitleId);
+            AppendSection(sb, "游戏版本", VersionDisplay(entry.GameVersion));
+            AppendSection(sb, "使用的模拟器版本", entry.EmulatorVersion);
+            AppendSection(sb, "当前状态", NormalizeStatus(entry.Status));
+            AppendSection(sb, "操作系统", entry.Os);
+            AppendSection(sb, "处理器", entry.Processor);
+            AppendSection(sb, "显卡", entry.GraphicsCard);
+            AppendSection(sb, "错误", entry.Error);
+            AppendSection(sb, "描述", entry.Comment);
+            sb.AppendLine("### 截图");
             sb.AppendLine();
-            sb.AppendLine("<!-- Add screenshots here -->");
+            sb.AppendLine("<!-- 在此添加截图 -->");
             sb.AppendLine();
-            sb.AppendLine("### Log File");
+            sb.AppendLine("### 日志文件");
             sb.AppendLine();
             sb.AppendLine(string.IsNullOrWhiteSpace(logFileName)
-                ? "<!-- Attach the log file here -->"
-                : $"<!-- Attach {logFileName} here -->");
+                ? "<!-- 在此附上日志文件 -->"
+                : $"<!-- 在此附上 {logFileName} -->");
 
             return sb.ToString().TrimEnd();
         }

@@ -68,9 +68,9 @@ public sealed class UnrealPakHandler : IAssetHandler, IAssetPreviewProvider
         var entries = _backend.ListEntries(source);
 
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"Unreal PAK ({header.Engine} v{header.Version}): {entries.Count} entries");
+        sb.AppendLine($"Unreal PAK（{header.Engine} v{header.Version}）：{entries.Count} 个条目");
         sb.AppendLine($"Header: {(header.HeaderStripped ? "stripped" : "present")}");
-        if (header.SkippedEntries > 0) sb.AppendLine($"Skipped: {header.SkippedEntries} deleted/duplicate records");
+        if (header.SkippedEntries > 0) sb.AppendLine($"已跳过：{header.SkippedEntries} 条已删除 / 重复记录");
         sb.AppendLine();
         foreach (var g in entries.GroupBy(e => e.Compression).OrderByDescending(g => g.Count()))
             sb.AppendLine($"  {g.Key}: {g.Count()}");

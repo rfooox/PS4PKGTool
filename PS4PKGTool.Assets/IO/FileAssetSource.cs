@@ -11,7 +11,7 @@ public sealed class FileAssetSource : IAssetSource, ICompanionResolverSource
     private readonly string _path;
     private readonly Func<string, IAssetSource?>? _companionResolver;
 
-    public FileAssetSource(string path, string? sourceDescription = "filesystem file",
+    public FileAssetSource(string path, string? sourceDescription = "文件系统文件",
         Func<string, IAssetSource?>? companionResolver = null)
     {
         _path = path;

@@ -19,8 +19,8 @@ namespace PS4PKGTool
         private void parseXml()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("App Version");
-            dt.Columns.Add("Change Info");
+            dt.Columns.Add("应用版本");
+            dt.Columns.Add("变更信息");
 
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xmlContent);

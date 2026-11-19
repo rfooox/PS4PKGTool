@@ -15,7 +15,7 @@ public sealed class TextureData
     public static TextureData FromRgba(byte[] rgba8, int width, int height, bool hasAlpha = true)
     {
         if (width <= 0 || height <= 0) throw new ArgumentOutOfRangeException(nameof(width));
-        if (rgba8.Length != width * height * 4) throw new ArgumentException("RGBA buffer size mismatch.");
+        if (rgba8.Length != width * height * 4) throw new ArgumentException("RGBA 缓冲区大小不匹配。");
         return new TextureData { Width = width, Height = height, Rgba8 = rgba8, HasAlpha = hasAlpha };
     }
 }

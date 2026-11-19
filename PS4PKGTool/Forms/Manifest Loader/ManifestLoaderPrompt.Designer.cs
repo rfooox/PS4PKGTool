@@ -55,7 +55,7 @@ namespace PS4PKGTool
             darkLabelTitle.Name = "darkLabelTitle";
             darkLabelTitle.Size = new System.Drawing.Size(380, 22);
             darkLabelTitle.TabIndex = 0;
-            darkLabelTitle.Text = "Welcome to PS4 PKG Tool";
+            darkLabelTitle.Text = "欢迎使用 PS4 PKG Tool";
             // 
             // btnLoadFromManifest
             // 
@@ -64,7 +64,7 @@ namespace PS4PKGTool
             btnLoadFromManifest.Name = "btnLoadFromManifest";
             btnLoadFromManifest.Size = new System.Drawing.Size(115, 32);
             btnLoadFromManifest.TabIndex = 2;
-            btnLoadFromManifest.Text = "Load Manifest";
+            btnLoadFromManifest.Text = "加载清单";
             btnLoadFromManifest.Click += btnLoadFromManifest_Click;
             // 
             // btnScanFromDirectory
@@ -74,7 +74,7 @@ namespace PS4PKGTool
             btnScanFromDirectory.Name = "btnScanFromDirectory";
             btnScanFromDirectory.Size = new System.Drawing.Size(115, 32);
             btnScanFromDirectory.TabIndex = 3;
-            btnScanFromDirectory.Text = "Scan Directory";
+            btnScanFromDirectory.Text = "扫描目录";
             btnScanFromDirectory.Click += btnScanFromDirectory_Click;
             // 
             // btnLaunchEmpty
@@ -84,7 +84,7 @@ namespace PS4PKGTool
             btnLaunchEmpty.Name = "btnLaunchEmpty";
             btnLaunchEmpty.Size = new System.Drawing.Size(115, 32);
             btnLaunchEmpty.TabIndex = 4;
-            btnLaunchEmpty.Text = "Launch Empty";
+            btnLaunchEmpty.Text = "空载启动";
             btnLaunchEmpty.Click += btnLaunchEmpty_Click;
             // 
             // ManifestLoaderPrompt
@@ -103,7 +103,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "ManifestLoaderPrompt";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Welcome";
+            Text = "欢迎";
             ResumeLayout(false);
         }
 

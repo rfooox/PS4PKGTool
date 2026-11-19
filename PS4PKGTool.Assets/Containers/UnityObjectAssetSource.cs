@@ -27,7 +27,7 @@ public sealed class UnityObjectAssetSource : IAssetSource
 
     public long Length => Object.Size;
 
-    public string? SourceDescription => $"Unity object (class {Object.ClassId}) in {_parent.Name}";
+    public string? SourceDescription => $"Unity 对象（class {Object.ClassId}），位于 {_parent.Name}";
 
     public Stream OpenRead() => _parent.OpenRead(Object.Offset, Object.Size);
 

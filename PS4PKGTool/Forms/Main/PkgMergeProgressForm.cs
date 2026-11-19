@@ -30,7 +30,7 @@ namespace PS4PKGTool
         {
             _cancellation.Cancel();
             _cancel.Enabled = false;
-            _stage.Text = "Cancelling merge...";
+            _stage.Text = "正在取消合并……";
         }
 
         private async Task RunMergeAsync()
@@ -96,7 +96,7 @@ namespace PS4PKGTool
                 _currentProgress.Value = Math.Clamp(progress.CurrentItem, 0, _currentProgress.Maximum);
                 _bytesLabel.Text = progress.Stage.StartsWith("Validating", StringComparison.Ordinal)
                     ? ""
-                    : $"Extracting {progress.CurrentItem + 1} of {progress.TotalItems} files";
+                    : $"正在提取 {progress.CurrentItem + 1}/{progress.TotalItems} 个文件";
             }
             else if (progress.TotalBytes > 0)
             {

@@ -1161,7 +1161,7 @@ namespace PS4_Trophy_xdpx
         {
             if (input.Length % outputCount != 0)
                 throw new ArgumentOutOfRangeException(nameof(outputCount), outputCount,
-                    $"The input array length ({input.Length}) must be divisible by the number of outputs.");
+                    $"输入数组长度（{input.Length}）必须能被输出数整除。");
 
             int inputSize = input.Length / outputCount;
             if (outputSize == -1)
@@ -1203,13 +1203,13 @@ namespace PS4_Trophy_xdpx
                 if (remainingLength < length)
                 {
                     throw new ArgumentOutOfRangeException(nameof(length), length,
-                        "Specified length is greater than the number of bytes remaining in the Stream");
+                        "指定长度大于流中剩余的字节数");
                 }
             }
 
             if (length % outputCount != 0)
                 throw new ArgumentOutOfRangeException(nameof(outputCount), outputCount,
-                    $"The input length ({length}) must be divisible by the number of outputs.");
+                    $"输入长度（{length}）必须能被输出数整除。");
 
             int inputSize = length / outputCount;
             if (outputSize == -1)
@@ -1293,7 +1293,7 @@ namespace PS4_Trophy_xdpx
                 outputSize = inputSize;
 
             if (inputs.Any(x => x.Length != inputSize))
-                throw new ArgumentOutOfRangeException(nameof(inputs), "Inputs must be of equal length");
+                throw new ArgumentOutOfRangeException(nameof(inputs), "输入长度必须一致");
 
             int inputCount = inputs.Length;
             int inBlockCount = inputSize.DivideByRoundUp(interleaveSize);

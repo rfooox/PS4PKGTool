@@ -71,7 +71,7 @@ namespace PS4PKGTool
             btnClose.Name = "btnClose";
             btnClose.Size = new System.Drawing.Size(80, 30);
             btnClose.TabIndex = 0;
-            btnClose.Text = "Close";
+            btnClose.Text = "关闭";
             btnClose.Click += btnClose_Click;
             // 
             // MissingBasePkgResultsForm
@@ -84,7 +84,7 @@ namespace PS4PKGTool
             MinimumSize = new System.Drawing.Size(760, 360);
             Name = "MissingBasePkgResultsForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Patches Missing Base PKG";
+            Text = "补丁缺少本体 PKG";
             ((System.ComponentModel.ISupportInitialize)dgvMissingPatches).EndInit();
             footerBar.ResumeLayout(false);
             ResumeLayout(false);

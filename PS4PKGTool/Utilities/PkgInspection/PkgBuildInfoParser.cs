@@ -9,10 +9,10 @@ namespace PS4PKGTool.Utilities.PkgInspection
         private static readonly IReadOnlyDictionary<string, string> FriendlyNames =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                ["c_date"] = "Creation Date",
-                ["sdk_ver"] = "PS4 SDK Version",
-                ["st_type"] = "Storage Type",
-                ["c_time"] = "Creation Time"
+                ["c_date"] = "创建日期",
+                ["sdk_ver"] = "PS4 SDK 版本",
+                ["st_type"] = "存储类型",
+                ["c_time"] = "创建时间"
             };
 
         public static IReadOnlyList<PkgInspectionField> Parse(string pubToolInfo)

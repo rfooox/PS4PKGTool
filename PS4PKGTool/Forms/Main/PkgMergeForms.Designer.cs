@@ -116,7 +116,7 @@ namespace PS4PKGTool
             lblBaseGame.Name = "lblBaseGame";
             lblBaseGame.Size = new System.Drawing.Size(65, 15);
             lblBaseGame.TabIndex = 0;
-            lblBaseGame.Text = "Base Game";
+            lblBaseGame.Text = "本体游戏";
             // 
             // txtBaseGame
             // 
@@ -135,7 +135,7 @@ namespace PS4PKGTool
             lblUpdate.Name = "lblUpdate";
             lblUpdate.Size = new System.Drawing.Size(45, 15);
             lblUpdate.TabIndex = 2;
-            lblUpdate.Text = "Update";
+            lblUpdate.Text = "更新";
             // 
             // txtUpdate
             // 
@@ -154,7 +154,7 @@ namespace PS4PKGTool
             lblTitleId.Name = "lblTitleId";
             lblTitleId.Size = new System.Drawing.Size(44, 15);
             lblTitleId.TabIndex = 4;
-            lblTitleId.Text = "Title ID";
+            lblTitleId.Text = "标题 ID";
             // 
             // txtTitleId
             // 
@@ -173,7 +173,7 @@ namespace PS4PKGTool
             lblVersions.Name = "lblVersions";
             lblVersions.Size = new System.Drawing.Size(50, 15);
             lblVersions.TabIndex = 6;
-            lblVersions.Text = "Versions";
+            lblVersions.Text = "版本";
             // 
             // txtVersions
             // 
@@ -192,7 +192,7 @@ namespace PS4PKGTool
             lblOutputPkg.Name = "lblOutputPkg";
             lblOutputPkg.Size = new System.Drawing.Size(69, 15);
             lblOutputPkg.TabIndex = 8;
-            lblOutputPkg.Text = "Output PKG";
+            lblOutputPkg.Text = "输出 PKG";
             // 
             // _outputPath
             // 
@@ -210,7 +210,7 @@ namespace PS4PKGTool
             btnBrowseOutput.Name = "btnBrowseOutput";
             btnBrowseOutput.Size = new System.Drawing.Size(82, 28);
             btnBrowseOutput.TabIndex = 1;
-            btnBrowseOutput.Text = "Browse...";
+            btnBrowseOutput.Text = "浏览……";
             btnBrowseOutput.Click += btnBrowseOutput_Click;
             // 
             // lblWorkLocation
@@ -220,7 +220,7 @@ namespace PS4PKGTool
             lblWorkLocation.Name = "lblWorkLocation";
             lblWorkLocation.Size = new System.Drawing.Size(81, 15);
             lblWorkLocation.TabIndex = 9;
-            lblWorkLocation.Text = "Work location";
+            lblWorkLocation.Text = "工作目录";
             // 
             // _workParent
             // 
@@ -238,7 +238,7 @@ namespace PS4PKGTool
             btnBrowseWork.Name = "btnBrowseWork";
             btnBrowseWork.Size = new System.Drawing.Size(82, 28);
             btnBrowseWork.TabIndex = 3;
-            btnBrowseWork.Text = "Browse...";
+            btnBrowseWork.Text = "浏览……";
             btnBrowseWork.Click += btnBrowseWork_Click;
             // 
             // optionsPanel
@@ -264,7 +264,7 @@ namespace PS4PKGTool
             _validate.Name = "_validate";
             _validate.Size = new System.Drawing.Size(192, 19);
             _validate.TabIndex = 0;
-            _validate.Text = "Validate merged PKG after build";
+            _validate.Text = "构建后校验合并后的 PKG";
             // 
             // _ignoreDiskSpace
             // 
@@ -274,7 +274,7 @@ namespace PS4PKGTool
             _ignoreDiskSpace.Name = "_ignoreDiskSpace";
             _ignoreDiskSpace.Size = new System.Drawing.Size(160, 19);
             _ignoreDiskSpace.TabIndex = 1;
-            _ignoreDiskSpace.Text = "Ignore disk-space check";
+            _ignoreDiskSpace.Text = "忽略磁盘空间检查";
             // 
             // lblWorkers
             // 
@@ -283,7 +283,7 @@ namespace PS4PKGTool
             lblWorkers.Name = "lblWorkers";
             lblWorkers.Size = new System.Drawing.Size(53, 15);
             lblWorkers.TabIndex = 1;
-            lblWorkers.Text = "Workers:";
+            lblWorkers.Text = "工作线程：";
             // 
             // _workers
             // 
@@ -314,7 +314,7 @@ namespace PS4PKGTool
             lblNote.Name = "lblNote";
             lblNote.Size = new System.Drawing.Size(712, 48);
             lblNote.TabIndex = 12;
-            lblNote.Text = "The source PKGs are not changed. A rebuilt Game PKG is created with the update version. The work location holds the temporary merge folder (extraction dumps and build scratch files). For best results, set the work location and output to a local disk (C: or an internal SSD); network/Samba shares can cause filesystem errors during extraction and image building.";
+            lblNote.Text = "源 PKG 不会被修改。程序会生成一个使用更新版本号的 Game PKG。工作目录用于存放临时合并文件夹（解包数据和构建临时文件）。为获得最佳效果，请将工作目录和输出位置设在本地磁盘（C: 或内置 SSD）上；网络/Samba 共享目录在解包和镜像构建过程中可能引发文件系统错误。";
             lblNote.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // buttonsPanel
@@ -336,7 +336,7 @@ namespace PS4PKGTool
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(82, 30);
             btnCancel.TabIndex = 0;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "取消";
             // 
             // btnMerge
             // 
@@ -344,7 +344,7 @@ namespace PS4PKGTool
             btnMerge.Name = "btnMerge";
             btnMerge.Size = new System.Drawing.Size(96, 30);
             btnMerge.TabIndex = 1;
-            btnMerge.Text = "Merge";
+            btnMerge.Text = "合并";
             btnMerge.Click += btnMerge_Click;
             // 
             // PkgMergeOptionsForm
@@ -360,7 +360,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "PkgMergeOptionsForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Merge Base and Update PKG";
+            Text = "合并本体与更新 PKG";
             layout.ResumeLayout(false);
             layout.PerformLayout();
             optionsPanel.ResumeLayout(false);

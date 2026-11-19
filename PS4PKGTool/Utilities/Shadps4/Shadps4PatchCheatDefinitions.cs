@@ -96,7 +96,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 foreach (var change in group)
                 {
                     if (change.MetadataIndex < 0 || change.MetadataIndex >= metadata.Count)
-                        throw new InvalidDataException("Patch metadata changed before Apply.");
+                        throw new InvalidDataException("应用前补丁元数据已发生变化。");
                     metadata[change.MetadataIndex].SetAttributeValue("isEnabled", change.Enabled ? "true" : "false");
                 }
                 using var writer = new StringWriter();
@@ -108,7 +108,7 @@ namespace PS4PKGTool.Utilities.Shadps4
         private static void InstallValidated(string directory, string fileName, string contents, bool cheat)
         {
             if (string.IsNullOrWhiteSpace(fileName) || fileName != Path.GetFileName(fileName))
-                throw new InvalidOperationException("The definition file name is invalid.");
+                throw new InvalidOperationException("定义文件名无效。");
             bool valid = cheat
                 ? Shadps4DefinitionParser.TryParseCheat(contents, fileName, OfficialRepository, out _, out var error)
                 : Shadps4DefinitionParser.TryParsePatch(contents, fileName, OfficialRepository, out _, out error);
@@ -121,7 +121,7 @@ namespace PS4PKGTool.Utilities.Shadps4
 
         private static void AtomicWrite(string destination, string contents)
         {
-            string directory = Path.GetDirectoryName(destination) ?? throw new InvalidOperationException("The destination directory is invalid.");
+            string directory = Path.GetDirectoryName(destination) ?? throw new InvalidOperationException("目标目录无效。");
             Directory.CreateDirectory(directory);
             string temp = Path.Combine(directory, "." + Path.GetFileName(destination) + ".tmp");
             try { File.WriteAllText(temp, contents); File.Move(temp, destination, true); }
@@ -160,10 +160,10 @@ namespace PS4PKGTool.Utilities.Shadps4
                 var authors = root.TryGetProperty("credits", out var credits) && credits.ValueKind == JsonValueKind.Array
                     ? credits.EnumerateArray().Where(e => e.ValueKind == JsonValueKind.String).Select(e => e.GetString()?.Trim() ?? "").Where(s => s.Length > 0).ToArray() : Array.Empty<string>();
                 definition = new(filePath, source, Get("name"), Get("id"), Get("version"), Get("process"), authors, mods);
-                if (string.IsNullOrWhiteSpace(definition.TitleId)) { error = "Cheat JSON has no id."; return false; }
+                if (string.IsNullOrWhiteSpace(definition.TitleId)) { error = "作弊码 JSON 缺少 id。"; return false; }
                 return true;
             }
-            catch (Exception ex) { error = "Invalid cheat JSON: " + ex.Message; return false; }
+            catch (Exception ex) { error = "作弊码 JSON 无效：" + ex.Message; return false; }
         }
 
         public static bool TryParsePatch(string xml, string filePath, string source, out Shadps4PatchDefinition definition, out string error)
@@ -184,10 +184,10 @@ namespace PS4PKGTool.Utilities.Shadps4
                         metadata.Descendants("Line").Count(), string.Join(", ", types)));
                 }
                 definition = new(filePath, source, ids, entries);
-                if (ids.Length == 0) { error = "Patch XML has no TitleID."; return false; }
+                if (ids.Length == 0) { error = "补丁 XML 缺少 TitleID。"; return false; }
                 return true;
             }
-            catch (Exception ex) { error = "Invalid patch XML: " + ex.Message; return false; }
+            catch (Exception ex) { error = "补丁 XML 无效：" + ex.Message; return false; }
         }
     }
 
@@ -201,9 +201,9 @@ namespace PS4PKGTool.Utilities.Shadps4
         }
         public static string Display(Shadps4DefinitionMatch match) => match switch
         {
-            Shadps4DefinitionMatch.ExactMatch => "Exact match",
-            Shadps4DefinitionMatch.VersionMismatch => "Version mismatch",
-            _ => "Version unknown"
+            Shadps4DefinitionMatch.ExactMatch => "精确匹配",
+            Shadps4DefinitionMatch.VersionMismatch => "版本不匹配",
+            _ => "版本未知"
         };
     }
 
@@ -220,7 +220,7 @@ namespace PS4PKGTool.Utilities.Shadps4
         }
         public async Task<Shadps4DownloadResult> DownloadForGameAsync(Shadps4GamePatchContext game, Shadps4PatchCheatStore store, CancellationToken ct = default)
         {
-            if (string.IsNullOrWhiteSpace(game.UserDirectory)) return new(false, "shadPS4 user directory is unavailable.", 0);
+            if (string.IsNullOrWhiteSpace(game.UserDirectory)) return new(false, "shadPS4 用户目录不可用。", 0);
             try
             {
                 string index = await GetText(IndexUrl, ct).ConfigureAwait(false);
@@ -243,10 +243,10 @@ namespace PS4PKGTool.Utilities.Shadps4
                         && patch.TitleIds.Any(id => string.Equals(id, game.TitleId, StringComparison.OrdinalIgnoreCase))) { store.InstallPatch(game.UserDirectory, name, content); downloaded++; }
                 }
                 store.RebuildPatchIndex(game.UserDirectory);
-                return new(true, downloaded == 0 ? "No official definitions match this installed game." : $"Downloaded {downloaded} definition(s).", downloaded);
+                return new(true, downloaded == 0 ? "没有与该已安装游戏匹配的官方定义。" : $"Downloaded {downloaded} definition(s).", downloaded);
             }
             catch (OperationCanceledException) { throw; }
-            catch (Exception ex) { return new(false, "Could not update official definitions: " + ex.Message, 0); }
+            catch (Exception ex) { return new(false, "无法更新官方定义：" + ex.Message, 0); }
         }
         private async Task<string> GetText(string url, CancellationToken ct)
         {

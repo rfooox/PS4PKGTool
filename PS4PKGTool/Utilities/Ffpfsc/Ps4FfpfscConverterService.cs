@@ -69,11 +69,11 @@ public sealed class Ps4FfpfscConverterService
             var (succeeded, message) = await extractor.ExtractFullAsync(options.PkgPath, extracted, null, ct, fileProgress, logCompletion: false)
                 .ConfigureAwait(false);
             if (!succeeded)
-                return (false, "Extraction failed: " + message, null);
+                return (false, "提取失败：" + message, null);
 
             string image0 = Path.Combine(extracted, "Image0");
             if (!Directory.Exists(image0))
-                return (false, "The package does not contain an application image (no game data to convert).", null);
+                return (false, "该安装包不包含应用程序镜像（没有可转换的游戏数据）。", null);
 
             // ── Step 2: restructure Sc0 → Image0/sce_sys ────────────────
             progress?.Report(new FfpfscConvertProgress(FfpfscConvertStages.Restructuring, 2, TotalSteps));
@@ -83,11 +83,11 @@ public sealed class Ps4FfpfscConverterService
             progress?.Report(new FfpfscConvertProgress(FfpfscConvertStages.ProjectingParamJson, 3, TotalSteps));
             string sfoPath = Path.Combine(image0, "sce_sys", "param.sfo");
             if (!File.Exists(sfoPath))
-                return (false, "The package does not contain sce_sys/param.sfo — cannot derive title metadata.", null);
+                return (false, "该安装包不包含 sce_sys/param.sfo——无法获取标题元数据。", null);
             ParamSfo sfo = ParamSfo.Parse(File.ReadAllBytes(sfoPath));
             string titleId = (sfo.GetString("TITLE_ID") ?? "").Trim();
             if (titleId.Length != 9)
-                return (false, $"Invalid TITLE_ID in param.sfo: '{titleId}' (expected a 9-character CUSA/XXXX id).", null);
+                return (false, $"param.sfo 中的 TITLE_ID 无效：'{titleId}'（应为 9 位 CUSA/XXXX ID）。", null);
 
             string titleName = ParamJsonProjector.ChooseTitle(sfo);
             string jsonPath = Path.Combine(image0, "sce_sys", "param.json");
@@ -151,7 +151,7 @@ public sealed class Ps4FfpfscConverterService
         }
         catch (Exception ex)
         {
-            return (false, "Conversion failed: " + ex.Message, null);
+            return (false, "转换失败：" + ex.Message, null);
         }
         finally
         {
@@ -200,11 +200,11 @@ public sealed class Ps4FfpfscConverterService
             // A failed cleanup (e.g. over a full or flaky SMB share) leaves an
             // orphaned multi-GB temp tree. Log it instead of swallowing it so
             // the operator can reclaim the space manually.
-            CoreLog.Warn($"FFPFSC: failed to delete work directory {path}: {ex.Message}");
+            CoreLog.Warn($"FFPFSC：无法删除工作目录 {path}：{ex.Message}");
         }
         catch (UnauthorizedAccessException ex)
         {
-            CoreLog.Warn($"FFPFSC: failed to delete work directory {path}: {ex.Message}");
+            CoreLog.Warn($"FFPFSC：无法删除工作目录 {path}：{ex.Message}");
         }
     }
 }

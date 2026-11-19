@@ -122,16 +122,16 @@ namespace PS4PKGTool.Utilities.Shadps4
         {
             if (!CusaId.IsMatch(titleId ?? ""))
                 return new Shadps4LaunchPlan(Shadps4LaunchStatus.InvalidTitleId,
-                    $"'{titleId}' is not a valid CUSA Title ID.", null, null);
+                    $"「{titleId}」不是有效的 CUSA Title ID。", null, null);
 
             string exe = env.CoreExePath ?? "";
             if (string.IsNullOrWhiteSpace(exe) || !File.Exists(exe))
                 return new Shadps4LaunchPlan(Shadps4LaunchStatus.ExecutableMissing,
-                    "shadPS4 core executable not found. Configure it in Program Settings.", null, null);
+                    "未找到 shadPS4 核心可执行文件。请在「程序设置」中配置。", null, null);
 
             if (IsCoreRunning())
                 return new Shadps4LaunchPlan(Shadps4LaunchStatus.AlreadyRunning,
-                    "shadPS4 is already running. Only one emulator instance can run at a time. Close the running shadPS4 to launch another game.",
+                    "shadPS4 已在运行。同时只能运行一个模拟器实例。请关闭正在运行的 shadPS4 后再启动其他游戏。",
                     null, null);
 
             string? eboot = FindInstalledEboot(env, titleId);
@@ -149,18 +149,18 @@ namespace PS4PKGTool.Utilities.Shadps4
 
             if (eboot == null)
                 return new Shadps4LaunchPlan(Shadps4LaunchStatus.GameNotFound,
-                    $"Game {titleId} is not installed in any configured shadPS4 library.", null, null);
+                    $"游戏 {titleId} 未安装在任何已配置的 shadPS4 库中。", null, null);
 
             if (fromExtraDir)
             {
                 // The core's own ID search only knows shadPS4's configured
                 // libraries - boot the found eboot by path instead.
-                Logger.LogInformation($"Shadps4Launch: {titleId} found in the tool's install directory ({eboot}) - launching by path");
-                return new Shadps4LaunchPlan(Shadps4LaunchStatus.Started, "shadPS4 launching by path.",
+                Logger.LogInformation($"Shadps4Launch：已在工具安装目录中找到 {titleId}（{eboot}）——按路径启动");
+                return new Shadps4LaunchPlan(Shadps4LaunchStatus.Started, "正在按路径启动 shadPS4。",
                     exe, BuildExecutableArguments(eboot));
             }
 
-            Logger.LogInformation($"Shadps4Launch: {titleId} found in a configured library - launching by title id");
+            Logger.LogInformation($"Shadps4Launch：已在已配置的库中找到 {titleId}——按 Title ID 启动");
             return new Shadps4LaunchPlan(Shadps4LaunchStatus.Started, "shadPS4 launching.",
                 exe, BuildTitleArguments(titleId));
         }
@@ -186,21 +186,21 @@ namespace PS4PKGTool.Utilities.Shadps4
             string exe = env.CoreExePath ?? "";
             if (string.IsNullOrWhiteSpace(exe) || !File.Exists(exe))
             {
-                Logger.LogWarning($"Shadps4Launch: core executable missing ({exe})");
-                return (Shadps4LaunchStatus.ExecutableMissing, "shadPS4 core executable not found. Configure it in Program Settings.");
+                Logger.LogWarning($"Shadps4Launch：缺少核心可执行文件（{exe}）");
+                return (Shadps4LaunchStatus.ExecutableMissing, "未找到 shadPS4 核心可执行文件。请在「程序设置」中配置。");
             }
 
             if (string.IsNullOrWhiteSpace(executablePath) || !File.Exists(executablePath))
             {
-                Logger.LogWarning($"Shadps4Launch: target executable missing ({executablePath})");
-                return (Shadps4LaunchStatus.ExecutableNotFound, $"Executable not found: {executablePath}");
+                Logger.LogWarning($"Shadps4Launch：缺少目标可执行文件（{executablePath}）");
+                return (Shadps4LaunchStatus.ExecutableNotFound, $"未找到可执行文件：{executablePath}");
             }
 
             if (IsCoreRunning())
             {
-                Logger.LogWarning("Shadps4Launch: core already running - refusing to start a second instance");
+                Logger.LogWarning("Shadps4Launch：核心已在运行——拒绝启动第二个实例");
                 return (Shadps4LaunchStatus.AlreadyRunning,
-                    "shadPS4 is already running. Only one emulator instance can run at a time. Close the running shadPS4 to launch another game.");
+                    "shadPS4 已在运行。同时只能运行一个模拟器实例。请关闭正在运行的 shadPS4 后再启动其他游戏。");
             }
 
             return Start(exe, BuildExecutableArguments(executablePath), executablePath, env.UserDirectory);
@@ -296,7 +296,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 Logger.LogInformation($"Shadps4Launch: starting {exe} {string.Join(" ", arguments)} (cwd: {psi.WorkingDirectory})");
                 Process proc = ProcessStartOverride != null
                     ? ProcessStartOverride(psi)
-                    : Process.Start(psi) ?? throw new InvalidOperationException("Process.Start returned null.");
+                    : Process.Start(psi) ?? throw new InvalidOperationException("Process.Start 返回了 null。");
                 string version = CoreVersion(exe);
                 // The watcher owns the process handle from here on: it waits
                 // for the exit, classifies it, and disposes the handle.
@@ -308,7 +308,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             }
             catch (Exception ex)
             {
-                Logger.LogError("Shadps4Launch: Process.Start failed: " + ex);
+                Logger.LogError("Shadps4Launch：Process.Start 失败：" + ex);
                 return (Shadps4LaunchStatus.StartFailed, ex.Message);
             }
         }
@@ -335,11 +335,11 @@ namespace PS4PKGTool.Utilities.Shadps4
 
                 string targetPart = string.IsNullOrEmpty(context.Target) ? "" : $", target {context.Target}";
                 Logger.LogInformation(
-                    $"Shadps4Launch: shadPS4 exited with code {report.ExitCodeText} after {report.RuntimeText}{targetPart}");
+                    $"Shadps4Launch：shadPS4 运行 {report.RuntimeText} 后以代码 {report.ExitCodeText} 退出{targetPart}");
                 if (!string.IsNullOrWhiteSpace(report.WerReportFolder))
-                    Logger.LogInformation($"Shadps4Launch: WER report folder: {report.WerReportFolder}");
+                    Logger.LogInformation($"Shadps4Launch：WER 报告目录：{report.WerReportFolder}");
                 if (!string.IsNullOrWhiteSpace(report.LogTail))
-                    Logger.LogInformation("Shadps4Launch: emulator log tail:\n" + report.LogTail);
+                    Logger.LogInformation("Shadps4Launch：模拟器日志末尾：\n" + report.LogTail);
 
                 Terminated?.Invoke(this, report);
             }
@@ -347,7 +347,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             {
                 // Never an unobserved task exception; a broken watch is a log
                 // line, not a user-facing failure.
-                Logger.LogWarning("Shadps4Launch: termination watch failed: " + ex.Message);
+                Logger.LogWarning("Shadps4Launch：进程退出监控失败：" + ex.Message);
             }
             finally
             {

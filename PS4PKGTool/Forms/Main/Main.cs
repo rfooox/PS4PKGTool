@@ -97,7 +97,7 @@ namespace PS4PKGTool
             picPreview.Visible = false;
             picPreview.Image?.Dispose();
             picPreview.Image = null;
-            lblFileViewerInfo.Text = "Select a file to preview it.";
+            lblFileViewerInfo.Text = "选择要预览的文件。";
             if (btnExportTextures != null) btnExportTextures.Enabled = false;
             if (btnExportTreeView != null) btnExportTreeView.Enabled = false;
             _previewEntryPath = null;
@@ -156,7 +156,7 @@ namespace PS4PKGTool
                 entryAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
             // Retrieve and return the version string
-            return versionAttribute?.InformationalVersion ?? "Version information not available";
+            return versionAttribute?.InformationalVersion ?? "版本信息不可用";
         }
 
         public Main()
@@ -224,7 +224,7 @@ namespace PS4PKGTool
             toolStripProgressBar1.MarqueeAnimationSpeed = 30;
 
             // Bypass UIPI: allow drag-drop from Explorer when running as admin
-            try { ChangeWindowMessageFilter(0x0233, 1); ChangeWindowMessageFilter(0x0049, 1); } catch (Exception ex) { Logger.LogWarning("UIPI bypass failed (non-critical): " + ex.Message); }
+            try { ChangeWindowMessageFilter(0x0233, 1); ChangeWindowMessageFilter(0x0049, 1); } catch (Exception ex) { Logger.LogWarning("UIPI 绕过失败（非致命）：" + ex.Message); }
 
             // Wire drag-drop on the form and all child controls
             WireAllControls(this);
@@ -254,7 +254,7 @@ namespace PS4PKGTool
                 foreach (var (key, bmp) in icons)
                     imageList1.Images.Add(key, new Bitmap(bmp));
             }
-            catch (Exception ex) { Logger.LogWarning($"Icon load: {ex.Message}"); }
+            catch (Exception ex) { Logger.LogWarning($"图标加载：{ex.Message}"); }
 
             // Collapse GLV groups on initial population (control must be visible first),
             // then keep the currently selected PKG visible by re-expanding its group.
@@ -333,15 +333,15 @@ namespace PS4PKGTool
 
         private void BtnGroupExpand_Click(object sender, EventArgs e)
         {
-            if (btnGroupExpand.Text == "Expand All")
+            if (btnGroupExpand.Text == "全部展开")
             {
                 groupedListView.ExpandAll();
-                btnGroupExpand.Text = "Collapse All";
+                btnGroupExpand.Text = "全部折叠";
             }
             else
             {
                 groupedListView.CollapseAll();
-                btnGroupExpand.Text = "Expand All";
+                btnGroupExpand.Text = "全部展开";
             }
         }
 
@@ -374,7 +374,7 @@ namespace PS4PKGTool
 
             string titleId = _glvContextGroupPaths
                 .Select(path => GetGridRowForPath(path)?.Cells[PkgColumns.TitleId].Value?.ToString())
-                .FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "Group";
+                .FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "分组";
             _glvGroupTitleMenu.Text = $"{titleId} ({_glvContextGroupPaths.Count} PKG)";
         }
 
@@ -510,7 +510,7 @@ namespace PS4PKGTool
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             ThemeManager.ThemeChanged -= Main_ThemeChanged;
-            Logger.LogInformation("App closing.");
+            Logger.LogInformation("正在关闭程序。");
             _groupedViewRefreshTimer.Stop();
             _logFlushTimer.Stop();
             DisposeMainFileListingSession();
@@ -561,8 +561,8 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogInformation($"ERROR: Selection changed: {ex.Message}");
-                Logger.LogError($"Error on selection change: {ex.Message}");
+                Logger.LogInformation($"错误：选中项变更：{ex.Message}");
+                Logger.LogError($"选中项变更时出错：{ex.Message}");
             }
         }
 
@@ -577,7 +577,7 @@ namespace PS4PKGTool
                     canOpen = pkgType == PKGCategory.GAME || pkgType == PKGCategory.PATCH;
                 }
             }
-            catch (Exception ex) { Logger.LogWarning("Error reading PKG type from grid: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("从网格读取 PKG 类型时出错：" + ex.Message); }
             downloadOfficialUpdateToolStripMenuItem1.Enabled = canOpen;
             if (downloadOfficialUpdateToolStripMenuItem2 != null)
                 downloadOfficialUpdateToolStripMenuItem2.Enabled = canOpen;
@@ -597,7 +597,7 @@ namespace PS4PKGTool
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            Logger.LogInformation("App started.");
+            Logger.LogInformation("程序已启动。");
             // The form-level DPI scale pass resizes AutoSize children (e.g.
             // the filter checkboxes) without a follow-up layout, leaving them
             // doubled at high DPI — force the flow panel to re-measure once
@@ -628,22 +628,22 @@ namespace PS4PKGTool
                 this.Text = "PS4 PKG Tool " + ApplicationVersion;
                 await Task.Run(() =>
             {
-                Logger.LogInformation("Selected directory: ");
+                Logger.LogInformation("已选目录：");
 
                 foreach (var folder in appSettings_.PkgDirectories)
                 {
                     Logger.LogInformation(folder);
                 }
 
-                Logger.LogInformation("Checking Node.js and server module...");
+                Logger.LogInformation("正在检查 Node.js 与服务器模块……");
 
                 bool isNodeJsInstalled = NodeJsHttpServer.IsSoftwareInstalled("Node.js");
                 appSettings_.NodeJsInstalled = isNodeJsInstalled;
-                Logger.LogInformation(isNodeJsInstalled ? "Node.js installed." : "Node.js not installed.");
+                Logger.LogInformation(isNodeJsInstalled ? "Node.js 已安装。" : "Node.js 未安装。");
 
                 bool isHttpServerModuleInstalled = Directory.Exists(NodeJsHttpServer.HttpServerModulePath);
                 appSettings_.HttpServerInstalled = isHttpServerModuleInstalled;
-                Logger.LogInformation(isHttpServerModuleInstalled ? "Module installed." : "Module not installed.");
+                Logger.LogInformation(isHttpServerModuleInstalled ? "模块已安装。" : "模块未安装。");
 
                 this.Invoke((MethodInvoker)delegate
                 {
@@ -664,18 +664,18 @@ namespace PS4PKGTool
                     PKGGridView.Enabled = false;
                     darkDataGridView2.Enabled = false;
 
-                    Logger.LogInformation("Scanning PKG...");
+                    Logger.LogInformation("正在扫描 PKG……");
 
                     if (Helper.LaunchEmpty)
                     {
-                        Logger.LogInformation("Launch Empty - skipping PKG scan.");
+                        Logger.LogInformation("以空列表启动 - 跳过 PKG 扫描。");
                         this.Invoke((MethodInvoker)(() =>
                         {
                             this.Enabled = true;
                             PKGGridView.Enabled = true;
                             darkDataGridView2.Enabled = true;
                             SetOperationMenusEnabled(false);
-                            toolStripStatusLabel2.Text = "Ready (empty)";
+                            toolStripStatusLabel2.Text = "就绪（空）";
                         }));
                     }
                     else
@@ -688,9 +688,9 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogInformation($"FATAL: App startup failed: {ex.Message}");
-                Logger.LogError($"Form1_Load crashed: {ex}");
-                AppMessageBox.Show("Fatal Error", $"Startup failed:\n{ex.Message}",
+                Logger.LogInformation($"致命错误：程序启动失败：{ex.Message}");
+                Logger.LogError($"Form1_Load 崩溃：{ex}");
+                AppMessageBox.Show("致命错误", $"启动失败：\n{ex.Message}",
                     AppMessageType.Error, AppMessageButtons.OK);
             }
         }
@@ -731,7 +731,7 @@ namespace PS4PKGTool
             }
 
             // Show loading indicator
-            toolStripStatusLabel2.Text = "Loading PKG details...";
+            toolStripStatusLabel2.Text = "正在加载 PKG 详情……";
 
             worker.DoWork += (_, args) =>
             {
@@ -745,14 +745,14 @@ namespace PS4PKGTool
                 if (args.Cancelled) return;
                 if (args.Error != null || args.Result == null)
                 {
-                    string message = args.Error?.Message ?? "No package metadata was returned.";
-                    Logger.LogError($"Failed to load PKG details for {pkgPath}: {message}");
+                    string message = args.Error?.Message ?? "未返回任何包元数据。";
+                    Logger.LogError($"加载 {pkgPath} 的 PKG 详情失败：{message}");
                     ClearSelectedPkgDetails();
                     // Keep the selected path available to context operations and
                     // retries even though its detail panels were cleared.
                     PKG.SelectedPKGFilename = pkgPath;
-                    toolStripStatusLabel2.Text = "Failed to load PKG details.";
-                    ShowError("Failed to load PKG details:\n" + message, false);
+                    toolStripStatusLabel2.Text = "加载 PKG 详情失败。";
+                    ShowError("加载 PKG 详情失败：\n" + message, false);
                     return;
                 }
                 var ps4Pkg = (PkgMetadata)args.Result;
@@ -762,8 +762,8 @@ namespace PS4PKGTool
                 PKG.CurrentPKGType = ps4Pkg.PKG_Type.ToString();
 
                 int selCount = PKGGridView.SelectedRows.Count;
-                GroupActionTitleStripMenuItem.Text = selCount > 1 ? "Group Action" : ps4Pkg.PS4_Title;
-                toolStripMenuItem2.Text = selCount > 1 ? "Group Action" : ps4Pkg.PS4_Title;
+                GroupActionTitleStripMenuItem.Text = selCount > 1 ? "分组操作" : ps4Pkg.PS4_Title;
+                toolStripMenuItem2.Text = selCount > 1 ? "分组操作" : ps4Pkg.PS4_Title;
 
                 RpiUninstallBasePKGToolStripMenuItem1.Enabled = true;
                 RpiUninstallBasePKGToolStripMenuItem2.Enabled = true;
@@ -829,7 +829,7 @@ namespace PS4PKGTool
         {
             if (!SelectGridRowsForPaths(_glvContextGroupPaths))
             {
-                ShowError("No PKG group selected.", false);
+                ShowError("未选择 PKG 分组。", false);
                 return;
             }
             action();
@@ -842,7 +842,7 @@ namespace PS4PKGTool
                 .ToList();
             if (matchingPaths.Count == 0)
             {
-                ShowWarning(category == PKGCategory.GAME ? "This group has no base game PKG." : "This group has no update PKG.", false);
+                ShowWarning(category == PKGCategory.GAME ? "此分组没有本体游戏 PKG。" : "此分组没有更新 PKG。", false);
                 return;
             }
 
@@ -888,7 +888,7 @@ namespace PS4PKGTool
             var updates = _glvContextGroupPaths.Where(path => string.Equals(GetGridRowForPath(path)?.Cells[PkgColumns.Category].Value?.ToString(), PKGCategory.PATCH, StringComparison.OrdinalIgnoreCase)).ToList();
             if (bases.Count != 1 || updates.Count == 0)
             {
-                ShowWarning("This group needs one base game PKG and at least one update PKG to merge.", false);
+                ShowWarning("合并需要此分组包含一个本体游戏 PKG 和至少一个更新 PKG。", false);
                 return;
             }
             string update = updates.OrderByDescending(path => GlvAppVersionRank(GetGridRowForPath(path)?.Cells[PkgColumns.AppVersion].Value?.ToString())).First();
@@ -918,7 +918,7 @@ namespace PS4PKGTool
             catch (Exception ex)
             {
                 if (loadVersion == _detailLoadVersion)
-                    Logger.LogWarning("Deferred package artwork load failed: " + ex.Message);
+                    Logger.LogWarning("延迟加载包图片失败：" + ex.Message);
             }
         }
 
@@ -933,7 +933,7 @@ namespace PS4PKGTool
                 PKGCategory.UNKNOWN => "Unknown",
                 _ => pkgType
             };
-            this.Text = $"PS4 PKG Tool {ApplicationVersion} - Viewing [{category}] \"{pkgTitle}\"";
+            this.Text = $"PS4 PKG Tool {ApplicationVersion} - 正在查看 [{category}]「{pkgTitle}」";
         }
 
         private OfficialUpdateForm _officialUpdateForm;
@@ -944,7 +944,7 @@ namespace PS4PKGTool
             {
                 if (PKGGridView.SelectedRows.Count != 1)
                 {
-                    ShowInformation("Please select a single PKG.", false);
+                    ShowInformation("请选择一个 PKG。", false);
                     return;
                 }
 
@@ -952,7 +952,7 @@ namespace PS4PKGTool
                 string pkgType = row.Cells[8].Value?.ToString() ?? "";
                 if (pkgType != PKGCategory.GAME && pkgType != PKGCategory.PATCH)
                 {
-                    ShowInformation("Official updates are only available for Game and Patch PKGs.", false);
+                    ShowInformation("官方更新仅适用于游戏和补丁 PKG。", false);
                     return;
                 }
 
@@ -960,21 +960,21 @@ namespace PS4PKGTool
                 string directory = row.Cells[13].Value?.ToString();
                 if (string.IsNullOrEmpty(filename) || string.IsNullOrEmpty(directory))
                 {
-                    ShowError("Could not determine PKG path.", false);
+                    ShowError("无法确定 PKG 路径。", false);
                     return;
                 }
 
                 string pkgPath = Path.Combine(directory, filename);
                 if (!File.Exists(pkgPath))
                 {
-                    ShowError("Selected PKG file not found.", false);
+                    ShowError("找不到所选的 PKG 文件。", false);
                     return;
                 }
 
                 string titleId = row.Cells[PkgColumns.TitleId].Value?.ToString() ?? "";
                 if (string.IsNullOrWhiteSpace(titleId))
                 {
-                    ShowError("Could not read PKG title ID.", false);
+                    ShowError("无法读取 PKG 标题 ID。", false);
                     return;
                 }
 
@@ -988,8 +988,8 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error opening official update form: " + ex.Message);
-                ShowError("Error opening official update form: " + ex.Message, true);
+                Logger.LogError("打开官方更新窗口时出错：" + ex.Message);
+                ShowError("打开官方更新窗口时出错：" + ex.Message, true);
             }
         }
 
@@ -1022,7 +1022,7 @@ namespace PS4PKGTool
 
                 darkDataGridView4.DataSource = dtPubtool;
             }
-            catch (Exception ex) { Logger.LogWarning("Error loading pub-tool info: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("加载 pub-tool 信息时出错：" + ex.Message); }
         }
 
         private void LoadHeaderInfo(PkgMetadata pkg)
@@ -1035,8 +1035,8 @@ namespace PS4PKGTool
                 var rows = PkgHeaderDump.Rows(pkg.Header, headerBytes);
 
                 DataTable dtHeader = new DataTable();
-                dtHeader.Columns.Add("Type");
-                dtHeader.Columns.Add("Value");
+                dtHeader.Columns.Add("类型");
+                dtHeader.Columns.Add("值");
 
                 foreach (var (type, value) in rows)
                 {
@@ -1045,7 +1045,7 @@ namespace PS4PKGTool
 
                 dgvHeader.DataSource = dtHeader;
             }
-            catch (Exception ex) { Logger.LogWarning("Error loading header info: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("加载头部信息时出错：" + ex.Message); }
         }
 
         /// <summary>Reads the 0x1100-byte header window PkgHeaderDump needs.</summary>
@@ -1099,19 +1099,19 @@ namespace PS4PKGTool
             catch (Exception ex)
             {
                 if (loadVersion == _detailLoadVersion)
-                    Logger.LogError($"Failed to load PKG entries: {ex.Message}.");
+                    Logger.LogError($"加载 PKG 条目失败：{ex.Message}。");
             }
         }
 
         private static PkgEntriesLoadResult BuildPkgEntries(string pkgPath)
         {
             var table = new DataTable();
-            table.Columns.Add("Name");
-            table.Columns.Add("Offset");
-            table.Columns.Add("Size");
-            table.Columns.Add("Flags 1");
-            table.Columns.Add("Flags 2");
-            table.Columns.Add("Encrypted?");
+            table.Columns.Add("名称");
+            table.Columns.Add("偏移");
+            table.Columns.Add("大小");
+            table.Columns.Add("标志 1");
+            table.Columns.Add("标志 2");
+            table.Columns.Add("已加密？");
 
             var entryNames = new Dictionary<string, string>();
             var encryptedEntryNames = new Dictionary<string, string>();
@@ -1183,7 +1183,7 @@ namespace PS4PKGTool
                     }
                 }
             }
-            catch (Exception ex) { Logger.LogWarning("Error displaying package icons: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("显示包图标时出错：" + ex.Message); }
         }
 
         private async Task<string> EnsureTrophyFileExtractedAsync(
@@ -1220,14 +1220,14 @@ namespace PS4PKGTool
                     reader.ExtractEntryToFile(OrbisPkgTool.Pkg.PkgEntryIds.Trophy00Trp, temporaryPath);
 
                 if (new FileInfo(temporaryPath).Length == 0)
-                    throw new InvalidDataException("Extracted trophy archive is empty.");
+                    throw new InvalidDataException("提取的奖杯归档为空。");
                 File.Move(temporaryPath, outputPath, overwrite: true);
-                Logger.LogInformation("Trophy extracted: " + pkg.PS4_Title + " -> " + outputPath);
+                Logger.LogInformation("奖杯已提取：" + pkg.PS4_Title + " -> " + outputPath);
                 return true;
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error extracting trophy data from PKG: " + pkgPath, ex);
+                Logger.LogError("从 PKG 提取奖杯数据时出错：" + pkgPath, ex);
                 return false;
             }
             finally
@@ -1248,7 +1248,7 @@ namespace PS4PKGTool
                 if (loadVersion != _trophyLoadVersion) return;
                 if (trophyFile == null)
                 {
-                    Logger.LogWarning("Trophy metadata unavailable because no extractable TRP was found for " + pkg.PS4_Title + " (" + pkg.Content_ID + ").");
+                    Logger.LogWarning("未找到可提取的 TRP，无法获取奖杯元数据：" + pkg.PS4_Title + " (" + pkg.Content_ID + ").");
                     return;
                 }
 
@@ -1259,7 +1259,7 @@ namespace PS4PKGTool
                 if (cache.TryGet(pkg.Content_ID, out string cachedId))
                 {
                     npCommunicationId = cachedId;
-                    Logger.LogInformation("Using cached NP Communication ID for " + pkg.Content_ID + ": " + cachedId);
+                    Logger.LogInformation("为下列项目使用缓存的 NP Communication ID：" + pkg.Content_ID + ": " + cachedId);
                 }
 
                 TRPReader legacyReader = null;
@@ -1273,11 +1273,11 @@ namespace PS4PKGTool
 
                 Trophy.trophy = legacyReader;
                 PopulateTrophyGrid(result);
-                Logger.LogInformation(result.StatusMessage + (result.NpCommunicationId == null ? string.Empty : " NP Communication ID: " + result.NpCommunicationId));
+                Logger.LogInformation(result.StatusMessage + (result.NpCommunicationId == null ? string.Empty : " NP Communication ID：" + result.NpCommunicationId));
             }
             catch (Exception ex)
             {
-                Logger.LogError("Error in LoadTrophyInfo", ex);
+                Logger.LogError("LoadTrophyInfo 中出错", ex);
             }
         }
 
@@ -1285,15 +1285,15 @@ namespace PS4PKGTool
         {
             var table = new DataTable();
             table.Columns.Add("ID", typeof(string));
-            table.Columns.Add("Image", typeof(Image));
-            table.Columns.Add("Grade", typeof(string));
-            table.Columns.Add("Hidden", typeof(string));
-            table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("Description", typeof(string));
-            table.Columns.Add("Group", typeof(string));
-            table.Columns.Add("File", typeof(string));
-            table.Columns.Add("Size", typeof(string));
-            table.Columns.Add("Offset", typeof(string));
+            table.Columns.Add("图像", typeof(Image));
+            table.Columns.Add("等级", typeof(string));
+            table.Columns.Add("隐藏", typeof(string));
+            table.Columns.Add("名称", typeof(string));
+            table.Columns.Add("描述", typeof(string));
+            table.Columns.Add("分组", typeof(string));
+            table.Columns.Add("文件", typeof(string));
+            table.Columns.Add("大小", typeof(string));
+            table.Columns.Add("偏移", typeof(string));
 
             var reader = new PS4PKGTool.Utilities.TrophyMetadata.TrpReader();
             var detector = new TrophyResourceDetector();
@@ -1328,8 +1328,8 @@ namespace PS4PKGTool
                     byte[] bytes = reader.ReadEntry(result.Archive, entry);
                     Match idMatch = Regex.Match(name, @"^TROP(?<id>\d{3})\.PNG$", RegexOptions.IgnoreCase);
                     table.Rows.Add(idMatch.Success ? idMatch.Groups["id"].Value : string.Empty,
-                        ResizeTrophyImage(ImageFromDetachedBytes(bytes)), "Unknown", "Unknown", "Metadata unavailable",
-                        result.StatusMessage, "Unknown", name, RoundBytes(entry.Size), "0x" + entry.Offset.ToString("X"));
+                        ResizeTrophyImage(ImageFromDetachedBytes(bytes)), "未知", "未知", "元数据不可用",
+                        result.StatusMessage, "未知", name, RoundBytes(entry.Size), "0x" + entry.Offset.ToString("X"));
                 }
             }
 
@@ -1497,7 +1497,7 @@ namespace PS4PKGTool
                 {
                     BGM.PlayAt9(selectedPkgFilename);
                 }
-                catch (Exception ex) { Logger.LogWarning("BGM playback failed: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("BGM 播放失败：" + ex.Message); }
             };
             bgw.RunWorkerCompleted += (s, e) =>
             {
@@ -1520,7 +1520,7 @@ namespace PS4PKGTool
             {
                 ClearPictureBox(pictureBox1, hide: true);
                 label3.Visible = true;
-                label3.Text = "Image not available";
+                label3.Text = "图片不可用";
             }
 
             darkLabel1.Text = pkg.PS4_Title;
@@ -1594,7 +1594,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error getting PKG list: {ex.Message}");
+                Logger.LogError($"获取 PKG 列表时出错：{ex.Message}");
             }
             return list;
         }
@@ -1651,7 +1651,7 @@ namespace PS4PKGTool
                         toolStripProgressBar1.Minimum = 0;
                         toolStripProgressBar1.Maximum = 100;
                         toolStripProgressBar1.Value = (int)(100.0 * current / max);
-                        toolStripStatusLabel2.Text = $"Saving artwork.. ({current}/{max})";
+                        toolStripStatusLabel2.Text = $"正在保存图片……（{current}/{max}）";
                     });
                 }
             }
@@ -1673,14 +1673,14 @@ namespace PS4PKGTool
         {
             if (!string.IsNullOrEmpty(Helper.Bitmap.FailExtractImageList))
             {
-                Logger.LogInformation("Artwork extraction completed with errors.");
-                ShowWarning("Some PKG fail to extract : \n\n" + Helper.Bitmap.FailExtractImageList, false);
-                Logger.LogWarning("Some PKG fail to extract : \n\n" + Helper.Bitmap.FailExtractImageList);
+                Logger.LogInformation("图片提取完成，但存在错误。");
+                ShowWarning("部分 PKG 提取失败：\n\n" + Helper.Bitmap.FailExtractImageList, false);
+                Logger.LogWarning("部分 PKG 提取失败：\n\n" + Helper.Bitmap.FailExtractImageList);
             }
             else
             {
-                Logger.LogInformation("Artwork saved successfully.");
-                ShowInformation("Artwork saved.", true);
+                Logger.LogInformation("图片保存成功。");
+                ShowInformation("图片已保存。", true);
             }
 
             toolStripStatusLabel2.Text = "... ";
@@ -1708,17 +1708,17 @@ namespace PS4PKGTool
                     try
                     {
                         int rows = dataTable?.Rows.Count ?? 0;
-                        Logger.LogInformation($"Exporting {rows} PKG(s) to Excel...");
-                        this.Invoke((MethodInvoker)delegate { toolStripStatusLabel2.Text = "Exporting PKG list.. "; });
+                        Logger.LogInformation($"正在将 {rows} 个 PKG 导出到 Excel……");
+                        this.Invoke((MethodInvoker)delegate { toolStripStatusLabel2.Text = "正在导出 PKG 列表……"; });
                         var wb = new XLWorkbook();
                         wb.Worksheets.Add(dataTable, "PS4 PKG");
                         wb.SaveAs(excelFilename);
-                        Logger.LogInformation($"Exported {rows} PKG(s) to \"{excelFilename}\".");
-                        this.Invoke((Action)(() => ShowInformation($"PKG list exported.", false)));
+                        Logger.LogInformation($"已将 {rows} 个 PKG 导出到「{excelFilename}」。");
+                        this.Invoke((Action)(() => ShowInformation($"PKG 列表已导出。", false)));
                     }
                     catch (Exception s)
                     {
-                        Logger.LogInformation($"ERROR: Export failed: {s.Message}");
+                        Logger.LogInformation($"错误：导出失败：{s.Message}");
                         this.Invoke((Action)(() => ShowError(s.Message, true)));
                     }
                     break;
@@ -1734,9 +1734,9 @@ namespace PS4PKGTool
                 string cid = row.Cells[3].Value?.ToString();
                 if (!string.IsNullOrEmpty(cid)) ids.Add(cid);
             }
-            if (ids.Count == 0) { ShowError("No PKG file selected.", false); return; }
+            if (ids.Count == 0) { ShowError("未选择 PKG 文件。", false); return; }
             Clipboard.SetText(string.Join("\n", ids));
-            ShowInformation($"{ids.Count} Content ID(s) copied to clipboard.", true);
+            ShowInformation($"已将 {ids.Count} 个内容 ID 复制到剪贴板。", true);
         }
 
         private void CopyTitle()
@@ -1747,9 +1747,9 @@ namespace PS4PKGTool
                 string title = row.Cells[1].Value?.ToString();
                 if (!string.IsNullOrEmpty(title)) titles.Add(title);
             }
-            if (titles.Count == 0) { ShowError("No PKG file selected.", false); return; }
+            if (titles.Count == 0) { ShowError("未选择 PKG 文件。", false); return; }
             Clipboard.SetText(string.Join("\n", titles));
-            ShowInformation($"{titles.Count} Title(s) copied to clipboard.", true);
+            ShowInformation($"已将 {titles.Count} 个标题复制到剪贴板。", true);
         }
 
         private void CopyFilename()
@@ -1760,16 +1760,16 @@ namespace PS4PKGTool
                 string fn = row.Cells[0].Value?.ToString();
                 if (!string.IsNullOrEmpty(fn)) filenames.Add(fn);
             }
-            if (filenames.Count == 0) { ShowError("No PKG file selected.", false); return; }
+            if (filenames.Count == 0) { ShowError("未选择 PKG 文件。", false); return; }
             Clipboard.SetText(string.Join("\n", filenames));
-            ShowInformation($"{filenames.Count} Filename(s) copied to clipboard.", true);
+            ShowInformation($"已将 {filenames.Count} 个文件名复制到剪贴板。", true);
         }
 
         private void RefreshPkgList()
         {
             mainTabControl.SelectedIndex = 0;
-            Logger.LogInformation("Refreshing PKG list..");
-            Logger.LogInformation("Refreshing PKG list...");
+            Logger.LogInformation("正在刷新 PKG 列表……");
+            Logger.LogInformation("正在刷新 PKG 列表……");
 
             // Clear existing data
             PKGGridView.DataSource = null;
@@ -1787,7 +1787,7 @@ namespace PS4PKGTool
 
         private void toolStripMenuItem78_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = DialogResultYesNo("Are you sure you wish to exit?");
+            DialogResult dialog = DialogResultYesNo("确定要退出吗？");
             if (dialog == DialogResult.Yes)
             {
                 Application.Exit();
@@ -1801,8 +1801,8 @@ namespace PS4PKGTool
         {
             using var dialog = new OpenFileDialog
             {
-                Title = "Load PKG Manifest",
-                Filter = "PKG manifest (*.json)|*.json|All files (*.*)|*.*",
+                Title = "加载 PKG 清单",
+                Filter = "PKG 清单 (*.json)|*.json|所有文件 (*.*)|*.*",
                 InitialDirectory = Path.GetDirectoryName(ManifestHelper.ManifestFilePath),
                 FileName = Path.GetFileName(ManifestHelper.ManifestFilePath),
                 CheckFileExists = true,
@@ -1815,20 +1815,20 @@ namespace PS4PKGTool
             var manifest = ManifestHelper.LoadManifest(dialog.FileName);
             if (manifest == null)
             {
-                ShowWarning("The selected manifest could not be loaded.", false);
+                ShowWarning("无法加载所选清单。", false);
                 return;
             }
 
             if (manifest.SchemaVersion != 1)
             {
-                ShowWarning("The selected manifest uses an unsupported format.", false);
+                ShowWarning("所选清单使用了不受支持的格式。", false);
                 return;
             }
 
             var (validEntries, removed) = ManifestHelper.FilterValidEntries(manifest.Entries);
             if (validEntries.Count == 0)
             {
-                ShowWarning("No accessible PKG entries were found in the selected manifest.", false);
+                ShowWarning("所选清单中没有可访问的 PKG 条目。", false);
                 return;
             }
 
@@ -1853,14 +1853,14 @@ namespace PS4PKGTool
             SetDataGridViewCellStyle();
             PopulateGroupedView();
             SetOperationMenusEnabled(true);
-            labelDisplayTotalPKG.Text = $"Displaying {pkgPaths.Count} PS4 PKG";
-            toolStripStatusLabel2.Text = "Manifest loaded.";
+            labelDisplayTotalPKG.Text = $"正在显示 {pkgPaths.Count} 个 PS4 PKG";
+            toolStripStatusLabel2.Text = "清单已加载。";
 
-            Logger.LogInformation($"Manifest loaded from {dialog.FileName}: {validEntries.Count} entries" +
-                (removed > 0 ? $", {removed} unavailable entries skipped" : ""));
-            string message = $"Loaded {validEntries.Count} PKG entries from the manifest.";
+            Logger.LogInformation($"已从 {dialog.FileName} 加载清单：{validEntries.Count} 个条目" +
+                (removed > 0 ? $"，跳过 {removed} 个不可用条目" : ""));
+            string message = $"已从清单加载 {validEntries.Count} 个 PKG 条目。";
             if (removed > 0)
-                message += $"\n{removed} unavailable entries were skipped.";
+                message += $"\n已跳过 {removed} 个不可用条目。";
             ShowInformation(message, true);
         }
 
@@ -1871,7 +1871,7 @@ namespace PS4PKGTool
         /// </summary>
         private void loadFromDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Logger.LogInformation("Loading PKG list from saved directories..");
+            Logger.LogInformation("正在从已保存目录加载 PKG 列表……");
             Helper.LoadFromManifest = false;
             RefreshPkgList();
         }
@@ -1884,13 +1884,13 @@ namespace PS4PKGTool
             var dt = PKGGridView.DataSource as DataTable;
             if (dt == null || dt.Rows.Count == 0)
             {
-                ShowWarning("Nothing to save, the PKG list is empty.", false);
+                ShowWarning("没有可保存的内容，PKG 列表为空。", false);
                 return;
             }
             using var dialog = new SaveFileDialog
             {
-                Title = "Save PKG Manifest",
-                Filter = "PKG manifest (*.json)|*.json|All files (*.*)|*.*",
+                Title = "保存 PKG 清单",
+                Filter = "PKG 清单 (*.json)|*.json|所有文件 (*.*)|*.*",
                 InitialDirectory = Path.GetDirectoryName(ManifestHelper.ManifestFilePath),
                 FileName = Path.GetFileName(ManifestHelper.ManifestFilePath),
                 AddExtension = true,
@@ -1902,7 +1902,7 @@ namespace PS4PKGTool
                 return;
 
             ManifestHelper.SaveManifest(dt, PKG.VerifiedPs4PkgList, dialog.FileName);
-            ShowInformation("Manifest saved.", true);
+            ShowInformation("清单已保存。", true);
         }
 
         /// <summary>
@@ -1910,10 +1910,10 @@ namespace PS4PKGTool
         /// </summary>
         private void emptyListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (DialogResultYesNo("Clear the current PKG list?\n\nPKG files and the cached manifest will not be deleted.") != DialogResult.Yes)
+            if (DialogResultYesNo("清空当前 PKG 列表？\n\n不会删除 PKG 文件和缓存的清单。") != DialogResult.Yes)
                 return;
 
-            Logger.LogInformation("Emptying PKG list..");
+            Logger.LogInformation("正在清空 PKG 列表……");
             Helper.LoadFromManifest = false;
             _detailWorker?.CancelAsync();                       // invalidate in-flight detail loads
             DisposeMainFileListingSession();                    // cancel the selected PKG file list
@@ -1939,9 +1939,9 @@ namespace PS4PKGTool
             ClearSelectedPkgDetails();
             groupedListView?.Clear();
             InitializeEmptyGrid();
-            labelDisplayTotalPKG.Text = "Displaying 0 PS4 PKG";
-            toolStripStatusLabel2.Text = "Ready (empty)";
-            Logger.LogInformation("PKG list emptied.");
+            labelDisplayTotalPKG.Text = "正在显示 0 个 PS4 PKG";
+            toolStripStatusLabel2.Text = "就绪（空）";
+            Logger.LogInformation("PKG 列表已清空。");
         }
 
         /// <summary>Resets the selected-PKG details when the library becomes empty.</summary>
@@ -2013,13 +2013,13 @@ namespace PS4PKGTool
         {
             if (!await Task.Run(() => Tool.CheckForInternetConnection()))
             {
-                ShowWarning("No internet connection detected. Cannot check for updates.", false);
+                ShowWarning("未检测到网络连接，无法检查更新。", false);
                 return;
             }
 
             try
             {
-                Logger.LogInformation("Checking for latest PS4 PKG Tool..");
+                Logger.LogInformation("正在检查 PS4 PKG Tool 最新版本……");
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 var checker = new UpdateChecker("pearlxcore", "PS4-PKG-Tool", "v" + ApplicationVersion);
@@ -2028,7 +2028,7 @@ namespace PS4PKGTool
 
                 if (update == UpdateType.None)
                 {
-                    ShowInformation("The program is up to date.", true);
+                    ShowInformation("程序已是最新版本。", true);
                 }
                 else
                 {
@@ -2043,8 +2043,8 @@ namespace PS4PKGTool
             {
                 // GitHubUpdate throws on API errors, rate limits (60 req/hr unauthenticated),
                 // or malformed release tags - never let that crash the app.
-                Logger.LogError("Update check failed: " + ex.Message);
-                ShowWarning("Could not check for updates. Please try again later.\n\n" + ex.Message, false);
+                Logger.LogError("检查更新失败：" + ex.Message);
+                ShowWarning("无法检查更新，请稍后再试。\n\n" + ex.Message, false);
             }
         }
 
@@ -2082,17 +2082,17 @@ namespace PS4PKGTool
             {
                 if (Shadps4Manager.IsInstallationActive)
                 {
-                    ShowWarning("A shadPS4 installation is in progress.", false);
+                    ShowWarning("shadPS4 正在安装中。", false);
                     return;
                 }
                 var priorityList = GetSelectedPKGDirectoryList(selectionType);
-                if (priorityList.Count == 0) { ShowError("No PKG files to rename.", false); return; }
+                if (priorityList.Count == 0) { ShowError("没有可重命名的 PKG 文件。", false); return; }
                 var priorityConfirm = DialogResultYesNo(
-                    $"Rename {priorityList.Count} PKG file{(priorityList.Count == 1 ? "" : "s")} by install priority?\n\n" +
-                    "Files will be grouped by Title ID and renamed with sequence prefixes:\n" +
-                    "  00 - Base -> 01 - Update\n\nAdd-on and App PKGs are skipped.\n\nContinue?");
+                    $"按安装优先级重命名 {priorityList.Count} 个 PKG 文件{(priorityList.Count == 1 ? "" : "")}？\n\n" +
+                    "文件将按 Title ID 分组，并加上序号前缀重命名：\n" +
+                    "  00 - 本体 -> 01 - 更新\n\n将跳过附加（DLC）和 App 类型的 PKG。\n\n继续？");
                 if (priorityConfirm == DialogResult.No) return;
-                Logger.LogInformation($"Rename by priority: {priorityList.Count} PKG(s)...");
+                Logger.LogInformation($"按优先级重命名：{priorityList.Count} 个 PKG……");
                 var priorityBg = new BackgroundWorker { WorkerReportsProgress = true };
                 priorityBg.DoWork += (_, _) => RenamePKGByPriority(priorityList, priorityBg);
                 priorityBg.ProgressChanged += (_, e) =>
@@ -2107,16 +2107,16 @@ namespace PS4PKGTool
                     try
                     {
                         if (PKG.CountFailRename > 0)
-                            ShowWarning(PKG.CountFailRename + " PKG failed to rename by priority. See program log to view the errors.", false);
+                            ShowWarning(PKG.CountFailRename + " 个 PKG 按优先级重命名失败。请查看程序日志了解错误详情。", false);
                         else
-                            ShowInformation("PKG rename by priority done.", true);
-                        Logger.LogInformation($"Rename by priority: done.");
+                            ShowInformation("按优先级重命名 PKG 已完成。", true);
+                        Logger.LogInformation($"按优先级重命名：已完成。");
                         SaveManifestAfterScan();
                         // GLV cells updated in-place by UpdatePKGFilename during rename
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError("Priority rename completion failed: " + ex.Message);
+                        Logger.LogError("按优先级重命名完成回调失败：" + ex.Message);
                     }
                     finally
                     {
@@ -2137,7 +2137,7 @@ namespace PS4PKGTool
             if (fmtNum == 11)
             {
                 if (string.IsNullOrEmpty(appSettings_.RenameCustomName))
-                { ShowError("Set custom name format in settings.", true); return; }
+                { ShowError("请在设置中指定自定义命名格式。", true); return; }
                 format = appSettings_.RenameCustomName;
             }
             else
@@ -2153,13 +2153,13 @@ namespace PS4PKGTool
                 if (dv != null && !string.IsNullOrEmpty(dv.RowFilter))
                 {
                     var result = DialogResultYesNo(
-                        "A filter is currently active. Rename All will affect ALL PKGs including those hidden by the filter.\n\nContinue?");
+                        "当前有筛选条件生效。全部重命名将影响所有 PKG，包括被筛选隐藏的条目。\n\n继续？");
                     if (result == DialogResult.No) return;
                 }
             }
 
             var pkgList = GetSelectedPKGDirectoryList(selectionType);
-            if (pkgList.Count == 0) { ShowError("No PKG files to rename.", false); return; }
+            if (pkgList.Count == 0) { ShowError("没有可重命名的 PKG 文件。", false); return; }
 
             // Build preview example for confirmation
             string previewName = format
@@ -2174,7 +2174,7 @@ namespace PS4PKGTool
                 .Replace("{SYSTEM_VERSION}", "9.00");
 
             var confirmResult = DialogResultYesNo(
-                $"Rename {pkgList.Count} PKG file{(pkgList.Count == 1 ? "" : "s")}?\n\nFormat: {format}\nExample: {previewName}.pkg");
+                $"重命名 {pkgList.Count} 个 PKG 文件{(pkgList.Count == 1 ? "" : "")}？\n\n格式：{format}\n示例：{previewName}.pkg");
             if (confirmResult == DialogResult.No) return;
 
             RenamePKG(format, pkgList);
@@ -2200,7 +2200,7 @@ namespace PS4PKGTool
 
         private void InitializedExportPKGToExcel(DataTable dataTable = null)
         {
-            if (ShowSaveFileDialog("Export PKG List to Excel", "*.xlsx|*.xlsx", out SaveFileDialog sfd))
+            if (ShowSaveFileDialog("导出 PKG 列表到 Excel", "*.xlsx|*.xlsx", out SaveFileDialog sfd))
             {
                 string excelFilename = sfd.FileName;
                 var bg = new BackgroundWorker();
@@ -2225,9 +2225,9 @@ namespace PS4PKGTool
                 string tid = row.Cells[2].Value?.ToString();
                 if (!string.IsNullOrEmpty(tid)) ids.Add(tid);
             }
-            if (ids.Count == 0) { ShowError("No PKG file selected.", false); return; }
+            if (ids.Count == 0) { ShowError("未选择 PKG 文件。", false); return; }
             Clipboard.SetText(string.Join("\n", ids));
-            ShowInformation($"{ids.Count} Title ID(s) copied to clipboard.", true);
+            ShowInformation($"已将 {ids.Count} 个标题 ID 复制到剪贴板。", true);
         }
 
         private void CopyID_Click(object sender, EventArgs e)
@@ -2272,7 +2272,7 @@ namespace PS4PKGTool
         #region ImageIconExtractor
         private void InitializedImageIconExtractor(string imageType, string selectionType)
         {
-            DialogResult extractionDialog = DialogResultYesNoCancel("Create subfolder for each PKG?");
+            DialogResult extractionDialog = DialogResultYesNoCancel("为每个 PKG 创建子文件夹？");
 
             if (extractionDialog == DialogResult.Cancel)
                 return;
@@ -2281,11 +2281,11 @@ namespace PS4PKGTool
 
             if (ShowFolderBrowserDialog(out FolderBrowserDialog fbd))
             {
-                Logger.LogInformation("Saving artwork..");
-                toolStripStatusLabel2.Text = "Saving artwork..";
+                Logger.LogInformation("正在保存图片……");
+                toolStripStatusLabel2.Text = "正在保存图片……";
                 var outputDirectory = fbd.SelectedPath;
                 var pkgList = GetSelectedPKGDirectoryList(selectionType);
-                Logger.LogInformation($"Save artwork: {pkgList.Count} PKG(s)");
+                Logger.LogInformation($"保存图片：{pkgList.Count} 个 PKG");
                 toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
                 toolStripProgressBar1.Minimum = 0;
                 toolStripProgressBar1.Maximum = 100;
@@ -2377,7 +2377,7 @@ namespace PS4PKGTool
         private void PKGGridView_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = null;
-            try { files = (string[])e.Data.GetData(DataFormats.FileDrop); } catch (Exception ex) { Logger.LogWarning("Drag-drop data retrieval failed: " + ex.Message); }
+            try { files = (string[])e.Data.GetData(DataFormats.FileDrop); } catch (Exception ex) { Logger.LogWarning("拖放数据获取失败：" + ex.Message); }
             if (files == null || files.Length == 0) return;
 
             // Collect valid folder paths first.
@@ -2447,7 +2447,7 @@ namespace PS4PKGTool
                     includeImmediateChildrenWhenNonRecursive: false);
                 var pkgFiles = scan.Files.ToList();
                 foreach (var issue in scan.Issues)
-                    Logger.LogWarning($"Could not scan '{issue.Path}': {issue.Message}");
+                    Logger.LogWarning($"无法扫描「{issue.Path}」：{issue.Message}");
 
                 int totalFiles = pkgFiles.Count;
                 this.Invoke((MethodInvoker)delegate
@@ -2459,7 +2459,7 @@ namespace PS4PKGTool
                 {
                     this.Invoke((MethodInvoker)delegate
                     {
-                        toolStripStatusLabel2.Text = $"No PKG files found in {folderPath}.";
+                        toolStripStatusLabel2.Text = $"在 {folderPath} 中未找到 PKG 文件。";
                     });
                     return;
                 }
@@ -2502,7 +2502,7 @@ namespace PS4PKGTool
                     if (processed % 10 == 0 || processed == totalFiles)
                     {
                         int p = processed, t = totalFiles;
-                        this.Invoke((MethodInvoker)delegate { toolStripStatusLabel2.Text = $"Loading PS4 PKG.. ({p}/{t})"; toolStripProgressBar1.Increment(10); });
+                        this.Invoke((MethodInvoker)delegate { toolStripStatusLabel2.Text = $"正在加载 PS4 PKG……（{p}/{t}）"; toolStripProgressBar1.Increment(10); });
                     }
                     // O(1) duplicate check
                     if (!existingSet.Add(pkgFile)) continue;
@@ -2595,7 +2595,7 @@ namespace PS4PKGTool
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError($"Failed to process dropped PKG {pkgFile}: {ex.Message}");
+                        Logger.LogError($"处理拖放的 PKG {pkgFile} 失败：{ex.Message}");
                     }
                 }
                 ApplyShadps4Status(scanDt);
@@ -2604,11 +2604,11 @@ namespace PS4PKGTool
                 this.Invoke((MethodInvoker)delegate
                 {
                     toolStripProgressBar1.Value = 0;
-                    toolStripStatusLabel2.Text = $"Added {finalAdded} PKG(s) from {folderPath}. Total: {dt.Rows.Count}";
-                    labelDisplayTotalPKG.Text = $"Displaying {dt.Rows.Count} PS4 PKG";
+                    toolStripStatusLabel2.Text = $"已从 {folderPath} 添加 {finalAdded} 个 PKG。总数：{dt.Rows.Count}";
+                    labelDisplayTotalPKG.Text = $"正在显示 {dt.Rows.Count} 个 PS4 PKG";
                 });
 
-                Logger.LogInformation($"Dropped folder scan complete: {finalAdded} new PKGs from {folderPath}.");
+                Logger.LogInformation($"拖放文件夹扫描完成：来自 {folderPath} 的 {finalAdded} 个新 PKG。");
             };
             bw.RunWorkerCompleted += (s, args) =>
             {
@@ -2618,7 +2618,7 @@ namespace PS4PKGTool
                 FinalizePkgProcess = false;
 
                 if (args.Error != null)
-                    Logger.LogError($"Dropped folder scan failed for {folderPath}: {args.Error}");
+                    Logger.LogError($"拖放文件夹 {folderPath} 扫描失败：{args.Error}");
 
                 // Reattach even when every candidate failed to parse.
                 if (scanDt != null)
@@ -2635,7 +2635,7 @@ namespace PS4PKGTool
                 }
                 else
                 {
-                    Logger.LogInformation($"Drag-drop scan done. Folder: {folderPath}");
+                    Logger.LogInformation($"拖放扫描完成。文件夹：{folderPath}");
                     SetOperationMenusEnabled(true);
                     try
                     {
@@ -2647,10 +2647,10 @@ namespace PS4PKGTool
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError("Post-scan refresh failed: " + ex.Message);
+                        Logger.LogError("扫描后刷新失败：" + ex.Message);
                     }
                     GetDrivesFreeSpace();
-                    labelDisplayTotalPKG.Text = $"Displaying {PKGGridView.Rows.Count} PS4 PKG";
+                    labelDisplayTotalPKG.Text = $"正在显示 {PKGGridView.Rows.Count} 个 PS4 PKG";
                     SetBackgroundMusicVolume();
                     SetDataGridViewCellStyle();
                     toolStripStatusLabel2.Text = "... ";
@@ -2699,7 +2699,7 @@ namespace PS4PKGTool
                         if (manifest != null && ManifestHelper.ValidateManifest(manifest, appSettings_).IsValid)
                         {
                             var (validEntries, removed) = ManifestHelper.FilterValidEntries(manifest.Entries);
-                            Logger.LogInformation($"Manifest loaded: {validEntries.Count} entries" + (removed > 0 ? $", {removed} removed" : ""));
+                            Logger.LogInformation($"清单已加载：{validEntries.Count} 个条目" + (removed > 0 ? $"，已移除 {removed} 个" : ""));
                             var dt = ManifestHelper.BuildDataTableFromManifest(validEntries);
                             var pkgPaths = ManifestHelper.BuildPkgPathList(validEntries);
 
@@ -2723,13 +2723,13 @@ namespace PS4PKGTool
                         }
                         else
                         {
-                            Logger.LogInformation("Manifest invalid or expired. Falling back to directory scan.");
+                            Logger.LogInformation("清单无效或已过期，回退到目录扫描。");
                             ManifestHelper.DeleteManifest();
                         }
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError($"Failed to load manifest: {ex.Message}. Falling back to directory scan.");
+                        Logger.LogError($"加载清单失败：{ex.Message}。回退到目录扫描。");
                     }
                 }
 
@@ -2739,14 +2739,14 @@ namespace PS4PKGTool
                 {
                     this.Invoke((MethodInvoker)delegate
                     {
-                        toolStripStatusLabel2.Text = "Scanning directory.. " + "(" + directory + ") ";
+                        toolStripStatusLabel2.Text = "正在扫描目录……" + "(" + directory + ") ";
                     });
                     var scan = PkgDirectoryScanner.Scan(
                         directory, appSettings_.ScanRecursive, ExcludedDirectoryList);
                     foreach (string pkgFile in scan.Files)
                         pkgFileSet.Add(pkgFile);
                     foreach (var issue in scan.Issues)
-                        Logger.LogWarning($"Could not scan '{issue.Path}': {issue.Message}");
+                        Logger.LogWarning($"无法扫描「{issue.Path}」：{issue.Message}");
                 }
 
                 List<string> PkgFileList = pkgFileSet
@@ -2771,7 +2771,7 @@ namespace PS4PKGTool
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogWarning($"Could not validate PKG header '{item}': {ex.Message}");
+                        Logger.LogWarning($"无法校验 PKG 头部「{item}」：{ex.Message}");
                     }
                 }
 
@@ -2782,7 +2782,7 @@ namespace PS4PKGTool
                     toolStripProgressBar1.Maximum = headerVerifiedPaths.Count;
                 });
 
-                Logger.LogInformation($"Scanning {headerVerifiedPaths.Count} PKGs from directories...");
+                Logger.LogInformation($"正在从目录扫描 {headerVerifiedPaths.Count} 个 PKG……");
                 // ── Pre-compute loop-invariant data ────────────────
                 var verRegex = new Regex(@"^0+(?=\d+\.)", RegexOptions.Compiled);
                 var imageCvt = new ImageConverter();
@@ -2821,7 +2821,7 @@ namespace PS4PKGTool
                     {
                         darkStatusStrip1.Invoke((MethodInvoker)delegate
                         {
-                            toolStripStatusLabel2.Text = $"Loading PS4 PKG.. ({metadataProcessed}/{headerVerifiedPaths.Count}) ";
+                            toolStripStatusLabel2.Text = $"正在加载 PS4 PKG……（{metadataProcessed}/{headerVerifiedPaths.Count}）";
                             toolStripProgressBar1.Value = Math.Min(metadataProcessed, toolStripProgressBar1.Maximum);
                         });
                     }
@@ -2832,7 +2832,7 @@ namespace PS4PKGTool
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError($"Failed to read PKG, skipping: {Path.GetFileName(pkg)} - {ex.Message}");
+                        Logger.LogError($"读取 PKG 失败，已跳过：{Path.GetFileName(pkg)} - {ex.Message}");
                         continue;
                     }
                     
@@ -2965,8 +2965,8 @@ namespace PS4PKGTool
             {
                 if (args.Error != null)
                 {
-                    Logger.LogError("PKG directory scan failed: " + args.Error);
-                    ShowError("The PKG scan stopped unexpectedly:\n" + args.Error.Message, false);
+                    Logger.LogError("PKG 目录扫描失败：" + args.Error);
+                    ShowError("PKG 扫描意外中断：\n" + args.Error.Message, false);
                 }
                 PostPkgLoad();
             };
@@ -3029,7 +3029,7 @@ namespace PS4PKGTool
                         // status) render as a blank header "▼  (N)" at the very
                         // top - name the bucket so it is understandable.
                         string key = item.Row[groupCol]?.ToString() ?? "";
-                        return string.IsNullOrWhiteSpace(key) ? "Unknown" : key;
+                        return string.IsNullOrWhiteSpace(key) ? "未知" : key;
                     },
                     item => BuildGlvRowData(item),
                     presentationFunc: BuildGlvCellPresentation
@@ -3043,7 +3043,7 @@ namespace PS4PKGTool
             {
                 // A GLV refresh failure must never break the enclosing operation's completion
                 // (which would leave the form and the GLV context menu disabled).
-                Logger.LogWarning("Failed to refresh grouped view: " + ex.Message);
+                Logger.LogWarning("刷新分组视图失败：" + ex.Message);
             }
         }
 
@@ -3165,8 +3165,8 @@ namespace PS4PKGTool
                     return new DarkGroupedListViewCellPresentation
                     {
                         Text = string.IsNullOrWhiteSpace(status)
-                            ? "[Installed]"
-                            : "● " + status + (installed ? " [Installed]" : ""),
+                            ? "[已安装]"
+                            : "● " + status + (installed ? " [已安装]" : ""),
                         ForeColor = statusColor,
                         SelectionForeColor = statusColor,
                         BackColor = backColor
@@ -3205,12 +3205,12 @@ namespace PS4PKGTool
             string filePath = groupedListView?.SelectedFilePath;
             if (string.IsNullOrEmpty(filePath))
             {
-                Logger.LogInformation("GLV selection: SelectedFilePath is null/empty");
+                Logger.LogInformation("GLV 选择：SelectedFilePath 为 null/空");
                 return;
             }
             if (!File.Exists(filePath))
             {
-                Logger.LogInformation($"GLV selection: file not found: {filePath}");
+                Logger.LogInformation($"GLV 选择：找不到文件：{filePath}");
                 return;
             }
 
@@ -3218,7 +3218,7 @@ namespace PS4PKGTool
             var dt = PKGGridView.DataSource as DataTable;
             if (dt == null)
             {
-                Logger.LogInformation("GLV selection: DataSource is null");
+                Logger.LogInformation("GLV 选择：DataSource 为 null");
                 return;
             }
 
@@ -3239,7 +3239,7 @@ namespace PS4PKGTool
                     return;
                 }
             }
-            Logger.LogInformation($"GLV selection: no grid row matches '{filePath}'");
+            Logger.LogInformation($"GLV 选择：没有匹配的网格行「{filePath}」");
         }
 
         // ── GLV context menu helpers ─────────────────────────
@@ -3272,23 +3272,23 @@ namespace PS4PKGTool
         private void GlvCopyContentId()
         {
             var paths = GetGLVTargetPaths();
-            if (paths.Count == 0) { ShowError("No PKG selected.", false); return; }
+            if (paths.Count == 0) { ShowError("未选择 PKG。", false); return; }
             var ids = paths.Select(p => { var r = PkgMetadataReader.ReadMetadataOnly(p); return r.SfoContentId; });
             Clipboard.SetText(string.Join("\n", ids));
-            ShowInformation($"{paths.Count} Content ID(s) copied.", true);
+            ShowInformation($"已复制 {paths.Count} 个内容 ID。", true);
         }
 
         private void GlvViewInExplorer()
         {
             var paths = GetGLVTargetPaths();
-            if (paths.Count == 0) { ShowError("No PKG selected.", false); return; }
+            if (paths.Count == 0) { ShowError("未选择 PKG。", false); return; }
             foreach (var p in paths) Process.Start("explorer.exe", "/select," + p);
         }
 
         private void GlvViewChangeInfo()
         {
             var paths = GetGLVTargetPaths();
-            if (paths.Count == 0) { ShowError("No PKG selected.", false); return; }
+            if (paths.Count == 0) { ShowError("未选择 PKG。", false); return; }
             PKG.SelectedPKGFilename = paths[0];
             ViewUpdateChangelog();
             string changeInfoFile = AppDataDirectory + "changeinfo.xml";
@@ -3300,28 +3300,28 @@ namespace PS4PKGTool
                     File.Delete(changeInfoFile);
                     using (var viewer = new PKGChangeInfoViewer(data)) { viewer.ShowDialog(); }
                 }
-                catch (Exception ex) { ShowError("Error viewing change info: " + ex.Message, true); }
+                catch (Exception ex) { ShowError("查看变更信息时出错：" + ex.Message, true); }
             }
         }
 
         private void GlvDeletePkg()
         {
             var paths = GetGLVTargetPaths();
-            if (paths.Count == 0) { ShowError("No PKG selected.", false); return; }
+            if (paths.Count == 0) { ShowError("未选择 PKG。", false); return; }
             var confirm = DialogResultYesNo(
-                $"{paths.Count} PKG file{(paths.Count == 1 ? "" : "s")} will be permanently deleted.\n\nContinue?");
+                $"将永久删除 {paths.Count} 个 PKG 文件。\n\n是否继续？");
             if (confirm != DialogResult.Yes) return;
-            Logger.LogInformation($"Delete: {paths.Count} PKG(s)");
+            Logger.LogInformation($"删除：{paths.Count} 个 PKG");
             PKG.isDeletingPkg = true;
             toolStripProgressBar1.Visible = true;
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
-            toolStripStatusLabel2.Text = "Deleting...";
+            toolStripStatusLabel2.Text = "正在删除……";
             foreach (var p in paths)
             {
                 try { File.Delete(p); }
-                catch (Exception ex) { Logger.LogError($"Failed to delete {p}: {ex.Message}"); }
+                catch (Exception ex) { Logger.LogError($"删除 {p} 失败：{ex.Message}"); }
             }
-            Logger.LogInformation($"Delete completed: {paths.Count} PKG(s)");
+            Logger.LogInformation($"删除完成：{paths.Count} 个 PKG");
             PKG.isDeletingPkg = false;
             toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
             RefreshPkgList();
@@ -3331,7 +3331,7 @@ namespace PS4PKGTool
         {
             if (Shadps4Manager.IsInstallationActive)
             {
-                ShowWarning("A shadPS4 installation is in progress.", false);
+                ShowWarning("shadPS4 正在安装中。", false);
                 return;
             }
             // Always target the whole group - right-click an item or a header,
@@ -3339,11 +3339,11 @@ namespace PS4PKGTool
             if (_glvGroupHeaderIndex < 0 && !string.IsNullOrEmpty(groupedListView?.SelectedFilePath))
                 _glvGroupHeaderIndex = groupedListView.FindGroupForPath(groupedListView.SelectedFilePath);
             var paths = GetGLVTargetPaths();
-            if (paths.Count == 0) { ShowError("No PKG selected.", false); return; }
+            if (paths.Count == 0) { ShowError("未选择 PKG。", false); return; }
             var confirm = DialogResultYesNo(
-                $"Rename {paths.Count} PKG file{(paths.Count == 1 ? "" : "s")} by install priority?\n\n" +
-                "Files will be grouped by Title ID and renamed with sequence prefixes:\n" +
-                "  00 - Base -> 01 - Update\n\nAdd-on and App PKGs are skipped.\n\nContinue?");
+                $"按安装优先级重命名 {paths.Count} 个 PKG 文件{(paths.Count == 1 ? "" : "")}？\n\n" +
+                "文件将按 Title ID 分组，并加上序号前缀重命名：\n" +
+                "  00 - 本体 -> 01 - 更新\n\n将跳过附加（DLC）和 App 类型的 PKG。\n\n继续？");
             if (confirm != DialogResult.Yes) return;
             var bg = new BackgroundWorker { WorkerReportsProgress = true };
             bg.DoWork += (_, _) => RenamePKGByPriority(paths, bg);
@@ -3359,15 +3359,15 @@ namespace PS4PKGTool
                 try
                 {
                     if (PKG.CountFailRename > 0)
-                        ShowWarning(PKG.CountFailRename + " PKG failed to rename by priority. See program log to view the errors.", false);
+                        ShowWarning(PKG.CountFailRename + " 个 PKG 按优先级重命名失败。请查看程序日志了解错误详情。", false);
                     else
-                        ShowInformation("PKG rename by priority done.", true);
+                        ShowInformation("按优先级重命名 PKG 已完成。", true);
                     SaveManifestAfterScan();
                     // GLV cells updated in-place by UpdatePKGFilename during rename.
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("GLV priority rename completion failed: " + ex.Message);
+                    Logger.LogError("GLV 按优先级重命名完成回调失败：" + ex.Message);
                 }
                 finally
                 {
@@ -3382,17 +3382,17 @@ namespace PS4PKGTool
             toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
             toolStripProgressBar1.Maximum = 100;
             toolStripProgressBar1.Value = 0;
-            toolStripStatusLabel2.Text = "Renaming by install priority...";
+            toolStripStatusLabel2.Text = "正在按安装优先级重命名……";
             bg.RunWorkerAsync();
         }
 
         private void GlvExtractImages()
         {
             var paths = GetGLVTargetPaths();
-            if (paths.Count == 0) { ShowError("No PKG selected.", false); return; }
-            using var fbd = new FolderBrowserDialog { Description = "Select output folder for artwork" };
+            if (paths.Count == 0) { ShowError("未选择 PKG。", false); return; }
+            using var fbd = new FolderBrowserDialog { Description = "选择图片输出文件夹" };
             if (fbd.ShowDialog() != DialogResult.OK) return;
-            Logger.LogInformation($"Save artwork: {paths.Count} PKG(s) to {fbd.SelectedPath}");
+            Logger.LogInformation($"保存图片：{paths.Count} 个 PKG 到 {fbd.SelectedPath}");
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
             var bg = new BackgroundWorker();
             bg.DoWork += (_, _) =>
@@ -3401,13 +3401,13 @@ namespace PS4PKGTool
             };
             bg.RunWorkerCompleted += (_, _) =>
             {
-                Logger.LogInformation("Artwork saved successfully.");
-                ShowInformation($"Artwork saved to {fbd.SelectedPath}", true);
+                Logger.LogInformation("图片保存成功。");
+                ShowInformation($"图片已保存到 {fbd.SelectedPath}", true);
                 toolStripStatusLabel2.Text = "...";
                 toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
                 toolStripProgressBar1.Value = 0;
             };
-            toolStripStatusLabel2.Text = "Saving artwork...";
+            toolStripStatusLabel2.Text = "正在保存图片……";
             bg.RunWorkerAsync();
         }
 
@@ -3433,13 +3433,13 @@ namespace PS4PKGTool
                         string latestValue;
                         var updateInfo = OrbisPkgTool.Psn.UpdateCheck.CheckForUpdate(titleId);
                         if (updateInfo != null && updateInfo.Tag?.Package?.ManifestUrl != null)
-                            latestValue = updateInfo.Tag.Package.Version ?? "No Update";
+                            latestValue = updateInfo.Tag.Package.Version ?? "无更新";
                         else
-                            latestValue = "No Update";
+                            latestValue = "无更新";
 
                         latestByTitleId[titleId] = latestValue;
                     }
-                    catch (Exception ex) { Logger.LogWarning("Update check failed for Title ID " + titleId + ": " + ex.Message); }
+                    catch (Exception ex) { Logger.LogWarning("检查 Title ID 的更新失败：" + titleId + ": " + ex.Message); }
                 }
                 if (latestByTitleId.Count == 0) return;
                 this.Invoke((Action)(() =>
@@ -3480,7 +3480,7 @@ namespace PS4PKGTool
                         row[PkgColumns.Shadps4] = status;
                 }
             }
-            catch (Exception ex) { Logger.LogWarning("Failed to apply shadPS4 status: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("应用 shadPS4 状态失败：" + ex.Message); }
         }
 
         /// <summary>Marks Title IDs with a validated game folder in the configured local shadPS4 library.</summary>
@@ -3511,7 +3511,7 @@ namespace PS4PKGTool
                         if (!string.IsNullOrWhiteSpace(titleId)) installedTitleIds.Add(titleId);
                     }
                 }
-                catch (Exception ex) { Logger.LogWarning("Failed to read shadPS4 install library: " + ex.Message); }
+                catch (Exception ex) { Logger.LogWarning("读取 shadPS4 安装库失败：" + ex.Message); }
             }
 
             foreach (DataRow row in dt.Rows)
@@ -3565,7 +3565,7 @@ namespace PS4PKGTool
                         : CultureInfo.CurrentCulture.TextInfo.ToTitleCase(entry.Ps5Bc.Replace("_", " ").ToLower());
                 }
             }
-            catch (Exception ex) { Logger.LogWarning("Failed to apply PS5 BC status: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("应用 PS5 BC 状态失败：" + ex.Message); }
         }
 
         private sealed class Ps5BcStatusEntry
@@ -3594,10 +3594,10 @@ namespace PS4PKGTool
                 if (Helper.LoadFromManifest)
                 {
                     var result = DialogResultYesNo(
-                        "Manifest loaded but no PKG files are currently accessible.\n\n" +
-                        "The PKG files may be on a network drive or external storage\n" +
-                        "that is not currently connected.\n\n" +
-                        "Would you like to scan directories instead?");
+                        "清单已加载，但当前没有可访问的 PKG 文件。\n\n" +
+                        "这些 PKG 文件可能位于网络驱动器或外置存储上\n" +
+                        "而该设备当前未连接。\n\n" +
+                        "是否改为扫描目录？");
                     if (result == DialogResult.Yes)
                     {
                         Helper.LoadFromManifest = false;
@@ -3612,15 +3612,15 @@ namespace PS4PKGTool
                     if (missingDirs.Count > 0)
                     {
                         var result = DialogResultYesNo(
-                            "No PKG files found. Some configured directories do not exist:\n" +
+                            "未找到 PKG 文件。部分已配置的目录不存在：\n" +
                             string.Join("\n", missingDirs) +
-                            "\n\nWould you like to open Program Settings to reconfigure?");
+                            "\n\n是否打开程序设置进行重新配置？");
                         if (result == DialogResult.Yes)
                             OpenPKGDirectorySettings();
                     }
                     else
                     {
-                        ShowInformation("No PKG files found in the configured directories.", true);
+                        ShowInformation("在已配置的目录中未找到 PKG 文件。", true);
                     }
                 }
             }
@@ -3716,7 +3716,7 @@ namespace PS4PKGTool
             {
                 btnGroupExpand.Enabled = hasVisiblePackages;
                 if (!hasVisiblePackages)
-                    btnGroupExpand.Text = "Expand All";
+                    btnGroupExpand.Text = "全部展开";
             }
             if (btnAssetBack != null)
                 btnAssetBack.Enabled = hasSelectedPackage && btnAssetBack.Visible &&
@@ -3854,7 +3854,7 @@ namespace PS4PKGTool
                     ApplyFilters();
                 }
             }
-            catch (Exception ex) { Logger.LogWarning("Error updating column visibility: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("更新列可见性时出错：" + ex.Message); }
         }
 
       
@@ -3869,7 +3869,7 @@ namespace PS4PKGTool
                 };
                 bgw.DoWork += (s, a) =>
                 {
-                    Logger.LogInformation("Extracting PKG background music..");
+                    Logger.LogInformation("正在提取 PKG 背景音乐……");
                     BGM.ExtractBgm();
                 };
                 bgw.RunWorkerCompleted += (s, a) =>
@@ -3878,14 +3878,14 @@ namespace PS4PKGTool
                 };
                 bgw.RunWorkerAsync();
                 GetDrivesFreeSpace();
-                labelDisplayTotalPKG.Text = $"Displaying {PKGGridView.Rows.Count} PS4 PKG";
-                Logger.LogInformation($"Loading PKG done. {PKGGridView.Rows.Count} PKG found.");
+                labelDisplayTotalPKG.Text = $"正在显示 {PKGGridView.Rows.Count} 个 PS4 PKG";
+                Logger.LogInformation($"加载 PKG 完成。找到 {PKGGridView.Rows.Count} 个 PKG。");
             }
         }
 
         private void GetDrivesFreeSpace()
         {
-            Logger.LogInformation("Checking hard disk free space..");
+            Logger.LogInformation("正在检查硬盘剩余空间……");
             try
             {
                 foreach (var drive in DriveInfo.GetDrives())
@@ -3898,12 +3898,12 @@ namespace PS4PKGTool
                     string formattedFreeSpace = $"{freeSpaceGB:F2} GB";
                     string formattedTotalSpace = $"{totalSpaceGB:F2} GB";
 
-                    Logger.LogInformation($"[{drive}] Free Space: {formattedFreeSpace}/{formattedTotalSpace}");
+                    Logger.LogInformation($"[{drive}] 剩余空间：{formattedFreeSpace}/{formattedTotalSpace}");
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError("An error occurred while getting hard disk free space: " + ex.Message);
+                Logger.LogError("获取硬盘剩余空间时发生错误：" + ex.Message);
             }
         }
         #endregion PKGScanning
@@ -3949,8 +3949,8 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error applying filter: {ex.Message}");
-                ShowError($"Error applying filter: {ex.Message}", true);
+                Logger.LogError($"应用筛选条件时出错：{ex.Message}");
+                ShowError($"应用筛选条件时出错：{ex.Message}", true);
             }
         }
 
@@ -4061,7 +4061,7 @@ namespace PS4PKGTool
                 foreach (string s in _filterState.CompatStatuses)
                     desired.Add((s, () => { _filterState.CompatStatuses.Remove(s); ApplyFilters(); }));
                 if (_filterState.Shadps4InstalledOnly)
-                    desired.Add(("ShadPS4 Installed", () => { _filterState.Shadps4InstalledOnly = false; ApplyFilters(); }));
+                    desired.Add(("已安装 shadPS4", () => { _filterState.Shadps4InstalledOnly = false; ApplyFilters(); }));
                 if (!string.IsNullOrWhiteSpace(_filterState.SearchText))
                     desired.Add(($"\"{_filterState.SearchText.Trim()}\"", () => { tbSearchGame.Text = ""; tbSearchGame.SearchText = ""; ApplyFilters(); }));
 
@@ -4087,17 +4087,17 @@ namespace PS4PKGTool
                 {
                     int visible = dt.DefaultView.Count;
                     int total = dt.Rows.Count;
-                    lblFilterCount.Text = visible == total ? "" : $"matches {visible} / {total}";
+                    lblFilterCount.Text = visible == total ? "" : $"匹配 {visible} / {total}";
                     // GLV tab indicator (option 2): the filter applies to the
                     // grouped view too - say so there.
                     bool active = !_filterState.IsEmpty;
-                    lblGlvFilterHint.Text = active ? $"filtered: {visible} / {total}" : "";
+                    lblGlvFilterHint.Text = active ? $"已筛选：{visible} / {total}" : "";
                 }
                 UpdatePackageActionButtonStates();
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("Filter bar refresh failed: " + ex.Message);
+                Logger.LogWarning("筛选栏刷新失败：" + ex.Message);
             }
         }
 
@@ -4218,8 +4218,8 @@ namespace PS4PKGTool
         /// <summary>Shows the current window width (helper for layout tuning).</summary>
         private void btnShowWindowWidth_Click(object sender, EventArgs e)
         {
-            AppMessageBox.Show("Window Width",
-                $"Current window width: {this.Width} px\nClient width: {this.ClientSize.Width} px",
+            AppMessageBox.Show("窗口宽度",
+                $"当前窗口宽度：{this.Width} 像素\n客户区宽度：{this.ClientSize.Width} 像素",
                 AppMessageType.Info, AppMessageButtons.OK);
         }
 
@@ -4322,7 +4322,7 @@ namespace PS4PKGTool
             }
             // After a successful install the wizard persists the active
             // core/launcher itself; just refresh any cached state.
-            Logger.LogInformation("shadPS4 setup wizard closed.");
+            Logger.LogInformation("shadPS4 设置向导已关闭。");
         }
 
         /// <summary>Resolves managed build ids against the installed store (hook for the active-core model).</summary>
@@ -4332,7 +4332,7 @@ namespace PS4PKGTool
         private void toolStripMenuItemShadps4Launch_Click(object sender, EventArgs e)
         {
             var row = GetSelectedGridRow();
-            if (row == null) { ShowWarning("Select a PKG in the grid first.", false); return; }
+            if (row == null) { ShowWarning("请先在列表中选择一个 PKG。", false); return; }
 
             string titleId = row[PkgColumns.TitleId]?.ToString() ?? "";
 
@@ -4351,9 +4351,9 @@ namespace PS4PKGTool
                     // External candidate - explicit approval only.
                     var adopt = AppMessageBox.Show("shadPS4",
                         $"{error}\n\n" +
-                        $"External shadPS4 core detected:\n{candidate}\n\n" +
-                        "This core was not verified as belonging to the selected QtLauncher build.\n\n" +
-                        "Adopt This Core?",
+                        $"检测到外部 shadPS4 核心：\n{candidate}\n\n" +
+                        "无法确认该核心属于所选的 QtLauncher 版本。\n\n" +
+                        "采用该核心？",
                         AppMessageType.Warning, AppMessageButtons.YesNoCancel);
                     if (adopt != DialogResult.Yes) return;
                     appSettings_.Shadps4ActiveCore = Shadps4ActiveCore.ForAdopted(candidate);
@@ -4363,7 +4363,7 @@ namespace PS4PKGTool
                 else
                 {
                     var setup = AppMessageBox.Show("shadPS4",
-                        $"{error}\n\nOpen Program Settings to select or install shadPS4?",
+                        $"{error}\n\n打开程序设置以选择或安装 shadPS4？",
                         AppMessageType.Warning, AppMessageButtons.YesNo);
                     if (setup == DialogResult.Yes) OpenProgramSettings();
                     return;
@@ -4395,7 +4395,7 @@ namespace PS4PKGTool
                     // Installing into the library is the supported path.
                     // Offer that path directly for the PKG the user tried to launch.
                     var installChoice = AppMessageBox.Show("shadPS4",
-                        message + "\n\nInstall this PKG to the configured shadPS4 library now?",
+                        message + "\n\n立即将此 PKG 安装到已配置的 shadPS4 库？",
                         AppMessageType.Warning, AppMessageButtons.YesNo);
                     if (installChoice == DialogResult.Yes)
                         BeginShadps4Install(row);
@@ -4423,8 +4423,8 @@ namespace PS4PKGTool
                 {
                     var adopt = AppMessageBox.Show("shadPS4",
                         $"{error}\n\n" +
-                        $"A QtLauncher was detected:\n{candidate}\n\n" +
-                        "Adopt This Launcher?",
+                        $"检测到 QtLauncher：\n{candidate}\n\n" +
+                        "采用该启动器？",
                         AppMessageType.Warning, AppMessageButtons.YesNoCancel);
                     if (adopt != DialogResult.Yes) return;
                     appSettings_.Shadps4ActiveLauncher = Shadps4ActiveCore.ForAdopted(candidate);
@@ -4434,7 +4434,7 @@ namespace PS4PKGTool
                 else
                 {
                     var setup = AppMessageBox.Show("shadPS4",
-                        $"{error}\n\nOpen Program Settings to select or install the Qt launcher?",
+                        $"{error}\n\n打开程序设置以选择或安装 Qt 启动器？",
                         AppMessageType.Warning, AppMessageButtons.YesNo);
                     if (setup == DialogResult.Yes) OpenProgramSettings();
                     return;
@@ -4450,11 +4450,11 @@ namespace PS4PKGTool
                     WorkingDirectory = Path.GetDirectoryName(launcherPath) ?? "",
                 };
                 Process.Start(psi);
-                ShowInformation("shadPS4 QtLauncher opened.", false);
+                ShowInformation("已打开 shadPS4 QtLauncher。", false);
             }
             catch (Exception ex)
             {
-                ShowError($"Failed to open the shadPS4 QtLauncher:\n{ex.Message}", false);
+                ShowError($"打开 shadPS4 QtLauncher 失败：\n{ex.Message}", false);
             }
         }
 
@@ -4466,7 +4466,7 @@ namespace PS4PKGTool
             DataRow? row = GetSelectedGridRow();
             if (row == null || !IsBaseGameRow(row) || !IsShadps4Installed(row))
             {
-                ShowWarning("Select an installed base game first.", false);
+                ShowWarning("请先选择一个已安装的本体游戏。", false);
                 return;
             }
 
@@ -4474,7 +4474,7 @@ namespace PS4PKGTool
                 && task.Status is QueueTaskStatus.Running or QueueTaskStatus.Cancelling)
                 || Shadps4Manager.IsInstallationActive)
             {
-                ShowWarning("A shadPS4 installation is in progress. Wait for it to finish before uninstalling a game.", false);
+                ShowWarning("shadPS4 正在安装中。请等待其完成后再卸载游戏。", false);
                 return;
             }
 
@@ -4483,37 +4483,37 @@ namespace PS4PKGTool
             if (!TryFindInstalledShadps4Game(titleId, out string gamePath))
             {
                 RefreshShadps4InstalledFilterState();
-                ShowWarning($"{titleId} is no longer installed in the configured shadPS4 library.", false);
+                ShowWarning($"{titleId} 已不在配置的 shadPS4 库中安装。", false);
                 return;
             }
 
             if (Shadps4Launcher.IsEmulatorRunning())
             {
                 var runningWarning = AppMessageBox.Show("shadPS4",
-                    "shadPS4 is currently running.\n\nDeleting a game while the emulator is using it may fail or leave inconsistent files.\n\nContinue?",
+                    "shadPS4 正在运行。\n\n在模拟器使用游戏时删除可能导致失败或文件状态不一致。\n\n继续？",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (runningWarning != DialogResult.Yes) return;
             }
 
-            var confirmation = AppMessageBox.Show("Uninstall game",
-                $"Uninstall '{title}' ({titleId})?\n\n" +
-                $"This permanently deletes the installed game folder:\n{gamePath}\n\n" +
-                "This cannot be undone.",
+            var confirmation = AppMessageBox.Show("卸载游戏",
+                $"卸载「{title}」（{titleId}）？\n\n" +
+                $"这将永久删除已安装的游戏文件夹：\n{gamePath}\n\n" +
+                "此操作无法撤销。",
                 AppMessageType.Warning, AppMessageButtons.YesNo);
             if (confirmation != DialogResult.Yes) return;
 
             try
             {
                 Directory.Delete(gamePath, true);
-                Logger.LogInformation($"Shadps4: uninstalled {titleId} from {gamePath}");
+                Logger.LogInformation($"Shadps4：已从 {gamePath} 卸载 {titleId}");
                 NotifyShadps4ManagerOfQueuedInstall();
                 RefreshShadps4InstalledFilterState();
-                ShowInformation($"'{title}' has been uninstalled from shadPS4.", true);
+                ShowInformation($"「{title}」已从 shadPS4 卸载。", true);
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Shadps4: failed to uninstall {titleId}: {ex.Message}");
-                ShowError("Uninstall failed:\n" + ex.Message, false);
+                Logger.LogError($"Shadps4：卸载 {titleId} 失败：{ex.Message}");
+                ShowError("卸载失败：\n" + ex.Message, false);
             }
         }
 
@@ -4546,7 +4546,7 @@ namespace PS4PKGTool
                     }
                 }
             }
-            catch (Exception ex) { Logger.LogWarning("Failed to inspect shadPS4 library before uninstall: " + ex.Message); }
+            catch (Exception ex) { Logger.LogWarning("卸载前检查 shadPS4 库失败：" + ex.Message); }
             return false;
         }
 
@@ -4565,11 +4565,11 @@ namespace PS4PKGTool
                     .ThenBy(item => item.Index)
                     .Select(item => item.Row!)
                     .ToList();
-            if (rows.Count == 0) { ShowWarning("Select one or more PKGs in the grid first.", false); return; }
+            if (rows.Count == 0) { ShowWarning("请先在列表中选择一个或多个 PKG。", false); return; }
 
             if (Shadps4Manager.IsInstallationActive)
             {
-                ShowWarning("A direct shadPS4 installation is in progress. Wait for it to finish before adding installs to the queue.", false);
+                ShowWarning("shadPS4 正在直接安装中。请等待其完成后再加入安装队列。", false);
                 return;
             }
 
@@ -4585,19 +4585,19 @@ namespace PS4PKGTool
                 bool isGame = category.Contains(PKGCategory.GAME);
                 bool isPatch = category.Contains(PKGCategory.PATCH);
                 string titleId = row[PkgColumns.TitleId]?.ToString() ?? "";
-                Logger.LogInformation($"Shadps4InstallUI: install requested for {titleId} (category '{category}', isPatch={isPatch})");
+                Logger.LogInformation($"Shadps4InstallUI：已请求安装 {titleId}（分类「{category}」，isPatch={isPatch}）");
                 if (!isGame && !isPatch)
                 {
-                    Logger.LogWarning("Shadps4InstallUI: rejected - not a base game or patch");
-                    ShowWarning($"{titleId} is not a base game or update PKG. DLC/addon installation is not supported yet.", false);
+                    Logger.LogWarning("Shadps4InstallUI：已拒绝 - 不是本体游戏或补丁");
+                    ShowWarning($"{titleId} 不是本体游戏或更新 PKG。暂不支持安装 DLC/附加内容。", false);
                     continue;
                 }
 
                 string pkgPath = GetRowPkgPath(row);
                 if (string.IsNullOrWhiteSpace(pkgPath) || !File.Exists(pkgPath))
                 {
-                    Logger.LogWarning($"Shadps4InstallUI: PKG missing on disk: {pkgPath}");
-                    ShowWarning($"PKG file not found on disk:\n{pkgPath}", false);
+                    Logger.LogWarning($"Shadps4InstallUI：磁盘上缺少 PKG：{pkgPath}");
+                    ShowWarning($"磁盘上找不到 PKG 文件：\n{pkgPath}", false);
                     continue;
                 }
 
@@ -4612,7 +4612,7 @@ namespace PS4PKGTool
             foreach (Shadps4Manager.InstallRequest request in requests)
             {
                 EnqueueShadps4Install(request);
-                Logger.LogInformation($"Shadps4InstallUI: queued {request.TitleId} into {request.Library}");
+                Logger.LogInformation($"Shadps4InstallUI：已将 {request.TitleId} 加入队列（{request.Library}）");
             }
         }
 
@@ -4635,7 +4635,7 @@ namespace PS4PKGTool
                 string candidate = Path.Combine(d, titleId);
                 if (Directory.Exists(candidate) && File.Exists(Path.Combine(candidate, "eboot.bin")))
                 {
-                    Logger.LogInformation($"Shadps4InstallUI: base game for {titleId} found at {candidate}");
+                    Logger.LogInformation($"Shadps4InstallUI：在 {candidate} 找到 {titleId} 的本体游戏");
                     return candidate;
                 }
             }
@@ -4667,8 +4667,8 @@ namespace PS4PKGTool
             if (string.IsNullOrWhiteSpace(compat))
             {
                 var compatChoice = AppMessageBox.Show("shadPS4",
-                    $"No shadPS4 compatibility status is known for {title} ({titleId}).\n\n" +
-                    "The game may not run in the emulator. Continue with the installation?",
+                    $"尚无 {title}（{titleId}）的 shadPS4 兼容性信息。\n\n" +
+                    "该游戏可能无法在模拟器中运行。继续安装？",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (compatChoice != DialogResult.Yes) return null;
                 confirmed = true;
@@ -4682,7 +4682,7 @@ namespace PS4PKGTool
             {
                 using var fbd = new FolderBrowserDialog
                 {
-                    Description = "Choose the shadPS4 game install folder.",
+                    Description = "选择 shadPS4 游戏安装文件夹。",
                     ShowNewFolderButton = true,
                 };
                 if (fbd.ShowDialog() != DialogResult.OK) return null;
@@ -4701,12 +4701,12 @@ namespace PS4PKGTool
             {
                 string? baseLocation = FindBaseGameLocation(titleId, library);
                 string message = baseLocation != null
-                    ? $"The base game for {titleId} was found in another library:\n{baseLocation}\n\n" +
-                      "This install target has no base game, so the patch alone cannot boot.\n\n" +
-                      "Cancel and install the patch into the library that contains the base game?"
-                    : $"No base game detected for {titleId} in\n{library}\n\n" +
-                      "A patch alone cannot boot, it only updates the base game's files, which are not installed yet.\n\n" +
-                      "Install the patch anyway?";
+                    ? $"在另一个库中找到了 {titleId} 的本体游戏：\n{baseLocation}\n\n" +
+                      "此安装目标没有本体游戏，仅靠补丁无法启动。\n\n" +
+                      "取消并把补丁安装到包含本体游戏的库中？"
+                    : $"在以下库中未检测到 {titleId} 的本体游戏：\n{library}\n\n" +
+                      "仅靠补丁无法启动，它只更新本体游戏文件，而这些文件尚未安装。\n\n" +
+                      "仍要安装该补丁吗？";
 
                 var warnBase = AppMessageBox.Show("shadPS4", message,
                     AppMessageType.Warning, AppMessageButtons.YesNo);
@@ -4723,7 +4723,7 @@ namespace PS4PKGTool
                 if (Shadps4Launcher.IsEmulatorRunning())
                 {
                     var warn = AppMessageBox.Show("shadPS4",
-                        "shadPS4 is currently running.\n\nModifying an installed game while the emulator is using it may fail or leave inconsistent files.\n\nContinue?",
+                        "shadPS4 正在运行。\n\n在模拟器使用游戏时修改可能导致失败或文件状态不一致。\n\n继续？",
                         AppMessageType.Warning, AppMessageButtons.YesNo);
                     if (warn != DialogResult.Yes) return null;
                 }
@@ -4733,7 +4733,7 @@ namespace PS4PKGTool
                     // Updates merge into the existing dump - files in the patch
                     // overwrite the base's, everything else stays untouched.
                     var mergeChoice = AppMessageBox.Show("shadPS4",
-                        $"Game already installed\n\nInstalled version: {installedVer}\nThis patch: {selectedVer}\n\nThe patch will be merged into the existing installation. Continue?",
+                        $"游戏已安装\n\n已安装版本：{installedVer}\n此补丁：{selectedVer}\n\n补丁将合并到现有安装中。继续？",
                         AppMessageType.Info, AppMessageButtons.YesNo);
                     if (mergeChoice != DialogResult.Yes) return null;
                     confirmed = true;
@@ -4741,7 +4741,7 @@ namespace PS4PKGTool
                 else
                 {
                     var replaceChoice = AppMessageBox.Show("shadPS4",
-                        $"Game already installed\n\nInstalled version: {installedVer}\nSelected PKG: {selectedVer}\n\nReplace the existing installation?",
+                        $"游戏已安装\n\n已安装版本：{installedVer}\n所选 PKG：{selectedVer}\n\n替换现有安装？",
                         AppMessageType.Info, AppMessageButtons.YesNo);
                     if (replaceChoice != DialogResult.Yes) return null;
                     replace = true;
@@ -4755,7 +4755,7 @@ namespace PS4PKGTool
             if (!confirmed)
             {
                 var go = AppMessageBox.Show("shadPS4",
-                    $"Install {title} ({titleId}) into\n{library}?",
+                    $"将 {title}（{titleId}）安装到\n{library}？",
                     AppMessageType.Info, AppMessageButtons.YesNo);
                 if (go != DialogResult.Yes) return null;
             }
@@ -4779,7 +4779,7 @@ namespace PS4PKGTool
         private void ViewPKGInExplorer()
         {
             var pkgList = GetSelectedPKGDirectoryList(PKGSelectionType.SELECTED);
-            pkgList.ForEach(pkg => Logger.LogInformation($"Opening {pkg} PKG file in Explorer.."));
+            pkgList.ForEach(pkg => Logger.LogInformation($"正在资源管理器中打开 {pkg} PKG 文件……"));
             pkgList.ForEach(pkg => Process.Start("explorer.exe", "/select," + pkg));
         }
 
@@ -4792,19 +4792,19 @@ namespace PS4PKGTool
         {
             if (Shadps4Manager.IsInstallationActive)
             {
-                ShowWarning("A shadPS4 installation is in progress.", false);
+                ShowWarning("shadPS4 正在安装中。", false);
                 return;
             }
             var pkgList = GetSelectedPKGDirectoryList(PKGSelectionType.SELECTED);
-            DialogResult dialog = DialogResultYesNo("PKG file will be permanently deleted. This operation cannot be undone. Are you sure you want to continue?");
+            DialogResult dialog = DialogResultYesNo("PKG 文件将被永久删除。此操作无法撤销。确定要继续吗？");
 
             if (dialog == DialogResult.Yes)
             {
-                Logger.LogInformation($"Delete: {pkgList.Count} PKG(s)");
+                Logger.LogInformation($"删除：{pkgList.Count} 个 PKG");
                 PKG.isDeletingPkg = true;
                 toolStripProgressBar1.Visible = true;
                 toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
-                toolStripStatusLabel2.Text = "Deleting...";
+                toolStripStatusLabel2.Text = "正在删除……";
                 var failures = new List<string>();
                 try
                 {
@@ -4814,7 +4814,7 @@ namespace PS4PKGTool
                         {
                             string fullPkgPath = Path.GetFullPath(pkg);
                             File.Delete(fullPkgPath);
-                            Logger.LogInformation($"\"{fullPkgPath}\" deleted.");
+                            Logger.LogInformation($"已删除「{fullPkgPath}」。");
 
                             var matchingRow = PKGGridView.Rows.Cast<DataGridViewRow>()
                                 .FirstOrDefault(row => !row.IsNewRow
@@ -4829,17 +4829,17 @@ namespace PS4PKGTool
                         catch (Exception ex)
                         {
                             failures.Add(Path.GetFileName(pkg) + ": " + ex.Message);
-                            Logger.LogError($"Failed to delete \"{pkg}\": {ex.Message}");
+                            Logger.LogError($"删除「{pkg}」失败：{ex.Message}");
                         }
                     }
 
                     PKG.SelectedPKGFilename = ""; // Reset
-                    labelDisplayTotalPKG.Text = "Displaying " + PKG.VerifiedPs4PkgList.Count.ToString() + " PS4 PKG";
+                    labelDisplayTotalPKG.Text = "正在显示 " + PKG.VerifiedPs4PkgList.Count.ToString() + " PS4 PKG";
                     PopulateGroupedView(); // remove deleted entries from the grouped view
                     if (failures.Count == 0)
-                        ShowInformation(pkgList.Count == 1 ? "PKG file deleted." : $"{pkgList.Count} PKG files deleted.", true);
+                        ShowInformation(pkgList.Count == 1 ? "PKG 文件已删除。" : $"已删除 {pkgList.Count} 个 PKG 文件。", true);
                     else
-                        ShowWarning($"Deleted {pkgList.Count - failures.Count} of {pkgList.Count} PKG files.\n\n" +
+                        ShowWarning($"已删除 {pkgList.Count} 个 PKG 文件中的 {pkgList.Count - failures.Count} 个。\n\n" +
                             string.Join("\n", failures), false);
                 }
                 finally
@@ -4872,17 +4872,17 @@ namespace PS4PKGTool
             if (!(sender is ToolStripMenuItem clickedMenuItem))
                 return;
 
-            Logger.LogInformation("Checking for duplicate PKG..");
+            Logger.LogInformation("正在检查重复 PKG……");
             if (clickedMenuItem == checkForDuplicatePKGToolStripMenuItem1 ||  clickedMenuItem == checkForDuplicatePKGToolStripMenuItem2)
             {
                 var result = FindDuplicatePKG();
                 if (result.Count == 0)
                 {
-                    ShowInformation("No duplicate PKG detected.", true);
+                    ShowInformation("未检测到重复 PKG。", true);
                 }
                 else
                 {
-                    ShowWarning($"Found {result.Count} duplicate PKG file(s):\n\n{string.Join("\n", result)}", true);
+                    ShowWarning($"发现 {result.Count} 个重复 PKG 文件：\n\n{string.Join("\n", result)}", true);
                 }
             }
         }
@@ -4914,7 +4914,7 @@ namespace PS4PKGTool
             }
 
             var result = dupGroups.Where(g => g.Count > 1).SelectMany(g => g).ToList();
-            Logger.LogInformation($"Duplicate check: {result.Count} file(s) in {dupGroups.Count(g => g.Count > 1)} group(s).");
+            Logger.LogInformation($"重复检查：{dupGroups.Count(g => g.Count > 1)} 个分组中共有 {result.Count} 个文件。");
             return result;
         }
 
@@ -5033,7 +5033,7 @@ namespace PS4PKGTool
 
         private void InitializePKGSender()
         {
-            if (RpiSendPkgtoolStripMenuItem2.Text == "Send PKG to PS4")
+            if (RpiSendPkgtoolStripMenuItem2.Text == "发送 PKG 到 PS4")
             {
                 DisableTabPages(mainTabControl, "tabPage1");
                 DisableControls(darkMenuStrip1);
@@ -5041,7 +5041,7 @@ namespace PS4PKGTool
 
                 PkgMetadata read = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
                 
-                Logger.LogInformation("Sending " + read.PS4_Title + " to PS4..");
+                Logger.LogInformation("正在发送 " + read.PS4_Title + " 到 PS4……");
 
                 // Update 'Settings.PKG.SelectedPKGFilename'
                 GetSelectedPKGPath();
@@ -5058,7 +5058,7 @@ namespace PS4PKGTool
                     appExistsJson = PKGSENDER.CheckIfPkgInstalled(read);
                     if (appExistsJson == null)
                     {
-                        ShowError("An error occurred while trying to communicate with PS4. Launch/restart Remote Package Installer application on PS4 and don't minimize it.", true);
+                        ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                         EnableControls_PkgSender();
                         EnableTabPages(mainTabControl);
                         EnableControls(darkMenuStrip1);
@@ -5074,7 +5074,7 @@ namespace PS4PKGTool
                         {
                             if (read.PKG_Type.ToString() == PKGCategory.GAME)
                             {
-                                ShowInformation("PKG already installed.", true);
+                                ShowInformation("PKG 已安装。", true);
                                 EnableControls_PkgSender();
                                 EnableTabPages(mainTabControl);
                                 EnableControls(darkMenuStrip1);
@@ -5096,20 +5096,20 @@ namespace PS4PKGTool
                     PKGSENDER.JSON.CHECKAPPEXISTS.baseAppExist = true;
                 }
 
-                toolStripMenuItem18.Text = "Remote PKG Installer | Status : Running";
-                RpiSendPkgtoolStripMenuItem2.Text = "Stop Current Operation";
-                toolStripMenuItem16.Text = "Remote PKG Installer | Status : Running";
-                RpiSendPkgtoolStripMenuItem1.Text = "Stop Current Operation";
-                toolStripStatusLabel2.Text = "Sending " + read.PS4_Title + " to PS4..";
+                toolStripMenuItem18.Text = "远程安装包安装器 | 状态：运行中";
+                RpiSendPkgtoolStripMenuItem2.Text = "停止当前操作";
+                toolStripMenuItem16.Text = "远程安装包安装器 | 状态：运行中";
+                RpiSendPkgtoolStripMenuItem1.Text = "停止当前操作";
+                toolStripStatusLabel2.Text = "正在发送 " + read.PS4_Title + " 到 PS4……";
                 SendPKG();
             }
             else
             {
-                Logger.LogInformation("Cancelling operation..");
+                Logger.LogInformation("正在取消操作……");
                 // Cancel current operation
                 if (PKGSENDER.isPreparing)
                 {
-                    ShowWarning("Cannot cancel operation while preparing.", true);
+                    ShowWarning("准备阶段无法取消操作。", true);
                     return;
                 }
 
@@ -5117,7 +5117,7 @@ namespace PS4PKGTool
                 stopTaskJson = PKGSENDER.StopTask();
                 if (stopTaskJson == null)
                 {
-                    ShowError("An error occurred while trying to communicate with PS4. Launch/restart Remote Package Installer application on PS4 and don't minimize it.", true);
+                    ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                     EnableControls_PkgSender();
                     EnableTabPages(mainTabControl);
                     EnableControls(darkMenuStrip1);
@@ -5134,7 +5134,7 @@ namespace PS4PKGTool
                     uninstallAppJson = PKGSENDER.UninstallGame(read);
                     if (uninstallAppJson == null)
                     {
-                        ShowError("An error occurred while trying to communicate with PS4. Launch/restart Remote Package Installer application on PS4 and don't minimize it.", true);
+                        ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                         EnableControls_PkgSender();
                         EnableTabPages(mainTabControl);
                         EnableControls(darkMenuStrip1);
@@ -5155,11 +5155,11 @@ namespace PS4PKGTool
                         toolStripProgressBar1.Value = 0;
                     });
 
-                    ShowInformation("Operation stopped.", true);
+                    ShowInformation("操作已停止。", true);
                 }
                 else
                 {
-                    ShowError("Failed to stop current operation.", true);
+                    ShowError("停止当前操作失败。", true);
                 }
             }
         }
@@ -5168,7 +5168,7 @@ namespace PS4PKGTool
         {
             PkgMetadata read = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
             
-            Logger.LogInformation("Checking if base PKG installed on PS4 (" + read.PS4_Title + ")..");
+            Logger.LogInformation("正在检查本体 PKG 是否已安装在 PS4 上（" + read.PS4_Title + "）……");
 
             DisableTabPages(mainTabControl, "tabPage1");
             DisableControls(darkMenuStrip1);
@@ -5181,7 +5181,7 @@ namespace PS4PKGTool
                 app_exists_json = await PKGSENDER.CheckIfPkgInstalled(read);
                 if (app_exists_json == null)
                 {
-                    ShowError("An error occurred while trying to communicate with PS4. Launch/restart Remote Package Installer application on PS4 and don't minimize it.", true);
+                    ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                     EnableControls_PkgSender();
                     EnableTabPages(mainTabControl);
                     EnableControls(darkMenuStrip1);
@@ -5198,17 +5198,17 @@ namespace PS4PKGTool
                     PKGSENDER.JSON.CHECKAPPEXISTS.exists = app_exists_json.exists.ToString();
                     if (PKGSENDER.JSON.CHECKAPPEXISTS.exists == "true")
                     {
-                        ShowInformation("PKG already installed.", true);
+                        ShowInformation("PKG 已安装。", true);
                     }
                     else
                     {
-                        ShowInformation("PKG is not installed.", true);
+                        ShowInformation("PKG 未安装。", true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                ShowError("An error occurred: " + ex.Message, true);
+                ShowError("发生错误：" + ex.Message, true);
             }
         }
 
@@ -5268,14 +5268,14 @@ namespace PS4PKGTool
                 {
                     this.Invoke((Action)(() =>
                     {
-                        ShowError("An error occurred while trying to communicate with PS4. Launch/restart Remote Package Installer application on PS4 and don't minimize it.", true);
+                        ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                         EnableControls_PkgSender();
                         EnableTabPages(mainTabControl);
                         EnableControls(darkMenuStrip1);
-                        toolStripMenuItem18.Text = "Remote PKG Installer | Status : Idle";
-                        RpiSendPkgtoolStripMenuItem2.Text = "Send PKG to PS4";
-                        toolStripMenuItem16.Text = "Remote PKG Installer | Status : Idle";
-                        RpiSendPkgtoolStripMenuItem1.Text = "Send PKG to PS4";
+                        toolStripMenuItem18.Text = "远程安装包安装器 | 状态：空闲";
+                        RpiSendPkgtoolStripMenuItem2.Text = "发送 PKG 到 PS4";
+                        toolStripMenuItem16.Text = "远程安装包安装器 | 状态：空闲";
+                        RpiSendPkgtoolStripMenuItem1.Text = "发送 PKG 到 PS4";
                         toolStripStatusLabel2.Text = "...";
                         toolStripProgressBar1.Value = 0;
                     }));
@@ -5299,11 +5299,11 @@ namespace PS4PKGTool
                     PKGSENDER.JSON.SENDPKG.error = send_pkg_json.error.ToString();
                     this.Invoke((Action)(() =>
                     {
-                        ShowError("Operation failed : \n\nStatus : " + PKGSENDER.JSON.SENDPKG.status + "\n" + PKGSENDER.JSON.SENDPKG.error, true);
-                        toolStripMenuItem18.Text = "Remote PKG Installer | Status : Idle";
-                        RpiSendPkgtoolStripMenuItem2.Text = "Send PKG to PS4";
-                        toolStripMenuItem16.Text = "Remote PKG Installer | Status : Idle";
-                        RpiSendPkgtoolStripMenuItem1.Text = "Send PKG to PS4";
+                        ShowError("操作失败：\n\n状态：" + PKGSENDER.JSON.SENDPKG.status + "\n" + PKGSENDER.JSON.SENDPKG.error, true);
+                        toolStripMenuItem18.Text = "远程安装包安装器 | 状态：空闲";
+                        RpiSendPkgtoolStripMenuItem2.Text = "发送 PKG 到 PS4";
+                        toolStripMenuItem16.Text = "远程安装包安装器 | 状态：空闲";
+                        RpiSendPkgtoolStripMenuItem1.Text = "发送 PKG 到 PS4";
                         toolStripStatusLabel2.Text = "...";
                         toolStripProgressBar1.Value = 0;
                         EnableControls_PkgSender();
@@ -5361,7 +5361,7 @@ namespace PS4PKGTool
 
             try
             {
-                Logger.LogInformation("Checking RPI requirement..");
+                Logger.LogInformation("正在检查 RPI 要求……");
                 var CheckRequirement = PKGSENDER.CheckRequirement();
                 if (CheckRequirement != "OK")
                 {
@@ -5401,8 +5401,8 @@ namespace PS4PKGTool
             {
                 // RPI commands run through BackgroundWorkers/async calls whose
                 // failures surface here - never let one crash the whole app.
-                Logger.LogError("Remote Package Installer command failed", ex);
-                ShowError("An error occurred: " + ex.Message, true);
+                Logger.LogError("Remote Package Installer 命令执行失败", ex);
+                ShowError("发生错误：" + ex.Message, true);
                 EnableControls_PkgSender();
                 EnableTabPages(mainTabControl);
                 EnableControls(darkMenuStrip1);
@@ -5417,8 +5417,8 @@ namespace PS4PKGTool
 
                 darkStatusStrip1.Invoke((MethodInvoker)delegate
                 {
-                    toolStripStatusLabel2.Text = "Preparing download..";
-                    Logger.LogInformation("Preparing download..");
+                    toolStripStatusLabel2.Text = "正在准备下载……";
+                    Logger.LogInformation("正在准备下载……");
                     darkStatusStrip1.Refresh();
                 });
 
@@ -5520,8 +5520,8 @@ namespace PS4PKGTool
                         darkStatusStrip1.Invoke((MethodInvoker)delegate
                         {
                             toolStripProgressBar1.Increment(increment);
-                            toolStripStatusLabel2.Text = $"Installing.. ({packageTransferredTotalFormatted}/{packageFilesizeTotalFormatted})";
-                            Logger.LogInformation($"Installing.. ({packageTransferredTotalFormatted}/{packageFilesizeTotalFormatted})");
+                            toolStripStatusLabel2.Text = $"正在安装……（{packageTransferredTotalFormatted}/{packageFilesizeTotalFormatted}）";
+                            Logger.LogInformation($"正在安装……（{packageTransferredTotalFormatted}/{packageFilesizeTotalFormatted}）");
                             darkStatusStrip1.Refresh();
                         });
 
@@ -5563,18 +5563,18 @@ namespace PS4PKGTool
 
                     if (PKGSENDER.pkgSendStopped || PKGSENDER.taskMonitorIsCancelling)
                     {
-                        ShowError("Operation stopped.", true);
+                        ShowError("操作已停止。", true);
                     }
 
                     if (PKGSENDER.pkgSendDone)
                     {
                         if (!PKGSENDER.JSON.CHECKAPPEXISTS.baseAppExist)
                         {
-                            ShowInformation("Patch PKG sent to PS4. Manually install it after base PKG is installed : Notifications -> Downloads", true);
+                            ShowInformation("补丁 PKG 已发送到 PS4。安装本体 PKG 后请手动安装：通知 -> 下载", true);
                         }
                         else
                         {
-                            ShowInformation("PKG installed.", true);
+                            ShowInformation("PKG 已安装。", true);
                         }
                     }
 
@@ -5583,10 +5583,10 @@ namespace PS4PKGTool
                     // Kill the server if it is running.
                     // killNodeJS();
 
-                    toolStripMenuItem18.Text = "Remote PKG Installer | Status : Idle";
-                    RpiSendPkgtoolStripMenuItem2.Text = "Send PKG to PS4";
-                    toolStripMenuItem16.Text = "Remote PKG Installer | Status : Idle";
-                    RpiSendPkgtoolStripMenuItem1.Text = "Send PKG to PS4";
+                    toolStripMenuItem18.Text = "远程安装包安装器 | 状态：空闲";
+                    RpiSendPkgtoolStripMenuItem2.Text = "发送 PKG 到 PS4";
+                    toolStripMenuItem16.Text = "远程安装包安装器 | 状态：空闲";
+                    RpiSendPkgtoolStripMenuItem1.Text = "发送 PKG 到 PS4";
                 });
             };
             bg.RunWorkerAsync();
@@ -5600,7 +5600,7 @@ namespace PS4PKGTool
 
             PkgMetadata read = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
             
-            Logger.LogInformation("Uninstalling addon PKG (" + read.PS4_Title + ")..");
+            Logger.LogInformation("正在卸载附加 PKG（" + read.PS4_Title + "）……");
 
             // Uninstall installed addon pkg
 
@@ -5609,7 +5609,7 @@ namespace PS4PKGTool
             uninstall_patch_json = PKGSENDER.UninstallAddonTheme(read);
             if (uninstall_patch_json == null)
             {
-                ShowError("An error occurred while trying to communicate with the PS4. Launch/restart the Remote Package Installer application on the PS4 and do not minimize it.", true);
+                ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                 EnableControls_PkgSender();
                 EnableTabPages(mainTabControl);
                 EnableControls(darkMenuStrip1);
@@ -5623,11 +5623,11 @@ namespace PS4PKGTool
 
             if (PKGSENDER.JSON.UNINTSALLADDON.status == "success")
             {
-                ShowInformation("PKG uninstalled.", true);
+                ShowInformation("PKG 已卸载。", true);
             }
             else
             {
-                ShowError("Uninstall failed.", true);
+                ShowError("卸载失败。", true);
             }
         }
 
@@ -5639,7 +5639,7 @@ namespace PS4PKGTool
 
             PkgMetadata read = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
             
-            Logger.LogInformation("Uninstalling theme PKG (" + read.PS4_Title + ")..");
+            Logger.LogInformation("正在卸载主题 PKG（" + read.PS4_Title + "）……");
 
             // Uninstall installed theme pkg
 
@@ -5648,7 +5648,7 @@ namespace PS4PKGTool
             uninstall_theme_json = PKGSENDER.UninstallAddonTheme(read);
             if (uninstall_theme_json == null)
             {
-                ShowError("An error occurred while trying to communicate with the PS4. Launch/restart the Remote Package Installer application on the PS4 and do not minimize it.", true);
+                ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                 EnableControls_PkgSender();
                 EnableTabPages(mainTabControl);
                 EnableControls(darkMenuStrip1);
@@ -5663,11 +5663,11 @@ namespace PS4PKGTool
 
             if (PKGSENDER.JSON.UNINTSALLTHEME.status == "success")
             {
-                ShowInformation("PKG uninstalled.", true);
+                ShowInformation("PKG 已卸载。", true);
             }
             else
             {
-                ShowError("Uninstall failed.", true);
+                ShowError("卸载失败。", true);
             }
         }
 
@@ -5688,7 +5688,7 @@ namespace PS4PKGTool
             DisableControls_PkgSender();
 
             PkgMetadata read = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
-                        Logger.LogInformation("Uninstalling base PKG (" + read.PS4_Title + ")..");
+                        Logger.LogInformation("正在卸载本体 PKG（" + read.PS4_Title + "）……");
 
             // Check if pkg is installed
 
@@ -5697,7 +5697,7 @@ namespace PS4PKGTool
             app_exists_json = PKGSENDER.CheckIfPkgInstalled(read);
             if (app_exists_json == null)
             {
-                ShowError("An error occurred while trying to communicate with the PS4. Launch/restart the Remote Package Installer application on the PS4 and do not minimize it.", true);
+                ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                 EnableControls_PkgSender();
                 EnableTabPages(mainTabControl);
                 EnableControls(darkMenuStrip1);
@@ -5711,7 +5711,7 @@ namespace PS4PKGTool
                 PKGSENDER.JSON.CHECKAPPEXISTS.exists = app_exists_json.exists.ToString();
                 if (PKGSENDER.JSON.CHECKAPPEXISTS.exists == "false")
                 {
-                    ShowInformation("PKG is not installed.", true);
+                    ShowInformation("PKG 未安装。", true);
                 }
                 else
                 {
@@ -5721,7 +5721,7 @@ namespace PS4PKGTool
                     uninstall_app_json = PKGSENDER.UninstallGame(read);
                     if (uninstall_app_json == null)
                     {
-                        ShowError("An error occurred while trying to communicate with the PS4. Launch/restart the Remote Package Installer application on the PS4 and do not minimize it.", true);
+                        ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                         EnableControls_PkgSender();
                         EnableTabPages(mainTabControl);
                         EnableControls(darkMenuStrip1);
@@ -5735,11 +5735,11 @@ namespace PS4PKGTool
 
                     if (PKGSENDER.JSON.UNINTSALLAPP.status == "success")
                     {
-                        ShowInformation("PKG uninstalled.", true);
+                        ShowInformation("PKG 已卸载。", true);
                     }
                     else
                     {
-                        ShowError("Uninstall failed.", true);
+                        ShowError("卸载失败。", true);
                     }
                 }
             }
@@ -5753,7 +5753,7 @@ namespace PS4PKGTool
 
             PkgMetadata read = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
             
-            Logger.LogInformation("Uninstalling patch PKG (" + read.PS4_Title + ")..");
+            Logger.LogInformation("正在卸载补丁 PKG（" + read.PS4_Title + "）……");
 
             // Uninstall installed patch pkg
 
@@ -5762,7 +5762,7 @@ namespace PS4PKGTool
             uninstall_patch_json = PKGSENDER.UninstallPatch(read);
             if (uninstall_patch_json == null)
             {
-                ShowError("An error occurred while trying to communicate with the PS4. Launch/restart the Remote Package Installer application on the PS4 and do not minimize it.", true);
+                ShowError("与 PS4 通信时发生错误。请在 PS4 上启动/重新启动 Remote Package Installer 应用，并且不要最小化它。", true);
                 EnableControls_PkgSender();
                 EnableTabPages(mainTabControl);
                 EnableControls(darkMenuStrip1);
@@ -5777,11 +5777,11 @@ namespace PS4PKGTool
 
             if (PKGSENDER.JSON.UNINTSALLPATCH.status == "success")
             {
-                ShowInformation("PKG uninstalled.", true);
+                ShowInformation("PKG 已卸载。", true);
             }
             else
             {
-                ShowError("Uninstall failed.", true);
+                ShowError("卸载失败。", true);
             }
         }
         #endregion PKGSender
@@ -5789,7 +5789,7 @@ namespace PS4PKGTool
 
         private void OpenProgramSettings()
         {
-            Logger.LogInformation("Opening Program Settings..");
+            Logger.LogInformation("正在打开程序设置……");
 
             ProgramSetting form = new ProgramSetting();
             form.ShowDialog();
@@ -5822,7 +5822,7 @@ namespace PS4PKGTool
         {
             if (ShowFolderBrowserDialog(out FolderBrowserDialog fbd))
             {
-                Logger.LogInformation("Extracting trophy icon..");
+                Logger.LogInformation("正在提取奖杯图标……");
                 string failExtract = "";
 
                 if (Trophy.TrophyFilenameToExtractList.Count > 1)
@@ -5846,17 +5846,17 @@ namespace PS4PKGTool
 
                     if (string.IsNullOrEmpty(failExtract))
                     {
-                        ShowInformation("Trophy icons extracted.", true);
+                        ShowInformation("奖杯图标已提取。", true);
                     }
                     else
                     {
-                        ShowError("Some trophy icons failed to extract.", true);
+                        ShowError("部分奖杯图标提取失败。", true);
                         //Logger.LogError(failExtract);
                     }
                 }
                 else
                 {
-                    ShowError("Error occured when trying to extract trophy icons.", true);
+                    ShowError("提取奖杯图标时发生错误。", true);
                 }
             }
         }
@@ -5903,14 +5903,14 @@ namespace PS4PKGTool
                         string pic = pb.Name == "pbPIC0" ? "PIC0" : "PIC1";
                         string filePath = Path.Combine(fbd.SelectedPath, $"{PKG.CurrentPKGTitle}_{pic}.PNG");
                         tempImage.Save(filePath, ImageFormat.Png);
-                        ShowInformation("Background image saved.", false);
-                        Logger.LogInformation($"Background image saved to \"{fbd.SelectedPath}\".");
+                        ShowInformation("背景图已保存。", false);
+                        Logger.LogInformation($"背景图已保存到「{fbd.SelectedPath}」。");
                     }
                 }
             }
             catch (Exception ex)
             {
-                ShowError($"Failed to save background image: {ex.Message}", true);
+                ShowError($"保存背景图失败：{ex.Message}", true);
             }
         }
 
@@ -5938,12 +5938,12 @@ namespace PS4PKGTool
                     tempImage.Save(imagePath, ImageFormat.Jpeg);
 
                     SystemParametersInfo(SPI_SETDESKWALLPAPER, 1, imagePath, SPIF_UPDATEINIFILE);
-                    Logger.LogInformation("Image set as desktop background.");
+                    Logger.LogInformation("已将图片设为桌面背景。");
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError("An error occurred: " + ex.Message);
+                Logger.LogError("发生错误：" + ex.Message);
             }
         }
 
@@ -5959,7 +5959,7 @@ namespace PS4PKGTool
             {
                 PkgMetadata PS4_PKG = PkgMetadataReader.Read(PKG.SelectedPKGFilename);
 
-                Logger.LogInformation("Extracting decrypted items..");
+                Logger.LogInformation("正在提取已解密条目……");
                 //load pkg file
                 string itemIndex = "";
                 var IO = new EndianIO(PKG.SelectedPKGFilename, EndianType.BigEndian, true);
@@ -6121,7 +6121,7 @@ namespace PS4PKGTool
                         try
                         {
                             if (entry[i].size > int.MaxValue)
-                                throw new InvalidDataException("The decrypted entry is too large to hold in memory.");
+                                throw new InvalidDataException("已解密的条目太大，无法放入内存。");
 
                             savepath = Path.Combine(outputpath, entryName);
                             Array.Resize(ref file_data, checked((int)entry[i].size));
@@ -6137,12 +6137,12 @@ namespace PS4PKGTool
                 IO.Close();
                 if (errorExtract.Count > 0)
                 {
-                    ShowWarning("Failed to extract some entries. See logs.", false);
-                    Logger.LogWarning($"Failed to extract some entries:\n{string.Join("\n", errorExtract)}");
+                    ShowWarning("部分条目提取失败。请查看日志。", false);
+                    Logger.LogWarning($"部分条目提取失败：\n{string.Join("\n", errorExtract)}");
                 }
                 else
                 {
-                    ShowInformation("All decrypted entries extracted.", true);
+                    ShowInformation("所有已解密条目均已提取。", true);
                 }
             }
         }
@@ -6156,7 +6156,7 @@ namespace PS4PKGTool
         {
             if (ShowFolderBrowserDialog(out FolderBrowserDialog fbd))
             {
-                Logger.LogInformation("Extracting PKG entries..");
+                Logger.LogInformation("正在提取 PKG 条目……");
 
                 try
                 {
@@ -6177,7 +6177,7 @@ namespace PS4PKGTool
                                 var idx = int.Parse(entry.Key);
                                 if (idx < 0 || idx >= entries.Count)
                                 {
-                                    failedEntries[name] = "Entry number is out of range.";
+                                    failedEntries[name] = "条目序号超出范围。";
                                     continue;
                                 }
 
@@ -6209,24 +6209,24 @@ namespace PS4PKGTool
                             catch (Exception ex)
                             {
                                 failedEntries[name] = ex.Message;
-                                Logger.LogError($"Error extracting {name} : {ex.Message}");
+                                Logger.LogError($"提取 {name} 时出错：{ex.Message}");
                             }
                         }
                     }
 
                     if (failedEntries.Count > 0)
                     {
-                        ShowWarning("Failed to extract some entries. See logs.", false);
-                        Logger.LogWarning($"Failed to extract some entries:\n{string.Join("\n", failedEntries.Select(item => $"{item.Key}: {item.Value}"))}");
+                        ShowWarning("部分条目提取失败。请查看日志。", false);
+                        Logger.LogWarning($"部分条目提取失败：\n{string.Join("\n", failedEntries.Select(item => $"{item.Key}: {item.Value}"))}");
                     }
                     else if (encryptedEntries.Count > 0)
                     {
-                        ShowWarning("All entries extracted. Encrypted entries were saved as encrypted bytes.", false);
-                        Logger.LogWarning($"Encrypted entries were saved without decryption:\n{string.Join("\n", encryptedEntries)}");
+                        ShowWarning("所有条目均已提取。加密条目以加密字节保存。", false);
+                        Logger.LogWarning($"加密条目未解密直接保存：\n{string.Join("\n", encryptedEntries)}");
                     }
                     else
                     {
-                        ShowInformation($"All entries extracted.", true);
+                        ShowInformation($"所有条目均已提取。", true);
                     }
                 }
                 catch (Exception a)
@@ -6281,10 +6281,10 @@ namespace PS4PKGTool
             int listingVersion,
             bool reportErrors)
         {
-            Logger.LogInformation($"Listing PKG files: {Path.GetFileName(pkgPath)}");
+            Logger.LogInformation($"正在列出 PKG 文件：{Path.GetFileName(pkgPath)}");
             PKGTreeView.Enabled = false;
             listView1.Enabled = false;
-            toolStripStatusLabel2.Text = "Listing PKG files...";
+            toolStripStatusLabel2.Text = "正在列出 PKG 文件……";
             toolStripProgressBar1.Visible = true;
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 
@@ -6296,9 +6296,9 @@ namespace PS4PKGTool
 
                 if (!result.Succeeded)
                 {
-                    string message = result.ErrorMessage ?? "Package files could not be listed.";
-                    Logger.LogError("View PKG list failed: " + message);
-                    toolStripStatusLabel2.Text = "PKG files unavailable.";
+                    string message = result.ErrorMessage ?? "无法列出包内文件。";
+                    Logger.LogError("查看 PKG 列表失败：" + message);
+                    toolStripStatusLabel2.Text = "PKG 文件不可用。";
                     if (reportErrors)
                         ShowError(message, true);
                     return;
@@ -6314,7 +6314,7 @@ namespace PS4PKGTool
                 catch { /* fall back to the file name */ }
 
                 PopulateMainFileTree(result, rootName);
-                Logger.LogInformation("PKG file list loaded.");
+                Logger.LogInformation("PKG 文件列表已加载。");
 
                 // The single game-folder root is pre-selected so the middle list
                 // view is ready before the user opens the File Browser tab.
@@ -6345,10 +6345,10 @@ namespace PS4PKGTool
                 if (!IsCurrentMainFileListing(session, pkgPath, listingVersion))
                     return;
 
-                Logger.LogError($"View PKG list failed for {pkgPath}: {ex}");
-                toolStripStatusLabel2.Text = "PKG files unavailable.";
+                Logger.LogError($"查看 {pkgPath} 的 PKG 列表失败：{ex}");
+                toolStripStatusLabel2.Text = "PKG 文件不可用。";
                 if (reportErrors)
-                    ShowError($"Failed to list PKG files:\n{ex.Message}", true);
+                    ShowError($"列出 PKG 文件失败：\n{ex.Message}", true);
             }
             finally
             {
@@ -6358,7 +6358,7 @@ namespace PS4PKGTool
                     listView1.Enabled = true;
                     toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
                     toolStripProgressBar1.Value = 0;
-                    if (toolStripStatusLabel2.Text == "Listing PKG files...")
+                    if (toolStripStatusLabel2.Text == "正在列出 PKG 文件……")
                         toolStripStatusLabel2.Text = "...";
                 }
             }
@@ -6475,12 +6475,12 @@ namespace PS4PKGTool
                     {
                         process.Kill();
                         process.WaitForExit();
-                        Logger.LogInformation($"{processName} killed.");
+                        Logger.LogInformation($"已终止 {processName}。");
                     }
                     catch (Exception ex)
                     {
                         // Handle any exception that occurred during process termination
-                        Logger.LogError($"Error while killing process {processName}: {ex.Message}");
+                        Logger.LogError($"终止进程 {processName} 时出错：{ex.Message}");
                     }
                 }
             }
@@ -6561,7 +6561,7 @@ namespace PS4PKGTool
             var bgw = new BackgroundWorker();
             bgw.WorkerSupportsCancellation = true;
             _selectedExtractWorker = bgw;
-            this.Invoke((Action)(() => btnExtractFullPKG.Text = "Stop Extract"));
+            this.Invoke((Action)(() => btnExtractFullPKG.Text = "停止提取"));
             this.Invoke((Action)(() => SetExtractionUiEnabled(false))); // lock the app during extraction
             _extractionCts = new CancellationTokenSource();
             CancellationToken ct = _extractionCts.Token;
@@ -6596,10 +6596,10 @@ namespace PS4PKGTool
                         if (!string.IsNullOrEmpty(outDir))
                             Directory.CreateDirectory(outDir);
 
-                        Logger.LogInformation($"Extracting {target.Logical} ({in_path})..");
+                        Logger.LogInformation($"正在提取 {target.Logical}（{in_path}）……");
                         this.Invoke((MethodInvoker)delegate
                         {
-                            toolStripStatusLabel2.Text = $"Extracting {target.Logical} ({in_path})..";
+                            toolStripStatusLabel2.Text = $"正在提取 {target.Logical}（{in_path}）……";
                         });
 
                         try
@@ -6608,13 +6608,13 @@ namespace PS4PKGTool
                             // path already encodes the flattened structure.
                             reader.ExtractFileTo(target.Real, out_path);
                             successCount++;
-                            Logger.LogInformation($"File extracted to \"{out_path}\"");
+                            Logger.LogInformation($"文件已提取到「{out_path}」");
                         }
                         catch (Exception ex)
                         {
                             failCount++;
-                            Logger.LogError($"Extraction failed for \"{target.Logical}\": {ex.Message}");
-                            this.Invoke(() => ShowError($"Extraction failed:\n{ex.Message}", true));
+                            Logger.LogError($"提取「{target.Logical}」失败：{ex.Message}");
+                            this.Invoke(() => ShowError($"提取失败：\n{ex.Message}", true));
                         }
                     }
                 }
@@ -6624,8 +6624,8 @@ namespace PS4PKGTool
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError($"Extraction failed: {ex.Message}");
-                    this.Invoke(() => ShowError($"Extraction failed:\n{ex.Message}", true));
+                    Logger.LogError($"提取失败：{ex.Message}");
+                    this.Invoke(() => ShowError($"提取失败：\n{ex.Message}", true));
                 }
             };
             bgw.RunWorkerCompleted += delegate (object s, RunWorkerCompletedEventArgs e)
@@ -6634,28 +6634,28 @@ namespace PS4PKGTool
                 SetExtractionUiEnabled(true); // unlock the app (covers cancel/error/success)
                 this.Invoke((Action)(() =>
                 {
-                    btnExtractFullPKG.Text = "Extract full PKG";
+                    btnExtractFullPKG.Text = "提取完整 PKG";
                     toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
                     toolStripProgressBar1.Value = 0;
                 }));
                 toolStripStatusLabel2.Text = $"...";
                 if (e.Cancelled)
                 {
-                    ShowInformation("Extraction cancelled.", true);
+                    ShowInformation("提取已取消。", true);
                 }
                 else if (e.Error != null)
                 {
-                    Logger.LogError($"Extraction failed: {e.Error.Message}");
-                    ShowError($"Extraction failed:\n{e.Error.Message}", true);
+                    Logger.LogError($"提取失败：{e.Error.Message}");
+                    ShowError($"提取失败：\n{e.Error.Message}", true);
                 }
                 else
                 {
                     // Report actual successes, not just how many were queued -
                     // per-entry failures already surfaced their own dialog.
                     string summary = failCount == 0
-                        ? $"Extraction complete: {successCount} item(s) extracted."
-                        : $"Extraction finished: {successCount} extracted, {failCount} failed.";
-                    Logger.LogInformation($"Extraction complete: {successCount} succeeded, {failCount} failed (of {nodeList.Count})");
+                        ? $"提取完成：已提取 {successCount} 个条目。"
+                        : $"提取结束：成功 {successCount} 个，失败 {failCount} 个。";
+                    Logger.LogInformation($"提取完成：成功 {successCount} 个，失败 {failCount} 个（共 {nodeList.Count} 个）");
                     ShowInformation(summary, false);
                 }
             };
@@ -6686,7 +6686,7 @@ namespace PS4PKGTool
                 {
                     reader.ExtractFileTo(target.Real, out_path); // exact dest, flattened
                 }
-                catch (Exception ex) { Logger.LogWarning($"Drag-drop extract failed for {target.Logical}: {ex.Message}"); }
+                catch (Exception ex) { Logger.LogWarning($"拖放提取 {target.Logical} 失败：{ex.Message}"); }
             }
         }
 
@@ -6725,7 +6725,7 @@ namespace PS4PKGTool
             finally
             {
                 Cursor.Current = Cursors.Default;
-                try { Directory.Delete(dragDir, true); } catch (Exception ex) { Logger.LogWarning("Failed to clean drag temp dir: " + ex.Message); }
+                try { Directory.Delete(dragDir, true); } catch (Exception ex) { Logger.LogWarning("清理拖放临时目录失败：" + ex.Message); }
             }
         }
 
@@ -6761,7 +6761,7 @@ namespace PS4PKGTool
             finally
             {
                 Cursor.Current = Cursors.Default;
-                try { Directory.Delete(dragDir, true); } catch (Exception ex) { Logger.LogWarning("Failed to clean drag temp dir: " + ex.Message); }
+                try { Directory.Delete(dragDir, true); } catch (Exception ex) { Logger.LogWarning("清理拖放临时目录失败：" + ex.Message); }
             }
         }
 
@@ -6820,7 +6820,7 @@ namespace PS4PKGTool
             tbPasscode.Text = DefaultOrbisPasscode;
             PKG.Passcode = DefaultOrbisPasscode;
 
-            Logger.LogInformation($"View PKG files: {Path.GetFileName(PKG.SelectedPKGFilename)}");
+            Logger.LogInformation($"查看 PKG 文件：{Path.GetFileName(PKG.SelectedPKGFilename)}");
             EnsureMainFileListing(
                 PKG.SelectedPKGFilename, forceReload: true, reportErrors: true);
         }
@@ -6841,11 +6841,11 @@ namespace PS4PKGTool
             string entryPath = _previewEntryPath ?? "";
             if (string.IsNullOrEmpty(entryPath) || string.IsNullOrEmpty(PKG.SelectedPKGFilename))
             {
-                ShowWarning("No PKG entry to export from.", false);
+                ShowWarning("没有可导出的 PKG 条目。", false);
                 return;
             }
 
-            using var fbd = new FolderBrowserDialog { Description = "Choose the folder for the exported texture PNGs" };
+            using var fbd = new FolderBrowserDialog { Description = "选择导出贴图 PNG 的目标文件夹" };
             if (fbd.ShowDialog() != DialogResult.OK) return;
             string outDir = fbd.SelectedPath;
 
@@ -6862,7 +6862,7 @@ namespace PS4PKGTool
                     // file. Stage every sibling stream, as the preview path does.
                     ExtractUnityStreamCompanions(PKG.SelectedPKGFilename, entryPath, tempDir);
 
-                    var source = new Assets.IO.FileAssetSource(extracted, "PKG entry",
+                    var source = new Assets.IO.FileAssetSource(extracted, "PKG 条目",
                         rel => ResolveUnityStreamCompanion(tempDir, rel));
                     var detection = _assetService.Detect(source);
                     if (detection == null) return;
@@ -6876,14 +6876,14 @@ namespace PS4PKGTool
 
                     this.Invoke((MethodInvoker)delegate
                     {
-                        ShowInformation($"Exported {count} texture PNG(s) to {outDir}.", true);
+                        ShowInformation($"已导出 {count} 个贴图 PNG 到 {outDir}。", true);
                     });
                 }
                 catch (Exception ex)
                 {
                     this.Invoke((MethodInvoker)delegate
                     {
-                        ShowError("Texture export failed: " + ex.Message, false);
+                        ShowError("贴图导出失败：" + ex.Message, false);
                     });
                 }
                 finally
@@ -6898,7 +6898,7 @@ namespace PS4PKGTool
                 this.Enabled = true;
             };
             this.Enabled = false;
-            toolStripStatusLabel2.Text = "Exporting textures...";
+            toolStripStatusLabel2.Text = "正在导出贴图……";
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
             toolStripProgressBar1.Visible = true;
             bg.RunWorkerAsync();
@@ -6915,13 +6915,13 @@ namespace PS4PKGTool
             if (children.Count == 0 || !CanExportContainerTextures())
             {
                 string reason = _containerDetection?.Format == Assets.Handlers.UnrealPakHandler.FormatId
-                    ? "This Unreal PAK has no directly decodable image entries. Its .uasset/.uexp texture payloads cannot be exported as PNG yet."
-                    : "This container has no decodable texture entries to export.";
+                    ? "此 Unreal PAK 没有可直接解码的图像条目。其 .uasset/.uexp 贴图数据暂无法导出为 PNG。"
+                    : "此容器没有可解码的贴图条目可供导出。";
                 ShowWarning(reason, false);
                 return;
             }
 
-            using var fbd = new FolderBrowserDialog { Description = "Choose the folder for the exported texture PNGs" };
+            using var fbd = new FolderBrowserDialog { Description = "选择导出贴图 PNG 的目标文件夹" };
             if (fbd.ShowDialog() != DialogResult.OK) return;
             string outDir = fbd.SelectedPath;
 
@@ -6991,19 +6991,19 @@ namespace PS4PKGTool
                     {
                         if (exported == 0)
                         {
-                            ShowWarning("No decodable textures were exported. This container may use an unsupported texture format or external payloads.", false);
+                            ShowWarning("未导出任何可解码贴图。此容器可能使用不受支持的贴图格式或外部数据。", false);
                             return;
                         }
 
-                        string skippedText = skipped > 0 ? $" Skipped {skipped} non-decodable entry(s)." : "";
-                        ShowInformation($"Exported {exported} texture PNG(s) to {outDir}.{skippedText}", true);
+                        string skippedText = skipped > 0 ? $" 已跳过 {skipped} 个不可解码条目。" : "";
+                        ShowInformation($"已导出 {exported} 个贴图 PNG 到 {outDir}。{skippedText}", true);
                     });
                 }
                 catch (Exception ex)
                 {
                     this.Invoke((MethodInvoker)delegate
                     {
-                        ShowError("Texture export failed: " + ex.Message, false);
+                        ShowError("贴图导出失败：" + ex.Message, false);
                     });
                 }
             };
@@ -7015,7 +7015,7 @@ namespace PS4PKGTool
                 UpdatePackageActionButtonStates();
             };
             this.Enabled = false;
-            toolStripStatusLabel2.Text = "Exporting container textures...";
+            toolStripStatusLabel2.Text = "正在导出容器贴图……";
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
             toolStripProgressBar1.Visible = true;
             bg.RunWorkerAsync();
@@ -7052,10 +7052,10 @@ namespace PS4PKGTool
 
         private void btnExportTreeView_Click(object sender, EventArgs e)
         {
-            if (PKGTreeView.Nodes.Count == 0) { ShowError("No data to export.", false); return; }
+            if (PKGTreeView.Nodes.Count == 0) { ShowError("没有可导出的数据。", false); return; }
             using var sfd = new SaveFileDialog
             {
-                Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                Filter = "文本文件 (*.txt)|*.txt|所有文件 (*.*)|*.*",
                 DefaultExt = "txt",
                 FileName = Path.GetFileNameWithoutExtension(PKG.SelectedPKGFilename ?? "export") + "_file_list.txt"
             };
@@ -7070,9 +7070,9 @@ namespace PS4PKGTool
                     WriteTree(sb, root, "", true);
                 }
                 File.WriteAllText(sfd.FileName, sb.ToString());
-                ShowInformation("Tree exported.", true);
+                ShowInformation("树视图已导出。", true);
             }
-            catch (Exception ex) { ShowError("Export failed: " + ex.Message, false); }
+            catch (Exception ex) { ShowError("导出失败：" + ex.Message, false); }
         }
 
         /// <summary>
@@ -7130,7 +7130,7 @@ namespace PS4PKGTool
                 ?? (PKGGridView.DataSource as DataView)?.Table;
             if (table == null)
             {
-                ShowInformation("No PKG files are loaded.", true);
+                ShowInformation("尚未加载任何 PKG 文件。", true);
                 return;
             }
 
@@ -7165,10 +7165,10 @@ namespace PS4PKGTool
                 .ThenBy(patch => patch.Version, StringComparer.OrdinalIgnoreCase)
                 .ToList();
 
-            Logger.LogInformation($"Missing base scan: checked {patches.Count} patch PKG(s), found {missing.Count} without a loaded base game.");
+            Logger.LogInformation($"缺少本体检查：已检查 {patches.Count} 个补丁 PKG，发现 {missing.Count} 个没有对应本体游戏。");
             if (missing.Count == 0)
             {
-                ShowInformation($"All {patches.Count} patch PKG(s) have a matching base game PKG loaded.", true);
+                ShowInformation($"全部 {patches.Count} 个补丁 PKG 都有已加载的对应本体游戏 PKG。", true);
                 return;
             }
 
@@ -7190,7 +7190,7 @@ namespace PS4PKGTool
 
             if (selected.Count != 2)
             {
-                ShowWarning("Select exactly two PKGs: one base Game and one Patch.", true);
+                ShowWarning("请准确选择两个 PKG：一个本体游戏和一个补丁。", true);
                 return;
             }
 
@@ -7198,19 +7198,19 @@ namespace PS4PKGTool
             var patchPackages = selected.Where(pkg => string.Equals(pkg.Category, PKGCategory.PATCH, StringComparison.OrdinalIgnoreCase)).ToList();
             if (basePackages.Count != 1 || patchPackages.Count != 1)
             {
-                ShowWarning("Select exactly one base Game PKG and one Patch PKG.", true);
+                ShowWarning("请准确选择一个本体游戏 PKG 和一个补丁 PKG。", true);
                 return;
             }
             var basePkg = basePackages[0];
             var patchPkg = patchPackages[0];
             if (!string.Equals(basePkg.TitleId, patchPkg.TitleId, StringComparison.OrdinalIgnoreCase))
             {
-                ShowWarning("The selected base and update have different Title IDs.", true);
+                ShowWarning("所选的本体和更新具有不同的 Title ID。", true);
                 return;
             }
             if (!File.Exists(basePkg.Path) || !File.Exists(patchPkg.Path))
             {
-                ShowWarning("One or both selected PKG files no longer exist.", true);
+                ShowWarning("所选的 PKG 文件有一个或两个已不存在。", true);
                 return;
             }
 
@@ -7230,8 +7230,8 @@ namespace PS4PKGTool
                 CleanupWorkDirectoryOnFailure = true
             };
 
-            EnqueueMerge(request, $"{basePkg.TitleId} base + {patchPkg.Version}");
-            Logger.LogInformation($"PKG merge queued: {basePkg.Path} + {patchPkg.Path}");
+            EnqueueMerge(request, $"{basePkg.TitleId} 本体 + {patchPkg.Version}");
+            Logger.LogInformation($"PKG 合并已入队：{basePkg.Path} + {patchPkg.Path}");
         }
 
         /// <summary>
@@ -7245,7 +7245,7 @@ namespace PS4PKGTool
                 .ToList();
             if (selected.Count == 0)
             {
-                ShowWarning("Select one or more PKGs to convert to FFPFSC.", true);
+                ShowWarning("请选择一个或多个要转换为 FFPFSC 的 PKG。", true);
                 return;
             }
 
@@ -7259,7 +7259,7 @@ namespace PS4PKGTool
             }).ToList();
             if (sources.Any(source => !File.Exists(source.Path)))
             {
-                ShowWarning("One or more selected PKG files no longer exist.", true);
+                ShowWarning("所选的 PKG 文件有一个或多个已不存在。", true);
                 return;
             }
 
@@ -7270,8 +7270,8 @@ namespace PS4PKGTool
 
             if (sources.Count == 1)
             {
-                EnqueueFfpfsc(optionsForm.Options, $"Convert: {Path.GetFileName(sources[0].Path)}");
-                Logger.LogInformation($"FFPFSC conversion queued: {sources[0].Path}");
+                EnqueueFfpfsc(optionsForm.Options, $"转换：{Path.GetFileName(sources[0].Path)}");
+                Logger.LogInformation($"FFPFSC 转换已入队：{sources[0].Path}");
                 return;
             }
 
@@ -7291,8 +7291,8 @@ namespace PS4PKGTool
                 }
 
                 EnqueueFfpfsc(optionsForm.Options with { PkgPath = source.Path, OutputPath = outputPath },
-                    $"Convert: {Path.GetFileName(source.Path)}");
-                Logger.LogInformation($"FFPFSC conversion queued: {source.Path}");
+                    $"转换：{Path.GetFileName(source.Path)}");
+                Logger.LogInformation($"FFPFSC 转换已入队：{source.Path}");
             }
         }
 
@@ -7306,12 +7306,12 @@ namespace PS4PKGTool
                 .ToList();
             if (sources.Count == 0)
             {
-                ShowWarning("Select one or more PKGs to extract.", true);
+                ShowWarning("请选择一个或多个要提取的 PKG。", true);
                 return;
             }
             if (sources.Any(path => !File.Exists(path)))
             {
-                ShowWarning("One or more selected PKG files no longer exist.", true);
+                ShowWarning("所选的 PKG 文件有一个或多个已不存在。", true);
                 return;
             }
             if (!ShowFolderBrowserDialog(out FolderBrowserDialog folder)) return;
@@ -7329,7 +7329,7 @@ namespace PS4PKGTool
                 }
 
                 EnqueueFullExtraction(pkgPath, outputDirectory);
-                Logger.LogInformation($"Full extraction queued: {pkgPath} -> {outputDirectory}");
+                Logger.LogInformation($"完整提取已入队：{pkgPath} -> {outputDirectory}");
             }
         }
 
@@ -7390,11 +7390,11 @@ namespace PS4PKGTool
             }
             catch (FileNotFoundException)
             {
-                ShowInformation("Change info not available.", true);
+                ShowInformation("变更信息不可用。", true);
             }
             catch (Exception ex)
             {
-                ShowError("An error occurred while viewing the update changelog: " + ex.Message, true);
+                ShowError("查看更新日志时发生错误：" + ex.Message, true);
             }
         }
 
@@ -7405,7 +7405,7 @@ namespace PS4PKGTool
 
         private void ViewPatchChangelog_Click(object sender, EventArgs e)
         {
-            Logger.LogInformation("Viewing patch PKG changelog..");
+            Logger.LogInformation("正在查看补丁 PKG 更新日志……");
 
             if (!(sender is ToolStripMenuItem clickedMenuItem))
                 return;
@@ -7428,7 +7428,7 @@ namespace PS4PKGTool
                     }
                     catch (Exception ex)
                     {
-                        ShowError("An error occurred while viewing the update changelog: " + ex.Message, true);
+                        ShowError("查看更新日志时发生错误：" + ex.Message, true);
                     }
                 }
             }
@@ -7512,7 +7512,7 @@ namespace PS4PKGTool
         {
             if (Shadps4Manager.IsInstallationActive)
             {
-                ShowWarning("A shadPS4 installation is in progress.", false);
+                ShowWarning("shadPS4 正在安装中。", false);
                 return;
             }
 
@@ -7526,8 +7526,8 @@ namespace PS4PKGTool
                 this.Invoke((Action)(() => toolStripProgressBar1.Maximum = pkgList.Count));
                 PKG.CountFailRename = 0;
                 PKG.ListFailRename = "";
-                Logger.LogInformation($"Rename: {pkgList.Count} PKG(s) to {namingFormat} format");
-                Logger.LogInformation($"Renaming PKG file to {namingFormat} format..");
+                Logger.LogInformation($"重命名：{pkgList.Count} 个 PKG 为 {namingFormat} 格式");
+                Logger.LogInformation($"正在将 PKG 文件重命名为 {namingFormat} 格式……");
                 foreach (var pkg in pkgList)
                 {
                     string targetPkgName = null;
@@ -7549,7 +7549,7 @@ namespace PS4PKGTool
                             lastInvoked = countPkg;
                             PKGGridView.Invoke((Action)(() =>
                             {
-                                toolStripStatusLabel2.Text = $"Renaming PKG.. ({current}/{pkgList.Count})";
+                                toolStripStatusLabel2.Text = $"正在重命名 PKG……（{current}/{pkgList.Count}）";
                                 toolStripProgressBar1.Increment(increment);
                             }));
                         }
@@ -7567,15 +7567,15 @@ namespace PS4PKGTool
                 {
                     if (PKG.CountFailRename > 0)
                     {
-                        Logger.LogInformation($"Rename completed with {PKG.CountFailRename} failure(s).");
-                        ShowWarning(PKG.CountFailRename + " PKG failed to rename. See program log to view the errors.", false);
-                        Logger.LogWarning(PKG.CountFailRename + " PKG failed to rename:");
+                        Logger.LogInformation($"重命名完成，但有 {PKG.CountFailRename} 个失败。");
+                        ShowWarning(PKG.CountFailRename + " 个 PKG 重命名失败。请查看程序日志了解错误详情。", false);
+                        Logger.LogWarning(PKG.CountFailRename + " 个 PKG 重命名失败：");
                         Logger.LogWarning(PKG.ListFailRename);
                     }
                     else
                     {
-                        Logger.LogInformation("Rename completed successfully.");
-                        ShowInformation("PKG rename done.", true);
+                        Logger.LogInformation("重命名成功完成。");
+                        ShowInformation("PKG 重命名已完成。", true);
                     }
 
                     SaveManifestAfterScan();
@@ -7584,7 +7584,7 @@ namespace PS4PKGTool
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Rename completion failed: " + ex.Message);
+                    Logger.LogError("重命名完成回调失败：" + ex.Message);
                 }
                 finally
                 {
@@ -7621,7 +7621,7 @@ namespace PS4PKGTool
         /// </summary>
         private void RenamePKGByPriority(List<string> pkgList, BackgroundWorker progressWorker = null)
         {
-            Logger.LogInformation($"Rename by priority started: {pkgList.Count} file(s)");
+            Logger.LogInformation($"按优先级重命名已开始：{pkgList.Count} 个文件");
             PKG.CountFailRename = 0;
             PKG.ListFailRename = "";
             int totalRenamed = 0;
@@ -7635,21 +7635,21 @@ namespace PS4PKGTool
             foreach (var pkg in pkgList)
             {
                 processed++;
-                progressWorker?.ReportProgress((int)(100.0 * processed / total), $"Reading PKG {processed}/{total}...");
+                progressWorker?.ReportProgress((int)(100.0 * processed / total), $"正在读取 PKG {processed}/{total}……");
                 try
                 {
                     var readPkg = PkgMetadataReader.ReadMetadataOnly(pkg);
                     string pkgType = readPkg.PKG_Type.ToString();
                     if (pkgType != "Game" && pkgType != "Patch")
                     {
-                        Logger.LogInformation($"Priority rename: skipping {Path.GetFileName(pkg)} ({pkgType}).");
+                        Logger.LogInformation($"按优先级重命名：跳过 {Path.GetFileName(pkg)}（{pkgType}）。");
                         continue;
                     }
                     string titleId = readPkg.TITLEID;
                     if (string.IsNullOrEmpty(titleId))
                     {
                         titleId = "UNKNOWN_TITLEID";
-                        Logger.LogWarning($"PKG has no Title ID, using '{titleId}': {Path.GetFileName(pkg)}");
+                        Logger.LogWarning($"PKG 没有 Title ID，使用「{titleId}」：{Path.GetFileName(pkg)}");
                     }
 
                     if (!groups.ContainsKey(titleId))
@@ -7661,7 +7661,7 @@ namespace PS4PKGTool
                 {
                     PKG.CountFailRename++;
                     PKG.ListFailRename += Path.GetFileName(pkg) + " : " + ex.Message + "\n";
-                    Logger.LogError($"Failed to read PKG for priority rename: {pkg}: {ex.Message}");
+                    Logger.LogError($"为按优先级重命名读取 PKG 失败：{pkg}：{ex.Message}");
                 }
             }
 
@@ -7678,7 +7678,7 @@ namespace PS4PKGTool
                 {
                     var (path, title, appVer, pkgType) = sorted[i];
                     renameDone++;
-                    progressWorker?.ReportProgress((int)(100.0 * renameDone / total), $"Renaming {renameDone}/{total}...");
+                    progressWorker?.ReportProgress((int)(100.0 * renameDone / total), $"正在重命名 {renameDone}/{total}……");
 
                     string targetPkg = null;
                     try
@@ -7708,15 +7708,15 @@ namespace PS4PKGTool
                         PKG.CountFailRename++;
                         string targetName = targetPkg == null ? "?" : Path.GetFileName(targetPkg);
                         PKG.ListFailRename += $"{Path.GetFileName(path)} → {targetName} : {ex.Message}\n";
-                        Logger.LogError($"Failed to rename by priority: {path}: {ex.Message}");
+                        Logger.LogError($"按优先级重命名失败：{path}：{ex.Message}");
                     }
                 }
             }
 
             if (PKG.CountFailRename > 0)
-                Logger.LogWarning($"Priority rename completed with {PKG.CountFailRename} failure(s):\n{PKG.ListFailRename}");
+                Logger.LogWarning($"按优先级重命名完成，但有 {PKG.CountFailRename} 个失败：\n{PKG.ListFailRename}");
             else
-                Logger.LogInformation($"Priority rename completed: {totalRenamed} PKG(s) renamed.");
+                Logger.LogInformation($"按优先级重命名完成：已重命名 {totalRenamed} 个 PKG。");
         }
 
         private void GetSelectedPKGPath()
@@ -7734,7 +7734,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error getting PKG path: {ex.Message}");
+                Logger.LogError($"获取 PKG 路径时出错：{ex.Message}");
             }
         }
 
@@ -7755,7 +7755,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error selecting first row: {ex.Message}");
+                Logger.LogError($"选中第一行时出错：{ex.Message}");
             }
         }
 
@@ -7788,7 +7788,7 @@ namespace PS4PKGTool
         {
             if (Shadps4Manager.IsInstallationActive)
             {
-                ShowWarning("A shadPS4 installation is in progress.", false);
+                ShowWarning("shadPS4 正在安装中。", false);
                 return;
             }
             if (!(sender is ToolStripMenuItem clickedMenuItem))
@@ -7810,10 +7810,14 @@ namespace PS4PKGTool
             else
                 return;
 
+            // moveBy is an internal key (switched on below); this is the
+            // label shown to the user in the confirm dialog and the log.
+            string moveByLabel = MoveByLabel(moveBy);
+
             int total = PKGGridView.Rows.Count;
             if (total == 0)
             {
-                ShowError("No PKG files to move.", false);
+                ShowError("没有可移动的 PKG 文件。", false);
                 return;
             }
 
@@ -7821,10 +7825,10 @@ namespace PS4PKGTool
                 return;
 
             string confirmMessage = moveBy == "flat"
-    ? $"Move {total} PKG(s) directly into:\n\n{fbd.SelectedPath}\n\nNo subfolders will be created.\n\nProceed?"
+    ? $"将 {total} 个 PKG 直接移动到：\n\n{fbd.SelectedPath}\n\n不会创建子文件夹。\n\n继续？"
     : moveBy == "Title"
-        ? $"Move {total} PKG(s) into subfolders under:\n\n{fbd.SelectedPath}\n\nGrouped by: {moveBy}\n\nA combined \"Base + Update\" main folder (grouped by title) and an \"Addon\" main folder (grouped by Title ID) are created.\n\nProceed?"
-        : $"Move {total} PKG(s) into subfolders under:\n\n{fbd.SelectedPath}\n\nGrouped by: {moveBy}\n\nProceed?";
+        ? $"将 {total} 个 PKG 移动到以下目录的子文件夹中：\n\n{fbd.SelectedPath}\n\n分组依据：{moveByLabel}\n\n会创建一个合并的「Base + Update」主文件夹（按标题分组）和一个「Addon」主文件夹（按 Title ID 分组）。\n\n继续？"
+        : $"将 {total} 个 PKG 移动到以下目录的子文件夹中：\n\n{fbd.SelectedPath}\n\n分组依据：{moveByLabel}\n\n继续？";
             var result = DialogResultYesNo(confirmMessage);
             if (result != DialogResult.Yes)
                 return;
@@ -7832,8 +7836,21 @@ namespace PS4PKGTool
             MovePKG(moveBy, fbd.SelectedPath);
         }
 
+        /// <summary>User-facing label for the internal "move by" key.</summary>
+        private static string MoveByLabel(string moveBy) => moveBy switch
+        {
+            "Type" => "类型",
+            "Category" => "分类",
+            "Region" => "区域",
+            "Title" => "标题",
+            "Title Id" => "标题 ID",
+            _ => moveBy
+        };
+
         private void MovePKG(string moveBy, string outputFolder)
         {
+            // moveBy is an internal key; this is the label shown to the user.
+            string moveByLabel = MoveByLabel(moveBy);
             var backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += delegate
             {
@@ -7847,7 +7864,7 @@ namespace PS4PKGTool
                     total = PKGGridView.Rows.Count;
                     toolStripProgressBar1.Maximum = total;
                 });
-                Logger.LogInformation($"Move PKG by {moveBy}: {total} PKG(s) → {outputFolder}");
+                Logger.LogInformation($"按 {moveByLabel} 移动 PKG：{total} 个 PKG → {outputFolder}");
 
                 for (int i = 0; i < total; i++)
                 {
@@ -7856,7 +7873,7 @@ namespace PS4PKGTool
                         PKG.pkgCount++;
                         this.Invoke((MethodInvoker)delegate
                         {
-                            toolStripStatusLabel2.Text = $"Moving PKG.. ({PKG.pkgCount}/{total})";
+                            toolStripStatusLabel2.Text = $"正在移动 PKG……（{PKG.pkgCount}/{total}）";
                             toolStripProgressBar1.Increment(1);
                         });
 
@@ -7899,8 +7916,8 @@ namespace PS4PKGTool
                         if (string.IsNullOrEmpty(dest))
                         {
                             PKG.CountFailMove++;
-                            string reason = moveBy == "region" ? $"Unknown region: {info.Region}" : $"Unknown {moveBy}";
-                            Logger.LogWarning($"Move skipped: {info.FileName} - {reason}");
+                            string reason = moveBy == "region" ? $"未知区域：{info.Region}" : $"未知{moveBy}";
+                            Logger.LogWarning($"已跳过移动：{info.FileName} - {reason}");
                             PKG.ListFailMove += $"{info.FileName} : {reason}\n";
                             continue;
                         }
@@ -7923,7 +7940,7 @@ namespace PS4PKGTool
                             }));
                         }
                         catch { /* best-effort: grid may not be accessible */ }
-                        Logger.LogError($"Move failed: {name} - {ex.Message}");
+                        Logger.LogError($"移动失败：{name} - {ex.Message}");
                         PKG.ListFailMove += $"{name} : {ex.Message}\n";
                     }
                 }
@@ -7933,17 +7950,17 @@ namespace PS4PKGTool
             {
                 if (PKG.CountFailMove > 0)
                 {
-                    Logger.LogWarning($"Move completed with {PKG.CountFailMove} failure(s):");
+                    Logger.LogWarning($"移动完成，但有 {PKG.CountFailMove} 个失败：");
                     Logger.LogWarning(PKG.ListFailMove);
-                    ShowWarning($"{PKG.CountFailMove} PKG failed to move. See program log for details.", false);
+                    ShowWarning($"{PKG.CountFailMove} 个 PKG 移动失败。请查看程序日志了解详情。", false);
                 }
                 else
                 {
-                    Logger.LogInformation("Move completed successfully.");
-                    ShowInformation("PKG moved to new directories. The destination was not added to saved directories.", true);
+                    Logger.LogInformation("移动成功完成。");
+                    ShowInformation("PKG 已移动到新目录。目标目录未添加到已保存目录列表。", true);
                 }
 
-                toolStripStatusLabel2.Text = "Refreshing PKG list.. ";
+                toolStripStatusLabel2.Text = "正在刷新 PKG 列表……";
                 LoadPKGGridView();
             };
 
@@ -7988,7 +8005,7 @@ namespace PS4PKGTool
             if (regionFolders.TryGetValue(info.Region, out string folder))
                 return Path.Combine(outputFolder, folder);
 
-            Logger.LogWarning($"Unknown region '{info.Region}' - moving to OTHER");
+            Logger.LogWarning($"未知区域「{info.Region}」 - 移动到 OTHER");
             return Path.Combine(outputFolder, "OTHER");
         }
 
@@ -8035,8 +8052,8 @@ namespace PS4PKGTool
                 string status = e.Value?.ToString() ?? "";
                 bool installed = PKGGridView.Rows[e.RowIndex].Cells[PkgColumns.Shadps4Installed].Value is true;
                 e.Value = string.IsNullOrWhiteSpace(status)
-                    ? (installed ? "[Installed]" : "")
-                    : "● " + status + (installed ? " [Installed]" : "");
+                    ? (installed ? "[已安装]" : "")
+                    : "● " + status + (installed ? " [已安装]" : "");
                 e.CellStyle.ForeColor = string.IsNullOrWhiteSpace(status)
                     ? Color.FromArgb(113, 190, 84)
                     : Shadps4Compat.StatusColor(status);
@@ -8232,8 +8249,8 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error sorting column: {ex.Message}");
-                ShowError($"Error sorting column: {ex.Message}", true);
+                Logger.LogError($"排序列时出错：{ex.Message}");
+                ShowError($"排序列时出错：{ex.Message}", true);
             }
         }
 
@@ -8243,7 +8260,7 @@ namespace PS4PKGTool
             {
                 PKGGridView.Rows[0].Selected = true;
                 PKGGridView.CurrentCell = PKGGridView.Rows[0].Cells[0];
-                try { PKGGridView.FirstDisplayedScrollingRowIndex = 0; } catch (Exception ex) { Logger.LogWarning("Failed to scroll grid to top: " + ex.Message); }
+                try { PKGGridView.FirstDisplayedScrollingRowIndex = 0; } catch (Exception ex) { Logger.LogWarning("滚动网格到顶部失败：" + ex.Message); }
             }
         }
 
@@ -8310,7 +8327,7 @@ namespace PS4PKGTool
                     _ => 0
                 };
             }
-            catch (Exception ex) { Logger.LogWarning("Error parsing size string '" + sizeStr + "': " + ex.Message); return 0; }
+            catch (Exception ex) { Logger.LogWarning("解析大小字符串失败：'" + sizeStr + "': " + ex.Message); return 0; }
         }
 
         private void btnExtractFullPKG_Click(object sender, EventArgs e)
@@ -8318,13 +8335,13 @@ namespace PS4PKGTool
             string pkgPath = PKG.SelectedPKGFilename;
             if (string.IsNullOrWhiteSpace(pkgPath) || !File.Exists(pkgPath))
             {
-                ShowWarning("Select a PKG before adding a full extraction task.", false);
+                ShowWarning("请先选择一个 PKG 再添加完整提取任务。", false);
                 return;
             }
             if (!ShowFolderBrowserDialog(out FolderBrowserDialog folder)) return;
             string outputDirectory = Path.Combine(folder.SelectedPath, Path.GetFileNameWithoutExtension(pkgPath));
             EnqueueFullExtraction(pkgPath, outputDirectory);
-            Logger.LogInformation($"Full extraction queued: {pkgPath} -> {outputDirectory}");
+            Logger.LogInformation($"完整提取已入队：{pkgPath} -> {outputDirectory}");
         }
 
         /// <summary>
@@ -8529,7 +8546,7 @@ namespace PS4PKGTool
                 {
                     // Empty directories also have Nodes.Count == 0 - skip preview for them
                     bool isDirItem = listView1.SelectedItems[0].SubItems.Count > 1
-                        && listView1.SelectedItems[0].SubItems[1].Text == "Directory";
+                        && listView1.SelectedItems[0].SubItems[1].Text == "目录";
                     if (!isDirItem)
                         PreviewEntry(NodeLogicalPath(selectedItem.Node));
                 }
@@ -8568,7 +8585,7 @@ namespace PS4PKGTool
                 }
                 sb.AppendLine();
             }
-            if (data.Length == 0) sb.AppendLine("(empty file)");
+            if (data.Length == 0) sb.AppendLine("（空文件）");
             return sb.ToString();
         }
 
@@ -8609,12 +8626,12 @@ namespace PS4PKGTool
             {
                 if (Helper.IsOperationRunning)
                 {
-                    ShowWarning("Cannot preview while an operation is running.", false);
+                    ShowWarning("操作进行中，无法预览。", false);
                     return;
                 }
                 if (_previewWorker != null && _previewWorker.IsBusy)
                 {
-                    lblFileViewerInfo.Text = "Preview already in progress...";
+                    lblFileViewerInfo.Text = "预览已在进行中……";
                     return;
                 }
                 if (string.IsNullOrEmpty(PKG.SelectedPKGFilename)) return;
@@ -8630,7 +8647,7 @@ namespace PS4PKGTool
                 long entrySize = _fileSizes.GetValueOrDefault(entryPath, 0);
                 if (!isContainerEntry && entrySize > maxPreviewBytes)
                 {
-                    string tooLarge = $"{Path.GetFileName(entryPath)} File too large to preview ({Helper.RoundBytes(entrySize)})";
+                    string tooLarge = $"{Path.GetFileName(entryPath)} 文件太大，无法预览（{Helper.RoundBytes(entrySize)}）";
                     lblFileViewerInfo.Text = tooLarge;
                     ShowWarning(tooLarge, false);
                     return;
@@ -8643,8 +8660,8 @@ namespace PS4PKGTool
                 _previewHex = null;
                 _previewInfo = null;
 
-                lblFileViewerInfo.Text = $"Previewing {fname}...";
-                toolStripStatusLabel2.Text = $"Previewing {fname}...";
+                lblFileViewerInfo.Text = $"正在预览 {fname}……";
+                toolStripStatusLabel2.Text = $"正在预览 {fname}……";
                 toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
                 toolStripProgressBar1.Visible = true;
 
@@ -8664,7 +8681,7 @@ namespace PS4PKGTool
 
                         // Asset framework: detect -> inspect -> preview/hex. All heavy
                         // decoding happens OFF the UI thread.
-                        var source = new Assets.IO.FileAssetSource(extracted, "PKG entry");
+                        var source = new Assets.IO.FileAssetSource(extracted, "PKG 条目");
                         var detection = _assetService.Detect(source);
                         _previewIsUnityFile = detection?.Format == Assets.Handlers.UnitySerializedFileHandler.FormatId;
 
@@ -8676,7 +8693,7 @@ namespace PS4PKGTool
                             ExtractUnityStreamCompanions(pkgPath, entryPath, tempDir);
                             if (Directory.EnumerateFiles(tempDir).Any(IsUnityStreamFile))
                             {
-                                source = new Assets.IO.FileAssetSource(extracted, "PKG entry",
+                                source = new Assets.IO.FileAssetSource(extracted, "PKG 条目",
                                     rel => ResolveUnityStreamCompanion(tempDir, rel));
                             }
                         }
@@ -8744,7 +8761,7 @@ namespace PS4PKGTool
                     UpdatePackageActionButtonStates();
                     if (_previewError != null)
                     {
-                        ShowError("Preview failed: " + _previewError, false);
+                        ShowError("预览失败：" + _previewError, false);
                         _previewError = null;
                         return;
                     }
@@ -8762,14 +8779,14 @@ namespace PS4PKGTool
                     }
                     catch (Exception ex)
                     {
-                        ShowError("Preview failed: " + ex.Message, false);
+                        ShowError("预览失败：" + ex.Message, false);
                     }
                 };
                 bg.RunWorkerAsync();
             }
             catch (Exception ex)
             {
-                Logger.LogError("Preview error: " + ex.Message);
+                Logger.LogError("预览出错：" + ex.Message);
             }
         }
 
@@ -8802,11 +8819,11 @@ namespace PS4PKGTool
                 txtPreview.Visible = false;
                 picPreview.Visible = false;
                 txtHexPreview.Text = _previewHex;
-                lblFileViewerInfo.Text = _previewInfo ?? $"{fname} ({sizeStr}) - hex, showing first {Helper.RoundBytes(1L << 20)}";
+                lblFileViewerInfo.Text = _previewInfo ?? $"{fname}（{sizeStr}）- 十六进制，仅显示前 {Helper.RoundBytes(1L << 20)}";
             }
             else
             {
-                ShowWarning("Preview failed: entry could not be extracted.", false);
+                ShowWarning("预览失败：无法提取该条目。", false);
             }
         }
 
@@ -8818,7 +8835,7 @@ namespace PS4PKGTool
             picPreview.Visible = false;
             txtPreview.Visible = false;
             txtHexPreview.Visible = false;
-            lblFileViewerInfo.Text = $"{_containerSource?.Name}: {_containerChildren.Count} entries (double-click to preview)";
+            lblFileViewerInfo.Text = $"{_containerSource?.Name}：{_containerChildren.Count} 个条目（双击预览）";
             UpdatePackageActionButtonStates();
         }
 
@@ -8859,7 +8876,7 @@ namespace PS4PKGTool
             picPreview.Visible = false;
             txtPreview.Visible = false;
             txtHexPreview.Visible = false;
-            lblFileViewerInfo.Text = $"{_containerSource.Name}: {_containerChildren.Count} entries (double-click to preview)";
+            lblFileViewerInfo.Text = $"{_containerSource.Name}：{_containerChildren.Count} 个条目（双击预览）";
             UpdatePackageActionButtonStates();
         }
 
@@ -8897,7 +8914,7 @@ namespace PS4PKGTool
         {
             if (_previewWorker != null && _previewWorker.IsBusy)
             {
-                lblFileViewerInfo.Text = "Preview already in progress...";
+                lblFileViewerInfo.Text = "预览已在进行中……";
                 return;
             }
 
@@ -8920,7 +8937,7 @@ namespace PS4PKGTool
                         var preview = handler.PreviewAsync(unityChild, _containerDetection!).GetAwaiter().GetResult();
                         if (preview?.Texture != null) _previewTexture = preview.Texture;
                         else if (preview?.Text != null) _previewText = preview.Text;
-                        else _previewError = "No preview available for this object.";
+                        else _previewError = "此对象没有可预览的内容。";
                         _previewInfo = preview?.Info;
                         return;
                     }
@@ -8934,7 +8951,7 @@ namespace PS4PKGTool
                     using (var fs = File.Create(temp))
                         s.CopyTo(fs);
 
-                    var source = new Assets.IO.FileAssetSource(temp, "container member");
+                    var source = new Assets.IO.FileAssetSource(temp, "容器成员");
                     var detection = _assetService.Detect(source);
                     if (detection == null)
                     {
@@ -8972,7 +8989,7 @@ namespace PS4PKGTool
                 UpdatePackageActionButtonStates();
                 if (_previewError != null)
                 {
-                    ShowError("Preview failed: " + _previewError, false);
+                    ShowError("预览失败：" + _previewError, false);
                     _previewError = null;
                     return;
                 }
@@ -8982,10 +8999,10 @@ namespace PS4PKGTool
                 }
                 catch (Exception ex)
                 {
-                    ShowError("Preview failed: " + ex.Message, false);
+                    ShowError("预览失败：" + ex.Message, false);
                 }
             };
-            toolStripStatusLabel2.Text = "Previewing asset...";
+            toolStripStatusLabel2.Text = "正在预览资源……";
             toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
             toolStripProgressBar1.Visible = true;
             bg.RunWorkerAsync();
@@ -9137,9 +9154,9 @@ namespace PS4PKGTool
                         Path = logical
                     };
 
-                    ListViewItem listViewItem = new ListViewItem(isDirectory ? "Directory" : "File");
+                    ListViewItem listViewItem = new ListViewItem(isDirectory ? "目录" : "文件");
                     listViewItem.Text = item.Text;
-                    listViewItem.SubItems.Add(isDirectory ? "Directory" : Path.GetExtension(item.Text).Replace(".", ""));
+                    listViewItem.SubItems.Add(isDirectory ? "目录" : Path.GetExtension(item.Text).Replace(".", ""));
                     listViewItem.SubItems.Add(dir);
                     listViewItem.SubItems.Add(isDirectory ? "" : Helper.RoundBytes(_fileSizes.GetValueOrDefault(logical, 0)));
                     listViewItem.Tag = treeNodeInfo;
@@ -9200,7 +9217,7 @@ namespace PS4PKGTool
             foreach (TreeNode child in children)
             {
                 bool isDir = child.Nodes.Count > 0;
-                string type = isDir ? "Directory" : Path.GetExtension(child.Text).Replace(".", "");
+                string type = isDir ? "目录" : Path.GetExtension(child.Text).Replace(".", "");
                 string childLogical = NodeLogicalPath(child);
                 bool matches = child.Text.Contains(query, StringComparison.OrdinalIgnoreCase)
                     || type.Contains(query, StringComparison.OrdinalIgnoreCase)
@@ -9208,7 +9225,7 @@ namespace PS4PKGTool
                 if (matches)
                 {
                     TreeNodeInfo info = new TreeNodeInfo { Node = child, Path = childLogical };
-                    var item = new ListViewItem(isDir ? "Directory" : "File");
+                    var item = new ListViewItem(isDir ? "目录" : "文件");
                     item.Text = child.Text;
                     item.SubItems.Add(type);
                     item.SubItems.Add(Path.GetDirectoryName(childLogical));
@@ -9245,9 +9262,9 @@ namespace PS4PKGTool
                     foreach (DataGridViewRow row in PKGGridView.SelectedRows)
                     {
                         row.Cells["Backported"].Value = "Yes";
-                        Logger.LogInformation($"\"{row.Cells["Filename"].Value}\" set as backported.");
+                        Logger.LogInformation($"\"{row.Cells["Filename"].Value}」已标记为回移植。");
                     }
-                    ShowInformation("PKG set as backported.", false);
+                    ShowInformation("PKG 已标记为回移植。", false);
                 }
             }
 
@@ -9258,9 +9275,9 @@ namespace PS4PKGTool
                     foreach (DataGridViewRow row in PKGGridView.SelectedRows)
                     {
                         row.Cells["Backported"].Value = backportRemarkTextboxtoolStripTextBox1.Text;
-                        Logger.LogInformation($"Added backport remark to \"{row.Cells["Filename"].Value}\" ({backportRemarkTextboxtoolStripTextBox1.Text}).");
+                        Logger.LogInformation($"已为「{row.Cells["Filename"].Value}」添加回移植备注（{backportRemarkTextboxtoolStripTextBox1.Text}）。");
                     }
-                    ShowInformation("Backport remark added.", false);
+                    ShowInformation("回移植备注已添加。", false);
                 }
             }
 
@@ -9271,9 +9288,9 @@ namespace PS4PKGTool
                     foreach (DataGridViewRow row in PKGGridView.SelectedRows)
                     {
                         row.Cells["Backported"].Value = backportRemarkTextboxtoolStripTextBox2.Text;
-                        Logger.LogInformation($"Added backport remark to \"{row.Cells["Filename"].Value}\" ({backportRemarkTextboxtoolStripTextBox2.Text}).");
+                        Logger.LogInformation($"已为「{row.Cells["Filename"].Value}」添加回移植备注（{backportRemarkTextboxtoolStripTextBox2.Text}）。");
                     }
-                    ShowInformation("Backport remark added.", false);
+                    ShowInformation("回移植备注已添加。", false);
                 }
             }
 
@@ -9284,9 +9301,9 @@ namespace PS4PKGTool
                     foreach (DataGridViewRow row in PKGGridView.SelectedRows)
                     {
                         row.Cells["Backported"].Value = "No";
-                        Logger.LogInformation($"Removed backport label from \"{row.Cells["Filename"].Value}\".");
+                        Logger.LogInformation($"已从「{row.Cells["Filename"].Value}\".");
                     }
-                    ShowInformation("Backport remark removed.", false);
+                    ShowInformation("回移植备注已移除。", false);
                 }
             }
 

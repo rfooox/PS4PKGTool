@@ -109,7 +109,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                 // which left _cache as an empty dict - Lookup then returned
                 // "" forever until the app restarted. Log it so the user can
                 // tell a broken cache from a genuinely unknown title.
-                Logger.LogWarning("shadPS4 compat cache load failed: " + ex.Message);
+                Logger.LogWarning("shadPS4 兼容性缓存加载失败：" + ex.Message);
             }
         }
 
@@ -122,13 +122,13 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         /// </summary>
         public static async Task<(int count, string error)> DownloadAsync(IProgress<string> progress = null)
         {
-            progress?.Report("Downloading the compatibility database...");
+            progress?.Report("正在下载兼容性数据库……");
             var (result, error) = await TryDownloadReleaseAssetAsync();
             if (error == null && result.Count > 0)
             {
                 _cache = result;
                 File.WriteAllText(CachePath, JsonConvert.SerializeObject(result, Formatting.Indented));
-                progress?.Report($"Compatibility database updated: {result.Count} games");
+                progress?.Report($"兼容性数据库已更新：{result.Count} 个游戏");
                 return (result.Count, null);
             }
 
@@ -150,7 +150,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
 
                 using var resp = await http.GetAsync(ReleaseAssetUrl);
                 if (!resp.IsSuccessStatusCode)
-                    return (empty, $"GitHub download error: {(int)resp.StatusCode}");
+                    return (empty, $"GitHub 下载错误：{(int)resp.StatusCode}");
                 string json = await resp.Content.ReadAsStringAsync();
                 return ParseReleaseAsset(json);
             }
@@ -218,7 +218,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         using (var resp = await http.GetAsync(url))
                         {
                             if (!resp.IsSuccessStatusCode)
-                                return (result.Count, $"GitHub API error: {(int)resp.StatusCode}");
+                                return (result.Count, $"GitHub API 错误：{(int)resp.StatusCode}");
                             json = await resp.Content.ReadAsStringAsync();
                         }
 
@@ -253,7 +253,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                         if (issues.Count < 100) break;
                         page++;
                     }
-                    progress?.Report($"{label.Replace("status-", "")}: {result.Count} games so far");
+                    progress?.Report($"{label.Replace("status-", "")}：目前已有 {result.Count} 个游戏");
                 }
 
                 _cache = result;

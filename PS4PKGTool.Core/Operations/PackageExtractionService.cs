@@ -35,7 +35,7 @@ public sealed class PkgExtractionService : IPackageExtractionService
                 : await ExtractRawAsync(sourcePath, destination, progress, fileProgress, ct).ConfigureAwait(false);
         }
         catch (OperationCanceledException) when (ct.IsCancellationRequested) { return (false, "Cancelled"); }
-        catch (Exception ex) { return (false, "Extraction failed: " + ex.Message); }
+        catch (Exception ex) { return (false, "提取失败：" + ex.Message); }
     }
 
     /// <summary>Extracts the raw Image0/Sc0 tree in place (internal workflows).</summary>
@@ -43,9 +43,9 @@ public sealed class PkgExtractionService : IPackageExtractionService
         IProgress<string>? progress,
         IProgress<(int Current, int Total, string CurrentFile)>? fileProgress, CancellationToken ct)
     {
-        progress?.Report("Preparing package...");
+        progress?.Report("正在准备安装包……");
         Directory.CreateDirectory(destination);
-        progress?.Report("Extracting game files...");
+        progress?.Report("正在提取游戏文件……");
         var failures = await Task.Run(() =>
         {
             using var reader = new OrbisPkgTool.PkgReader(sourcePath, _passcode);
@@ -66,9 +66,9 @@ public sealed class PkgExtractionService : IPackageExtractionService
         IProgress<string>? progress,
         IProgress<(int Current, int Total, string CurrentFile)>? fileProgress, CancellationToken ct)
     {
-        progress?.Report("Preparing package...");
+        progress?.Report("正在准备安装包……");
         Directory.CreateDirectory(destination);
-        progress?.Report("Extracting game files...");
+        progress?.Report("正在提取游戏文件……");
 
         var report = MakeProgress(progress, ExtractLayout.Merged, fileProgress);
         (int Extracted, int Preserved, List<OrbisPkgTool.ExtractionFailure> Failures) result = await Task.Run(() =>
@@ -124,7 +124,7 @@ public sealed class PkgExtractionService : IPackageExtractionService
         }, ct).ConfigureAwait(false);
 
         string message = result.Preserved > 0
-            ? $"{result.Preserved} existing file(s) preserved under {DumpLayout.ConflictsDirectoryName}/."
+            ? $"已在 {DumpLayout.ConflictsDirectoryName}/ 下保留 {result.Preserved} 个原有文件。"
             : string.Empty;
         if (result.Failures.Count > 0)
         {

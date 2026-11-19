@@ -43,12 +43,12 @@ namespace PS4PKGTool.Startup
             if (arguments.Length != 1)
             {
                 return StartupRoute.Invalid(
-                    "PS4 PKG Tool accepts either no arguments or one .pkg file path.");
+                    "PS4 PKG Tool 只接受无参数，或一个 .pkg 文件路径。");
             }
 
             string suppliedPath = arguments[0];
             if (string.IsNullOrWhiteSpace(suppliedPath))
-                return StartupRoute.Invalid("The supplied package path is empty.");
+                return StartupRoute.Invalid("传入的安装包路径为空。");
 
             string fullPath;
             try
@@ -57,23 +57,23 @@ namespace PS4PKGTool.Startup
             }
             catch (Exception ex) when (ex is ArgumentException || ex is NotSupportedException || ex is PathTooLongException)
             {
-                return StartupRoute.Invalid("The supplied package path is invalid.");
+                return StartupRoute.Invalid("传入的安装包路径无效。");
             }
 
             if (!string.Equals(Path.GetExtension(fullPath), ".pkg", StringComparison.OrdinalIgnoreCase))
-                return StartupRoute.Invalid("The supplied file must have a .pkg extension.");
+                return StartupRoute.Invalid("传入的文件必须是 .pkg 扩展名。");
 
             if (!File.Exists(fullPath))
-                return StartupRoute.Invalid("The supplied package file does not exist:\n\n" + fullPath);
+                return StartupRoute.Invalid("传入的安装包文件不存在：\n\n" + fullPath);
 
             try
             {
                 if (new FileInfo(fullPath).Length == 0)
-                    return StartupRoute.Invalid("The supplied package file is empty:\n\n" + fullPath);
+                    return StartupRoute.Invalid("传入的安装包文件为空：\n\n" + fullPath);
             }
             catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException)
             {
-                return StartupRoute.Invalid("The supplied package file cannot be accessed:\n\n" + fullPath);
+                return StartupRoute.Invalid("无法访问传入的安装包文件：\n\n" + fullPath);
             }
 
             return StartupRoute.MiniPkgViewer(fullPath);

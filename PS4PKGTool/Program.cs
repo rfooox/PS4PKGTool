@@ -67,7 +67,7 @@ namespace PS4PKGTool
                 ShellRegistry.Install();
                 appSettings_.ShellIntegrationInstalled = ShellRegistry.IsInstalled();
                 SettingsManager.SaveSettings(appSettings_, SettingFilePath);
-                Logger.LogInformation("Shell integration registered: " + appSettings_.ShellIntegrationInstalled);
+                Logger.LogInformation("右键菜单集成已注册：" + appSettings_.ShellIntegrationInstalled);
                 return;
             }
             if (args.Length == 1 && string.Equals(args[0], "--shell-unregister", StringComparison.OrdinalIgnoreCase))
@@ -75,7 +75,7 @@ namespace PS4PKGTool
                 ShellRegistry.Remove();
                 appSettings_.ShellIntegrationInstalled = false;
                 SettingsManager.SaveSettings(appSettings_, SettingFilePath);
-                Logger.LogInformation("Shell integration removed.");
+                Logger.LogInformation("右键菜单集成已移除。");
                 return;
             }
 
@@ -86,7 +86,7 @@ namespace PS4PKGTool
             {
                 var shellRequest = ShellCommandRouter.Parse(args);
                 string? shellError = shellRequest == null
-                    ? "The shell command is not recognized.\n\n" +
+                    ? "无法识别的右键菜单命令。\n\n" +
                       "Usage:\n" +
                       "  PS4PKGTool.exe --shell copy <field> <package>...\n" +
                       "  PS4PKGTool.exe --shell rename <formatId> <package>...\n" +
@@ -107,7 +107,7 @@ namespace PS4PKGTool
             if (route.Kind == StartupRouteKind.InvalidArguments)
             {
                 AppMessageBox.Show(
-                    "PKG Viewer",
+                    "PKG 查看器",
                     route.ErrorMessage,
                     AppMessageType.Error,
                     AppMessageButtons.OK);
@@ -233,7 +233,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogInformation(fileName + " migration failed: " + ex.Message);
+                Logger.LogInformation(fileName + " 迁移失败：" + ex.Message);
             }
         }
 
@@ -263,7 +263,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogInformation(dirName + " migration failed: " + ex.Message);
+                Logger.LogInformation(dirName + " 迁移失败：" + ex.Message);
             }
         }
 
@@ -337,7 +337,7 @@ shadps4_check=False";
                     }
                     else
                     {
-                        Logger.LogInformation($"Manifest invalid: {reason}.");
+                        Logger.LogInformation($"清单无效：{reason}。");
                     }
                 }
             }

@@ -79,14 +79,14 @@ namespace PS4PKGTool.Utilities.Shadps4
             Logger.LogInformation($"Shadps4Install: {pkgPath}");
             Logger.LogInformation($"Shadps4Install: target = {Path.Combine(libraryDir, titleId)} (replace={replaceExisting}, merge={mergeIntoExisting})");
             if (string.IsNullOrWhiteSpace(pkgPath) || !File.Exists(pkgPath))
-                return Fail(Shadps4InstallStatus.PkgMissing, $"PKG not found: {pkgPath}");
+                return Fail(Shadps4InstallStatus.PkgMissing, $"未找到 PKG：{pkgPath}");
             if (string.IsNullOrWhiteSpace(libraryDir) || !Directory.Exists(libraryDir))
-                return Fail(Shadps4InstallStatus.LibraryMissing, $"shadPS4 library not found: {libraryDir}");
+                return Fail(Shadps4InstallStatus.LibraryMissing, $"未找到 shadPS4 库：{libraryDir}");
 
             string finalDir = Path.Combine(libraryDir, titleId);
             if (Directory.Exists(finalDir) && !replaceExisting && !mergeIntoExisting)
                 return Fail(Shadps4InstallStatus.ExistingInstall,
-                    $"Game {titleId} is already installed in {libraryDir}.");
+                    $"游戏 {titleId} 已安装在 {libraryDir}。");
 
             // Free-space check BEFORE writing anything.
             long free = FreeSpaceOverride != null
@@ -96,23 +96,23 @@ namespace PS4PKGTool.Utilities.Shadps4
             Logger.LogInformation($"Shadps4Install: free={HelperBytes(free)}, estimate={HelperBytes(estimate)}");
             if (free < estimate + SpaceMarginBytes)
                 return Fail(Shadps4InstallStatus.InsufficientSpace,
-                    $"Not enough free space in {libraryDir}: needs ~{HelperBytes(estimate + SpaceMarginBytes)}, has {HelperBytes(free)}.");
+                    $"{libraryDir} 剩余空间不足：需要约 {HelperBytes(estimate + SpaceMarginBytes)}，可用 {HelperBytes(free)}。");
 
             string staging = Path.Combine(libraryDir, $".ps4pkgtool-{titleId}.tmp");
             try
             {
                 if (Directory.Exists(staging))
                 {
-                    Logger.LogWarning($"Shadps4Install: removing leftover staging {staging}");
+                    Logger.LogWarning($"Shadps4Install：正在移除残留暂存目录 {staging}");
                     Directory.Delete(staging, true); // leftovers from a previous interrupted run
                 }
                 Directory.CreateDirectory(staging);
 
                 if (ct.IsCancellationRequested)
-                    return Fail(Shadps4InstallStatus.Cancelled, "Installation cancelled.");
+                    return Fail(Shadps4InstallStatus.Cancelled, "安装已取消。");
 
-                progress?.Report("Extracting PKG...");
-                Logger.LogInformation("Shadps4Install: extracting via OrbisPkgTool.PkgReader...");
+                progress?.Report("正在解压 PKG……");
+                Logger.LogInformation("Shadps4Install：正在通过 OrbisPkgTool.PkgReader 解压……");
                 string extractDetail = "";
                 bool extracted;
                 if (ExtractOverride != null)
@@ -126,38 +126,38 @@ namespace PS4PKGTool.Utilities.Shadps4
                 if (!extracted)
                 {
                     string detail = string.IsNullOrWhiteSpace(extractDetail)
-                        ? "extraction failed (see log)."
+                        ? "解压失败（请查看日志）。"
                         : extractDetail;
                     return Fail(Shadps4InstallStatus.ExtractionFailed,
-                        "PKG extraction failed: " + detail);
+                        "PKG 解压失败：" + detail);
                 }
 
                 if (ct.IsCancellationRequested)
-                    return Fail(Shadps4InstallStatus.Cancelled, "Installation cancelled.");
+                    return Fail(Shadps4InstallStatus.Cancelled, "安装已取消。");
 
                 // shadPS4 libraries hold DUMP-LAYOUT game folders (eboot.bin and
                 // sce_sys at the folder root), not the PKG Image0/Sc0 tree the
                 // extractor produces - flatten before validating/finalizing.
-                progress?.Report("Arranging game files...");
-                Logger.LogInformation("Shadps4Install: flattening to dump layout...");
+                progress?.Report("正在整理游戏文件……");
+                Logger.LogInformation("Shadps4Install：正在展开为 dump 目录结构……");
                 FlattenToDumpLayout(staging);
 
-                progress?.Report("Validating extracted game...");
+                progress?.Report("正在校验解压后的游戏……");
                 string? eboot = Shadps4Launcher.FindEboot(staging, depth: 3);
                 if (eboot == null || !Directory.Exists(Path.Combine(staging, "sce_sys")))
                     return Fail(Shadps4InstallStatus.ValidationFailed,
-                        "The extracted PKG does not contain a valid game layout (eboot.bin / sce_sys missing).");
-                Logger.LogInformation($"Shadps4Install: validated eboot at {eboot}");
+                        "解压出的 PKG 不包含有效的游戏目录结构（缺少 eboot.bin / sce_sys）。");
+                Logger.LogInformation($"Shadps4Install：已校验 eboot：{eboot}");
 
-                progress?.Report("Finalizing installation...");
+                progress?.Report("正在完成安装……");
                 if (mergeIntoExisting && Directory.Exists(finalDir))
                 {
                     // Update path: merge the patch over the existing dump.
-                    Logger.LogInformation($"Shadps4Install: merging patch into {finalDir}");
+                    Logger.LogInformation($"Shadps4Install：正在将补丁合并到 {finalDir}");
                     ApplyPatchTransactionally(staging, finalDir);
                     return Success($"Updated {titleId} in {finalDir}.", finalDir);
                 }
-                Logger.LogInformation($"Shadps4Install: replacing existing install {finalDir}");
+                Logger.LogInformation($"Shadps4Install：正在替换现有安装 {finalDir}");
                 ReplaceInstall(staging, finalDir);
 
                 return Success($"Installed {titleId} into {finalDir}.", finalDir);
@@ -165,20 +165,20 @@ namespace PS4PKGTool.Utilities.Shadps4
             catch (OperationCanceledException)
             {
                 Cleanup(staging);
-                Logger.LogWarning("Shadps4Install: cancelled - staging cleaned.");
-                return new Shadps4InstallResult(Shadps4InstallStatus.Cancelled, "Installation cancelled.");
+                Logger.LogWarning("Shadps4Install：已取消——暂存目录已清理。");
+                return new Shadps4InstallResult(Shadps4InstallStatus.Cancelled, "安装已取消。");
             }
             catch (IOException ex) when ((uint)ex.HResult == 0x80070070) // ERROR_DISK_FULL
             {
                 Cleanup(staging);
-                Logger.LogError("Shadps4Install: disk full - " + ex.Message);
+                Logger.LogError("Shadps4Install：磁盘空间不足——" + ex.Message);
                 return new Shadps4InstallResult(Shadps4InstallStatus.InsufficientSpace,
-                    $"Disk full during extraction: {ex.Message}");
+                    $"解压时磁盘空间不足：{ex.Message}");
             }
             catch (Exception ex)
             {
                 Cleanup(staging);
-                Logger.LogError("Shadps4Install failed: " + ex);
+                Logger.LogError("Shadps4Install 失败：" + ex);
                 return new Shadps4InstallResult(Shadps4InstallStatus.Failed, ex.Message);
             }
             finally
@@ -201,7 +201,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             IProgress<string>? progress = null, CancellationToken ct = default)
         {
             if (!Directory.Exists(destinationDir)) Directory.CreateDirectory(destinationDir);
-            progress?.Report("Extracting PKG...");
+            progress?.Report("正在解压 PKG……");
             bool ok;
             if (ExtractOverride != null)
             {
@@ -212,7 +212,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 var (extracted, detail) = ExtractInProcess(pkgPath, destinationDir, ct);
                 ok = extracted;
                 if (!ok)
-                    Logger.LogWarning("Shadps4Install: ExtractToFolder failed: " + detail);
+                    Logger.LogWarning("Shadps4Install：ExtractToFolder 失败：" + detail);
             }
             if (!ok || ct.IsCancellationRequested) return null;
             FlattenToDumpLayout(destinationDir);
@@ -283,7 +283,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             if (Directory.Exists(finalDir))
             {
                 backup = finalDir + $".previous-{Guid.NewGuid():N}";
-                Logger.LogInformation($"Shadps4Install: moving existing install aside to {backup}");
+                Logger.LogInformation($"Shadps4Install：正在将现有安装移至 {backup}");
                 Directory.Move(finalDir, backup);
             }
             try
@@ -294,7 +294,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             {
                 if (backup != null && !Directory.Exists(finalDir) && Directory.Exists(backup))
                 {
-                    Logger.LogWarning("Shadps4Install: swap failed - restoring previous install");
+                    Logger.LogWarning("Shadps4Install：替换失败——正在还原上一个安装");
                     Directory.Move(backup, finalDir);
                 }
                 throw;
@@ -378,7 +378,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogWarning($"Shadps4Install: rollback could not remove {path}: {ex.Message}");
+                    Logger.LogWarning($"Shadps4Install：回滚时无法移除 {path}：{ex.Message}");
                 }
             }
             foreach ((string backup, string original) in overwritten)
@@ -393,7 +393,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogWarning($"Shadps4Install: rollback could not restore {original}: {ex.Message}");
+                    Logger.LogWarning($"Shadps4Install：回滚时无法还原 {original}：{ex.Message}");
                 }
             }
         }
@@ -448,10 +448,10 @@ namespace PS4PKGTool.Utilities.Shadps4
                 {
                     string summary = string.Join("; ",
                         failures.Take(5).Select(f => $"{f.Path}: {f.Exception.Message}"));
-                    Logger.LogWarning($"Shadps4Install: {failures.Count} entries failed: {summary}");
+                    Logger.LogWarning($"Shadps4Install：{failures.Count} 个条目失败：{summary}");
                     return (false, $"{failures.Count} {(failures.Count == 1 ? "entry" : "entries")} failed to extract: {summary}");
                 }
-                Logger.LogInformation("Shadps4Install: in-process extraction completed.");
+                Logger.LogInformation("Shadps4Install：进程内解压已完成。");
                 return (true, "");
             }
             catch (OperationCanceledException) { throw; }
@@ -459,7 +459,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             {
                 // "Passcode mismatch." lands here with 'passcode' in the
                 // message - the shell flow keys its re-prompt on exactly that.
-                Logger.LogError("Shadps4Install: extraction threw: " + ex);
+                Logger.LogError("Shadps4Install：解压抛出异常：" + ex);
                 return (false, ex.Message);
             }
         }

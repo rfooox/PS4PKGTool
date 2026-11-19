@@ -38,11 +38,11 @@ public sealed class UnityTextureExporter : IAssetExporter
         if (source is UnityObjectAssetSource objectSource)
         {
             var tex = _backend.ReadTexture2D(objectSource.Parent, objectSource.Object);
-            if (tex == null) throw new UnsupportedAssetException("Not a Texture2D object.");
+            if (tex == null) throw new UnsupportedAssetException("不是 Texture2D 对象。");
             var withBytes = UnitySerializedFileHandler.LoadTextureBytes(objectSource.Parent, tex)
-                ?? throw new UnsupportedAssetException($"Texture '{tex.Name}' streams its data to '{tex.StreamPath}' - the .resS companion is not available.");
+                ?? throw new UnsupportedAssetException($"纹理 '{tex.Name}' 的数据位于 '{tex.StreamPath}'——对应的 .resS 文件不可用。");
             var decoded = _backend.DecodeTexture(withBytes)
-                ?? throw new UnsupportedAssetException($"Texture format {tex.Format} is not decodeable yet.");
+                ?? throw new UnsupportedAssetException($"暂无法解码纹理格式 {tex.Format}。");
             PngExport.Write(decoded, destinationPath);
             return Task.CompletedTask;
         }
@@ -70,7 +70,7 @@ public sealed class UnityTextureExporter : IAssetExporter
             catch (AssetException) { failed++; }
         }
         if (exported == 0)
-            throw new UnsupportedAssetException($"No decodeable textures in this file (skipped {failed}).");
+            throw new UnsupportedAssetException($"该文件中没有可解码的纹理（已跳过 {failed} 个）。");
         return Task.CompletedTask;
     }
 

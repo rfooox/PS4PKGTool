@@ -44,15 +44,15 @@ namespace PS4PKGTool.Utilities.Shadps4
                 string entryName = entry.FullName.Replace('\\', '/');
                 if (IsSuspiciousEntry(entryName, entry))
                     throw new InvalidDataException(
-                        $"Archive entry rejected as unsafe: {entry.FullName}");
+                        $"压缩包条目因不安全被拒绝：{entry.FullName}");
 
                 string target = Path.GetFullPath(Path.Combine(root, entryName));
                 if (!IsWithin(target, root))
                     throw new InvalidDataException(
-                        $"Archive entry escapes the extraction folder: {entry.FullName}");
+                        $"压缩包条目越出了解压目录：{entry.FullName}");
                 if (!seenTargets.Add(target))
                     throw new InvalidDataException(
-                        $"Archive contains duplicate output path: {entry.FullName}");
+                        $"压缩包中存在重复的输出路径：{entry.FullName}");
 
                 if (entryName.EndsWith("/") || string.IsNullOrEmpty(entry.Name))
                 {

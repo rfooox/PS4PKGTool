@@ -13,7 +13,7 @@ namespace PS4PKGTool.Assets.Unreal;
 /// </summary>
 public sealed class UnrealPakBackend : IUnrealAssetBackend
 {
-    public string Name => "self-written PAK parser (verified UE4)";
+    public string Name => "自行实现的 PAK 解析器（已验证 UE4）";
 
     private sealed class PakData
     {
@@ -35,7 +35,7 @@ public sealed class UnrealPakBackend : IUnrealAssetBackend
     public Stream OpenEntryStream(IAssetSource source, PakEntryRef entry)
     {
         if (entry.Encrypted)
-            throw new UnsupportedAssetException($"Entry '{entry.Path}' is AES-encrypted - decryption is not supported yet.");
+            throw new UnsupportedAssetException($"条目 '{entry.Path}' 使用 AES 加密——暂不支持解密。");
 
         var pak = Get(source);
         long baseOffset = ResolveOffset(pak, entry);
@@ -67,16 +67,16 @@ public sealed class UnrealPakBackend : IUnrealAssetBackend
         // not a dependency one).
         if (entry.Compression == "Oodle")
             throw new MissingDependencyException(
-                "Entry uses Oodle compression - the Oodle DLL is not bundled (see ASSET_FRAMEWORK.md). Raw export of the compressed bytes remains available.");
+                "条目使用 Oodle 压缩——未随程序附带 Oodle DLL（见 ASSET_FRAMEWORK.md）。仍可导出压缩后的原始数据。");
         if (entry.Compression.StartsWith("Unknown", StringComparison.Ordinal))
-            throw new UnsupportedAssetException($"Unknown compression method '{entry.Compression}'.");
+            throw new UnsupportedAssetException($"未知的压缩方式 '{entry.Compression}'。");
 
         // Compressed entries are self-describing: their data starts with the
         // record (including the block list we already parsed from the index);
         // the payloads sit at the block ranges. v5+ block starts are relative
         // to the entry offset; v4 block starts are absolute.
         if (entry.Blocks is not { Count: > 0 })
-            throw new UnsupportedAssetException($"Entry '{entry.Path}' is compressed but carries no block list.");
+            throw new UnsupportedAssetException($"条目 '{entry.Path}' 已压缩但缺少块列表。");
 
         var payload = new MemoryStream();
         foreach (var (start, end) in entry.Blocks)
@@ -84,7 +84,7 @@ public sealed class UnrealPakBackend : IUnrealAssetBackend
             long blockFilePos = pak.Header.Version >= 5 ? baseOffset + start : start;
             long blockLen = end - start;
             if (blockFilePos < 0 || blockFilePos + blockLen > source.Length)
-                throw new CorruptAssetException($"PAK block for '{entry.Path}' lies outside the file.");
+                throw new CorruptAssetException($"条目 '{entry.Path}' 的 PAK 块位于文件之外。");
             byte[] block;
             using (var s = source.OpenRead(blockFilePos, blockLen))
             {

@@ -38,7 +38,7 @@ namespace PS4PKGTool.Forms.Main
         {
             _cancellation.Cancel();
             btnCancel.Enabled = false;
-            lblStage.Text = "Cancelling conversion...";
+            lblStage.Text = "正在取消转换……";
         }
 
         private async Task RunConversionAsync()
@@ -86,7 +86,7 @@ namespace PS4PKGTool.Forms.Main
                 _currentProgress.TextMode = DarkProgressBarMode.XOfN;
                 _currentProgress.Maximum = Math.Max(1, progress.ItemsTotal - 1);
                 _currentProgress.Value = Math.Clamp(progress.ItemsProcessed - 1, 0, _currentProgress.Maximum);
-                lblBytes.Text = $"Extracting {progress.ItemsProcessed} of {progress.ItemsTotal} files";
+                lblBytes.Text = $"正在提取 {progress.ItemsProcessed}/{progress.ItemsTotal} 个文件";
             }
             else if (progress.TotalBytes > 0)
             {

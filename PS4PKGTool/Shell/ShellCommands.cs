@@ -58,7 +58,7 @@ namespace PS4PKGTool.Shell
         {
             if (paths.Count <= 1) return true;
             MessageBoxHelper.ShowInformation(
-                "This action currently supports one PKG at a time.\n\nThe other selected files were not touched.", false);
+                "此操作当前一次只支持一个 PKG。\n\n其他选中的文件未被处理。", false);
             return false;
         }
 
@@ -73,7 +73,7 @@ namespace PS4PKGTool.Shell
             }
             catch (Exception ex)
             {
-                Logger.LogWarning($"Shell: could not read PKG metadata for {path}: {ex.Message}");
+                Logger.LogWarning($"Shell：无法读取 {path} 的 PKG 元数据：{ex.Message}");
                 return null;
             }
         }
@@ -89,7 +89,7 @@ namespace PS4PKGTool.Shell
                 if (meta == null)
                 {
                     MessageBoxHelper.ShowError(
-                        "Could not read PKG metadata.\n\n" + path, false);
+                        "无法读取 PKG 元数据。\n\n" + path, false);
                     return;
                 }
                 parts.Add(ExtractField(field, meta));
@@ -99,14 +99,14 @@ namespace PS4PKGTool.Shell
             try { Clipboard.SetText(text); }
             catch (Exception ex)
             {
-                Logger.LogWarning("Shell: clipboard write failed: " + ex.Message);
-                MessageBoxHelper.ShowError("Could not write to the clipboard.", false);
+                Logger.LogWarning("Shell：写入剪贴板失败：" + ex.Message);
+                MessageBoxHelper.ShowError("无法写入剪贴板。", false);
                 return;
             }
 
-            string label = parts.Count == 1 ? parts[0] : parts.Count + " values";
+            string label = parts.Count == 1 ? parts[0] : parts.Count + " 个值";
             using (var confirm = new ShellConfirmForm(
-                (field == "info" ? "PKG info copied" : CopyFieldLabel(field) + " copied") + ":\n" + Truncate(label, 60)))
+                (field == "info" ? "PKG 信息已复制" : CopyFieldLabel(field) + " 已复制") + "：\n" + Truncate(label, 60)))
                 confirm.ShowDialog();
         }
 
@@ -126,27 +126,27 @@ namespace PS4PKGTool.Shell
         {
             var lines = new List<string>
             {
-                "Title: " + m.Title,
-                "Title ID: " + m.TitleId,
-                "Content ID: " + m.ContentId,
-                "Version: " + m.PackageVersion,
-                "App Version: " + m.ApplicationVersion,
-                "Type: " + m.PackageCategory,
-                "Size: " + m.PackageSize,
-                "Path: " + m.PackagePath,
+                "标题：" + m.Title,
+                "标题 ID：" + m.TitleId,
+                "内容 ID：" + m.ContentId,
+                "版本：" + m.PackageVersion,
+                "应用版本：" + m.ApplicationVersion,
+                "类型：" + m.PackageCategory,
+                "大小：" + m.PackageSize,
+                "路径：" + m.PackagePath,
             };
             return string.Join(Environment.NewLine, lines);
         }
 
         private static string CopyFieldLabel(string field) => field switch
         {
-            "title" => "Title",
-            "titleid" => "Title ID",
-            "contentid" => "Content ID",
-            "version" => "Version",
-            "appversion" => "App Version",
-            "fullpath" => "Full path",
-            _ => "Value",
+            "title" => "标题",
+            "titleid" => "标题 ID",
+            "contentid" => "内容 ID",
+            "version" => "版本",
+            "appversion" => "应用版本",
+            "fullpath" => "完整路径",
+            _ => "值",
         };
 
         private static string Truncate(string value, int max)
@@ -171,7 +171,7 @@ namespace PS4PKGTool.Shell
                 }
                 else
                 {
-                    MessageBoxHelper.ShowWarning("The rename format is not available.", false);
+                    MessageBoxHelper.ShowWarning("重命名格式不可用。", false);
                     return;
                 }
             }
@@ -187,7 +187,7 @@ namespace PS4PKGTool.Shell
             if (lastRenamed != null)
             {
                 using var confirm = new ShellConfirmForm(
-                    (paths.Count > 1 ? paths.Count + " PKGs renamed" : "Renamed to") + ":\n" + Path.GetFileName(lastRenamed));
+                    (paths.Count > 1 ? paths.Count + " 个 PKG 已重命名" : "重命名为") + "：\n" + Path.GetFileName(lastRenamed));
                 confirm.ShowDialog();
             }
         }
@@ -204,19 +204,19 @@ namespace PS4PKGTool.Shell
                 if (File.Exists(targetPkg))
                 {
                     MessageBoxHelper.ShowWarning(
-                        "A file with the target name already exists. The PKG was not renamed.\n\n" +
+                        "已存在同名文件，该 PKG 未被重命名。\n\n" +
                         Path.GetFileName(targetPkg), false);
                     return null;
                 }
 
                 File.Move(sourcePath, targetPkg);
-                Logger.LogInformation($"Shell renamed: {Path.GetFileName(sourcePath)} -> {Path.GetFileName(targetPkg)}");
+                Logger.LogInformation($"Shell 重命名：{Path.GetFileName(sourcePath)} -> {Path.GetFileName(targetPkg)}");
                 return targetPkg;
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("Shell rename failed: " + ex.Message);
-                MessageBoxHelper.ShowError("The PKG could not be renamed: " + ex.Message, false);
+                Logger.LogWarning("Shell 重命名失败：" + ex.Message);
+                MessageBoxHelper.ShowError("无法重命名该 PKG：" + ex.Message, false);
                 return null;
             }
         }
@@ -234,14 +234,14 @@ namespace PS4PKGTool.Shell
             // retries (max 5 attempts - a typo'd custom passcode re-prompts).
             string passcode = PkgFileListingService.DefaultPasscode;
 
-            ShellOperationForm.Run("Validating PKG", fileName, ReadMetaLine(path), null,
+            ShellOperationForm.Run("正在验证 PKG", fileName, ReadMetaLine(path), null,
                 (progress, ct) => Task.Run(async () =>
                 {
-                    progress.Report(new ShellOperationProgress("Reading PKG metadata..."));
+                    progress.Report(new ShellOperationProgress("正在读取 PKG 元数据……"));
                     var meta = await new PkgInspectionService()
                         .InspectAsync(path, ct).ConfigureAwait(false);
 
-                    progress.Report(new ShellOperationProgress("Checking PKG structure..."));
+                    progress.Report(new ShellOperationProgress("正在检查 PKG 结构……"));
                     var listing = await new PkgFileListingService()
                         .ListAsync(path, passcode, ct).ConfigureAwait(false);
 
@@ -251,14 +251,14 @@ namespace PS4PKGTool.Shell
                             || !IsPasscodeFailure(listing.ErrorMessage))
                             break;
 
-                        progress.Report(new ShellOperationProgress("Passcode required..."));
+                        progress.Report(new ShellOperationProgress("需要通行密码……"));
                         string? custom = await PromptForPasscodeAsync().ConfigureAwait(false);
                         if (custom == null)
                             return ShellOperationResult.CancelledResult(
-                                "Validation cancelled. The PKG requires a passcode."); // prompt cancelled - close all
+                                "验证已取消。该 PKG 需要通行密码。"); // prompt cancelled - close all
 
                         passcode = custom;
-                        progress.Report(new ShellOperationProgress("Checking PKG structure..."));
+                        progress.Report(new ShellOperationProgress("正在检查 PKG 结构……"));
                         listing = await new PkgFileListingService()
                             .ListAsync(path, passcode, ct).ConfigureAwait(false);
                     }
@@ -266,12 +266,12 @@ namespace PS4PKGTool.Shell
                     if (listing.Succeeded)
                     {
                         string message =
-                            $"{fileName}\n\nWarnings: 0\nErrors: 0\n\nTitle: {meta.Title}\n" +
-                            $"Title ID: {meta.TitleId}\nEntries: {listing.Entries.Count}";
+                            $"{fileName}\n\n警告：0\n错误：0\n\n标题：{meta.Title}\n" +
+                            $"标题 ID：{meta.TitleId}\n条目：{listing.Entries.Count}";
                         return new ShellOperationResult(true, message, listing.MalformedLineCount > 0
-                            ? $"Malformed listing lines: {listing.MalformedLineCount}" : null);
+                            ? $"格式错误的清单行：{listing.MalformedLineCount}" : null);
                     }
-                    return new ShellOperationResult(false, "Validation failed:\n" + listing.ErrorMessage);
+                    return new ShellOperationResult(false, "验证失败：\n" + listing.ErrorMessage);
                 }, ct));
         }
 
@@ -318,7 +318,7 @@ namespace PS4PKGTool.Shell
 
             using var fbd = new FolderBrowserDialog
             {
-                Description = "Choose where to extract the PKG.",
+                Description = "选择 PKG 的解压目标文件夹。",
                 ShowNewFolderButton = true,
             };
             if (fbd.ShowDialog() != DialogResult.OK) return;
@@ -331,7 +331,7 @@ namespace PS4PKGTool.Shell
             // re-prompts (max 5 attempts) so a typo does not end the run.
             string passcode = PkgFileListingService.DefaultPasscode;
 
-            ShellOperationForm.Run("Extracting PKG", title, MetaLine(meta), extractLocation,
+            ShellOperationForm.Run("正在提取 PKG", title, MetaLine(meta), extractLocation,
                 (progress, ct) => Task.Run(async () =>
                 {
                     var p = new Progress<string>(s => progress.Report(new ShellOperationProgress(s)));
@@ -343,7 +343,7 @@ namespace PS4PKGTool.Shell
                         int completed = Math.Min(entry.Current + 1, entry.Total);
                         int percent = (int)Math.Round(completed * 100.0 / entry.Total);
                         progress.Report(new ShellOperationProgress(
-                            $"Extracting {completed}/{entry.Total}: {entry.CurrentFile}", percent));
+                            $"正在提取 {completed}/{entry.Total}：{entry.CurrentFile}", percent));
                     });
                     var (succeeded, message) = await new PkgExtractionService(passcode: passcode)
                         .ExtractFullAsync(path, extractLocation, p, ct, fileProgress, logCompletion: true,
@@ -354,14 +354,14 @@ namespace PS4PKGTool.Shell
                         if (succeeded || !IsPasscodeFailure(message))
                             break;
 
-                        progress.Report(new ShellOperationProgress("Passcode required..."));
+                        progress.Report(new ShellOperationProgress("需要通行密码……"));
                         string? custom = await PromptForPasscodeAsync().ConfigureAwait(false);
                         if (custom == null)
                             return ShellOperationResult.CancelledResult(
-                                "Extraction cancelled. The PKG requires a passcode."); // prompt cancelled - close all
+                                "提取已取消。该 PKG 需要通行密码。"); // prompt cancelled - close all
 
                         passcode = custom;
-                        progress.Report(new ShellOperationProgress("Extracting game files..."));
+                        progress.Report(new ShellOperationProgress("正在提取游戏文件……"));
                         (succeeded, message) = await new PkgExtractionService(passcode: passcode)
                             .ExtractFullAsync(path, extractLocation, p, ct, fileProgress, logCompletion: true,
                                 layout: ExtractLayout.Merged).ConfigureAwait(false);
@@ -370,8 +370,8 @@ namespace PS4PKGTool.Shell
                     if (succeeded)
                     {
                         string detail = string.IsNullOrWhiteSpace(message)
-                            ? "Extraction complete"
-                            : "Extraction complete. " + message;
+                            ? "提取完成"
+                            : "提取完成。" + message;
                         return new ShellOperationResult(true, detail, null, extractLocation);
                     }
                     return new ShellOperationResult(false, message);
@@ -388,7 +388,7 @@ namespace PS4PKGTool.Shell
             var meta = ReadMetadata(path);
             if (meta == null)
             {
-                MessageBoxHelper.ShowError("Could not read PKG metadata.", false);
+                MessageBoxHelper.ShowError("无法读取 PKG 元数据。", false);
                 return;
             }
 
@@ -399,7 +399,7 @@ namespace PS4PKGTool.Shell
             if (!isGame && !isPatch)
             {
                 MessageBoxHelper.ShowWarning(
-                    "Select a base game or update (patch) PKG. DLC/addon installation is not supported yet.", false);
+                    "请选择本体游戏或更新（补丁）PKG。暂不支持安装 DLC/附加内容。", false);
                 return;
             }
 
@@ -412,8 +412,8 @@ namespace PS4PKGTool.Shell
             if (string.IsNullOrWhiteSpace(compat))
             {
                 var compatChoice = AppMessageBox.Show("shadPS4",
-                    $"No shadPS4 compatibility status is known for {title} ({titleId}).\n\n" +
-                    "The game may not run in the emulator. Continue with the installation?",
+                    $"没有 {title}（{titleId}）的 shadPS4 兼容状态记录。\n\n" +
+                    "该游戏可能无法在模拟器中运行。仍要继续安装吗？",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (compatChoice != DialogResult.Yes) return;
                 confirmed = true;
@@ -424,7 +424,7 @@ namespace PS4PKGTool.Shell
             {
                 using var fbd = new FolderBrowserDialog
                 {
-                    Description = "Choose the shadPS4 game install folder.",
+                    Description = "选择 shadPS4 游戏安装文件夹。",
                     ShowNewFolderButton = true,
                 };
                 if (fbd.ShowDialog() != DialogResult.OK) return;
@@ -439,9 +439,9 @@ namespace PS4PKGTool.Shell
             if (isPatch && !hasBase)
             {
                 var warnBase = AppMessageBox.Show("shadPS4",
-                    $"No base game detected for {titleId} in\n{library}\n\n" +
-                    "A patch alone cannot boot, it only updates the base game's files, which are not installed yet.\n\n" +
-                    "Install the patch anyway?",
+                    $"未在以下位置检测到 {titleId} 的本体游戏：\n{library}\n\n" +
+                    "单独安装补丁无法启动游戏，它只能更新本体游戏的文件，而本体游戏尚未安装。\n\n" +
+                    "仍要安装该补丁吗？",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (warnBase != DialogResult.Yes) return;
                 confirmed = true;
@@ -450,13 +450,13 @@ namespace PS4PKGTool.Shell
             bool replace = false;
             if (Directory.Exists(finalDir))
             {
-                string installedVer = ParamSfoReader.ReadAppVersion(Path.Combine(finalDir, "sce_sys", "param.sfo")) ?? "unknown";
+                string installedVer = ParamSfoReader.ReadAppVersion(Path.Combine(finalDir, "sce_sys", "param.sfo")) ?? "未知";
                 string selectedVer = meta.ApplicationVersion;
 
                 if (Shadps4Launcher.IsEmulatorRunning())
                 {
                     var warn = AppMessageBox.Show("shadPS4",
-                        "shadPS4 is currently running.\n\nModifying an installed game while the emulator is using it may fail or leave inconsistent files.\n\nContinue?",
+                        "shadPS4 正在运行。\n\n在模拟器使用期间修改已安装的游戏可能导致失败或文件不一致。\n\n是否继续？",
                         AppMessageType.Warning, AppMessageButtons.YesNo);
                     if (warn != DialogResult.Yes) return;
                 }
@@ -464,7 +464,7 @@ namespace PS4PKGTool.Shell
                 if (isPatch)
                 {
                     var mergeChoice = AppMessageBox.Show("shadPS4",
-                        $"Game already installed\n\nInstalled version: {installedVer}\nThis patch: {selectedVer}\n\nThe patch will be merged into the existing installation. Continue?",
+                        $"游戏已安装\n\n已安装版本：{installedVer}\n此补丁：{selectedVer}\n\n该补丁将合并到现有安装中。是否继续？",
                         AppMessageType.Info, AppMessageButtons.YesNo);
                     if (mergeChoice != DialogResult.Yes) return;
                     confirmed = true;
@@ -472,7 +472,7 @@ namespace PS4PKGTool.Shell
                 else
                 {
                     var replaceChoice = AppMessageBox.Show("shadPS4",
-                        $"Game already installed\n\nInstalled version: {installedVer}\nSelected PKG: {selectedVer}\n\nReplace the existing installation?",
+                        $"游戏已安装\n\n已安装版本：{installedVer}\n所选 PKG：{selectedVer}\n\n是否替换现有安装？",
                         AppMessageType.Info, AppMessageButtons.YesNo);
                     if (replaceChoice != DialogResult.Yes) return;
                     replace = true;
@@ -483,7 +483,7 @@ namespace PS4PKGTool.Shell
             if (!confirmed)
             {
                 var go = AppMessageBox.Show("shadPS4",
-                    $"Install {title} ({titleId}) into\n{library}?",
+                    $"要将 {title}（{titleId}）安装到\n{library}吗？",
                     AppMessageType.Info, AppMessageButtons.YesNo);
                 if (go != DialogResult.Yes) return;
             }
@@ -495,8 +495,8 @@ namespace PS4PKGTool.Shell
             // the whole install (max 5 attempts; a wrong custom passcode
             // re-prompts so a typo does not end the run).
             string passcode = PkgFileListingService.DefaultPasscode;
-            ShellOperationForm.Run("Installing to shadPS4", title,
-                $"{titleId} | {(isPatch ? "Update" : "Base Game")} | v{meta.ApplicationVersion}", finalDir,
+            ShellOperationForm.Run("正在安装到 shadPS4", title,
+                $"{titleId} | {(isPatch ? "更新" : "本体游戏")} | v{meta.ApplicationVersion}", finalDir,
                 (progress, ct) => Task.Run(() =>
                 {
                     var stageProgress = new Progress<string>(s => progress.Report(
@@ -509,7 +509,7 @@ namespace PS4PKGTool.Shell
                         int completed = Math.Min(entry.Current + 1, entry.Total);
                         int percent = (int)Math.Round(completed * 100.0 / entry.Total);
                         progress.Report(new ShellOperationProgress(
-                            $"Extracting {completed}/{entry.Total}: {entry.CurrentFile}", percent));
+                            $"正在提取 {completed}/{entry.Total}：{entry.CurrentFile}", percent));
                     });
                     var svc = new Shadps4InstallService
                     {
@@ -525,11 +525,11 @@ namespace PS4PKGTool.Shell
                             || !IsPasscodeFailure(result.Message))
                             break;
 
-                        progress.Report(new ShellOperationProgress("Passcode required..."));
+                        progress.Report(new ShellOperationProgress("需要通行密码……"));
                         string? custom = PromptForPasscodeAsync().GetAwaiter().GetResult();
                         if (custom == null)
                             return Task.FromResult(ShellOperationResult.CancelledResult(
-                                "Installation cancelled. The PKG requires a passcode.")); // prompt cancelled - close all
+                                "安装已取消。该 PKG 需要通行密码。")); // prompt cancelled - close all
 
                         passcode = custom;
                         svc.Passcode = custom;
@@ -540,10 +540,10 @@ namespace PS4PKGTool.Shell
 
                     return Task.FromResult(result.Status switch
                     {
-                        Shadps4InstallStatus.Success => new ShellOperationResult(true, "Installation complete", null, finalDir),
-                        Shadps4InstallStatus.Cancelled => new ShellOperationResult(false, "Installation cancelled"),
+                        Shadps4InstallStatus.Success => new ShellOperationResult(true, "安装完成", null, finalDir),
+                        Shadps4InstallStatus.Cancelled => new ShellOperationResult(false, "安装已取消"),
                         _ => new ShellOperationResult(false, string.IsNullOrWhiteSpace(result.Message)
-                            ? "Installation failed." : result.Message),
+                            ? "安装失败。" : result.Message),
                     });
                 }, ct));
         }

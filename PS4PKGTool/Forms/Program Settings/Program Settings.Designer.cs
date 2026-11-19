@@ -170,7 +170,7 @@ namespace PS4PKGTool
             darkCheckBoxRecursive.Name = "darkCheckBoxRecursive";
             darkCheckBoxRecursive.Size = new System.Drawing.Size(110, 19);
             darkCheckBoxRecursive.TabIndex = 1;
-            darkCheckBoxRecursive.Text = "Scan recursively";
+            darkCheckBoxRecursive.Text = "递归扫描";
             // 
             // btnAddPkgDirectory
             // 
@@ -179,7 +179,7 @@ namespace PS4PKGTool
             btnAddPkgDirectory.Name = "btnAddPkgDirectory";
             btnAddPkgDirectory.Size = new System.Drawing.Size(132, 28);
             btnAddPkgDirectory.TabIndex = 2;
-            btnAddPkgDirectory.Text = "Add Directory";
+            btnAddPkgDirectory.Text = "添加目录";
             btnAddPkgDirectory.Click += btnAddPkgDirectory_Click;
             // 
             // btnDeletePkgDirectory
@@ -189,7 +189,7 @@ namespace PS4PKGTool
             btnDeletePkgDirectory.Name = "btnDeletePkgDirectory";
             btnDeletePkgDirectory.Size = new System.Drawing.Size(132, 28);
             btnDeletePkgDirectory.TabIndex = 3;
-            btnDeletePkgDirectory.Text = "Remove";
+            btnDeletePkgDirectory.Text = "移除";
             btnDeletePkgDirectory.Click += btnDeletePkgDirectory_Click;
             // 
             // btnClearAllPkgDirectory
@@ -199,7 +199,7 @@ namespace PS4PKGTool
             btnClearAllPkgDirectory.Name = "btnClearAllPkgDirectory";
             btnClearAllPkgDirectory.Size = new System.Drawing.Size(132, 28);
             btnClearAllPkgDirectory.TabIndex = 4;
-            btnClearAllPkgDirectory.Text = "Clear All";
+            btnClearAllPkgDirectory.Text = "全部清除";
             btnClearAllPkgDirectory.Click += btnClearAllPkgDirectory_Click;
             // 
             // grpStartup
@@ -210,7 +210,7 @@ namespace PS4PKGTool
             grpStartup.Margin = new System.Windows.Forms.Padding(6);
             grpStartup.Name = "grpStartup";
             grpStartup.Padding = new System.Windows.Forms.Padding(12);
-            grpStartup.SectionHeader = "Library Behavior";
+            grpStartup.SectionHeader = "库行为";
             grpStartup.Size = new System.Drawing.Size(601, 91);
             grpStartup.TabIndex = 2;
             // 
@@ -223,7 +223,7 @@ namespace PS4PKGTool
             AutoSortRow.Name = "AutoSortRow";
             AutoSortRow.Size = new System.Drawing.Size(151, 19);
             AutoSortRow.TabIndex = 2;
-            AutoSortRow.Text = "Sort PKGs automatically";
+            AutoSortRow.Text = "自动排序 PKG";
             // 
             // cbAutoFetchUpdate
             // 
@@ -234,7 +234,7 @@ namespace PS4PKGTool
             cbAutoFetchUpdate.Name = "cbAutoFetchUpdate";
             cbAutoFetchUpdate.Size = new System.Drawing.Size(243, 19);
             cbAutoFetchUpdate.TabIndex = 3;
-            cbAutoFetchUpdate.Text = "Check for latest game updates on startup";
+            cbAutoFetchUpdate.Text = "启动时检查游戏最新更新";
             // 
             // grpDirList
             // 
@@ -247,7 +247,7 @@ namespace PS4PKGTool
             grpDirList.Margin = new System.Windows.Forms.Padding(6);
             grpDirList.Name = "grpDirList";
             grpDirList.Padding = new System.Windows.Forms.Padding(12);
-            grpDirList.SectionHeader = "PKG Directory List";
+            grpDirList.SectionHeader = "PKG 目录列表";
             grpDirList.Size = new System.Drawing.Size(596, 230);
             grpDirList.TabIndex = 1;
             // 
@@ -260,7 +260,7 @@ namespace PS4PKGTool
             BGM.Name = "BGM";
             BGM.Size = new System.Drawing.Size(220, 19);
             BGM.TabIndex = 1;
-            BGM.Text = "Play selected PKG background music";
+            BGM.Text = "播放选中 PKG 的背景音乐";
             // 
             // cmbTheme
             // 
@@ -278,7 +278,7 @@ namespace PS4PKGTool
             btnOpenAppData.Name = "btnOpenAppData";
             btnOpenAppData.Size = new System.Drawing.Size(120, 24);
             btnOpenAppData.TabIndex = 4;
-            btnOpenAppData.Text = "Open App Data";
+            btnOpenAppData.Text = "打开 AppData";
             btnOpenAppData.Click += btnOpenAppData_Click;
             // 
             // grpPkgExtraction
@@ -292,7 +292,7 @@ namespace PS4PKGTool
             grpPkgExtraction.Margin = new System.Windows.Forms.Padding(6);
             grpPkgExtraction.Name = "grpPkgExtraction";
             grpPkgExtraction.Padding = new System.Windows.Forms.Padding(12);
-            grpPkgExtraction.SectionHeader = "PKG Extraction";
+            grpPkgExtraction.SectionHeader = "PKG 提取";
             // 140: two-line description (DPI label fitting), the temp row and
             // the ignore-check checkbox, with bottom padding.
             grpPkgExtraction.Size = new System.Drawing.Size(597, 140);
@@ -305,7 +305,7 @@ namespace PS4PKGTool
             btnUseDefaultOrbisTempDirectory.Name = "btnUseDefaultOrbisTempDirectory";
             btnUseDefaultOrbisTempDirectory.Size = new System.Drawing.Size(75, 26);
             btnUseDefaultOrbisTempDirectory.TabIndex = 3;
-            btnUseDefaultOrbisTempDirectory.Text = "Default";
+            btnUseDefaultOrbisTempDirectory.Text = "默认";
             btnUseDefaultOrbisTempDirectory.Click += btnUseDefaultOrbisTempDirectory_Click;
             // 
             // btnBrowseOrbisTempDirectory
@@ -315,7 +315,7 @@ namespace PS4PKGTool
             btnBrowseOrbisTempDirectory.Name = "btnBrowseOrbisTempDirectory";
             btnBrowseOrbisTempDirectory.Size = new System.Drawing.Size(75, 26);
             btnBrowseOrbisTempDirectory.TabIndex = 2;
-            btnBrowseOrbisTempDirectory.Text = "Browse...";
+            btnBrowseOrbisTempDirectory.Text = "浏览……";
             btnBrowseOrbisTempDirectory.Click += btnBrowseOrbisTempDirectory_Click;
             // 
             // tbOrbisTempDirectory
@@ -333,7 +333,7 @@ namespace PS4PKGTool
             // Two lines: DarkLabel grows to fit the description at high DPI.
             lblOrbisTempDirectory.Size = new System.Drawing.Size(570, 36);
             lblOrbisTempDirectory.TabIndex = 0;
-            lblOrbisTempDirectory.Text = "Temporary directory for PKG preview and extraction staging. Leave blank to use the Windows temporary directory.";
+            lblOrbisTempDirectory.Text = "用于 PKG 预览和提取暂存的临时目录。留空则使用 Windows 临时目录。";
             // 
             // cbIgnoreDiskSpace
             // 
@@ -342,7 +342,7 @@ namespace PS4PKGTool
             cbIgnoreDiskSpace.Name = "cbIgnoreDiskSpace";
             cbIgnoreDiskSpace.Size = new System.Drawing.Size(300, 19);
             cbIgnoreDiskSpace.TabIndex = 4;
-            cbIgnoreDiskSpace.Text = "Ignore the disk-space check when merging (continue anyway)";
+            cbIgnoreDiskSpace.Text = "合并时忽略磁盘空间检查（无论如何都继续）";
             // 
             // grpColors
             // 
@@ -366,7 +366,7 @@ namespace PS4PKGTool
             grpColors.Margin = new System.Windows.Forms.Padding(6);
             grpColors.Name = "grpColors";
             grpColors.Padding = new System.Windows.Forms.Padding(12);
-            grpColors.SectionHeader = "PKG Color Labeling";
+            grpColors.SectionHeader = "PKG 颜色标记";
             grpColors.Size = new System.Drawing.Size(601, 265);
             grpColors.TabIndex = 1;
             // 
@@ -376,7 +376,7 @@ namespace PS4PKGTool
             darkLabel13.Name = "darkLabel13";
             darkLabel13.Size = new System.Drawing.Size(77, 15);
             darkLabel13.TabIndex = 15;
-            darkLabel13.Text = "Background";
+            darkLabel13.Text = "背景";
             // 
             // darkLabel7
             // 
@@ -385,7 +385,7 @@ namespace PS4PKGTool
             // Widened: "Text Color" clipped at high DPI (snug design width).
             darkLabel7.Size = new System.Drawing.Size(75, 15);
             darkLabel7.TabIndex = 14;
-            darkLabel7.Text = "Text Color";
+            darkLabel7.Text = "文字颜色";
             // 
             // PKGColorLabeling
             // 
@@ -396,7 +396,7 @@ namespace PS4PKGTool
             PKGColorLabeling.Name = "PKGColorLabeling";
             PKGColorLabeling.Size = new System.Drawing.Size(136, 19);
             PKGColorLabeling.TabIndex = 0;
-            PKGColorLabeling.Text = "Enable color labeling";
+            PKGColorLabeling.Text = "启用颜色标记";
             // 
             // darkLabelGamePkgColorLabel
             // 
@@ -415,7 +415,7 @@ namespace PS4PKGTool
             btnGamePkgForeColor.Name = "btnGamePkgForeColor";
             btnGamePkgForeColor.Size = new System.Drawing.Size(80, 24);
             btnGamePkgForeColor.TabIndex = 2;
-            btnGamePkgForeColor.Text = "Choose...";
+            btnGamePkgForeColor.Text = "选择……";
             btnGamePkgForeColor.Click += SetPKGLabelColor_Click;
             // 
             // btnGamePkgBackColor
@@ -425,7 +425,7 @@ namespace PS4PKGTool
             btnGamePkgBackColor.Name = "btnGamePkgBackColor";
             btnGamePkgBackColor.Size = new System.Drawing.Size(80, 24);
             btnGamePkgBackColor.TabIndex = 3;
-            btnGamePkgBackColor.Text = "Choose...";
+            btnGamePkgBackColor.Text = "选择……";
             btnGamePkgBackColor.Click += SetPKGLabelColor_Click;
             // 
             // darkLabelPatchPkgColorLabel
@@ -445,7 +445,7 @@ namespace PS4PKGTool
             btnPatchPkgForeColor.Name = "btnPatchPkgForeColor";
             btnPatchPkgForeColor.Size = new System.Drawing.Size(80, 24);
             btnPatchPkgForeColor.TabIndex = 5;
-            btnPatchPkgForeColor.Text = "Choose...";
+            btnPatchPkgForeColor.Text = "选择……";
             btnPatchPkgForeColor.Click += SetPKGLabelColor_Click;
             // 
             // btnPatchPkgBackColor
@@ -455,7 +455,7 @@ namespace PS4PKGTool
             btnPatchPkgBackColor.Name = "btnPatchPkgBackColor";
             btnPatchPkgBackColor.Size = new System.Drawing.Size(80, 24);
             btnPatchPkgBackColor.TabIndex = 6;
-            btnPatchPkgBackColor.Text = "Choose...";
+            btnPatchPkgBackColor.Text = "选择……";
             btnPatchPkgBackColor.Click += SetPKGLabelColor_Click;
             // 
             // darkLabelAddonPkgColorLabel
@@ -475,7 +475,7 @@ namespace PS4PKGTool
             btnAddonPkgForeColor.Name = "btnAddonPkgForeColor";
             btnAddonPkgForeColor.Size = new System.Drawing.Size(80, 24);
             btnAddonPkgForeColor.TabIndex = 8;
-            btnAddonPkgForeColor.Text = "Choose...";
+            btnAddonPkgForeColor.Text = "选择……";
             btnAddonPkgForeColor.Click += SetPKGLabelColor_Click;
             // 
             // btnAddonPkgBackColor
@@ -485,7 +485,7 @@ namespace PS4PKGTool
             btnAddonPkgBackColor.Name = "btnAddonPkgBackColor";
             btnAddonPkgBackColor.Size = new System.Drawing.Size(80, 24);
             btnAddonPkgBackColor.TabIndex = 9;
-            btnAddonPkgBackColor.Text = "Choose...";
+            btnAddonPkgBackColor.Text = "选择……";
             btnAddonPkgBackColor.Click += SetPKGLabelColor_Click;
             // 
             // darkLabelAppPkgColorLabel
@@ -505,7 +505,7 @@ namespace PS4PKGTool
             btnAppPkgForeColor.Name = "btnAppPkgForeColor";
             btnAppPkgForeColor.Size = new System.Drawing.Size(80, 24);
             btnAppPkgForeColor.TabIndex = 11;
-            btnAppPkgForeColor.Text = "Choose...";
+            btnAppPkgForeColor.Text = "选择……";
             btnAppPkgForeColor.Click += SetPKGLabelColor_Click;
             // 
             // btnAppPkgBackColor
@@ -515,7 +515,7 @@ namespace PS4PKGTool
             btnAppPkgBackColor.Name = "btnAppPkgBackColor";
             btnAppPkgBackColor.Size = new System.Drawing.Size(80, 24);
             btnAppPkgBackColor.TabIndex = 12;
-            btnAppPkgBackColor.Text = "Choose...";
+            btnAppPkgBackColor.Text = "选择……";
             btnAppPkgBackColor.Click += SetPKGLabelColor_Click;
             // 
             // btnResetPkgLabelColor
@@ -525,7 +525,7 @@ namespace PS4PKGTool
             btnResetPkgLabelColor.Name = "btnResetPkgLabelColor";
             btnResetPkgLabelColor.Size = new System.Drawing.Size(91, 24);
             btnResetPkgLabelColor.TabIndex = 13;
-            btnResetPkgLabelColor.Text = "Reset Color";
+            btnResetPkgLabelColor.Text = "重置颜色";
             btnResetPkgLabelColor.Click += SetPKGLabelColor_Click;
             // 
             // grpColumns
@@ -545,7 +545,7 @@ namespace PS4PKGTool
             grpColumns.Margin = new System.Windows.Forms.Padding(6);
             grpColumns.Name = "grpColumns";
             grpColumns.Padding = new System.Windows.Forms.Padding(12);
-            grpColumns.SectionHeader = "Column Visibility";
+            grpColumns.SectionHeader = "列显示";
             grpColumns.Size = new System.Drawing.Size(601, 117);
             grpColumns.TabIndex = 0;
             // 
@@ -692,7 +692,7 @@ namespace PS4PKGTool
             grpPS5BC.Margin = new System.Windows.Forms.Padding(6);
             grpPS5BC.Name = "grpPS5BC";
             grpPS5BC.Padding = new System.Windows.Forms.Padding(12);
-            grpPS5BC.SectionHeader = "PS5 Backward Compatibility";
+            grpPS5BC.SectionHeader = "PS5 向后兼容";
             grpPS5BC.Size = new System.Drawing.Size(601, 145);
             grpPS5BC.TabIndex = 2;
             // 
@@ -705,7 +705,7 @@ namespace PS4PKGTool
             cbPs5BcCheck.Name = "cbPs5BcCheck";
             cbPs5BcCheck.Size = new System.Drawing.Size(275, 19);
             cbPs5BcCheck.TabIndex = 0;
-            cbPs5BcCheck.Text = "Show PS5 BC, PSVR, and PS4 Pro status column";
+            cbPs5BcCheck.Text = "显示 PS5 BC、PSVR 和 PS4 Pro 状态列";
             // 
             // btnDownloadPS5BCJson
             // 
@@ -714,7 +714,7 @@ namespace PS4PKGTool
             btnDownloadPS5BCJson.Name = "btnDownloadPS5BCJson";
             btnDownloadPS5BCJson.Size = new System.Drawing.Size(170, 26);
             btnDownloadPS5BCJson.TabIndex = 1;
-            btnDownloadPS5BCJson.Text = "Download BC status data";
+            btnDownloadPS5BCJson.Text = "下载 BC 状态数据";
             btnDownloadPS5BCJson.Click += btnDownloadPS5BCJson_Click;
             // 
             // darkLabel9
@@ -724,7 +724,7 @@ namespace PS4PKGTool
             darkLabel9.Name = "darkLabel9";
             darkLabel9.Size = new System.Drawing.Size(90, 18);
             darkLabel9.TabIndex = 2;
-            darkLabel9.Text = "Last download:";
+            darkLabel9.Text = "上次下载：";
             // 
             // labelPs5BcJsonDownloadDate
             // 
@@ -747,7 +747,7 @@ namespace PS4PKGTool
             grpShadps4Config.Margin = new System.Windows.Forms.Padding(6);
             grpShadps4Config.Name = "grpShadps4Config";
             grpShadps4Config.Padding = new System.Windows.Forms.Padding(12);
-            grpShadps4Config.SectionHeader = "shadPS4 Compatibility  ";
+            grpShadps4Config.SectionHeader = "shadPS4 兼容性  ";
             grpShadps4Config.Size = new System.Drawing.Size(601, 176);
             grpShadps4Config.TabIndex = 5;
             // 
@@ -760,7 +760,7 @@ namespace PS4PKGTool
             cbShadps4Check.Name = "cbShadps4Check";
             cbShadps4Check.Size = new System.Drawing.Size(253, 19);
             cbShadps4Check.TabIndex = 0;
-            cbShadps4Check.Text = "Show shadPS4 compatibility status column";
+            cbShadps4Check.Text = "显示 shadPS4 兼容状态列";
             // 
             // darkLabelShadps4Os
             // 
@@ -769,7 +769,7 @@ namespace PS4PKGTool
             darkLabelShadps4Os.Name = "darkLabelShadps4Os";
             darkLabelShadps4Os.Size = new System.Drawing.Size(137, 15);
             darkLabelShadps4Os.TabIndex = 4;
-            darkLabelShadps4Os.Text = "Compatibility platform:";
+            darkLabelShadps4Os.Text = "兼容平台：";
             // 
             // cmbShadps4Os
             // 
@@ -787,7 +787,7 @@ namespace PS4PKGTool
             btnDownloadShadps4Json.Name = "btnDownloadShadps4Json";
             btnDownloadShadps4Json.Size = new System.Drawing.Size(189, 26);
             btnDownloadShadps4Json.TabIndex = 1;
-            btnDownloadShadps4Json.Text = "Download Compatibility Data";
+            btnDownloadShadps4Json.Text = "下载兼容数据";
             btnDownloadShadps4Json.Click += btnDownloadShadps4Json_Click;
             // 
             // darkLabelShadps4
@@ -797,7 +797,7 @@ namespace PS4PKGTool
             darkLabelShadps4.Name = "darkLabelShadps4";
             darkLabelShadps4.Size = new System.Drawing.Size(90, 18);
             darkLabelShadps4.TabIndex = 2;
-            darkLabelShadps4.Text = "Last download:";
+            darkLabelShadps4.Text = "上次下载：";
             // 
             // labelShadps4JsonDate
             // 
@@ -819,7 +819,7 @@ namespace PS4PKGTool
             grpNetwork.Margin = new System.Windows.Forms.Padding(6);
             grpNetwork.Name = "grpNetwork";
             grpNetwork.Padding = new System.Windows.Forms.Padding(12);
-            grpNetwork.SectionHeader = "Network";
+            grpNetwork.SectionHeader = "网络";
             grpNetwork.Size = new System.Drawing.Size(601, 124);
             grpNetwork.TabIndex = 0;
             // 
@@ -830,7 +830,7 @@ namespace PS4PKGTool
             darkLabel1.Name = "darkLabel1";
             darkLabel1.Size = new System.Drawing.Size(100, 20);
             darkLabel1.TabIndex = 0;
-            darkLabel1.Text = "PC IP address:";
+            darkLabel1.Text = "PC IP 地址：";
             // 
             // darkComboBoxServerIP
             // 
@@ -848,7 +848,7 @@ namespace PS4PKGTool
             darkLabel2.Name = "darkLabel2";
             darkLabel2.Size = new System.Drawing.Size(100, 20);
             darkLabel2.TabIndex = 2;
-            darkLabel2.Text = "PS4 IP address:";
+            darkLabel2.Text = "PS4 IP 地址：";
             // 
             // tbPS4IP
             // 
@@ -866,7 +866,7 @@ namespace PS4PKGTool
             btnPingPs4.Name = "btnPingPs4";
             btnPingPs4.Size = new System.Drawing.Size(117, 24);
             btnPingPs4.TabIndex = 4;
-            btnPingPs4.Text = "Test Connection";
+            btnPingPs4.Text = "测试连接";
             btnPingPs4.Click += btnPingPs4_Click;
             // 
             // grpTools
@@ -881,7 +881,7 @@ namespace PS4PKGTool
             grpTools.Margin = new System.Windows.Forms.Padding(6);
             grpTools.Name = "grpTools";
             grpTools.Padding = new System.Windows.Forms.Padding(12);
-            grpTools.SectionHeader = "Requirements";
+            grpTools.SectionHeader = "环境要求";
             grpTools.Size = new System.Drawing.Size(601, 76);
             grpTools.TabIndex = 1;
             // 
@@ -912,7 +912,7 @@ namespace PS4PKGTool
             btnInstallNodejs.Name = "btnInstallNodejs";
             btnInstallNodejs.Size = new System.Drawing.Size(55, 26);
             btnInstallNodejs.TabIndex = 2;
-            btnInstallNodejs.Text = "Install";
+            btnInstallNodejs.Text = "安装";
             btnInstallNodejs.Click += btnInstallNodejs_Click;
             // 
             // darkLabel4
@@ -942,7 +942,7 @@ namespace PS4PKGTool
             btnInstalleServerModule.Name = "btnInstalleServerModule";
             btnInstalleServerModule.Size = new System.Drawing.Size(55, 26);
             btnInstalleServerModule.TabIndex = 5;
-            btnInstalleServerModule.Text = "Install";
+            btnInstalleServerModule.Text = "安装";
             btnInstalleServerModule.Click += btnInstallServerModule_Click;
             // 
             // grpRename
@@ -964,7 +964,7 @@ namespace PS4PKGTool
             grpRename.Margin = new System.Windows.Forms.Padding(6);
             grpRename.Name = "grpRename";
             grpRename.Padding = new System.Windows.Forms.Padding(12);
-            grpRename.SectionHeader = "Custom File Naming";
+            grpRename.SectionHeader = "自定义文件命名";
             grpRename.Size = new System.Drawing.Size(601, 269);
             grpRename.TabIndex = 0;
             // 
@@ -975,7 +975,7 @@ namespace PS4PKGTool
             darkLabel12.Name = "darkLabel12";
             darkLabel12.Size = new System.Drawing.Size(570, 20);
             darkLabel12.TabIndex = 0;
-            darkLabel12.Text = "Filename format:  (files are renamed using this pattern when you Rename PKG)";
+            darkLabel12.Text = "文件名格式：（在「重命名 PKG」时按此格式重命名文件）";
             // 
             // tbCustomNamePattern
             // 
@@ -993,7 +993,7 @@ namespace PS4PKGTool
             darkLabelPlaceholderHint.Name = "darkLabelPlaceholderHint";
             darkLabelPlaceholderHint.Size = new System.Drawing.Size(570, 16);
             darkLabelPlaceholderHint.TabIndex = 2;
-            darkLabelPlaceholderHint.Text = "Click a button below to insert that value into the format:";
+            darkLabelPlaceholderHint.Text = "点击下面的按钮可将该值插入格式中：";
             // 
             // btnPlaceTitle
             // 
@@ -1090,7 +1090,7 @@ namespace PS4PKGTool
             darkButton1.Name = "darkButton1";
             darkButton1.Size = new System.Drawing.Size(135, 26);
             darkButton1.TabIndex = 18;
-            darkButton1.Text = "Clear Format";
+            darkButton1.Text = "清除格式";
             darkButton1.Click += darkButton1_Click;
             // 
             // darkLabelNamingPatternExample
@@ -1113,7 +1113,7 @@ namespace PS4PKGTool
             grpTrophyCache.Margin = new System.Windows.Forms.Padding(6);
             grpTrophyCache.Name = "grpTrophyCache";
             grpTrophyCache.Padding = new System.Windows.Forms.Padding(12);
-            grpTrophyCache.SectionHeader = "Trophy Metadata Cache";
+            grpTrophyCache.SectionHeader = "奖杯元数据缓存";
             grpTrophyCache.Size = new System.Drawing.Size(601, 190);
             grpTrophyCache.TabIndex = 0;
             // 
@@ -1132,7 +1132,7 @@ namespace PS4PKGTool
             lblTrophyCacheDesc.Name = "lblTrophyCacheDesc";
             lblTrophyCacheDesc.Size = new System.Drawing.Size(575, 38);
             lblTrophyCacheDesc.TabIndex = 0;
-            lblTrophyCacheDesc.Text = "Build a local trophy metadata cache from PKGs in your configured directories. Cached IDs enable full trophy names and descriptions when a PKG is selected.";
+            lblTrophyCacheDesc.Text = "从已配置目录中的 PKG 构建本地奖杯元数据缓存。缓存 ID 后，选中 PKG 时即可显示完整的奖杯名称和描述。";
             // 
             // btnBuildTrophyCache
             // 
@@ -1141,7 +1141,7 @@ namespace PS4PKGTool
             btnBuildTrophyCache.Name = "btnBuildTrophyCache";
             btnBuildTrophyCache.Size = new System.Drawing.Size(210, 30);
             btnBuildTrophyCache.TabIndex = 1;
-            btnBuildTrophyCache.Text = "Build Trophy Metadata Cache";
+            btnBuildTrophyCache.Text = "构建奖杯元数据缓存";
             btnBuildTrophyCache.Click += btnBuildTrophyCache_Click;
             // 
             // btnCancelTrophyCache
@@ -1151,7 +1151,7 @@ namespace PS4PKGTool
             btnCancelTrophyCache.Name = "btnCancelTrophyCache";
             btnCancelTrophyCache.Size = new System.Drawing.Size(105, 30);
             btnCancelTrophyCache.TabIndex = 2;
-            btnCancelTrophyCache.Text = "Cancel";
+            btnCancelTrophyCache.Text = "取消";
             btnCancelTrophyCache.Click += btnCancelTrophyCache_Click;
             // 
             // btnClearTrophyCache
@@ -1161,7 +1161,7 @@ namespace PS4PKGTool
             btnClearTrophyCache.Name = "btnClearTrophyCache";
             btnClearTrophyCache.Size = new System.Drawing.Size(120, 30);
             btnClearTrophyCache.TabIndex = 3;
-            btnClearTrophyCache.Text = "Clear Cache";
+            btnClearTrophyCache.Text = "清除缓存";
             btnClearTrophyCache.Click += btnClearTrophyCache_Click;
             // 
             // lblTrophyCacheStatus
@@ -1171,7 +1171,7 @@ namespace PS4PKGTool
             lblTrophyCacheStatus.Name = "lblTrophyCacheStatus";
             lblTrophyCacheStatus.Size = new System.Drawing.Size(575, 22);
             lblTrophyCacheStatus.TabIndex = 5;
-            lblTrophyCacheStatus.Text = "Cache not checked.";
+            lblTrophyCacheStatus.Text = "未检查缓存。";
             // 
             // btnOpenShadps4Manager
             // 
@@ -1180,7 +1180,7 @@ namespace PS4PKGTool
             btnOpenShadps4Manager.Name = "btnOpenShadps4Manager";
             btnOpenShadps4Manager.Size = new System.Drawing.Size(180, 26);
             btnOpenShadps4Manager.TabIndex = 12;
-            btnOpenShadps4Manager.Text = "Open shadPS4 Manager...";
+            btnOpenShadps4Manager.Text = "打开 shadPS4 管理器……";
             btnOpenShadps4Manager.Click += btnOpenShadps4Manager_Click;
             // 
             // btnSaveClose
@@ -1190,7 +1190,7 @@ namespace PS4PKGTool
             btnSaveClose.Name = "btnSaveClose";
             btnSaveClose.Size = new System.Drawing.Size(146, 25);
             btnSaveClose.TabIndex = 1;
-            btnSaveClose.Text = "Save && Close";
+            btnSaveClose.Text = "保存并关闭";
             btnSaveClose.Click += btnSaveClose_Click;
             // 
             // darkSidebarTabControl1
@@ -1215,7 +1215,7 @@ namespace PS4PKGTool
             sidebarPage1.Padding = new System.Windows.Forms.Padding(12);
             sidebarPage1.Size = new System.Drawing.Size(627, 656);
             sidebarPage1.TabIndex = 2;
-            sidebarPage1.Text = "General";
+            sidebarPage1.Text = "常规";
             // 
             // grpShellIntegration
             // 
@@ -1227,7 +1227,7 @@ namespace PS4PKGTool
             grpShellIntegration.Margin = new System.Windows.Forms.Padding(6);
             grpShellIntegration.Name = "grpShellIntegration";
             grpShellIntegration.Padding = new System.Windows.Forms.Padding(12);
-            grpShellIntegration.SectionHeader = "File Explorer Integration";
+            grpShellIntegration.SectionHeader = "资源管理器右键菜单集成";
             grpShellIntegration.Size = new System.Drawing.Size(598, 100);
             grpShellIntegration.TabIndex = 3;
             // 
@@ -1238,7 +1238,7 @@ namespace PS4PKGTool
             btnShellRemove.Name = "btnShellRemove";
             btnShellRemove.Size = new System.Drawing.Size(155, 30);
             btnShellRemove.TabIndex = 3;
-            btnShellRemove.Text = "Remove Integration";
+            btnShellRemove.Text = "移除集成";
             btnShellRemove.Visible = false;
             btnShellRemove.Click += btnShellRemove_Click;
             // 
@@ -1249,7 +1249,7 @@ namespace PS4PKGTool
             btnShellInstall.Name = "btnShellInstall";
             btnShellInstall.Size = new System.Drawing.Size(155, 30);
             btnShellInstall.TabIndex = 2;
-            btnShellInstall.Text = "Install Integration";
+            btnShellInstall.Text = "安装集成";
             btnShellInstall.Click += btnShellInstall_Click;
             // 
             // lblShellIntegrationStatus
@@ -1258,7 +1258,7 @@ namespace PS4PKGTool
             lblShellIntegrationStatus.Name = "lblShellIntegrationStatus";
             lblShellIntegrationStatus.Size = new System.Drawing.Size(280, 18);
             lblShellIntegrationStatus.TabIndex = 1;
-            lblShellIntegrationStatus.Text = "Status: Not installed";
+            lblShellIntegrationStatus.Text = "状态：未安装";
             // 
             // lblShellIntegrationTitle
             // 
@@ -1269,7 +1269,7 @@ namespace PS4PKGTool
             // second line ran into the status label below; one line fits here.
             lblShellIntegrationTitle.Size = new System.Drawing.Size(350, 18);
             lblShellIntegrationTitle.TabIndex = 0;
-            lblShellIntegrationTitle.Text = "Adds PS4 PKG Tool actions to the right-click menu for .pkg files.";
+            lblShellIntegrationTitle.Text = "为 .pkg 文件的右键菜单添加 PS4 PKG Tool 操作项。";
             // 
             // darkSectionPanel2
             // 
@@ -1279,7 +1279,7 @@ namespace PS4PKGTool
             darkSectionPanel2.Margin = new System.Windows.Forms.Padding(6);
             darkSectionPanel2.Name = "darkSectionPanel2";
             darkSectionPanel2.Padding = new System.Windows.Forms.Padding(12);
-            darkSectionPanel2.SectionHeader = "Application Data";
+            darkSectionPanel2.SectionHeader = "应用数据";
             darkSectionPanel2.Size = new System.Drawing.Size(601, 91);
             darkSectionPanel2.TabIndex = 1;
             // 
@@ -1290,7 +1290,7 @@ namespace PS4PKGTool
             darkLabel5.Name = "darkLabel5";
             darkLabel5.Size = new System.Drawing.Size(397, 41);
             darkLabel5.TabIndex = 5;
-            darkLabel5.Text = "PS4 PKG Tool stores its settings, cache and local application data in the App Data folder. ";
+            darkLabel5.Text = "PS4 PKG Tool 将设置、缓存和本地应用数据保存在 AppData 文件夹中。";
             darkLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // darkSectionPanel1
@@ -1300,7 +1300,7 @@ namespace PS4PKGTool
             darkSectionPanel1.Margin = new System.Windows.Forms.Padding(6);
             darkSectionPanel1.Name = "darkSectionPanel1";
             darkSectionPanel1.Padding = new System.Windows.Forms.Padding(12);
-            darkSectionPanel1.SectionHeader = "Application";
+            darkSectionPanel1.SectionHeader = "应用程序";
             darkSectionPanel1.Size = new System.Drawing.Size(601, 69);
             darkSectionPanel1.TabIndex = 0;
             // 
@@ -1315,7 +1315,7 @@ namespace PS4PKGTool
             sidebarPage2.Padding = new System.Windows.Forms.Padding(12);
             sidebarPage2.Size = new System.Drawing.Size(627, 656);
             sidebarPage2.TabIndex = 3;
-            sidebarPage2.Text = "Appearance";
+            sidebarPage2.Text = "外观";
             // 
             // darkSectionPanel3
             // 
@@ -1324,7 +1324,7 @@ namespace PS4PKGTool
             darkSectionPanel3.Margin = new System.Windows.Forms.Padding(6);
             darkSectionPanel3.Name = "darkSectionPanel3";
             darkSectionPanel3.Padding = new System.Windows.Forms.Padding(12);
-            darkSectionPanel3.SectionHeader = "Theme";
+            darkSectionPanel3.SectionHeader = "主题";
             darkSectionPanel3.Size = new System.Drawing.Size(601, 78);
             darkSectionPanel3.TabIndex = 0;
             // 
@@ -1346,7 +1346,7 @@ namespace PS4PKGTool
             sidebarPage3.Padding = new System.Windows.Forms.Padding(12);
             sidebarPage3.Size = new System.Drawing.Size(627, 656);
             sidebarPage3.TabIndex = 4;
-            sidebarPage3.Text = "Library";
+            sidebarPage3.Text = "库";
             // 
             // sidebarPage4
             // 
@@ -1358,7 +1358,7 @@ namespace PS4PKGTool
             sidebarPage4.Padding = new System.Windows.Forms.Padding(12);
             sidebarPage4.Size = new System.Drawing.Size(627, 656);
             sidebarPage4.TabIndex = 5;
-            sidebarPage4.Text = "Compatibility";
+            sidebarPage4.Text = "兼容性";
             // 
             // sidebarPage5
             // 
@@ -1370,7 +1370,7 @@ namespace PS4PKGTool
             sidebarPage5.Padding = new System.Windows.Forms.Padding(12);
             sidebarPage5.Size = new System.Drawing.Size(627, 656);
             sidebarPage5.TabIndex = 6;
-            sidebarPage5.Text = "Remote PKG Installer";
+            sidebarPage5.Text = "远程安装包安装器";
             // 
             // sidebarPage6
             // 
@@ -1381,7 +1381,7 @@ namespace PS4PKGTool
             sidebarPage6.Padding = new System.Windows.Forms.Padding(12);
             sidebarPage6.Size = new System.Drawing.Size(627, 656);
             sidebarPage6.TabIndex = 7;
-            sidebarPage6.Text = "Trophies";
+            sidebarPage6.Text = "奖杯";
             // 
             // darkLabel14
             // 
@@ -1389,7 +1389,7 @@ namespace PS4PKGTool
             darkLabel14.Name = "darkLabel14";
             darkLabel14.Size = new System.Drawing.Size(60, 15);
             darkLabel14.TabIndex = 15;
-            darkLabel14.Text = "Theme: ";
+            darkLabel14.Text = "主题：";
             darkLabel14.Visible = false;
             // 
             // darkHeaderBar1
@@ -1429,7 +1429,7 @@ namespace PS4PKGTool
             Name = "ProgramSetting";
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Program Settings";
+            Text = "程序设置";
             Load += ProgramSetting_Load;
             grpStartup.ResumeLayout(false);
             grpStartup.PerformLayout();

@@ -16,10 +16,10 @@ public static class PakCompression
     public static byte[] Decompress(string method, ReadOnlySpan<byte> data, long uncompressedSize)
     {
         if (uncompressedSize < 0)
-            throw new CorruptAssetException($"Entry declares a negative uncompressed size ({uncompressedSize}).");
+            throw new CorruptAssetException($"条目声明的未压缩大小为负数（{uncompressedSize}）。");
         if (uncompressedSize > MaxDecompressed)
             throw new UnsupportedAssetException(
-                $"Entry decompresses to {uncompressedSize} bytes - over the {MaxDecompressed} safety cap.");
+                $"条目解压后为 {uncompressedSize} 字节，超过 {MaxDecompressed} 的安全上限。");
 
         switch (method)
         {
@@ -33,9 +33,9 @@ public static class PakCompression
                 return DecompressLz4(data, uncompressedSize);
             case "Oodle":
                 throw new MissingDependencyException(
-                    "Entry uses Oodle compression - the Oodle DLL is not bundled (see ASSET_FRAMEWORK.md). Raw export of the compressed bytes remains available.");
+                    "条目使用 Oodle 压缩——未随程序附带 Oodle DLL（见 ASSET_FRAMEWORK.md）。仍可导出压缩后的原始数据。");
             default:
-                throw new UnsupportedAssetException($"Unknown compression method '{method}'.");
+                throw new UnsupportedAssetException($"未知的压缩方式 '{method}'。");
         }
     }
 
@@ -43,7 +43,7 @@ public static class PakCompression
     private static byte[] DecompressZlib(ReadOnlySpan<byte> data, long expected)
     {
         if (data.Length < 6 || (data[0] & 0x0F) != 8)
-            throw new CorruptAssetException("Invalid zlib header.");
+            throw new CorruptAssetException("zlib 头部无效。");
         using var input = new MemoryStream(data[2..].ToArray());
         using var deflate = new DeflateStream(input, CompressionMode.Decompress);
         return ReadAll(deflate, expected);
@@ -61,7 +61,7 @@ public static class PakCompression
         var output = new byte[expected];
         int written = LZ4Codec.Decode(data.ToArray(), 0, data.Length, output, 0, output.Length);
         if (written != expected)
-            throw new CorruptAssetException($"LZ4 decode wrote {written} bytes, expected {expected}.");
+            throw new CorruptAssetException($"LZ4 解码写入 {written} 字节，预期 {expected} 字节。");
         return output;
     }
 
@@ -81,11 +81,11 @@ public static class PakCompression
             total += read;
             if (total > limit)
                 throw new CorruptAssetException(
-                    $"Decompressed data exceeds the declared size of {expected} bytes.");
+                    $"解压后数据超过声明的 {expected} 字节。");
             ms.Write(buffer, 0, read);
         }
         if (ms.Length != expected)
-            throw new CorruptAssetException($"Decompressed size mismatch: got {ms.Length}, expected {expected}.");
+            throw new CorruptAssetException($"解压后大小不匹配：实际 {ms.Length}，预期 {expected}。");
         return ms.ToArray();
     }
 }

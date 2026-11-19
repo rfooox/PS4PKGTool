@@ -18,25 +18,25 @@ namespace PS4PKGTool
         public MissingBasePkgResultsForm(int checkedPatchCount, IReadOnlyList<MissingBasePatch> missingPatches)
         {
             InitializeComponent();
-            lblSummary.Text = $"Checked {checkedPatchCount} patch PKG(s). {missingPatches.Count} base PKG(s) missing.";
+            lblSummary.Text = $"已勾选 {checkedPatchCount} 个补丁 PKG。缺少 {missingPatches.Count} 个本体 PKG。";
 
             var table = new DataTable();
-            table.Columns.Add("Status");
-            table.Columns.Add("Patch PKG");
-            table.Columns.Add("Title");
-            table.Columns.Add("Title ID");
-            table.Columns.Add("Patch Version");
-            table.Columns.Add("Location");
+            table.Columns.Add("状态");
+            table.Columns.Add("补丁 PKG");
+            table.Columns.Add("标题");
+            table.Columns.Add("标题 ID");
+            table.Columns.Add("补丁版本");
+            table.Columns.Add("位置");
             foreach (var patch in missingPatches)
-                table.Rows.Add("Missing base", patch.Filename, patch.Title, patch.TitleId, patch.Version, patch.Directory);
+                table.Rows.Add("缺少本体", patch.Filename, patch.Title, patch.TitleId, patch.Version, patch.Directory);
 
             dgvMissingPatches.DataSource = table;
-            dgvMissingPatches.Columns["Status"].FillWeight = 75;
-            dgvMissingPatches.Columns["Patch PKG"].FillWeight = 160;
-            dgvMissingPatches.Columns["Title"].FillWeight = 150;
-            dgvMissingPatches.Columns["Title ID"].FillWeight = 75;
-            dgvMissingPatches.Columns["Patch Version"].FillWeight = 85;
-            dgvMissingPatches.Columns["Location"].FillWeight = 220;
+            dgvMissingPatches.Columns["状态"].FillWeight = 75;
+            dgvMissingPatches.Columns["补丁 PKG"].FillWeight = 160;
+            dgvMissingPatches.Columns["标题"].FillWeight = 150;
+            dgvMissingPatches.Columns["标题 ID"].FillWeight = 75;
+            dgvMissingPatches.Columns["补丁版本"].FillWeight = 85;
+            dgvMissingPatches.Columns["位置"].FillWeight = 220;
         }
 
         private void btnClose_Click(object sender, EventArgs e) => Close();

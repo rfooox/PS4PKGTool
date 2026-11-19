@@ -31,7 +31,7 @@ public sealed class UnityBundleHandler : IAssetHandler, IAssetPreviewProvider
             ["Files"] = bundle.Files.Count.ToString(),
         };
         if (!string.IsNullOrEmpty(bundle.UnityVersion)) meta["Unity Version"] = bundle.UnityVersion!;
-        if (bundle.AnyCompressedBlocks) meta["Compression"] = "LZMA/LZ4 (unsupported yet)";
+        if (bundle.AnyCompressedBlocks) meta["Compression"] = "LZMA/LZ4（暂不支持）";
 
         return Task.FromResult(new AssetDescriptor
         {
@@ -50,8 +50,8 @@ public sealed class UnityBundleHandler : IAssetHandler, IAssetPreviewProvider
         // Container listing as a text preview (nested browsing data).
         var bundle = UnityBundle.Parse(source);
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"Unity Asset Bundle: {bundle.Files.Count} files");
-        sb.AppendLine($"Bundle version: {bundle.Version}{(string.IsNullOrEmpty(bundle.UnityVersion) ? "" : $" (Unity {bundle.UnityVersion})")}");
+        sb.AppendLine($"Unity Asset Bundle：{bundle.Files.Count} 个文件");
+        sb.AppendLine($"包版本：{bundle.Version}{(string.IsNullOrEmpty(bundle.UnityVersion) ? "" : $" (Unity {bundle.UnityVersion})")}");
         sb.AppendLine();
         foreach (var f in bundle.Files)
             sb.AppendLine($"  {f.Name} ({f.Size} bytes)");

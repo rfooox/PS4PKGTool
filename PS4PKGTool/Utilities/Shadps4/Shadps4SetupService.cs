@@ -58,9 +58,9 @@ namespace PS4PKGTool.Utilities.Shadps4
             // Same build already installed - never duplicate or overwrite.
             if (store.FindExe(component, release.BuildId) != null)
             {
-                Logger.LogInformation($"Shadps4Setup: build {release.BuildId} already installed - skipping.");
+                Logger.LogInformation($"Shadps4Setup：版本 {release.BuildId} 已安装——跳过。");
                 return new Shadps4SetupResult(Shadps4SetupStatus.AlreadyInstalled,
-                    $"Build {release.BuildId} is already installed.");
+                    $"版本 {release.BuildId} 已安装。");
             }
 
             string root = store.RootPath;
@@ -76,9 +76,9 @@ namespace PS4PKGTool.Utilities.Shadps4
                     : FreeSpace(root);
                 if (release.SizeBytes > 0 && free < release.SizeBytes + SpaceMarginBytes)
                 {
-                    Logger.LogWarning($"Shadps4Setup: not enough space to download ({HelperBytes(release.SizeBytes + SpaceMarginBytes)} needed, {HelperBytes(free)} free)");
+                    Logger.LogWarning($"Shadps4Setup：空间不足以下载（需要 {HelperBytes(release.SizeBytes + SpaceMarginBytes)}，可用 {HelperBytes(free)}）");
                     return new Shadps4SetupResult(Shadps4SetupStatus.InsufficientSpace,
-                        $"Not enough free space to download {release.AssetName} (needs ~{HelperBytes(release.SizeBytes + SpaceMarginBytes)}, has {HelperBytes(free)}).");
+                        $"剩余空间不足以下载 {release.AssetName}（需要约 {HelperBytes(release.SizeBytes + SpaceMarginBytes)}，可用 {HelperBytes(free)}）。");
                 }
 
                 // 2) streamed download to .part, then rename.
@@ -94,13 +94,13 @@ namespace PS4PKGTool.Utilities.Shadps4
                     release.AssetDigestSha256, bytes, ct).ConfigureAwait(false);
                 if (dlError != null)
                 {
-                    Logger.LogWarning($"Shadps4Setup: download failed: {dlError}");
+                    Logger.LogWarning($"Shadps4Setup：下载失败：{dlError}");
                     return new Shadps4SetupResult(Shadps4SetupStatus.DownloadFailed, dlError);
                 }
                 Logger.LogInformation($"Shadps4Setup: downloaded {release.AssetName}");
 
                 // 3) validate the ZIP and estimate the extracted size.
-                progress?.Report("Validating archive...");
+                progress?.Report("正在校验压缩包……");
                 long uncompressed;
                 try
                 {
@@ -109,18 +109,18 @@ namespace PS4PKGTool.Utilities.Shadps4
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogWarning($"Shadps4Setup: archive invalid or truncated: {ex.Message}");
+                    Logger.LogWarning($"Shadps4Setup：压缩包无效或已截断：{ex.Message}");
                     return new Shadps4SetupResult(Shadps4SetupStatus.VerificationFailed,
-                        $"The downloaded archive is invalid or truncated: {ex.Message}");
+                        $"下载的压缩包无效或已截断：{ex.Message}");
                 }
 
                 // 4) free space for the extraction.
                 free = FreeSpaceOverride != null ? FreeSpaceOverride(root) : FreeSpace(root);
                 if (free < uncompressed + SpaceMarginBytes)
                 {
-                    Logger.LogWarning($"Shadps4Setup: not enough space to extract ({HelperBytes(uncompressed + SpaceMarginBytes)} needed, {HelperBytes(free)} free)");
+                    Logger.LogWarning($"Shadps4Setup：空间不足以解压（需要 {HelperBytes(uncompressed + SpaceMarginBytes)}，可用 {HelperBytes(free)}）");
                     return new Shadps4SetupResult(Shadps4SetupStatus.InsufficientSpace,
-                        $"Not enough free space to extract {release.AssetName} (needs ~{HelperBytes(uncompressed + SpaceMarginBytes)}, has {HelperBytes(free)}).");
+                        $"剩余空间不足以解压 {release.AssetName}（需要约 {HelperBytes(uncompressed + SpaceMarginBytes)}，可用 {HelperBytes(free)}）。");
                 }
 
                 // 5) extract to staging (same volume as the final dir).
@@ -132,13 +132,13 @@ namespace PS4PKGTool.Utilities.Shadps4
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogWarning($"Shadps4Setup: extraction failed: {ex.Message}");
+                    Logger.LogWarning($"Shadps4Setup：解压失败：{ex.Message}");
                     return new Shadps4SetupResult(Shadps4SetupStatus.ExtractionFailed,
-                        $"Extraction failed: {ex.Message}");
+                        $"解压失败：{ex.Message}");
                 }
 
                 // 6) verify the expected executable + atomic commit.
-                progress?.Report("Finalizing build...");
+                progress?.Report("正在完成构建……");
                 Shadps4InstalledBuild build;
                 try
                 {
@@ -146,31 +146,31 @@ namespace PS4PKGTool.Utilities.Shadps4
                 }
                 catch (InvalidOperationException ex)
                 {
-                    Logger.LogWarning($"Shadps4Setup: commit rejected: {ex.Message}");
+                    Logger.LogWarning($"Shadps4Setup：提交被拒绝：{ex.Message}");
                     return new Shadps4SetupResult(Shadps4SetupStatus.VerificationFailed, ex.Message);
                 }
-                Logger.LogInformation($"Shadps4Setup: installed build {build.BuildId} at {build.DirectoryPath}");
+                Logger.LogInformation($"Shadps4Setup：已将版本 {build.BuildId} 安装到 {build.DirectoryPath}");
 
                 return new Shadps4SetupResult(Shadps4SetupStatus.Success,
-                    $"Installed {release.AssetName} as build {build.BuildId}.", build);
+                    $"已将 {release.AssetName} 安装为版本 {build.BuildId}。", build);
             }
             catch (OperationCanceledException)
             {
                 CleanupWork(workDir, staging);
-                Logger.LogWarning("Shadps4Setup: cancelled - work dir and staging cleaned.");
-                return new Shadps4SetupResult(Shadps4SetupStatus.Cancelled, "Installation cancelled.");
+                Logger.LogWarning("Shadps4Setup：已取消——工作目录与暂存已清理。");
+                return new Shadps4SetupResult(Shadps4SetupStatus.Cancelled, "安装已取消。");
             }
             catch (IOException ex) when ((uint)ex.HResult == 0x80070070) // ERROR_DISK_FULL
             {
                 CleanupWork(workDir, staging);
-                Logger.LogError("Shadps4Setup: disk full - " + ex.Message);
+                Logger.LogError("Shadps4Setup：磁盘空间不足——" + ex.Message);
                 return new Shadps4SetupResult(Shadps4SetupStatus.InsufficientSpace,
-                    $"Disk full during installation: {ex.Message}");
+                    $"安装时磁盘空间不足：{ex.Message}");
             }
             catch (Exception ex)
             {
                 CleanupWork(workDir, staging);
-                Logger.LogError("Shadps4Setup failed: " + ex);
+                Logger.LogError("Shadps4Setup 失败：" + ex);
                 return new Shadps4SetupResult(Shadps4SetupStatus.Failed, ex.Message);
             }
             finally

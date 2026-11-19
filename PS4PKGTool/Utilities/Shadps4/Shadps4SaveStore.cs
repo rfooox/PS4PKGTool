@@ -211,7 +211,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             if (!string.Equals(backup.UserId, userId, StringComparison.Ordinal)
                 || !string.Equals(backup.TitleId, titleId, StringComparison.OrdinalIgnoreCase))
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                    "The snapshot does not belong to this save. Nothing was changed.", null);
+                    "该快照不属于此存档。未做任何更改。", null);
 
             // Snapshot identity comes from the manifest, but the actual files
             // are always resolved from the known snapshot directory - never
@@ -219,11 +219,11 @@ namespace PS4PKGTool.Utilities.Shadps4
             string gamesRoot = GameBackupsDir(backupRoot, userId, titleId);
             if (!IsUnder(gamesRoot, backup.Path))
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                    "The snapshot is outside the managed backup root. Nothing was changed.", null);
+                    "快照位于托管备份根目录之外。未做任何更改。", null);
             string dataDir = Path.Combine(backup.Path, DataFolderName);
             if (!_fs.DirectoryExists(dataDir))
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.NotFound,
-                    "The snapshot content is missing. Nothing was changed.", null);
+                    "快照内容缺失。未做任何更改。", null);
 
             string live = GameSavePath(userDir, userId, titleId);
             string staging = Path.Combine(UserSavesDir(userDir, userId), $".{titleId}.restore");
@@ -233,7 +233,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             // Check 1.
             if (IsCoreRunning())
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.RefusedRunning,
-                    "shadPS4 is running. Close it before restoring a save. Nothing was changed.", null);
+                    "shadPS4 正在运行。请先关闭它再还原存档。未做任何更改。", null);
 
             // Space preflight: the swap briefly holds current + snapshot on the
             // live volume; the auto-backup is a full copy on the backup volume.
@@ -243,7 +243,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             long neededBackup = currentSize + SpaceMarginBytes;
             if (_fs.GetFreeSpace(live) < neededLive || _fs.GetFreeSpace(backupRoot) < neededBackup)
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.SpaceInsufficient,
-                    "Not enough free disk space for a safe restore. Nothing was changed.", null);
+                    "磁盘剩余空间不足以安全还原。未做任何更改。", null);
 
             // Auto-backup the current save - a hard precondition.
             Shadps4SaveBackup? safety = null;
@@ -256,12 +256,12 @@ namespace PS4PKGTool.Utilities.Shadps4
                 catch (Exception ex)
                 {
                     return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                        "The safety backup of the current save failed:\n" + ex.Message +
-                        "\n\nThe current save was left untouched.", null);
+                        "当前存档的安全备份失败：\n" + ex.Message +
+                        "\n\n当前存档未被改动。", null);
                 }
                 if (safety == null)
                     return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                        "The safety backup of the current save failed. The current save was left untouched.", null);
+                        "当前存档的安全备份失败。当前存档未被改动。", null);
             }
 
             try
@@ -272,14 +272,14 @@ namespace PS4PKGTool.Utilities.Shadps4
                 _fs.CopyDirectory(dataDir, staging);
                 if (!_fs.DirectoryExists(staging))
                     return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                        "Staging the restored save failed. The current save was left untouched.", safety);
+                        "暂存还原后的存档失败。当前存档未被改动。", safety);
 
                 // Check 2 - immediately before the destructive rename.
                 if (IsCoreRunning())
                 {
                     try { _fs.DeleteDirectory(staging); } catch { /* best-effort: leftover staging self-heals on next init */ }
                     return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.RefusedRunning,
-                        "shadPS4 started while restoring. The current save was left untouched.", safety);
+                        "还原过程中 shadPS4 已启动。当前存档未被改动。", safety);
                 }
 
                 // The swap.
@@ -303,12 +303,12 @@ namespace PS4PKGTool.Utilities.Shadps4
                         if (liveExists && _fs.DirectoryExists(previous))
                         {
                             _fs.MoveDirectory(previous, live);
-                            rollbackNote = " The previous save was put back.";
+                            rollbackNote = " 已恢复上一个存档。";
                         }
                     }
                     catch { /* best-effort: stranded .previous self-heals via the journal */ }
                     return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                        "Restore failed:\n" + ex.Message + rollbackNote, safety);
+                        "恢复失败：\n" + ex.Message + rollbackNote, safety);
                 }
 
                 if (!_fs.DirectoryExists(live))
@@ -320,18 +320,18 @@ namespace PS4PKGTool.Utilities.Shadps4
                         if (liveExists && _fs.DirectoryExists(previous))
                         {
                             _fs.MoveDirectory(previous, live);
-                            rollbackNote = " The previous save was put back.";
+                            rollbackNote = " 已恢复上一个存档。";
                         }
                     }
                     catch { /* best-effort: stranded .previous self-heals via the journal */ }
                     return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                        "The restored save could not be verified." + rollbackNote, safety);
+                        "无法校验还原后的存档。" + rollbackNote, safety);
                 }
 
                 // The swap is complete - the previous save is no longer needed.
                 try { if (_fs.DirectoryExists(previous)) _fs.DeleteDirectory(previous); } catch { /* best-effort: leftover .previous self-heals on next init */ }
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Restored,
-                    "Save restored. The previous save was backed up before restoring.", safety);
+                    "存档已还原。还原前已备份上一个存档。", safety);
             }
             catch (Exception ex)
             {
@@ -339,7 +339,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 // untouched; discard any partial staging so it self-heals.
                 try { if (_fs.DirectoryExists(staging)) _fs.DeleteDirectory(staging); } catch { /* best-effort cleanup */ }
                 return new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                    "Restore failed:\n" + ex.Message + "\n\nThe current save was left untouched.", safety);
+                    "恢复失败：\n" + ex.Message + "\n\n当前存档未被改动。", safety);
             }
         }
 
@@ -386,12 +386,12 @@ namespace PS4PKGTool.Utilities.Shadps4
                                 if (stagingExists)
                                 {
                                     _fs.MoveDirectory(staging, live);
-                                    report.Add($"Completed the interrupted restore of {titleId}.");
+                                    report.Add($"已完成 {titleId} 被中断的还原。");
                                 }
                                 else
                                 {
                                     _fs.MoveDirectory(previous, live);
-                                    report.Add($"Rolled back the interrupted restore of {titleId}.");
+                                    report.Add($"已回滚 {titleId} 被中断的还原。");
                                 }
                                 if (_fs.DirectoryExists(previous)) _fs.DeleteDirectory(previous);
                             }
@@ -400,19 +400,19 @@ namespace PS4PKGTool.Utilities.Shadps4
                                 // The swap finished; only cleanup was pending.
                                 if (stagingExists) _fs.DeleteDirectory(staging);
                                 _fs.DeleteDirectory(previous);
-                                report.Add($"Cleaned up the completed restore of {titleId}.");
+                                report.Add($"已清理 {titleId} 已完成的还原。");
                             }
                         }
                         else if (stagingExists)
                         {
                             // Stale staging; the current save was never touched.
                             _fs.DeleteDirectory(staging);
-                            report.Add($"Discarded an unfinished staging of {titleId}. Your saves are intact.");
+                            report.Add($"已丢弃 {titleId} 未完成的暂存。你的存档完好无损。");
                         }
                     }
                     catch (Exception ex)
                     {
-                        report.Add($"Recovery could not finish {titleId}: {ex.Message}");
+                        report.Add($"无法完成 {titleId} 的恢复：{ex.Message}");
                     }
                 }
             }

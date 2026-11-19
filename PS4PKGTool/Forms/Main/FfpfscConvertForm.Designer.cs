@@ -67,7 +67,7 @@ namespace PS4PKGTool.Forms.Main
             lblStage.Name = "lblStage";
             lblStage.Size = new System.Drawing.Size(496, 26);
             lblStage.TabIndex = 0;
-            lblStage.Text = "Preparing...";
+            lblStage.Text = "准备中……";
             lblStage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             // lblDetail
@@ -86,7 +86,7 @@ namespace PS4PKGTool.Forms.Main
             lblCurrent.Name = "lblCurrent";
             lblCurrent.Size = new System.Drawing.Size(496, 26);
             lblCurrent.TabIndex = 2;
-            lblCurrent.Text = "Current progress";
+            lblCurrent.Text = "当前进度";
             lblCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             // _currentProgress
@@ -109,7 +109,7 @@ namespace PS4PKGTool.Forms.Main
             lblOverall.Name = "lblOverall";
             lblOverall.Size = new System.Drawing.Size(496, 26);
             lblOverall.TabIndex = 4;
-            lblOverall.Text = "Overall progress";
+            lblOverall.Text = "总进度";
             lblOverall.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             // _overallProgress
@@ -150,7 +150,7 @@ namespace PS4PKGTool.Forms.Main
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(82, 30);
             btnCancel.TabIndex = 0;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "取消";
             btnCancel.Click += btnCancel_Click;
             //
             // FfpfscConvertForm
@@ -166,7 +166,7 @@ namespace PS4PKGTool.Forms.Main
             MinimizeBox = false;
             Name = "FfpfscConvertForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Converting to FFPFSC";
+            Text = "正在转换为 FFPFSC";
             Shown += FfpfscConvertForm_Shown;
             _layout.ResumeLayout(false);
             _layout.PerformLayout();

@@ -42,7 +42,7 @@ namespace PS4PKGTool
 
             if (string.IsNullOrWhiteSpace(tbPasscodeInput.Text))
             {
-                ShowWarning("Enter the PKG passcode, or press Cancel.", false);
+                ShowWarning("请输入 PKG 通行密码，或按取消。", false);
                 return;
             }
 

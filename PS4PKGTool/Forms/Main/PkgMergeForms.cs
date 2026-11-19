@@ -24,7 +24,7 @@ namespace PS4PKGTool
             txtBaseGame.Text = basePkg.Path;
             txtUpdate.Text = patchPkg.Path;
             txtTitleId.Text = basePkg.TitleId;
-            txtVersions.Text = $"Base: {basePkg.Version}    Update: {patchPkg.Version}";
+            txtVersions.Text = $"本体：{basePkg.Version}    更新：{patchPkg.Version}";
             _outputPath.Text = "";
             _workParent.Text = DefaultWorkParent();
             _ignoreDiskSpace.Checked =
@@ -83,12 +83,12 @@ namespace PS4PKGTool
                 if (free < needed)
                 {
                     lblSpaceWarning.ForeColor = System.Drawing.Color.OrangeRed;
-                    lblSpaceWarning.Text = $"Low disk space: only {freeText} free on the work drive, but ~{needText} is estimated to be needed.";
+                    lblSpaceWarning.Text = $"磁盘空间不足：工作盘仅剩 {freeText}，预计需要约 {needText}。";
                 }
                 else
                 {
                     lblSpaceWarning.ForeColor = System.Drawing.Color.Silver;
-                    lblSpaceWarning.Text = $"{freeText} free · ~{needText} estimated needed.";
+                    lblSpaceWarning.Text = $"{freeText} 可用 · 预计需要约 {needText}。";
                 }
             }
             catch
@@ -115,7 +115,7 @@ namespace PS4PKGTool
 
             using var dialog = new SaveFileDialog
             {
-                Filter = "PS4 Package (*.pkg)|*.pkg",
+                Filter = "PS4 安装包 (*.pkg)|*.pkg",
                 FileName = fileName,
                 InitialDirectory = string.IsNullOrWhiteSpace(initialDirectory) ? Environment.CurrentDirectory : initialDirectory
             };
@@ -134,12 +134,12 @@ namespace PS4PKGTool
             string workParent = _workParent.Text.Trim();
             if (string.IsNullOrWhiteSpace(output) || !output.EndsWith(".pkg", StringComparison.OrdinalIgnoreCase))
             {
-                ShowWarning("Choose an output PKG filename.", false);
+                ShowWarning("请选择输出 PKG 文件名。", false);
                 return;
             }
             if (string.IsNullOrWhiteSpace(workParent))
             {
-                ShowWarning("Choose a work location.", false);
+                ShowWarning("请选择工作目录。", false);
                 return;
             }
 
@@ -150,7 +150,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                ShowWarning("The work location could not be created:\n" + ex.Message, false);
+                ShowWarning("无法创建工作目录：\n" + ex.Message, false);
                 return;
             }
 

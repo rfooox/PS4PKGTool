@@ -62,7 +62,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         public TrophyGrade Grade { get; init; }
         public bool IsHidden { get; init; }
         public int? GroupId { get; init; }
-        public string GroupName { get; init; } = "Base Game";
+        public string GroupName { get; init; } = "本体游戏";
         public int? PlatinumId { get; init; }
         public byte[]? IconData { get; init; }
         public string IconEntryName { get; init; } = string.Empty;

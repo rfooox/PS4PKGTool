@@ -51,7 +51,7 @@ namespace PS4PKGTool.Utilities.Shadps4
                 catch (OperationCanceledException) { throw; }
                 catch (Exception ex)
                 {
-                    return $"Download failed: {ex.Message}";
+                    return $"下载失败：{ex.Message}";
                 }
 
                 long done = 0;
@@ -80,14 +80,14 @@ namespace PS4PKGTool.Utilities.Shadps4
                 if (expectedSize.HasValue && done != expectedSize.Value)
                 {
                     TryDelete(partFile);
-                    return $"Download incomplete: expected {expectedSize.Value} bytes, received {done}.";
+                    return $"下载未完成：预期 {expectedSize.Value} 字节，实际收到 {done} 字节。";
                 }
 
                 if (!string.IsNullOrWhiteSpace(expectedSha256Hex)
                     && !string.Equals(actualHash, expectedSha256Hex.Trim(), StringComparison.OrdinalIgnoreCase))
                 {
                     TryDelete(partFile);
-                    return $"Checksum mismatch: expected {expectedSha256Hex}, got {actualHash}.";
+                    return $"校验和不匹配：期望 {expectedSha256Hex}，实际 {actualHash}。";
                 }
 
                 File.Move(partFile, destinationFile, overwrite: true);
@@ -101,7 +101,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             catch (Exception ex)
             {
                 TryDelete(partFile);
-                return $"Download failed: {ex.Message}";
+                return $"下载失败：{ex.Message}";
             }
         }
 

@@ -71,7 +71,7 @@ namespace PS4PKGTool
             }
             else
             {
-                lblReportLogFile.Text = "No session log was preserved.";
+                lblReportLogFile.Text = "未保存任何会话日志。";
                 btnReportOpenLog.Enabled = false;
             }
         }
@@ -149,12 +149,12 @@ namespace PS4PKGTool
             try
             {
                 Clipboard.SetText(CurrentMarkdown());
-                lblReportCopied.Text = "Report copied to clipboard.";
+                lblReportCopied.Text = "报告已复制到剪贴板。";
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("Copy report failed: " + ex.Message);
-                MessageBoxHelper.ShowWarning("Could not copy the report to the clipboard.", true);
+                Logger.LogWarning("复制报告失败：" + ex.Message);
+                MessageBoxHelper.ShowWarning("无法将报告复制到剪贴板。", true);
             }
         }
 
@@ -167,8 +167,8 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("Open log failed: " + ex.Message);
-                MessageBoxHelper.ShowWarning("Could not open the log file.", true);
+                Logger.LogWarning("打开日志失败：" + ex.Message);
+                MessageBoxHelper.ShowWarning("无法打开日志文件。", true);
             }
         }
 

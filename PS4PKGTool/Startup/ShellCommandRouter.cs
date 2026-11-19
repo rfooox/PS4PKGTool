@@ -90,26 +90,26 @@ namespace PS4PKGTool.Startup
         public static string? ValidatePaths(IReadOnlyList<string> paths)
         {
             if (paths == null || paths.Count == 0)
-                return "No PKG files were passed to the shell action.";
+                return "未向右键菜单操作传入任何 PKG 文件。";
 
             foreach (string path in paths)
             {
                 string full;
                 try { full = Path.GetFullPath(path); }
-                catch { return $"The path is not valid: {path}"; }
+                catch { return $"路径无效：{path}"; }
 
                 if (File.Exists(full))
                 {
                     if (!string.Equals(Path.GetExtension(full), ".pkg", StringComparison.OrdinalIgnoreCase))
-                        return $"Not a PKG file: {Path.GetFileName(full)}";
+                        return $"不是 PKG 文件：{Path.GetFileName(full)}";
                 }
                 else if (Directory.Exists(full))
                 {
-                    return $"The path is a folder, not a PKG file: {full}";
+                    return $"该路径是文件夹，不是 PKG 文件：{full}";
                 }
                 else
                 {
-                    return $"The PKG file was not found: {full}";
+                    return $"未找到 PKG 文件：{full}";
                 }
             }
             return null;

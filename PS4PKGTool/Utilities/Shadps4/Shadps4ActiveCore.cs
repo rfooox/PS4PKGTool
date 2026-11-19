@@ -67,12 +67,12 @@ namespace PS4PKGTool.Utilities.Shadps4
                     string path = r.Value;
                     if (string.IsNullOrWhiteSpace(path))
                     {
-                        error = "The adopted shadPS4 path is empty.";
+                        error = "已采用的 shadPS4 路径为空。";
                         return null;
                     }
                     if (!File.Exists(path))
                     {
-                        error = $"The configured shadPS4 executable no longer exists:\n{path}";
+                        error = $"配置的 shadPS4 可执行文件已不存在：\n{path}";
                         return null;
                     }
                     error = null;
@@ -81,20 +81,20 @@ namespace PS4PKGTool.Utilities.Shadps4
                 case Shadps4ComponentSource.Managed:
                     if (resolveManagedBuild == null)
                     {
-                        error = "The managed shadPS4 build store is not available.";
+                        error = "shadPS4 托管版本库不可用。";
                         return null;
                     }
                     string? managedPath = resolveManagedBuild(r.Value);
                     if (string.IsNullOrWhiteSpace(managedPath) || !File.Exists(managedPath))
                     {
-                        error = $"The managed shadPS4 build was not found on disk: {r.Value}";
+                        error = $"磁盘上未找到该 shadPS4 托管版本：{r.Value}";
                         return null;
                     }
                     error = null;
                     return managedPath;
 
                 default:
-                    error = "No shadPS4 core is active. Open Program Settings to select or install one.";
+                    error = "当前没有启用 shadPS4 核心。请在「程序设置」中选择或安装。";
                     return null;
             }
         }

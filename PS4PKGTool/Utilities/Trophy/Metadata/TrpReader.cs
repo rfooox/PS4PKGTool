@@ -19,7 +19,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         public TrpArchive Read(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("A TRP file path is required.", nameof(filePath));
+                throw new ArgumentException("必须指定 TRP 文件路径。", nameof(filePath));
 
             using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             return Read(stream, filePath);
@@ -29,18 +29,18 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         {
             ArgumentNullException.ThrowIfNull(stream);
             if (!stream.CanRead || !stream.CanSeek)
-                throw new ArgumentException("The TRP stream must be readable and seekable.", nameof(stream));
+                throw new ArgumentException("TRP 流必须可读且可定位。", nameof(stream));
             if (stream.Length < VersionOneTwoHeaderSize)
-                throw new InvalidDataException("The TRP is truncated before its header is complete.");
+                throw new InvalidDataException("TRP 头部尚未完整就被截断。");
 
             stream.Position = 0;
             byte[] commonHeader = ReadExactly(stream, CommonHeaderSize);
             if (!commonHeader.AsSpan(0, 4).SequenceEqual(Magic))
-                throw new InvalidDataException("The file does not have the PS4 TRP magic DCA24D00.");
+                throw new InvalidDataException("该文件不含 PS4 TRP 魔数 DCA24D00。");
 
             uint version = BinaryPrimitives.ReadUInt32BigEndian(commonHeader.AsSpan(4, 4));
             if (version is < 1 or > 3)
-                throw new NotSupportedException($"TRP version {version} is not supported.");
+                throw new NotSupportedException($"不支持 TRP 版本 {version}。");
 
             long declaredSize = checked((long)BinaryPrimitives.ReadUInt64BigEndian(commonHeader.AsSpan(8, 8)));
             uint entryCount = BinaryPrimitives.ReadUInt32BigEndian(commonHeader.AsSpan(16, 4));
@@ -49,12 +49,12 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             int headerSize = version == 3 ? VersionThreeHeaderSize : VersionOneTwoHeaderSize;
 
             if (declaredSize != stream.Length)
-                throw new InvalidDataException($"TRP header size {declaredSize} does not match the actual length {stream.Length}.");
+                throw new InvalidDataException($"TRP 头部大小 {declaredSize} 与实际长度 {stream.Length} 不匹配。");
             if (entrySize < MinimumEntrySize || entrySize > 4096)
-                throw new InvalidDataException($"TRP entry size {entrySize} is outside the supported range.");
+                throw new InvalidDataException($"TRP 条目大小 {entrySize} 超出支持范围。");
             long tableSize = checked((long)entryCount * entrySize);
             if (headerSize > stream.Length || tableSize > stream.Length - headerSize)
-                throw new InvalidDataException("The TRP entry table extends beyond the file.");
+                throw new InvalidDataException("TRP 条目表超出了文件范围。");
 
             stream.Position = CommonHeaderSize;
             byte[] headerTail = ReadExactly(stream, headerSize - CommonHeaderSize);
@@ -70,7 +70,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
                 long offset = BinaryPrimitives.ReadUInt32BigEndian(raw.AsSpan(36, 4));
                 ulong unsignedSize = BinaryPrimitives.ReadUInt64BigEndian(raw.AsSpan(40, 8));
                 if (unsignedSize > long.MaxValue)
-                    throw new InvalidDataException($"TRP entry {index} has an unsupported size.");
+                    throw new InvalidDataException($"TRP 条目 {index} 的大小不受支持。");
                 long size = (long)unsignedSize;
                 uint flags = BinaryPrimitives.ReadUInt32BigEndian(raw.AsSpan(48, 4));
                 ValidateBounds(index, name, offset, size, stream.Length);
@@ -103,9 +103,9 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             ArgumentNullException.ThrowIfNull(archive);
             ArgumentNullException.ThrowIfNull(entry);
             if (string.IsNullOrEmpty(archive.FilePath) || archive.FilePath == "<stream>")
-                throw new InvalidOperationException("This archive was not read from a reusable file path.");
+                throw new InvalidOperationException("该压缩包不是从可复用的文件路径读取的。");
             if (entry.Size > int.MaxValue)
-                throw new InvalidDataException($"Entry {entry.Name} is too large to process in memory.");
+                throw new InvalidDataException($"条目 {entry.Name} 太大，无法在内存中处理。");
 
             using var stream = new FileStream(archive.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             ValidateBounds(entry.Index, entry.Name, entry.Offset, entry.Size, stream.Length);
@@ -126,7 +126,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
                 int requested = (int)Math.Min(buffer.Length, remaining);
                 int read = stream.Read(buffer, 0, requested);
                 if (read == 0)
-                    throw new EndOfStreamException($"Entry {entry.Name} ended before its declared size.");
+                    throw new EndOfStreamException($"条目 {entry.Name} 在达到声明大小前就结束了。");
                 destination.Write(buffer, 0, read);
                 remaining -= read;
             }
@@ -142,7 +142,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         private static void ValidateBounds(int index, string name, long offset, long size, long fileLength)
         {
             if (offset < 0 || size < 0 || offset > fileLength || size > fileLength - offset)
-                throw new InvalidDataException($"TRP entry {index} ({name}) points outside the file: offset={offset}, size={size}, file={fileLength}.");
+                throw new InvalidDataException($"TRP 条目 {index}（{name}）指向文件之外：offset={offset}，size={size}，file={fileLength}。");
         }
     }
 }

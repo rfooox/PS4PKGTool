@@ -216,7 +216,7 @@ namespace PS4PKGTool.Utilities.PkgInspection
                 // InvalidDataException("Passcode mismatch."); callers
                 // (ShellCommands, Mini Viewer) match "passcode" in the
                 // message to offer the retry prompt.
-                return Failure("Package files could not be listed. " + ex.Message);
+                return Failure("无法列出安装包文件。 " + ex.Message);
             }
         }
 

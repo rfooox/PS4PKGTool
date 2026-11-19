@@ -63,7 +63,7 @@
             Icon=global::PS4PKGTool.Properties.Resources.PackageIcon;
             Name="PKGChangeInfoViewer";
             StartPosition=System.Windows.Forms.FormStartPosition.CenterParent;
-            Text="PKG Change Info Viewer";
+            Text="PKG 变更信息查看器";
             ((System.ComponentModel.ISupportInitialize)darkDataGridView1).EndInit();
             ResumeLayout(false);
         }

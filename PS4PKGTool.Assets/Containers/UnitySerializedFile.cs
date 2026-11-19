@@ -73,11 +73,11 @@ public sealed class UnitySerializedFile
         uint version = ReadU32(data, ref pos, bigEndian);
         uint dataOffset = ReadU32(data, ref pos, bigEndian);
 
-        if (version < 5 || version > 22) throw new CorruptAssetException($"Unsupported serialized file version {version}.");
+        if (version < 5 || version > 22) throw new CorruptAssetException($"不支持的序列化文件版本 {version}。");
 
         if (version >= 9)
         {
-            if (pos >= data.Length) throw new CorruptAssetException("Serialized file header truncated.");
+            if (pos >= data.Length) throw new CorruptAssetException("序列化文件头部已截断。");
             byte endianness = data[pos++];
             pos += 3; // reserved
             // AssetStudio: the first four header fields are read with the reader's
@@ -93,12 +93,12 @@ public sealed class UnitySerializedFile
         bool enableTypeTree = true;
         if (version >= 13)
         {
-            if (pos >= data.Length) throw new CorruptAssetException("Serialized file header truncated.");
+            if (pos >= data.Length) throw new CorruptAssetException("序列化文件头部已截断。");
             enableTypeTree = data[pos++] != 0;
         }
 
         int typeCount = ReadI32(data, ref pos, bigEndian);
-        if (typeCount < 0 || typeCount > 4096) throw new CorruptAssetException($"Invalid type count {typeCount}.");
+        if (typeCount < 0 || typeCount > 4096) throw new CorruptAssetException($"类型数量 {typeCount} 无效。");
 
         var leavesByClass = new Dictionary<long, List<FieldLeaf>>();
         var orderedClassIds = new List<long>(typeCount);
@@ -121,7 +121,7 @@ public sealed class UnitySerializedFile
             if (enableTypeTree)
             {
                 if (version >= 12) leavesByClass[classId] = ReadTypeTreeBlob(data, ref pos, bigEndian);
-                else throw new UnsupportedAssetException($"Type tree format for version {version} is not supported yet.");
+                else throw new UnsupportedAssetException($"暂不支持版本 {version} 的类型树格式。");
             }
         }
 
@@ -131,7 +131,7 @@ public sealed class UnitySerializedFile
         int objectCount = ReadI32(data, ref pos, bigEndian);
 
         if (!IsPlausibleObjectCount(objectCount))
-            throw new CorruptAssetException($"Invalid object count {objectCount}.");
+            throw new CorruptAssetException($"对象数量 {objectCount} 无效。");
 
         var objects = new List<ObjectInfo>(objectCount);
         for (int i = 0; i < objectCount; i++)
@@ -251,7 +251,7 @@ public sealed class UnitySerializedFile
         }
         else
         {
-            if (pos >= data.Length) throw new CorruptAssetException("Serialized Texture2D data is truncated.");
+            if (pos >= data.Length) throw new CorruptAssetException("序列化 Texture2D 数据已截断。");
             mipCount = data[pos++] != 0 ? 1 : 0; // m_MipMap (Unity 5.0-5.1)
         }
         pos += 1;                                 // m_IsReadable (bool)
@@ -301,7 +301,7 @@ public sealed class UnitySerializedFile
         }
 
         if (width <= 0 || height <= 0 || format < 0)
-            throw new CorruptAssetException($"Texture2D fields are out of range (layout mismatch: {width}x{height}, format {format}).");
+            throw new CorruptAssetException($"Texture2D 字段超出范围（布局不匹配：{width}x{height}，格式 {format}）。");
 
         return new Texture2DInfo
         {
@@ -352,18 +352,18 @@ public sealed class UnitySerializedFile
     {
         using var s = source.OpenRead();
         if (s.CanSeek && s.Length > MaxSerializedFileBytes)
-            throw new UnsupportedAssetException($"Serialized file is too large ({s.Length} bytes).");
+            throw new UnsupportedAssetException($"序列化文件过大（{s.Length} 字节）。");
         using var ms = new MemoryStream();
         s.CopyTo(ms);
         if (ms.Length > MaxSerializedFileBytes)
-            throw new UnsupportedAssetException("Serialized file is too large.");
+            throw new UnsupportedAssetException("序列化文件过大。");
         return ms.ToArray();
     }
 
     private static byte[] ReadRange(IAssetSource source, long offset, long length)
     {
         if (length < 0 || length > int.MaxValue)
-            throw new CorruptAssetException($"Invalid serialized object size {length}.");
+            throw new CorruptAssetException($"序列化对象大小 {length} 无效。");
         using var s = source.OpenRead(offset, length);
         var b = new byte[s.Length];
         s.ReadExactly(b);
@@ -373,7 +373,7 @@ public sealed class UnitySerializedFile
     private static uint ReadU32(byte[] d, ref int p, bool be)
     {
         if (p < 0 || p + 4 > d.Length)
-            throw new CorruptAssetException("Serialized Texture2D data is truncated or uses an unsupported layout.");
+            throw new CorruptAssetException("序列化 Texture2D 数据已截断，或使用了不支持的布局。");
         uint v = be ? (uint)((d[p] << 24) | (d[p + 1] << 16) | (d[p + 2] << 8) | d[p + 3]) : BitConverter.ToUInt32(d, p);
         p += 4;
         return v;
@@ -418,7 +418,7 @@ public sealed class UnitySerializedFile
 
     private static ushort ReadU16(byte[] d, ref int p, bool be)
     {
-        if (p + 2 > d.Length) throw new CorruptAssetException("Serialized file is truncated.");
+        if (p + 2 > d.Length) throw new CorruptAssetException("序列化文件已截断。");
         ushort v = be ? (ushort)((d[p] << 8) | d[p + 1]) : BitConverter.ToUInt16(d, p);
         p += 2;
         return v;
@@ -434,11 +434,11 @@ public sealed class UnitySerializedFile
     /// <summary>Unity aligned string: int32 length (negative = null), UTF8 bytes, padded to 4.</summary>
     private static string? ReadAlignedString(byte[] d, ref int p, bool be)
     {
-        if (p + 4 > d.Length) throw new CorruptAssetException("Aligned string truncated.");
+        if (p + 4 > d.Length) throw new CorruptAssetException("对齐字符串已截断。");
         int len = ReadI32(d, ref p, be);
         if (len < 0) return null;
         if (len > 1 << 24 || p + len > d.Length)
-            throw new CorruptAssetException("Aligned string length out of range.");
+            throw new CorruptAssetException("对齐字符串长度超出范围。");
         string s = System.Text.Encoding.UTF8.GetString(d, p, len);
         p += len;
         Align4(ref p);
@@ -470,7 +470,7 @@ public sealed class UnitySerializedFile
         int nodeCount = ReadI32(d, ref p, be);
         int stringBufferSize = ReadI32(d, ref p, be);
         if (nodeCount < 0 || nodeCount > 1_000_000 || stringBufferSize < 0 || stringBufferSize > 64 * 1024 * 1024)
-            throw new CorruptAssetException("Invalid type tree blob sizes.");
+            throw new CorruptAssetException("类型树数据块大小无效。");
 
         var nodes = new (uint typeOff, uint nameOff)[nodeCount];
         for (int i = 0; i < nodeCount; i++)
@@ -516,7 +516,7 @@ public sealed class UnitySerializedFile
     private static byte[] SliceBigEndian(byte[] d, int p, int len, bool be)
     {
         if (p < 0 || len < 0 || p > d.Length - len)
-            throw new CorruptAssetException("Serialized file is truncated.");
+            throw new CorruptAssetException("序列化文件已截断。");
         var b = new byte[len];
         Array.Copy(d, p, b, 0, len);
         if (be) Array.Reverse(b);

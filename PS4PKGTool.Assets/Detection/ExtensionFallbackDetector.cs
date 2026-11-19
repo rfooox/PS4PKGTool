@@ -20,7 +20,7 @@ public sealed class ExtensionFallbackDetector : IAssetDetector
         {
             Format = ext.TrimStart('.').ToLowerInvariant(),
             Confidence = 0.1,
-            Evidence = new[] { "extension fallback" },
+            Evidence = new[] { "按扩展名回退识别" },
         };
     }
 }

@@ -83,7 +83,7 @@ public sealed class RasterImageHandler : IAssetHandler, IAssetPreviewProvider
             var info = ImageInfo.FromStream(probe);
             if (info is { } meta && (long)meta.Width * meta.Height > MaxPixels)
                 throw new UnsupportedAssetException(
-                    $"Image {meta.Width}x{meta.Height} exceeds the {MaxPixels}-pixel preview limit.");
+                    $"图片 {meta.Width}x{meta.Height} 超过 {MaxPixels} 像素的预览上限。");
         }
         catch (UnsupportedAssetException) { throw; }
         catch { /* probe is best-effort; fall through to the normal decode */ }

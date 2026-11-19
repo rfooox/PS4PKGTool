@@ -23,14 +23,14 @@ namespace PS4PKGTool
             // Build description text
             string info = "";
             if (manifestAvailable)
-                info += $"• Manifest available ({manifestEntryCount} PKGs cached)\r\n";
+                info += $"• 已找到清单（缓存了 {manifestEntryCount} 个 PKG）\r\n";
             else
-                info += "• No manifest found\r\n";
+                info += "• 未找到清单\r\n";
 
             if (directoriesAvailable)
-                info += $"• {directoryCount} director{(directoryCount == 1 ? "y" : "ies")} configured\r\n";
+                info += $"• 已配置 {directoryCount} 个目录\r\n";
             else
-                info += "• No directories configured\r\n";
+                info += "• 未配置任何目录\r\n";
 
             darkLabelInfo.Text = info.TrimEnd();
 

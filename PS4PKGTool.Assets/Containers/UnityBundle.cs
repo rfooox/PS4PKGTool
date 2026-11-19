@@ -48,8 +48,8 @@ public sealed class UnityBundle
         byte[] head;
         using (var s = source.OpenRead(0, probe)) { head = new byte[s.Length]; s.ReadExactly(head); }
 
-        if (!HasUnityMagic(head)) throw new CorruptAssetException("Missing Unity bundle magic.");
-        if (head.Length < 16) throw new CorruptAssetException("Unity bundle header truncated.");
+        if (!HasUnityMagic(head)) throw new CorruptAssetException("缺少 Unity bundle 魔数。");
+        if (head.Length < 16) throw new CorruptAssetException("Unity bundle 头部已截断。");
 
         int pos = 8;
         uint version = BitConverter.ToUInt32(head, pos); pos += 4;
@@ -68,7 +68,7 @@ public sealed class UnityBundle
         uint flags;
         if (version >= 7)
         {
-            if (pos + 24 > head.Length) throw new CorruptAssetException("Unity bundle header truncated.");
+            if (pos + 24 > head.Length) throw new CorruptAssetException("Unity bundle 头部已截断。");
             pos += 4;                          // header size
             pos += 8;                          // file size
             pos += 8;                          // compressed + uncompressed block sizes
@@ -76,13 +76,13 @@ public sealed class UnityBundle
         }
         else if (version >= 6)
         {
-            if (pos + 20 > head.Length) throw new CorruptAssetException("Unity bundle header truncated.");
+            if (pos + 20 > head.Length) throw new CorruptAssetException("Unity bundle 头部已截断。");
             pos += 4; pos += 4; pos += 8;
             flags = BitConverter.ToUInt32(head, pos); pos += 4;
         }
         else
         {
-            if (pos + 16 > head.Length) throw new CorruptAssetException("Unity bundle header truncated.");
+            if (pos + 16 > head.Length) throw new CorruptAssetException("Unity bundle 头部已截断。");
             pos += 4; pos += 8;
             flags = BitConverter.ToUInt32(head, pos); pos += 4;
         }
@@ -113,13 +113,13 @@ public sealed class UnityBundle
 
     private static UnityBundle ParseBlocksInfo(byte[] info, bool blocksAtEnd, uint version)
     {
-        if (info.Length < 8) throw new CorruptAssetException("Unity bundle blocks info truncated.");
+        if (info.Length < 8) throw new CorruptAssetException("Unity bundle 块信息已截断。");
 
         int p = 0;
         long dataOffset = BitConverter.ToUInt32(info, p); p += 4;
         int blockCount = BitConverter.ToInt32(info, p); p += 4;
-        if (blockCount < 0 || blockCount > 4096) throw new CorruptAssetException("Unity bundle has an invalid block count.");
-        if (p + blockCount * 10 > info.Length) throw new CorruptAssetException("Unity bundle block table truncated.");
+        if (blockCount < 0 || blockCount > 4096) throw new CorruptAssetException("Unity bundle 的块数量无效。");
+        if (p + blockCount * 10 > info.Length) throw new CorruptAssetException("Unity bundle 块表已截断。");
 
         bool anyCompressed = false;
         for (int i = 0; i < blockCount; i++)
@@ -133,16 +133,16 @@ public sealed class UnityBundle
         int fileTableStart;
         if (!blocksAtEnd)
         {
-            if (p + 4 > info.Length) throw new CorruptAssetException("Unity bundle file count missing.");
+            if (p + 4 > info.Length) throw new CorruptAssetException("缺少 Unity bundle 文件数量。");
             fileCount = BitConverter.ToInt32(info, p); p += 4;
             fileTableStart = p;
         }
         else
         {
             // Last 4 bytes = file count; walk each record backward.
-            if (info.Length < 4) throw new CorruptAssetException("Unity bundle blocks info truncated.");
+            if (info.Length < 4) throw new CorruptAssetException("Unity bundle 块信息已截断。");
             fileCount = BitConverter.ToInt32(info, info.Length - 4);
-            if (fileCount < 0 || fileCount > 65536) throw new CorruptAssetException("Unity bundle has an invalid file count.");
+            if (fileCount < 0 || fileCount > 65536) throw new CorruptAssetException("Unity bundle 的文件数量无效。");
 
             int q = info.Length - 4;
             var entries = new (int nameStart, int nameLen, long off, long size, uint fileFlags)[fileCount];
@@ -150,16 +150,16 @@ public sealed class UnityBundle
             {
                 if (version >= 7)
                 {
-                    if (q - 4 < 0) throw new CorruptAssetException("Unity bundle file entry truncated.");
+                    if (q - 4 < 0) throw new CorruptAssetException("Unity bundle 文件条目已截断。");
                     uint fileFlags = BitConverter.ToUInt32(info, q - 4); q -= 4;
                     entries[i] = entries[i] with { fileFlags = fileFlags };
                 }
-                if (q - 8 < 0) throw new CorruptAssetException("Unity bundle file entry truncated.");
+                if (q - 8 < 0) throw new CorruptAssetException("Unity bundle 文件条目已截断。");
                 long size = BitConverter.ToUInt32(info, q - 4); q -= 4;
                 long off = BitConverter.ToUInt32(info, q - 4); q -= 4;
-                if (q - 4 < 0) throw new CorruptAssetException("Unity bundle file name truncated.");
+                if (q - 4 < 0) throw new CorruptAssetException("Unity bundle 文件名已截断。");
                 int nameLen = BitConverter.ToInt32(info, q - 4); q -= 4;
-                if (nameLen < 0 || nameLen > 4096 || q - nameLen < 0) throw new CorruptAssetException("Unity bundle file name truncated.");
+                if (nameLen < 0 || nameLen > 4096 || q - nameLen < 0) throw new CorruptAssetException("Unity bundle 文件名已截断。");
                 entries[i] = (q - nameLen, nameLen, off, size, entries[i].fileFlags);
                 q -= nameLen;
             }
@@ -181,18 +181,18 @@ public sealed class UnityBundle
         // Forward layout (blocks at start): fixed-size file table.
         int entrySize = version >= 7 ? 16 : 12; // nameLen+name + off + size (+flags)
         if (fileTableStart + (long)fileCount * entrySize > info.Length)
-            throw new CorruptAssetException("Unity bundle file table truncated.");
+            throw new CorruptAssetException("Unity bundle 文件表已截断。");
 
         var fwd = new List<Member>(fileCount);
         int r = fileTableStart;
         for (int i = 0; i < fileCount; i++)
         {
-            if (r + 4 > info.Length) throw new CorruptAssetException("Unity bundle file table truncated.");
+            if (r + 4 > info.Length) throw new CorruptAssetException("Unity bundle 文件表已截断。");
             int nameLen = BitConverter.ToInt32(info, r); r += 4;
-            if (nameLen < 0 || nameLen > 4096 || r + nameLen > info.Length) throw new CorruptAssetException("Unity bundle file name truncated.");
+            if (nameLen < 0 || nameLen > 4096 || r + nameLen > info.Length) throw new CorruptAssetException("Unity bundle 文件名已截断。");
             string name = System.Text.Encoding.UTF8.GetString(info, r, nameLen); r += nameLen;
             int tail = version >= 7 ? 16 : 12; // off + size (+ flags)
-            if (r + tail > info.Length) throw new CorruptAssetException("Unity bundle file table truncated.");
+            if (r + tail > info.Length) throw new CorruptAssetException("Unity bundle 文件表已截断。");
             uint off = BitConverter.ToUInt32(info, r); r += 4;
             uint size = BitConverter.ToUInt32(info, r); r += 4;
             uint fileFlags = version >= 7 ? BitConverter.ToUInt32(info, r) : 0;
@@ -205,9 +205,9 @@ public sealed class UnityBundle
     public IAssetSource OpenEntry(IAssetSource containerSource, Member member)
     {
         if ((long)member.Offset + member.Size > containerSource.Length)
-            throw new CorruptAssetException($"Unity bundle member '{member.Name}' lies outside the container.");
+            throw new CorruptAssetException($"Unity bundle 成员 '{member.Name}' 位于容器之外。");
         if (AnyCompressedBlocks)
-            throw new UnsupportedAssetException("This Unity bundle uses compressed blocks (LZMA/LZ4) - compression support is not in yet.");
+            throw new UnsupportedAssetException("该 Unity bundle 使用了压缩块（LZMA/LZ4）——暂未支持压缩。");
         return new UnityBundleEntrySource(containerSource, member, DataOffset);
     }
 }
@@ -226,7 +226,7 @@ public sealed class UnityBundleEntrySource : IAssetSource
         _dataOffset = dataOffset;
         Name = member.Name;
         Length = member.Size;
-        SourceDescription = "Unity bundle member";
+        SourceDescription = "Unity bundle 成员";
     }
 
     public string Name { get; }

@@ -53,7 +53,7 @@ public sealed class AudioMetadataHandler : IAssetHandler, IAssetPreviewProvider
         }
         else
         {
-            throw new CorruptAssetException($"File is not a valid {_format.ToUpperInvariant()} file.");
+            throw new CorruptAssetException($"不是有效的 {_format.ToUpperInvariant()} 文件。");
         }
 
         return Task.FromResult(new AssetDescriptor
@@ -72,21 +72,21 @@ public sealed class AudioMetadataHandler : IAssetHandler, IAssetPreviewProvider
         // Text preview of the metadata (no audio decode in Phase 1).
         var sb = new System.Text.StringBuilder();
         sb.AppendLine(source.Name);
-        sb.AppendLine($"Size: {source.Length} bytes");
+        sb.AppendLine($"大小：{source.Length} 字节");
         using var stream = source.OpenRead(0, Math.Min(source.Length, 256));
         var head = new byte[stream.Length];
         stream.ReadExactly(head);
 
         if (_format == WavFormat && head.Length >= 44)
         {
-            sb.AppendLine($"Channels: {BitConverter.ToInt16(head, 22)}");
-            sb.AppendLine($"Sample Rate: {BitConverter.ToInt32(head, 24)} Hz");
-            sb.AppendLine($"Bit Depth: {BitConverter.ToInt16(head, 34)}-bit");
+            sb.AppendLine($"声道数：{BitConverter.ToInt16(head, 22)}");
+            sb.AppendLine($"采样率：{BitConverter.ToInt32(head, 24)} Hz");
+            sb.AppendLine($"位深：{BitConverter.ToInt16(head, 34)} 位");
         }
         else if (_format == OggFormat && head.Length >= 28)
         {
-            sb.AppendLine($"Sample Rate: {BitConverter.ToUInt32(head, 24)} Hz");
-            sb.AppendLine($"Channels: {head[27]}");
+            sb.AppendLine($"采样率：{BitConverter.ToUInt32(head, 24)} Hz");
+            sb.AppendLine($"声道数：{head[27]}");
         }
 
         return Task.FromResult<AssetPreview?>(AssetPreview.ForText(sb.ToString()));

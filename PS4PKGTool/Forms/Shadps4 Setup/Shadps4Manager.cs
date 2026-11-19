@@ -257,7 +257,7 @@ namespace PS4PKGTool
                 .ToList();
             if (entries.Count == 0)
             {
-                MessageBoxHelper.ShowInformation("No test results for this game yet.", false);
+                MessageBoxHelper.ShowInformation("该游戏暂无测试结果。", false);
                 return;
             }
 
@@ -293,24 +293,24 @@ namespace PS4PKGTool
             string dataLine = Directory.Exists(data) ? data : "(none)";
 
             var useIt = AppMessageBox.Show("shadPS4",
-                "An existing shadPS4 setup was detected:\n\n" +
+                "检测到已有的 shadPS4 配置：\n\n" +
                 $"  Core:        {core?.DisplayName ?? "(none)"}\n" +
                 $"  QtLauncher:  {launcher?.DisplayName ?? "(none)"}\n" +
                 $"  Install dir: {dataLine}\n\n" +
-                "Use this configuration?",
+                "使用该配置？",
                 AppMessageType.Info, AppMessageButtons.YesNo);
 
             if (useIt == DialogResult.Yes)
             {
                 SettingsManager.AutoHealShadps4Settings(_settings);
                 SettingsManager.SaveSettings(_settings, SettingsManager.SettingFilePath);
-                Logger.LogInformation("Restored the detected shadPS4 setup from the managed store.");
+                Logger.LogInformation("已从托管库恢复检测到的 shadPS4 配置。");
             }
             else
             {
                 _settings.Shadps4ConfigDetectionDismissed = true;
                 SettingsManager.SaveSettings(_settings, SettingsManager.SettingFilePath);
-                Logger.LogInformation("Declined the detected shadPS4 setup; will not ask again.");
+                Logger.LogInformation("已拒绝检测到的 shadPS4 配置；不会再询问。");
             }
         }
 
@@ -319,7 +319,7 @@ namespace PS4PKGTool
         private void RefreshHeaderState()
         {
             lblManagerHeaderState.Text =
-                "Core: " + Shadps4SetupDisplay.ComponentDisplayName(
+                "核心：" + Shadps4SetupDisplay.ComponentDisplayName(
                     _settings.Shadps4ActiveCore, Shadps4Component.Core, _settings.Shadps4ManagedRoot) +
                 "    Launcher: " + Shadps4SetupDisplay.ComponentDisplayName(
                     _settings.Shadps4ActiveLauncher, Shadps4Component.QtLauncher, _settings.Shadps4ManagedRoot);
@@ -332,8 +332,8 @@ namespace PS4PKGTool
             if (launcherPath == null)
             {
                 MessageBoxHelper.ShowWarning(
-                    (string.IsNullOrEmpty(error) ? "No QtLauncher is configured." : error) +
-                    "\n\nUse the Settings tab or the Builds tab to configure or install it.", false);
+                    (string.IsNullOrEmpty(error) ? "未配置 QtLauncher。" : error) +
+                    "\n\n请在「设置」选项卡或「版本」选项卡中配置或安装。", false);
                 return;
             }
             try
@@ -342,7 +342,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Failed to open the shadPS4 QtLauncher:\n" + ex.Message, false);
+                MessageBoxHelper.ShowWarning("打开 shadPS4 QtLauncher 失败：\n" + ex.Message, false);
             }
         }
 
@@ -362,8 +362,8 @@ namespace PS4PKGTool
             if (!Directory.Exists(configDir))
             {
                 MessageBoxHelper.ShowWarning(
-                    "The shadPS4 config folder does not exist yet:\n" + configDir +
-                    "\n\nIt is created by shadPS4 on its first run.", false);
+                    "shadPS4 配置目录尚不存在：\n" + configDir +
+                    "\n\n该目录由 shadPS4 首次运行时创建。", false);
                 return;
             }
             Process.Start("explorer.exe", configDir);
@@ -376,7 +376,7 @@ namespace PS4PKGTool
             if (!Directory.Exists(root))
             {
                 MessageBoxHelper.ShowWarning(
-                    "The managed builds folder does not exist yet:\n" + root, false);
+                    "托管版本目录尚不存在：\n" + root, false);
                 return;
             }
             Process.Start("explorer.exe", root);
@@ -388,7 +388,7 @@ namespace PS4PKGTool
             if (string.IsNullOrWhiteSpace(installDir) || !Directory.Exists(installDir))
             {
                 MessageBoxHelper.ShowWarning(
-                    "No install directory is configured yet.\n\nSet it in the Settings tab.", false);
+                    "尚未配置安装目录。\n\n请在「设置」选项卡中设置。", false);
                 return;
             }
             Process.Start("explorer.exe", installDir);
@@ -416,10 +416,10 @@ namespace PS4PKGTool
             catch { /* best-effort: unconfigured root shows zero builds */ }
 
             lblOverviewCounts.Text =
-                $"Games installed: {CountGameFolders()}    " +
-                $"Save games detected: {CountSaveGames()}    " +
-                $"Managed core builds: {coreBuilds}    " +
-                $"Managed launcher builds: {launcherBuilds}";
+                $"已安装游戏：{CountGameFolders()}    " +
+                $"检测到存档：{CountSaveGames()}    " +
+                $"托管核心版本：{coreBuilds}    " +
+                $"托管启动器版本：{launcherBuilds}";
 
             RefreshOverviewReports();
 
@@ -446,7 +446,7 @@ namespace PS4PKGTool
                     }
                     else
                     {
-                        info.Text = parsed.Value + "\n\nNot set";
+                        info.Text = parsed.Value + "\n\n未设置";
                     }
                     break;
                 case Shadps4ComponentSource.Adopted:
@@ -454,7 +454,7 @@ namespace PS4PKGTool
                     dir = Path.GetDirectoryName(parsed.Value) ?? "";
                     break;
                 default:
-                    info.Text = "(not set)\n\nNot set";
+                    info.Text = "（未设置）\n\n未设置";
                     break;
             }
             openFolder.Enabled = !string.IsNullOrWhiteSpace(dir) && Directory.Exists(dir);
@@ -558,11 +558,11 @@ namespace PS4PKGTool
             catch { /* best-effort: unresolved env shows an empty user mode */ }
 
             return
-                $"Managed builds root:  {Describe(root)}\n" +
-                $"Game library:         {Describe(installDir)}\n" +
-                $"shadPS4 data:         {Describe(configDir)}   (user mode: {Describe(userMode)})\n" +
-                $"Managed core builds:  {coreBuilds}   Managed launcher builds: {launcherBuilds}\n" +
-                "Play launches ONLY the active core; PS4 PKG Tool never writes shadPS4's own configuration files.";
+                $"托管版本根目录：  {Describe(root)}\n" +
+                $"游戏库：         {Describe(installDir)}\n" +
+                $"shadPS4 数据：         {Describe(configDir)}   （用户模式：{Describe(userMode)}）\n" +
+                $"托管核心版本：  {coreBuilds}   托管启动器版本：{launcherBuilds}\n" +
+                "「运行」只会启动启用的核心；PS4 PKG Tool 绝不写入 shadPS4 自身的配置文件。";
         }
 
         private void CopyEnvironmentInfo()
@@ -570,11 +570,11 @@ namespace PS4PKGTool
             try
             {
                 Clipboard.SetText(BuildEnvironmentInfoText());
-                SetStatus("Environment info copied to clipboard.", false);
+                SetStatus("环境信息已复制到剪贴板。", false);
             }
             catch (Exception ex)
             {
-                SetStatus("Copy failed: " + ex.Message, false);
+                SetStatus("复制失败：" + ex.Message, false);
             }
         }
 
@@ -643,7 +643,7 @@ namespace PS4PKGTool
                 string installDir = _settings.Shadps4InstallDirectory?.Trim() ?? "";
                 if (string.IsNullOrWhiteSpace(installDir) || !Directory.Exists(installDir))
                 {
-                    lblManagerGamesHint.Text = "No install directory configured. Set it in the Settings tab.";
+                    lblManagerGamesHint.Text = "尚未配置安装目录。请在「设置」选项卡中设置。";
                     return;
                 }
 
@@ -664,7 +664,7 @@ namespace PS4PKGTool
                     string path = Path.Combine(installDir, folder);
                     if (!TryReadInstalledGame(path, out string title, out string titleId, out string version))
                     {
-                        Logger.LogWarning($"Ignoring non-game directory in shadPS4 library: {path}");
+                        Logger.LogWarning($"已忽略 shadPS4 库中的非游戏目录：{path}");
                         continue;
                     }
 
@@ -695,8 +695,8 @@ namespace PS4PKGTool
                 }
 
                 lblManagerGamesHint.Text = _gameRows.Count == 0
-                    ? "No installed games found in the install directory."
-                    : $"Installed games in: {installDir}";
+                    ? "在安装目录中未找到已安装的游戏。"
+                    : $"已安装的游戏位于：{installDir}";
 
                 if (!string.IsNullOrWhiteSpace(selectedFolder))
                     SelectGameByTitleId(selectedFolder);
@@ -744,14 +744,14 @@ namespace PS4PKGTool
         {
             if (IsInstallationActive)
             {
-                MessageBoxHelper.ShowWarning("A shadPS4 installation is in progress. Games will refresh when it completes.", false);
+                MessageBoxHelper.ShowWarning("shadPS4 正在安装中。安装完成后会刷新游戏列表。", false);
                 return;
             }
 
             RefreshGames();
             RefreshPatches();
             RefreshOverview();
-            SetStatus("Games refreshed.", false);
+            SetStatus("游戏列表已刷新。", false);
         }
 
         // ── Patches & Cheats tab ───────────────────────────────────────
@@ -793,7 +793,7 @@ namespace PS4PKGTool
             if (game == null)
             {
                 PopulatePatchGrids(null);
-                lblPatchesHint.Text = _gameRows.Count == 0 ? "No installed games are available for patch management." : "shadPS4 user directory is unavailable.";
+                lblPatchesHint.Text = _gameRows.Count == 0 ? "没有可用于补丁管理的已安装游戏。" : "shadPS4 用户目录不可用。";
                 return;
             }
             try
@@ -801,13 +801,13 @@ namespace PS4PKGTool
                 var definitions = _patchCheatStore.ListLocal(game);
                 PopulatePatchGrids((game, definitions));
                 lblPatchesHint.Text = definitions.Diagnostics.Count == 0
-                    ? "Source: official shadPS4. Definitions are read only here. Enable state is managed by QtLauncher."
-                    : $"Source: official shadPS4. {definitions.Diagnostics.Count} malformed definition(s) were skipped. Enable state is managed by QtLauncher.";
+                    ? "来源：官方 shadPS4。此处仅可查看定义。启用状态由 QtLauncher 管理。"
+                    : $"来源：官方 shadPS4。已跳过 {definitions.Diagnostics.Count} 条格式错误的定义。启用状态由 QtLauncher 管理。";
             }
             catch (Exception ex)
             {
                 PopulatePatchGrids(null);
-                lblPatchesHint.Text = "Could not read local definitions: " + ex.Message;
+                lblPatchesHint.Text = "无法读取本地定义：" + ex.Message;
             }
         }
 
@@ -851,7 +851,7 @@ namespace PS4PKGTool
             if (enabled && Shadps4DefinitionMatcher.Version((SelectedPatchGame()?.AppVersion) ?? "", working.TargetVersion) == Shadps4DefinitionMatch.VersionMismatch)
             {
                 var result = AppMessageBox.Show("Patches & Cheats",
-                    "This patch targets game version " + working.TargetVersion + ".\nThe installed game version is " + (SelectedPatchGame()?.AppVersion ?? "") + ".\n\nThe patch may not work correctly with this version.\n\nEnable it anyway?",
+                    "该补丁针对游戏版本 " + working.TargetVersion + ".\nThe installed game version is " + (SelectedPatchGame()?.AppVersion ?? "") + "。\n\n该补丁可能与此版本不兼容。\n\n仍要启用吗？",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (result != DialogResult.Yes)
                 {
@@ -869,7 +869,7 @@ namespace PS4PKGTool
             bool dirty = dgvPatches.Rows.Cast<DataGridViewRow>().Any(row => row.Tag is PatchWorkingRow working && (row.Cells[colPatchEnabled.Index].Value is true) != working.OriginalEnabled);
             btnPatchesApply.Enabled = dirty;
             btnPatchesRevert.Enabled = dirty;
-            if (dirty) lblPatchesHint.Text = "Unsaved patch changes. Cheats are applied at runtime by QtLauncher.";
+            if (dirty) lblPatchesHint.Text = "有未保存的补丁更改。作弊码由 QtLauncher 在运行时应用。";
         }
 
         private void btnPatchesRevert_Click(object sender, EventArgs e) => LoadLocalDefinitions();
@@ -878,7 +878,7 @@ namespace PS4PKGTool
         {
             if (Process.GetProcessesByName("shadPS4").Length != 0 || Process.GetProcessesByName("shadPS4QtLauncher").Length != 0)
             {
-                MessageBoxHelper.ShowWarning("Close shadPS4 and QtLauncher before applying patch changes.", false);
+                MessageBoxHelper.ShowWarning("应用补丁前请先关闭 shadPS4 和 QtLauncher。", false);
                 return;
             }
             var changes = dgvPatches.Rows.Cast<DataGridViewRow>()
@@ -892,22 +892,22 @@ namespace PS4PKGTool
             {
                 // Recheck immediately before atomic replacement to avoid racing either upstream process.
                 if (Process.GetProcessesByName("shadPS4").Length != 0 || Process.GetProcessesByName("shadPS4QtLauncher").Length != 0)
-                    throw new InvalidOperationException("shadPS4 or QtLauncher started while changes were being prepared.");
+                    throw new InvalidOperationException("在准备变更期间启动了 shadPS4 或 QtLauncher。");
                 _patchCheatStore.SetPatchEnabledStates(changes);
                 string? userDirectory = CurrentUserDir();
                 if (!string.IsNullOrWhiteSpace(userDirectory)) _patchCheatStore.RebuildPatchIndex(userDirectory);
                 LoadLocalDefinitions();
-                AppMessageBox.Show("Patches & Cheats", "Patch changes applied.", AppMessageType.Info, AppMessageButtons.OK);
+                AppMessageBox.Show("Patches & Cheats", "补丁变更已应用。", AppMessageType.Info, AppMessageButtons.OK);
             }
-            catch (Exception ex) { MessageBoxHelper.ShowWarning("Could not apply patch changes:\n" + ex.Message, false); }
+            catch (Exception ex) { MessageBoxHelper.ShowWarning("无法应用补丁变更：\n" + ex.Message, false); }
         }
 
         private async void btnPatchesDownload_Click(object sender, EventArgs e)
         {
             var game = SelectedPatchGame();
-            if (game == null) { MessageBoxHelper.ShowWarning("Select an installed game and configure shadPS4 first.", false); return; }
+            if (game == null) { MessageBoxHelper.ShowWarning("请先选择一个已安装的游戏并配置 shadPS4。", false); return; }
             btnPatchesDownload.Enabled = false;
-            SetStatus("Downloading official patch and cheat definitions...", true);
+            SetStatus("正在下载官方补丁与作弊码定义……", true);
             try
             {
                 var result = await new Shadps4OfficialDefinitionRepository().DownloadForGameAsync(game, _patchCheatStore);
@@ -915,15 +915,15 @@ namespace PS4PKGTool
                 else AppMessageBox.Show("Patches & Cheats", result.Message, AppMessageType.Info, AppMessageButtons.OK);
                 LoadLocalDefinitions();
             }
-            catch (Exception ex) { MessageBoxHelper.ShowWarning("Definition download failed:\n" + ex.Message, false); }
+            catch (Exception ex) { MessageBoxHelper.ShowWarning("定义下载失败：\n" + ex.Message, false); }
             finally { btnPatchesDownload.Enabled = true; SetStatus("", false); }
         }
 
         private void btnPatchesOpenData_Click(object sender, EventArgs e)
         {
             string? userDirectory = CurrentUserDir();
-            if (string.IsNullOrWhiteSpace(userDirectory)) { MessageBoxHelper.ShowWarning("The shadPS4 user directory is unavailable.", false); return; }
-            if (!Directory.Exists(userDirectory)) { MessageBoxHelper.ShowWarning("The shadPS4 user directory does not exist yet:\n" + userDirectory, false); return; }
+            if (string.IsNullOrWhiteSpace(userDirectory)) { MessageBoxHelper.ShowWarning("shadPS4 用户目录不可用。", false); return; }
+            if (!Directory.Exists(userDirectory)) { MessageBoxHelper.ShowWarning("shadPS4 用户目录尚不存在：\n" + userDirectory, false); return; }
             Process.Start("explorer.exe", userDirectory);
         }
 
@@ -939,7 +939,7 @@ namespace PS4PKGTool
 
         private void ResetGameDetails()
         {
-            lblGameDetailTitle.Text = "Select a game";
+            lblGameDetailTitle.Text = "选择一个游戏";
             lblGameDetailMeta.Text = "";
             lblGameDetailCompat.Text = "";
             lblGameDetailLastTest.Text = "";
@@ -974,28 +974,28 @@ namespace PS4PKGTool
 
             string status = Shadps4Compat.Lookup(row.TitleId, _settings.Shadps4Os);
             if (string.IsNullOrWhiteSpace(status)) status = "Unknown";
-            lblGameDetailCompat.Text = "Compatibility: " + status;
+            lblGameDetailCompat.Text = "兼容性：" + status;
             try { lblGameDetailCompat.ForeColor = Shadps4Compat.StatusColor(status); }
             catch { /* best-effort: theme color fallback stays at default */ }
 
-            lblGameDetailLastTest.Text = string.IsNullOrEmpty(row.LastTest) ? "" : "Last test: " + row.LastTest;
+            lblGameDetailLastTest.Text = string.IsNullOrEmpty(row.LastTest) ? "" : "上次测试：" + row.LastTest;
 
             var feedback = GameFeedbackStore.ReadAll()
                 .Where(f => string.Equals(f.TitleId, row.Folder, StringComparison.OrdinalIgnoreCase))
                 .ToList();
             if (feedback.Count == 0)
             {
-                lblGameDetailReports.Text = "No test results yet";
+                lblGameDetailReports.Text = "暂无测试结果";
                 btnManagerGameReports.Enabled = false;
-                lblGameDetailRecent.Text = "No test results yet";
+                lblGameDetailRecent.Text = "暂无测试结果";
             }
             else
             {
-                lblGameDetailReports.Text = $"{feedback.Count} test result(s)";
+                lblGameDetailReports.Text = $"{feedback.Count} 条测试结果";
                 btnManagerGameReports.Enabled = true;
                 var best = feedback.FirstOrDefault(f => f.IsBestProfile);
                 if (best != null)
-                    lblGameDetailBest.Text = $"Pinned result: {best.Status} on {best.Core}  ({FeedbackWhen(best.TimestampUtc)})";
+                    lblGameDetailBest.Text = $"最佳结果：{best.Status}（{best.Core}）（{FeedbackWhen(best.TimestampUtc)}）";
 
                 // Recent results: newest first, one short line each (the
                 // Results button opens the full list).
@@ -1005,10 +1005,10 @@ namespace PS4PKGTool
             }
 
             if (_gameSizeCache.TryGetValue(path, out long cachedSize))
-                lblGameDetailSize.Text = "Size: " + Helper.RoundBytes(cachedSize);
+                lblGameDetailSize.Text = "大小：" + Helper.RoundBytes(cachedSize);
             else
             {
-                lblGameDetailSize.Text = "Size: Calculating...";
+                lblGameDetailSize.Text = "大小：正在计算……";
                 LoadGameSizeAsync(path, detailVersion);
             }
             lblGameDetailPath.Text = path;
@@ -1036,12 +1036,12 @@ namespace PS4PKGTool
                 long size = await Task.Run(() => ComputeFolderSize(path));
                 _gameSizeCache[path] = size;
                 if (detailVersion == _gameDetailsVersion)
-                    lblGameDetailSize.Text = "Size: " + Helper.RoundBytes(size);
+                    lblGameDetailSize.Text = "大小：" + Helper.RoundBytes(size);
             }
             catch
             {
                 if (detailVersion == _gameDetailsVersion)
-                    lblGameDetailSize.Text = "Size: Unavailable";
+                    lblGameDetailSize.Text = "大小：不可用";
             }
         }
 
@@ -1084,7 +1084,7 @@ namespace PS4PKGTool
         {
             if (IsInstallationActive)
             {
-                MessageBoxHelper.ShowWarning("A shadPS4 installation is in progress.", false);
+                MessageBoxHelper.ShowWarning("shadPS4 正在安装中。", false);
                 return;
             }
             int idx = SelectedGameIndex();
@@ -1103,9 +1103,9 @@ namespace PS4PKGTool
                 {
                     var adopt = AppMessageBox.Show("shadPS4",
                         $"{error}\n\n" +
-                        $"External shadPS4 core detected:\n{candidate}\n\n" +
-                        "This core was not verified as belonging to the selected QtLauncher build.\n\n" +
-                        "Adopt This Core?",
+                        $"检测到外部 shadPS4 核心：\n{candidate}\n\n" +
+                        "未验证该核心与所选 QtLauncher 版本属于同一套。\n\n" +
+                        "采用这个核心？",
                         AppMessageType.Warning, AppMessageButtons.YesNoCancel);
                     if (adopt != DialogResult.Yes) return;
                     _settings.Shadps4ActiveCore = Shadps4ActiveCore.ForAdopted(candidate);
@@ -1115,8 +1115,8 @@ namespace PS4PKGTool
                 else
                 {
                     MessageBoxHelper.ShowWarning(
-                        (string.IsNullOrEmpty(error) ? "No shadPS4 core is active." : error) +
-                        "\n\nInstall or configure a core in the Builds tab or the Settings tab.", false);
+                        (string.IsNullOrEmpty(error) ? "当前没有启用 shadPS4 核心。" : error) +
+                        "\n\n请在「版本」选项卡或「设置」选项卡中安装或配置核心。", false);
                     return;
                 }
             }
@@ -1144,7 +1144,7 @@ namespace PS4PKGTool
                     SetStatus($"{title} running with {Shadps4SetupDisplay.ComponentDisplayName(_settings.Shadps4ActiveCore, Shadps4Component.Core, _settings.Shadps4ManagedRoot)}", false);
                     break;
                 case Shadps4LaunchStatus.GameNotFound:
-                    MessageBoxHelper.ShowWarning(message + "\n\nInstall the game into the install directory first.", false);
+                    MessageBoxHelper.ShowWarning(message + "\n\n请先将游戏安装到安装目录。", false);
                     break;
                 default:
                     MessageBoxHelper.ShowWarning(message, false);
@@ -1179,7 +1179,7 @@ namespace PS4PKGTool
                         .FirstOrDefault(r => string.Equals(r.Folder, titleId, StringComparison.OrdinalIgnoreCase))?.Title
                         ?? titleId;
                     SetStatus(Shadps4ExitStatus.IsErrorStatus(report.Category)
-                        ? $"{displayTitle} exited with error {report.ExitCodeText}."
+                        ? $"{displayTitle} 因错误退出，退出码 {report.ExitCodeText}。"
                         : $"{displayTitle} closed.", false);
 
                     RefreshGames();
@@ -1207,24 +1207,24 @@ namespace PS4PKGTool
 
             var sb = new StringBuilder();
             sb.AppendLine("Title: " + row.Title);
-            sb.AppendLine("Title ID: " + row.TitleId);
+            sb.AppendLine("Title ID：" + row.TitleId);
             if (!string.IsNullOrWhiteSpace(row.Version)) sb.AppendLine("Version: " + row.Version);
             sb.AppendLine("Compatibility: " + status);
-            if (!string.IsNullOrWhiteSpace(row.LastTest)) sb.AppendLine("Last test: " + row.LastTest);
-            sb.AppendLine("Test results: " + feedback.Count);
+            if (!string.IsNullOrWhiteSpace(row.LastTest)) sb.AppendLine("上次测试：" + row.LastTest);
+            sb.AppendLine("测试结果：" + feedback.Count);
             var best = feedback.FirstOrDefault(f => f.IsBestProfile);
-            if (best != null) sb.AppendLine("Pinned result: " + best.Status + " on " + best.Core);
+            if (best != null) sb.AppendLine("最佳结果：" + best.Status + " on " + best.Core);
             sb.AppendLine("Size: " + Helper.RoundBytes(ComputeFolderSize(path)));
             sb.AppendLine("Path: " + path);
 
             try
             {
                 Clipboard.SetText(sb.ToString().TrimEnd('\r', '\n'));
-                SetStatus("Game information copied to clipboard.", false);
+                SetStatus("游戏信息已复制到剪贴板。", false);
             }
             catch (Exception ex)
             {
-                SetStatus("Copy failed: " + ex.Message, false);
+                SetStatus("复制失败：" + ex.Message, false);
             }
         }
 
@@ -1232,7 +1232,7 @@ namespace PS4PKGTool
         {
             if (IsInstallationActive)
             {
-                MessageBoxHelper.ShowWarning("A shadPS4 installation is in progress.", false);
+                MessageBoxHelper.ShowWarning("shadPS4 正在安装中。", false);
                 return;
             }
             int idx = SelectedGameIndex();
@@ -1246,7 +1246,7 @@ namespace PS4PKGTool
             if (!string.Equals(Path.GetDirectoryName(resolvedPath), installDir, StringComparison.OrdinalIgnoreCase)
                 || !TryReadInstalledGame(resolvedPath, out _, out _, out _))
             {
-                MessageBoxHelper.ShowWarning("The selected folder is not a validated installed game. Nothing was deleted.", false);
+                MessageBoxHelper.ShowWarning("所选目录不是经过校验的已安装游戏。未删除任何内容。", false);
                 return;
             }
             path = resolvedPath;
@@ -1254,17 +1254,17 @@ namespace PS4PKGTool
             if (Shadps4Launcher.IsEmulatorRunning())
             {
                 var warn = AppMessageBox.Show("shadPS4",
-                    "shadPS4 is currently running.\n\n" +
-                    "Deleting a game while the emulator is using it may fail or leave inconsistent files.\n\n" +
+                    "shadPS4 当前正在运行。\n\n" +
+                    "在模拟器使用游戏时删除它，可能失败或留下不一致的文件。\n\n" +
                     "Continue?",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (warn != DialogResult.Yes) return;
             }
 
-            var choice = AppMessageBox.Show("Uninstall Game",
+            var choice = AppMessageBox.Show("卸载游戏",
                 $"Uninstall '{folder}'?\n\n" +
-                $"This permanently deletes the installed game folder:\n{path}\n\n" +
-                "This cannot be undone.",
+                $"将永久删除已安装的游戏目录：\n{path}\n\n" +
+                "此操作无法撤销。",
                 AppMessageType.Warning, AppMessageButtons.YesNo);
             if (choice != DialogResult.Yes) return;
 
@@ -1273,11 +1273,11 @@ namespace PS4PKGTool
                 Directory.Delete(path, true);
                 RefreshGames();
                 RefreshOverview();
-                AppMessageBox.Show("Uninstall", $"'{folder}' has been uninstalled.", AppMessageType.Info, AppMessageButtons.OK);
+                AppMessageBox.Show("Uninstall", $"「{folder}」已卸载。", AppMessageType.Info, AppMessageButtons.OK);
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Uninstall failed:\n" + ex.Message, false);
+                MessageBoxHelper.ShowWarning("卸载失败：\n" + ex.Message, false);
             }
         }
 
@@ -1289,7 +1289,7 @@ namespace PS4PKGTool
             string path = SelectedGamePath(folder);
             if (!Directory.Exists(path))
             {
-                MessageBoxHelper.ShowWarning("The folder no longer exists:\n" + path, false);
+                MessageBoxHelper.ShowWarning("该目录已不存在：\n" + path, false);
                 RefreshGames();
                 return;
             }
@@ -1316,7 +1316,7 @@ namespace PS4PKGTool
             if (IsInstallationActive)
             {
                 shadps4Tabs.SelectedIndex = GamesTabIndex;
-                MessageBoxHelper.ShowWarning("Another shadPS4 installation is already in progress.", false);
+                MessageBoxHelper.ShowWarning("已有另一个 shadPS4 安装正在进行。", false);
                 return;
             }
             StartInstall(request);
@@ -1339,14 +1339,14 @@ namespace PS4PKGTool
             SetInstallState(InstallActivityState.Preparing);
 
             lblInstallTitle.Text = request.Title;
-            string meta = request.IsPatch ? "Update" : "Base Game";
+            string meta = request.IsPatch ? "Update" : "本体游戏";
             meta += " • " + request.TitleId;
             if (!string.IsNullOrWhiteSpace(request.Version))
                 meta += request.IsPatch
                     ? $" • {request.InstalledVersion} → {request.Version}"
                     : $" • v{request.Version}";
             lblInstallMeta.Text = meta;
-            lblInstallStage.Text = "Preparing installation...";
+            lblInstallStage.Text = "正在准备安装……";
 
             prgInstallProgress.Value = 0;
             prgInstallProgress.Visible = true;
@@ -1377,11 +1377,11 @@ namespace PS4PKGTool
                 try
                 {
                     var svc = new Shadps4InstallService();
-                    Logger.LogInformation($"Shadps4Manager install: starting {installRequest.TitleId} into {installRequest.Library} (replace={installRequest.Replace}, patch={installRequest.IsPatch})");
+                    Logger.LogInformation($"Shadps4Manager 安装：正在将 {installRequest.TitleId} 安装到 {installRequest.Library}（replace={installRequest.Replace}，patch={installRequest.IsPatch}）");
                     var result = svc.Install(installRequest.PkgPath, installRequest.TitleId, installRequest.Library,
                         installRequest.Replace, progress, cts.Token, mergeIntoExisting: installRequest.IsPatch,
                         fileProgress: fileProgress);
-                    Logger.LogInformation($"Shadps4Manager install: finished {result.Status} - {result.Message}");
+                    Logger.LogInformation($"Shadps4Manager 安装：已完成 {result.Status} - {result.Message}");
                     if (IsDisposed) return;
                     try { BeginInvoke((MethodInvoker)(() =>
                     {
@@ -1392,7 +1392,7 @@ namespace PS4PKGTool
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Shadps4Manager install crashed: " + ex);
+                    Logger.LogError("Shadps4Manager 安装崩溃：" + ex);
                     if (IsDisposed) return;
                     try
                     {
@@ -1401,7 +1401,7 @@ namespace PS4PKGTool
                             fileProgress.Dispose();
                             OnInstallCompleted(
                                 new Shadps4InstallResult(Shadps4InstallStatus.Failed,
-                                    "Installation failed unexpectedly: " + ex.Message), installRequest);
+                                    "安装意外失败：" + ex.Message), installRequest);
                         }));
                     }
                     catch (InvalidOperationException) { /* form closing raced the completion */ }
@@ -1423,7 +1423,7 @@ namespace PS4PKGTool
                 // checks there. Disable Cancel and make the boundary
                 // unambiguous.
                 btnInstallCancel.Enabled = false;
-                lblInstallStage.Text = "Finalizing installation... Installation can no longer be cancelled.";
+                lblInstallStage.Text = "正在完成安装……此时已无法取消安装。";
                 return;
             }
             if (_installState != InstallActivityState.Cancelling)
@@ -1461,7 +1461,7 @@ namespace PS4PKGTool
                     SetInstallState(InstallActivityState.Completed);
                     RefreshGames();
                     SelectGameByTitleId(request.TitleId);
-                    lblInstallTitle.Text = "✓ " + request.Title + (request.IsPatch ? " updated successfully" : " installed successfully");
+                    lblInstallTitle.Text = "✓ " + request.Title + (request.IsPatch ? " 更新成功" : " 安装成功");
                     lblInstallMeta.Text = request.TitleId;
                     if (!string.IsNullOrWhiteSpace(request.Version))
                         lblInstallMeta.Text += request.IsPatch
@@ -1474,12 +1474,12 @@ namespace PS4PKGTool
 
                 case Shadps4InstallStatus.Cancelled:
                     SetInstallState(InstallActivityState.Cancelled);
-                    lblInstallTitle.Text = "✕ " + request.Title + " installation cancelled";
+                    lblInstallTitle.Text = "✕ " + request.Title + " 安装已取消";
                     lblInstallMeta.Text = request.TitleId;
                     // Cancellation can only be reported before the final
                     // commit ran, and staging is removed on cancel - the
                     // library is guaranteed untouched at this point.
-                    lblInstallStage.Text = "No game files were changed.";
+                    lblInstallStage.Text = "未更改任何游戏文件。";
                     btnInstallOpenFolder.Visible = false;
                     btnInstallDismiss.Visible = true;
                     break;
@@ -1487,10 +1487,10 @@ namespace PS4PKGTool
                 default:
                     SetInstallState(InstallActivityState.Failed);
                     _installFailureDetail = result.Message;
-                    lblInstallTitle.Text = "✕ " + request.Title + " installation failed";
+                    lblInstallTitle.Text = "✕ " + request.Title + " 安装失败";
                     lblInstallMeta.Text = request.TitleId;
                     string failedAt = string.IsNullOrWhiteSpace(_installStageText) ? "installation" : _installStageText;
-                    lblInstallStage.Text = "Failed while " + failedAt + ". View Details for more information.";
+                    lblInstallStage.Text = "在以下步骤失败：" + failedAt + "。查看「详细信息」了解更多。";
                     btnInstallOpenFolder.Visible = false;
                     btnInstallDismiss.Visible = true;
                     break;
@@ -1502,7 +1502,7 @@ namespace PS4PKGTool
             if (_installState == state) return;
             if (!InstallActivityStateMachine.IsValidTransition(_installState, state))
             {
-                Logger.LogWarning($"Shadps4Manager: dropped invalid install state transition {_installState} -> {state}");
+                Logger.LogWarning($"Shadps4Manager：已丢弃非法的安装状态转换 {_installState} -> {state}");
                 return;
             }
             _installState = state;
@@ -1529,7 +1529,7 @@ namespace PS4PKGTool
         {
             if (_installState != InstallActivityState.Running) return;
             SetInstallState(InstallActivityState.Cancelling);
-            lblInstallStage.Text = "Cancelling...";
+            lblInstallStage.Text = "正在取消……";
             btnInstallCancel.Enabled = false;
             _installCts?.Cancel();
         }
@@ -1543,7 +1543,7 @@ namespace PS4PKGTool
             }
             else if (_installState == InstallActivityState.Failed)
             {
-                AppMessageBox.Show("Installation Failed",
+                AppMessageBox.Show("安装失败",
                     _installFailureDetail, AppMessageType.Error, AppMessageButtons.OK);
             }
         }
@@ -1554,7 +1554,7 @@ namespace PS4PKGTool
             string path = Path.Combine(_installRequest.Library, _installRequest.TitleId);
             if (!Directory.Exists(path))
             {
-                MessageBoxHelper.ShowWarning("The folder no longer exists:\n" + path, false);
+                MessageBoxHelper.ShowWarning("该目录已不存在：\n" + path, false);
                 return;
             }
             Process.Start("explorer.exe", path);
@@ -1583,10 +1583,10 @@ namespace PS4PKGTool
             if (IsInstallationActive)
             {
                 var choice = AppMessageBox.Show("shadPS4",
-                    "An installation is currently in progress.\n\n" +
-                    "Closing the Manager will not safely stop the installation.\n\n" +
-                    "Choose Yes to keep the Manager open, or No to cancel the installation " +
-                    "and keep the Manager open until cleanup finishes.",
+                    "当前有安装正在进行。\n\n" +
+                    "关闭管理器无法安全中止安装。\n\n" +
+                    "选择「是」保持管理器打开，选择「否」取消安装 " +
+                    "，并在清理完成前保持管理器打开。",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 e.Cancel = true; // keep open either way
                 if (choice == DialogResult.No)
@@ -1675,10 +1675,10 @@ namespace PS4PKGTool
             if (string.IsNullOrWhiteSpace(userDir) || !Directory.Exists(userDir))
             {
                 // Placeholder item kept only as the DarkListBox empty-list draw guard.
-                lstManagerSaves.Items.Add("(no shadPS4 user directory detected)");
-                lstManagerSavesSlots.Items.Add("(no save selected)");
-                lstManagerSavesBackups.Items.Add("(no backups yet)");
-                lblManagerSavesHint.Text = "Start shadPS4 once so it creates its user directory, or adopt a core or launcher in the Settings tab.";
+                lstManagerSaves.Items.Add("（未检测到 shadPS4 用户目录）");
+                lstManagerSavesSlots.Items.Add("（未选择存档）");
+                lstManagerSavesBackups.Items.Add("（暂无备份）");
+                lblManagerSavesHint.Text = "先启动一次 shadPS4 让它创建用户目录，或在「设置」选项卡中采用核心或启动器。";
                 return;
             }
 
@@ -1701,21 +1701,21 @@ namespace PS4PKGTool
                 }
                 if (games.Count == 0)
                 {
-                    lstManagerSaves.Items.Add("(no save games found)");
-                    lstManagerSavesSlots.Items.Add("(no save selected)");
-                    lstManagerSavesBackups.Items.Add("(no backups yet)");
-                    lblManagerSavesHint.Text = "Saves appear here after a game saves in shadPS4.";
+                    lstManagerSaves.Items.Add("（未找到存档）");
+                    lstManagerSavesSlots.Items.Add("（未选择存档）");
+                    lstManagerSavesBackups.Items.Add("（暂无备份）");
+                    lblManagerSavesHint.Text = "游戏在 shadPS4 中保存后，存档会显示在这里。";
                 }
                 else
                 {
-                    lblManagerSavesHint.Text = $"Save games in: {userDir}";
+                    lblManagerSavesHint.Text = $"存档位于：{userDir}";
                 }
             }
             catch (Exception ex)
             {
-                lstManagerSaves.Items.Add("(failed to read save games)");
-                lstManagerSavesSlots.Items.Add("(no save selected)");
-                lstManagerSavesBackups.Items.Add("(no backups yet)");
+                lstManagerSaves.Items.Add("（读取存档失败）");
+                lstManagerSavesSlots.Items.Add("（未选择存档）");
+                lstManagerSavesBackups.Items.Add("（暂无备份）");
                 lblManagerSavesHint.Text = ex.Message;
             }
         }
@@ -1735,7 +1735,7 @@ namespace PS4PKGTool
             lstManagerSavesBackups.Items.Clear();
             _saveBackups.Clear();
             btnSavesRestore.Enabled = false;
-            lblSaveGameTitle.Text = "No save selected";
+            lblSaveGameTitle.Text = "未选择存档";
             lblSaveGameUser.Text = "";
             lblSaveGamePath.Text = "";
             lblSaveNotInstalled.Text = "";
@@ -1747,23 +1747,23 @@ namespace PS4PKGTool
             if (!valid)
             {
                 // Placeholder items kept only as the DarkListBox empty-list draw guard.
-                lstManagerSavesSlots.Items.Add("(no save selected)");
-                lstManagerSavesBackups.Items.Add("(no backups yet)");
+                lstManagerSavesSlots.Items.Add("（未选择存档）");
+                lstManagerSavesBackups.Items.Add("（暂无备份）");
                 return;
             }
 
             var game = _saveGames[idx];
             lblSaveGameTitle.Text = string.IsNullOrEmpty(game.Title) ? game.TitleId : game.Title;
-            lblSaveGameUser.Text = "User: " + game.UserId + "    " + game.TitleId;
-            lblSaveGamePath.Text = "Save location: " + game.Path;
+            lblSaveGameUser.Text = "用户：" + game.UserId + "    " + game.TitleId;
+            lblSaveGamePath.Text = "存档位置：" + game.Path;
             lblSaveNotInstalled.Text = IsGameInstalled(game.TitleId)
                 ? ""
-                : "Game not installed. Save data remains available.";
+                : "游戏未安装。存档数据仍可使用。";
 
             foreach (var slot in game.Slots)
                 lstManagerSavesSlots.Items.Add($"{slot.Name}   {Helper.RoundBytes(slot.Size)}   {slot.ModifiedUtc:yyyy-MM-dd}");
             if (game.Slots.Count == 0)
-                lstManagerSavesSlots.Items.Add("(no slots)");
+                lstManagerSavesSlots.Items.Add("（无存档位）");
 
             if (!TryGetBackupRoot(out string root)) return;
             try
@@ -1774,14 +1774,14 @@ namespace PS4PKGTool
                     string live = b.LiveUnverified ? "  (live)" : "";
                     var m = Shadps4BackupMetrics.Measure(b.Path);
                     lstManagerSavesBackups.Items.Add(
-                        $"{b.BackedUpAtUtc:yyyy-MM-dd HH:mm}{live}   {Helper.RoundBytes(m.TotalSize)}   {m.SlotCount} slot(s)");
+                        $"{b.BackedUpAtUtc:yyyy-MM-dd HH:mm}{live}   {Helper.RoundBytes(m.TotalSize)}   {m.SlotCount} 个存档位");
                 }
                 if (_saveBackups.Count == 0)
-                    lstManagerSavesBackups.Items.Add("(no backups yet)");
+                    lstManagerSavesBackups.Items.Add("（暂无备份）");
             }
             catch
             {
-                lstManagerSavesBackups.Items.Add("(no backups yet)");
+                lstManagerSavesBackups.Items.Add("（暂无备份）");
             }
         }
 
@@ -1796,15 +1796,15 @@ namespace PS4PKGTool
             var game = _saveGames[idx];
             if (!TryGetBackupRoot(out string root))
             {
-                MessageBoxHelper.ShowWarning("No managed builds folder is set.\n\nUse Install shadPS4 in the Builds tab first.", false);
+                MessageBoxHelper.ShowWarning("尚未设置托管版本目录。\n\n请先在「版本」选项卡中使用「安装 shadPS4」。", false);
                 return;
             }
 
             bool live = Shadps4Launcher.IsCoreRunning();
             if (live)
             {
-                var warn = AppMessageBox.Show("Backup Save",
-                    "shadPS4 is currently running.\n\nThe backup may contain files from different save states.\n\nContinue?",
+                var warn = AppMessageBox.Show("备份存档",
+                    "shadPS4 当前正在运行。\n\n备份可能包含来自不同存档状态的文件。\n\n是否继续？",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (warn != DialogResult.Yes) return;
             }
@@ -1813,22 +1813,22 @@ namespace PS4PKGTool
             {
                 string? userDir = CurrentUserDir();
                 if (string.IsNullOrWhiteSpace(userDir)) return;
-                SetStatus($"Backing up {game.TitleId}...", true);
+                SetStatus($"正在备份 {game.TitleId}……", true);
                 var backup = SaveStore().BackupSave(userDir, game.UserId, game.TitleId, root, live);
                 if (backup == null)
                 {
-                    SetStatus("Backup failed.", false);
-                    MessageBoxHelper.ShowWarning("The save folder does not exist:\n" + game.Path, false);
+                    SetStatus("备份失败。", false);
+                    MessageBoxHelper.ShowWarning("存档目录不存在：\n" + game.Path, false);
                     return;
                 }
-                SetStatus("Backup created.", false);
-                AppMessageBox.Show("Backup Save", "Save backed up.\n\n" + backup.Path, AppMessageType.Info, AppMessageButtons.OK);
+                SetStatus("备份已创建。", false);
+                AppMessageBox.Show("备份存档", "存档已备份。\n\n" + backup.Path, AppMessageType.Info, AppMessageButtons.OK);
                 UpdateSavesSelection();
             }
             catch (Exception ex)
             {
-                SetStatus("Backup failed.", false);
-                MessageBoxHelper.ShowWarning("Backup failed:\n" + ex.Message, false);
+                SetStatus("备份失败。", false);
+                MessageBoxHelper.ShowWarning("备份失败：\n" + ex.Message, false);
             }
         }
 
@@ -1841,10 +1841,10 @@ namespace PS4PKGTool
             var backup = _saveBackups[backupIdx];
             if (!TryGetBackupRoot(out string root)) return;
 
-            var confirm = AppMessageBox.Show("Restore Save",
-                $"Restore the save of {game.TitleId} (user {game.UserId}) from the backup of {backup.BackedUpAtUtc:yyyy-MM-dd HH:mm}?\n\n" +
-                "The current save is automatically backed up before restoring.\n\n" +
-                "shadPS4 must be closed.",
+            var confirm = AppMessageBox.Show("恢复备份",
+                $"从 {backup.BackedUpAtUtc:yyyy-MM-dd HH:mm} 的备份中恢复 {game.TitleId}（用户 {game.UserId}）的存档？\n\n" +
+                "恢复前会自动备份当前存档。\n\n" +
+                "必须先关闭 shadPS4。",
                 AppMessageType.Warning, AppMessageButtons.YesNo);
             if (confirm != DialogResult.Yes) return;
 
@@ -1860,14 +1860,14 @@ namespace PS4PKGTool
             catch (Exception ex)
             {
                 result = new Shadps4SaveRestoreResult(Shadps4SaveRestoreStatus.Failed,
-                    "Restore failed:\n" + ex.Message, null);
+                    "恢复失败：\n" + ex.Message, null);
             }
-            SetStatus(result.Status == Shadps4SaveRestoreStatus.Restored ? "Restore complete." : "Restore failed.", false);
+            SetStatus(result.Status == Shadps4SaveRestoreStatus.Restored ? "恢复完成。" : "恢复失败。", false);
 
             switch (result.Status)
             {
                 case Shadps4SaveRestoreStatus.Restored:
-                    AppMessageBox.Show("Restore Save", result.Message, AppMessageType.Info, AppMessageButtons.OK);
+                    AppMessageBox.Show("恢复备份", result.Message, AppMessageType.Info, AppMessageButtons.OK);
                     break;
                 case Shadps4SaveRestoreStatus.RefusedRunning:
                     MessageBoxHelper.ShowWarning(result.Message, false);
@@ -1886,7 +1886,7 @@ namespace PS4PKGTool
             string path = _saveGames[idx].Path;
             if (!Directory.Exists(path))
             {
-                MessageBoxHelper.ShowWarning("The save folder no longer exists:\n" + path, false);
+                MessageBoxHelper.ShowWarning("存档目录已不存在：\n" + path, false);
                 RefreshSaves();
                 return;
             }
@@ -1899,8 +1899,8 @@ namespace PS4PKGTool
 
         // DarkUI's DarkListBox crashes (OnDrawItem, index -1) when drawing an
         // EMPTY list - always keep at least one placeholder item.
-        private const string NoCoreBuildsHint = "(no core builds installed yet. Use Install Build to add one.)";
-        private const string NoLauncherBuildsHint = "(no launcher builds installed yet. Use Install Build to add one.)";
+        private const string NoCoreBuildsHint = "（尚未安装任何核心版本，请使用「安装版本……」添加。）";
+        private const string NoLauncherBuildsHint = "（尚未安装任何启动器版本，请使用「安装版本……」添加。）";
 
         private static readonly Regex DateInTag = new(@"\d{4}-\d{2}-\d{2}", RegexOptions.Compiled);
 
@@ -1942,7 +1942,7 @@ namespace PS4PKGTool
             UpdateActionButtons();
 
             // The exact storage location is a tooltip away, not primary UI.
-            toolTipBuilds.SetToolTip(lblStatus, "Managed builds live in:\n" + _buildsStore.RootPath);
+            toolTipBuilds.SetToolTip(lblStatus, "托管版本位于：\n" + _buildsStore.RootPath);
         }
 
         private void FillCurrentSetupCard(DarkUI.Controls.DarkLabel state, DarkUI.Controls.DarkLabel date,
@@ -1964,22 +1964,22 @@ namespace PS4PKGTool
                 }
                 else
                 {
-                    state.Text = "Not set";
-                    date.Text = "(not set)";
+                    state.Text = "未设置";
+                    date.Text = "（未设置）";
                     sha.Text = "";
                 }
             }
             else if (active.Source == Shadps4ComponentSource.Adopted)
             {
-                state.Text = "● ACTIVE";
+                state.Text = "● 当前启用";
                 date.Text = Path.GetFileName(active.Value);
-                sha.Text = "Adopted";
+                sha.Text = "已采用";
                 dir = Path.GetDirectoryName(active.Value) ?? "";
             }
             else
             {
-                state.Text = "Not set";
-                date.Text = "(not set)";
+                state.Text = "未设置";
+                date.Text = "（未设置）";
                 sha.Text = "";
             }
             openFolder.Enabled = !string.IsNullOrWhiteSpace(dir) && Directory.Exists(dir);
@@ -2062,8 +2062,8 @@ namespace PS4PKGTool
             if (build == null)
             {
                 MessageBoxHelper.ShowWarning(ActiveBuildComponent == Shadps4Component.Core
-                    ? "Select a core build first."
-                    : "Select a launcher build first.", false);
+                    ? "请先选择一个核心版本。"
+                    : "请先选择一个启动器版本。", false);
                 return;
             }
 
@@ -2087,13 +2087,13 @@ namespace PS4PKGTool
             if (build == null)
             {
                 MessageBoxHelper.ShowWarning(ActiveBuildComponent == Shadps4Component.Core
-                    ? "Select a core build first."
-                    : "Select a launcher build first.", false);
+                    ? "请先选择一个核心版本。"
+                    : "请先选择一个启动器版本。", false);
                 return;
             }
             if (!Directory.Exists(build.DirectoryPath))
             {
-                MessageBoxHelper.ShowWarning("The folder no longer exists:\n" + build.DirectoryPath, false);
+                MessageBoxHelper.ShowWarning("该目录已不存在：\n" + build.DirectoryPath, false);
                 RefreshBuildsTab();
                 return;
             }
@@ -2106,8 +2106,8 @@ namespace PS4PKGTool
             if (build == null)
             {
                 MessageBoxHelper.ShowWarning(ActiveBuildComponent == Shadps4Component.Core
-                    ? "Select a core build first."
-                    : "Select a launcher build first.", false);
+                    ? "请先选择一个核心版本。"
+                    : "请先选择一个启动器版本。", false);
                 return;
             }
 
@@ -2119,26 +2119,26 @@ namespace PS4PKGTool
             if (isActive)
             {
                 MessageBoxHelper.ShowWarning(
-                    "The active build cannot be removed.\n\nActivate another build first.", false);
+                    "启用的版本无法移除。\n\n请先启用另一个版本。", false);
                 return;
             }
 
             if (Shadps4Launcher.IsEmulatorRunning())
             {
-                var warn = AppMessageBox.Show("Remove Build",
-                    "shadPS4 is currently running.\n\n" +
-                    "Deleting a build while the emulator uses it may fail or leave inconsistent files.\n\n" +
+                var warn = AppMessageBox.Show("移除版本",
+                    "shadPS4 当前正在运行。\n\n" +
+                    "在模拟器使用该版本时删除它，可能失败或留下不一致的文件。\n\n" +
                     "Continue?",
                     AppMessageType.Warning, AppMessageButtons.YesNo);
                 if (warn != DialogResult.Yes) return;
             }
 
             var (primary, secondary) = BuildIdentity(build);
-            var choice = AppMessageBox.Show("Remove Build",
-                $"Remove this build?\n\n" +
+            var choice = AppMessageBox.Show("移除版本",
+                $"移除该版本？\n\n" +
                 $"  {primary} · {secondary}\n\n" +
-                "This permanently deletes its folder:\n" + build.DirectoryPath + "\n\n" +
-                "Old builds are how you roll back. A removed build cannot be restored.",
+                "将永久删除其所在目录：\n" + build.DirectoryPath + "\n\n" +
+                "旧版本用于回滚。已删除的版本无法恢复。",
                 AppMessageType.Warning, AppMessageButtons.YesNo);
             if (choice != DialogResult.Yes) return;
 
@@ -2154,7 +2154,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Remove failed:\n" + ex.Message, false);
+                MessageBoxHelper.ShowWarning("移除失败：\n" + ex.Message, false);
             }
         }
 
@@ -2170,7 +2170,7 @@ namespace PS4PKGTool
         private async void btnChooseCoreVersion_Click(object sender, EventArgs e)
         {
             btnChooseCoreVersion.Enabled = false;
-            lblStatus.Text = "Loading available core versions from GitHub...";
+            lblStatus.Text = "正在从 GitHub 加载可用的核心版本……";
             try
             {
                 var feed = new Shadps4ReleaseFeed();
@@ -2184,7 +2184,7 @@ namespace PS4PKGTool
 
                 if (releases.Count == 0)
                 {
-                    MessageBoxHelper.ShowWarning("No core versions could be loaded.\n\n" + (stableResult.Error ?? nightlyResult.Error ?? "Unknown error."), false);
+                    MessageBoxHelper.ShowWarning("无法加载任何核心版本。\n\n" + (stableResult.Error ?? nightlyResult.Error ?? "未知错误。"), false);
                     return;
                 }
 
@@ -2194,7 +2194,7 @@ namespace PS4PKGTool
                 var selected = picker.Selected;
                 if (_buildsStore.FindExe(Shadps4Component.Core, selected.BuildId) != null)
                 {
-                    MessageBoxHelper.ShowWarning($"Build {selected.Tag} is already installed. Use Activate to switch to it.", false);
+                    MessageBoxHelper.ShowWarning($"版本 {selected.Tag} 已安装。使用「启用」切换过去。", false);
                     RefreshBuildsTab();
                     return;
                 }
@@ -2203,12 +2203,12 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Failed to load core versions: " + ex.Message, false);
+                MessageBoxHelper.ShowWarning("加载核心版本失败：" + ex.Message, false);
             }
             finally
             {
                 btnChooseCoreVersion.Enabled = true;
-                lblStatus.Text = "Managed builds are kept locally so you can switch back to an older build.";
+                lblStatus.Text = "托管版本保存在本地，方便你切换回旧版本。";
             }
         }
 
@@ -2228,7 +2228,7 @@ namespace PS4PKGTool
                 {
                     case Shadps4SetupStatus.Success:
                         var askActive = AppMessageBox.Show("shadPS4 Builds",
-                            $"{result.Message}\n\nMake this build the active core now?",
+                            $"{result.Message}\n\n现在将该版本设为启用的核心？",
                             AppMessageType.Info, AppMessageButtons.YesNo);
                         if (askActive == DialogResult.Yes && result.Build != null)
                         {
@@ -2250,7 +2250,7 @@ namespace PS4PKGTool
             {
                 btnChooseCoreVersion.Enabled = true;
                 btnInstallShadps4.Enabled = true;
-                lblStatus.Text = "Managed builds are kept locally so you can switch back to an older build.";
+                lblStatus.Text = "托管版本保存在本地，方便你切换回旧版本。";
             }
         }
 
@@ -2261,15 +2261,15 @@ namespace PS4PKGTool
 
         private void miMaintenanceReset_Click(object sender, EventArgs e)
         {
-            var choice = AppMessageBox.Show("Reset shadPS4 Setup",
-                "Reset the shadPS4 setup?\n\n" +
-                "This removes:\n" +
-                "  - All managed shadPS4 builds downloaded by PS4 PKG Tool\n" +
-                "  - The shadPS4 settings in PS4 PKG Tool (active core, launcher, install directory)\n\n" +
-                "This does NOT touch:\n" +
-                "  - shadPS4's own configuration (%APPDATA%\\shadPS4)\n" +
-                "  - Your saves, games or installed libraries\n\n" +
-                "You can redo the setup afterwards with Install Build...\n\n" +
+            var choice = AppMessageBox.Show("重置 shadPS4 配置",
+                "重置 shadPS4 配置？\n\n" +
+                "将移除：\n" +
+                "  - PS4 PKG Tool 下载的所有 shadPS4 托管版本\n" +
+                "  - PS4 PKG Tool 中的 shadPS4 设置（启用的核心、启动器、安装目录）\n\n" +
+                "不会影响：\n" +
+                "  - shadPS4 自身的配置（%APPDATA%\\shadPS4）\n" +
+                "  - 你的存档、游戏或已安装的库\n\n" +
+                "之后可以用「安装版本……」重新执行配置……\n\n" +
                 "Reset?",
                 AppMessageType.Warning, AppMessageButtons.YesNo);
             if (choice != DialogResult.Yes) return;
@@ -2280,29 +2280,29 @@ namespace PS4PKGTool
             RefreshHeaderState();
             RefreshOverview();
             MessageBoxHelper.ShowWarning(
-                "shadPS4 setup has been reset.\n\nUse Install Build to start fresh.", false);
+                "shadPS4 配置已重置。\n\n使用「安装版本……」重新开始。", false);
         }
 
         private void miMaintenanceRemoveAll_Click(object sender, EventArgs e)
         {
             if (Process.GetProcessesByName("shadPS4").Length != 0 || Process.GetProcessesByName("shadPS4QtLauncher").Length != 0)
             {
-                MessageBoxHelper.ShowWarning("Close shadPS4 and QtLauncher before removing data.", false);
+                MessageBoxHelper.ShowWarning("移除数据前请先关闭 shadPS4 和 QtLauncher。", false);
                 return;
             }
 
             var targets = ResolveFullRemovalTargets();
             if (targets.Count == 0)
             {
-                MessageBoxHelper.ShowWarning("No removable shadPS4 data folders are configured.", false);
+                MessageBoxHelper.ShowWarning("未配置可移除的 shadPS4 数据目录。", false);
                 return;
             }
 
             string list = string.Join("\n", targets.Select(path => "  " + path));
-            var choice = AppMessageBox.Show("Remove All shadPS4 Data",
-                "This permanently removes the following folders and their contents:\n\n" + list +
+            var choice = AppMessageBox.Show("移除全部 shadPS4 数据",
+                "将永久移除以下目录及其内容：\n\n" + list +
                 "\n\nThis includes installed games, shadPS4 user data, saves, cheats, patches and managed builds.\n" +
-                "It also clears PS4 PKG Tool shadPS4 settings.\n\nRemove all data?",
+                "这也会清除 PS4 PKG Tool 中的 shadPS4 设置。\n\n移除全部数据？",
                 AppMessageType.Warning, AppMessageButtons.YesNo);
             if (choice != DialogResult.Yes) return;
 
@@ -2310,7 +2310,7 @@ namespace PS4PKGTool
             {
                 // Recheck immediately before the irreversible filesystem operation.
                 if (Process.GetProcessesByName("shadPS4").Length != 0 || Process.GetProcessesByName("shadPS4QtLauncher").Length != 0)
-                    throw new InvalidOperationException("shadPS4 or QtLauncher started while removal was being prepared.");
+                    throw new InvalidOperationException("在准备移除期间启动了 shadPS4 或 QtLauncher。");
                 foreach (string target in targets.OrderByDescending(path => path.Length))
                     if (Directory.Exists(target)) Directory.Delete(target, true);
                 Shadps4SetupReset.Reset(_buildsStore, _settings);
@@ -2322,11 +2322,11 @@ namespace PS4PKGTool
                 RefreshSettingsTab();
                 RefreshHeaderState();
                 RefreshOverview();
-                AppMessageBox.Show("Remove All shadPS4 Data", "All configured shadPS4 data has been removed.", AppMessageType.Info, AppMessageButtons.OK);
+                AppMessageBox.Show("移除全部 shadPS4 数据", "所有已配置的 shadPS4 数据均已移除。", AppMessageType.Info, AppMessageButtons.OK);
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Could not remove all shadPS4 data:\n" + ex.Message, false);
+                MessageBoxHelper.ShowWarning("无法移除全部 shadPS4 数据：\n" + ex.Message, false);
             }
         }
 
@@ -2378,7 +2378,7 @@ namespace PS4PKGTool
 
                 var lines = new List<string>
                 {
-                    $"Active core: {Shadps4SetupDisplay.DescribeActiveSetting(_settings.Shadps4ActiveCore)}",
+                    $"启用的核心：{Shadps4SetupDisplay.DescribeActiveSetting(_settings.Shadps4ActiveCore)}",
                     $"QtLauncher: {Shadps4SetupDisplay.DescribeActiveSetting(_settings.Shadps4ActiveLauncher)}",
                     $"Status: {(env.IsValid ? "Configuration detected successfully" : "shadPS4 not configured or not found")}",
                     $"Mode: {env.UserDirectoryMode}{(env.DetectionConfidence == Shadps4DetectionConfidence.Low ? " (low confidence)" : "")}",
@@ -2388,7 +2388,7 @@ namespace PS4PKGTool
                     $"Addon/DLC: {Shadps4SetupDisplay.ShortenPath(env.AddonInstallDirectory)}",
                     $"Home: {Shadps4SetupDisplay.ShortenPath(env.HomeDirectory)}",
                     $"Fonts: {Shadps4SetupDisplay.ShortenPath(env.FontDirectory)}",
-                    $"Sys modules: {Shadps4SetupDisplay.ShortenPath(env.SysModulesDirectory)}",
+                    $"Sys modules：{Shadps4SetupDisplay.ShortenPath(env.SysModulesDirectory)}",
                 };
                 foreach (var warning in env.Warnings)
                     lines.Add("⚠ " + warning);
@@ -2397,7 +2397,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                lblSettingsDetect.Text = "Detection failed: " + ex.Message;
+                lblSettingsDetect.Text = "检测失败：" + ex.Message;
             }
         }
 
@@ -2405,7 +2405,7 @@ namespace PS4PKGTool
         {
             using var ofd = new OpenFileDialog
             {
-                Title = "Select the shadPS4 core (shadPS4.exe)",
+                Title = "选择 shadPS4 核心（shadPS4.exe）",
                 Filter = "shadPS4 core (shadPS4.exe)|shadPS4.exe|Executables (*.exe)|*.exe",
             };
             if (ofd.ShowDialog() != DialogResult.OK) return;
@@ -2419,7 +2419,7 @@ namespace PS4PKGTool
         {
             using var ofd = new OpenFileDialog
             {
-                Title = "Select the shadPS4 QtLauncher (shadPS4QtLauncher.exe)",
+                Title = "选择 shadPS4 QtLauncher（shadPS4QtLauncher.exe）",
                 Filter = "shadPS4 QtLauncher (shadPS4QtLauncher.exe)|shadPS4QtLauncher.exe|Executables (*.exe)|*.exe",
             };
             if (ofd.ShowDialog() != DialogResult.OK) return;
@@ -2444,8 +2444,8 @@ namespace PS4PKGTool
             if (path == null)
             {
                 MessageBoxHelper.ShowWarning(
-                    (error ?? "No QtLauncher configured.") +
-                    "\n\nUse Browse or install a launcher in the Builds tab.", false);
+                    (error ?? "未配置 QtLauncher。") +
+                    "\n\n请使用「浏览可用版本」，或在「版本」选项卡中安装启动器。", false);
                 return;
             }
             try
@@ -2459,7 +2459,7 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("Failed to open the shadPS4 QtLauncher:\n" + ex.Message, false);
+                MessageBoxHelper.ShowWarning("打开 shadPS4 QtLauncher 失败：\n" + ex.Message, false);
             }
         }
 
@@ -2467,7 +2467,7 @@ namespace PS4PKGTool
         {
             using var fbd = new FolderBrowserDialog
             {
-                Description = "Select the shadPS4 game install directory",
+                Description = "选择 shadPS4 游戏安装目录",
                 ShowNewFolderButton = true,
             };
             string current = tbSettingsInstallDir.Text.Trim();
@@ -2475,7 +2475,7 @@ namespace PS4PKGTool
                 fbd.SelectedPath = current;
             if (fbd.ShowDialog() != DialogResult.OK) return;
             tbSettingsInstallDir.Text = fbd.SelectedPath;
-            Logger.LogInformation($"shadPS4 install directory set to \"{fbd.SelectedPath}\"");
+            Logger.LogInformation($"shadPS4 安装目录已设为「{fbd.SelectedPath}」");
         }
 
         /// <summary>
@@ -2494,7 +2494,7 @@ namespace PS4PKGTool
         private async void btnSettingsCheckUpdates_Click(object sender, EventArgs e)
         {
             btnSettingsCheckUpdates.Enabled = false;
-            btnSettingsCheckUpdates.Text = "Checking...";
+            btnSettingsCheckUpdates.Text = "正在检查……";
             try
             {
                 var feed = new Shadps4ReleaseFeed();
@@ -2509,7 +2509,7 @@ namespace PS4PKGTool
                 string coreError = stable.Error ?? nightly.Error;
                 if (coreError != null)
                 {
-                    MessageBoxHelper.ShowWarning("shadPS4 update check failed:\n" + coreError, false);
+                    MessageBoxHelper.ShowWarning("shadPS4 更新检查失败：\n" + coreError, false);
                     return;
                 }
 
@@ -2521,7 +2521,7 @@ namespace PS4PKGTool
                     "QtLauncher\n" +
                     $"  Installed: {Shadps4SetupDisplay.DescribeActiveSetting(_settings.Shadps4ActiveLauncher)}\n" +
                     $"  Latest: {latestLauncher ?? "unknown"}\n\n" +
-                    "Updates are never installed or activated automatically. Use Browse Builds in the Builds tab to install a specific version.";
+                    "更新永远不会自动安装或启用。请在「版本」选项卡中使用「浏览可用版本」安装指定版本。";
 
                 var choice = AppMessageBox.Show("shadPS4 Updates", message,
                     AppMessageType.Info, AppMessageButtons.YesNo);
@@ -2530,17 +2530,17 @@ namespace PS4PKGTool
             }
             catch (Exception ex)
             {
-                MessageBoxHelper.ShowWarning("shadPS4 update check failed: " + ex.Message, false);
+                MessageBoxHelper.ShowWarning("shadPS4 更新检查失败：" + ex.Message, false);
             }
             finally
             {
                 btnSettingsCheckUpdates.Enabled = true;
-                btnSettingsCheckUpdates.Text = "Check for Updates";
+                btnSettingsCheckUpdates.Text = "检查更新";
             }
         }
 
         private static string Describe(string value)
-            => string.IsNullOrWhiteSpace(value) ? "(not set)" : value;
+            => string.IsNullOrWhiteSpace(value) ? "（未设置）" : value;
 
         private void btncopyDetectioninfo_Click(object sender, EventArgs e) => CopyDetectionInfoToClipboard();
 
@@ -2549,11 +2549,11 @@ namespace PS4PKGTool
             try
             {
                 Clipboard.SetText(lblSettingsDetect.Text);
-                SetStatus("Copied to clipboard.", false);
+                SetStatus("已复制到剪贴板。", false);
             }
             catch (Exception ex)
             {
-                SetStatus("Copy failed: " + ex.Message, false);
+                SetStatus("复制失败：" + ex.Message, false);
             }
         }
     }

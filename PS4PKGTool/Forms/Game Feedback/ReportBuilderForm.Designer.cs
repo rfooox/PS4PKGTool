@@ -47,7 +47,7 @@ namespace PS4PKGTool
             lblReportGameLabel.Name = "lblReportGameLabel";
             lblReportGameLabel.Size = new System.Drawing.Size(100, 20);
             lblReportGameLabel.TabIndex = 1;
-            lblReportGameLabel.Text = "Game";
+            lblReportGameLabel.Text = "游戏";
             // 
             // lblReportGame
             // 
@@ -82,7 +82,7 @@ namespace PS4PKGTool
             lblReportShadps4Hint.Name = "lblReportShadps4Hint";
             lblReportShadps4Hint.Size = new System.Drawing.Size(348, 14);
             lblReportShadps4Hint.TabIndex = 5;
-            lblReportShadps4Hint.Text = "Release versions appear after Check for Updates or installing a release build.";
+            lblReportShadps4Hint.Text = "检查更新或安装正式版后，才会显示正式版本。";
             // 
             // lblReportStatusLabel
             // 
@@ -90,7 +90,7 @@ namespace PS4PKGTool
             lblReportStatusLabel.Name = "lblReportStatusLabel";
             lblReportStatusLabel.Size = new System.Drawing.Size(100, 20);
             lblReportStatusLabel.TabIndex = 6;
-            lblReportStatusLabel.Text = "Status";
+            lblReportStatusLabel.Text = "状态";
             // 
             // cboReportStatus
             // 
@@ -106,7 +106,7 @@ namespace PS4PKGTool
             lblReportDescriptionLabel.Name = "lblReportDescriptionLabel";
             lblReportDescriptionLabel.Size = new System.Drawing.Size(200, 16);
             lblReportDescriptionLabel.TabIndex = 8;
-            lblReportDescriptionLabel.Text = "Description";
+            lblReportDescriptionLabel.Text = "描述";
             // 
             // txtReportDescription
             // 
@@ -123,7 +123,7 @@ namespace PS4PKGTool
             lblReportErrorLabel.Name = "lblReportErrorLabel";
             lblReportErrorLabel.Size = new System.Drawing.Size(300, 16);
             lblReportErrorLabel.TabIndex = 10;
-            lblReportErrorLabel.Text = "Error / relevant log";
+            lblReportErrorLabel.Text = "错误 / 相关日志";
             // 
             // txtReportError
             // 
@@ -140,7 +140,7 @@ namespace PS4PKGTool
             lblReportChecklistLabel.Name = "lblReportChecklistLabel";
             lblReportChecklistLabel.Size = new System.Drawing.Size(200, 16);
             lblReportChecklistLabel.TabIndex = 12;
-            lblReportChecklistLabel.Text = "Checklist";
+            lblReportChecklistLabel.Text = "检查清单";
             // 
             // chkReportRelease
             // 
@@ -150,7 +150,7 @@ namespace PS4PKGTool
             chkReportRelease.Name = "chkReportRelease";
             chkReportRelease.Size = new System.Drawing.Size(444, 20);
             chkReportRelease.TabIndex = 13;
-            chkReportRelease.Text = "Tested on required release build";
+            chkReportRelease.Text = "已在所需的正式版本上测试";
             // 
             // chkReportExisting
             // 
@@ -160,7 +160,7 @@ namespace PS4PKGTool
             chkReportExisting.Name = "chkReportExisting";
             chkReportExisting.Size = new System.Drawing.Size(444, 20);
             chkReportExisting.TabIndex = 14;
-            chkReportExisting.Text = "Checked for an existing report";
+            chkReportExisting.Text = "已确认没有重复报告";
             // 
             // chkReportOwnDump
             // 
@@ -170,7 +170,7 @@ namespace PS4PKGTool
             chkReportOwnDump.Name = "chkReportOwnDump";
             chkReportOwnDump.Size = new System.Drawing.Size(444, 20);
             chkReportOwnDump.TabIndex = 15;
-            chkReportOwnDump.Text = "Own and unmodified game dump";
+            chkReportOwnDump.Text = "使用自己未修改的游戏镜像";
             // 
             // chkReportFirmware
             // 
@@ -180,7 +180,7 @@ namespace PS4PKGTool
             chkReportFirmware.Name = "chkReportFirmware";
             chkReportFirmware.Size = new System.Drawing.Size(444, 20);
             chkReportFirmware.TabIndex = 16;
-            chkReportFirmware.Text = "Required firmware modules installed";
+            chkReportFirmware.Text = "已安装所需固件模块";
             // 
             // chkReportSyncLog
             // 
@@ -190,7 +190,7 @@ namespace PS4PKGTool
             chkReportSyncLog.Name = "chkReportSyncLog";
             chkReportSyncLog.Size = new System.Drawing.Size(444, 20);
             chkReportSyncLog.TabIndex = 17;
-            chkReportSyncLog.Text = "Sync logging enabled";
+            chkReportSyncLog.Text = "已启用同步日志";
             // 
             // chkReportDefaultSettings
             // 
@@ -200,7 +200,7 @@ namespace PS4PKGTool
             chkReportDefaultSettings.Name = "chkReportDefaultSettings";
             chkReportDefaultSettings.Size = new System.Drawing.Size(444, 20);
             chkReportDefaultSettings.TabIndex = 18;
-            chkReportDefaultSettings.Text = "Default emulation settings used";
+            chkReportDefaultSettings.Text = "使用默认模拟设置";
             // 
             // lblReportLogLabel
             // 
@@ -208,7 +208,7 @@ namespace PS4PKGTool
             lblReportLogLabel.Name = "lblReportLogLabel";
             lblReportLogLabel.Size = new System.Drawing.Size(100, 20);
             lblReportLogLabel.TabIndex = 19;
-            lblReportLogLabel.Text = "Log";
+            lblReportLogLabel.Text = "日志";
             // 
             // lblReportLogFile
             // 
@@ -224,7 +224,7 @@ namespace PS4PKGTool
             btnReportOpenLog.Name = "btnReportOpenLog";
             btnReportOpenLog.Size = new System.Drawing.Size(80, 26);
             btnReportOpenLog.TabIndex = 21;
-            btnReportOpenLog.Text = "Open";
+            btnReportOpenLog.Text = "打开";
             btnReportOpenLog.Click += btnReportOpenLog_Click;
             // 
             // lblReportCopied
@@ -240,7 +240,7 @@ namespace PS4PKGTool
             btnReportPreview.Name = "btnReportPreview";
             btnReportPreview.Size = new System.Drawing.Size(90, 26);
             btnReportPreview.TabIndex = 23;
-            btnReportPreview.Text = "Preview";
+            btnReportPreview.Text = "预览";
             btnReportPreview.Click += btnReportPreview_Click;
             // 
             // btnReportCopy
@@ -249,7 +249,7 @@ namespace PS4PKGTool
             btnReportCopy.Name = "btnReportCopy";
             btnReportCopy.Size = new System.Drawing.Size(112, 26);
             btnReportCopy.TabIndex = 24;
-            btnReportCopy.Text = "Copy Markdown";
+            btnReportCopy.Text = "复制 Markdown";
             btnReportCopy.Click += btnReportCopy_Click;
             // 
             // btnReportCancel
@@ -258,7 +258,7 @@ namespace PS4PKGTool
             btnReportCancel.Name = "btnReportCancel";
             btnReportCancel.Size = new System.Drawing.Size(106, 26);
             btnReportCancel.TabIndex = 25;
-            btnReportCancel.Text = "Cancel";
+            btnReportCancel.Text = "取消";
             btnReportCancel.Click += btnReportCancel_Click;
             // 
             // ReportBuilderForm
@@ -297,7 +297,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "ReportBuilderForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Create Compatibility Report";
+            Text = "创建兼容性报告";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -24,7 +24,7 @@ namespace PS4PKGTool.Shell
             FormatValue = txtShellFormat.Text.Trim();
             if (string.IsNullOrEmpty(FormatValue))
             {
-                MessageBoxHelper.ShowWarning("The custom format cannot be empty.", false);
+                MessageBoxHelper.ShowWarning("自定义格式不能为空。", false);
                 return;
             }
             DialogResult = DialogResult.OK;

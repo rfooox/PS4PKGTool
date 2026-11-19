@@ -70,7 +70,7 @@ namespace PS4PKGTool
             _stage.Name = "_stage";
             _stage.Size = new System.Drawing.Size(496, 26);
             _stage.TabIndex = 0;
-            _stage.Text = "Preparing...";
+            _stage.Text = "准备中……";
             _stage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             // _detail
@@ -92,7 +92,7 @@ namespace PS4PKGTool
             _lblCurrent.Name = "_lblCurrent";
             _lblCurrent.Size = new System.Drawing.Size(496, 26);
             _lblCurrent.TabIndex = 2;
-            _lblCurrent.Text = "Current progress";
+            _lblCurrent.Text = "当前进度";
             _lblCurrent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             // _lblOverall
@@ -103,7 +103,7 @@ namespace PS4PKGTool
             _lblOverall.Name = "_lblOverall";
             _lblOverall.Size = new System.Drawing.Size(496, 26);
             _lblOverall.TabIndex = 4;
-            _lblOverall.Text = "Overall progress";
+            _lblOverall.Text = "总进度";
             _lblOverall.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             //
             // _overallProgress
@@ -161,7 +161,7 @@ namespace PS4PKGTool
             _cancel.Name = "_cancel";
             _cancel.Size = new System.Drawing.Size(84, 30);
             _cancel.TabIndex = 0;
-            _cancel.Text = "Cancel";
+            _cancel.Text = "取消";
             _cancel.Click += cancel_Click;
             //
             // PkgMergeProgressForm
@@ -174,7 +174,7 @@ namespace PS4PKGTool
             Icon = Properties.Resources.PackageIcon;
             Name = "PkgMergeProgressForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Merging PKGs";
+            Text = "正在合并 PKG";
             Shown += PkgMergeProgressForm_Shown;
             progressLayout.ResumeLayout(false);
             footerPanel.ResumeLayout(false);

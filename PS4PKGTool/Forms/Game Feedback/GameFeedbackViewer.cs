@@ -25,7 +25,7 @@ namespace PS4PKGTool
             // Newest first for chronological regression reading.
             _entries = new List<GameFeedbackEntry>(entries);
             _entries.Sort((a, b) => ParseTime(b.TimestampUtc).CompareTo(ParseTime(a.TimestampUtc)));
-            this.Text = "Test History  ·  " + titleId;
+            this.Text = "测试历史  ·  " + titleId;
             RefreshList();
         }
 
@@ -40,12 +40,12 @@ namespace PS4PKGTool
             {
                 string prefix = e.IsBestProfile ? "✓ " : "  ";
                 string runtime = TestResultDisplay.FormatRuntime(e.RuntimeSeconds);
-                string crash = e.Crashed ? "  ·  Crash" : "";
+                string crash = e.Crashed ? "  ·  崩溃" : "";
                 lstFeedbackEntries.Items.Add(
                     $"{prefix}{TestResultDisplay.FormatWhen(e.TimestampUtc)}  {e.Status}  {runtime}{crash}");
             }
             if (lstFeedbackEntries.Items.Count == 0)
-                lstFeedbackEntries.Items.Add("(no test results yet)");
+                lstFeedbackEntries.Items.Add("（暂无测试结果）");
             btnFeedbackSetBest.Enabled = false;
             btnFeedbackCopyReport.Enabled = false;
             lblFeedbackViewerDetails.Text = "";
@@ -95,46 +95,46 @@ namespace PS4PKGTool
         private static string BuildDetails(GameFeedbackEntry e)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Status: " + e.Status);
-            if (!string.IsNullOrWhiteSpace(e.Comment)) sb.AppendLine("Notes: " + e.Comment);
+            sb.AppendLine("状态：" + e.Status);
+            if (!string.IsNullOrWhiteSpace(e.Comment)) sb.AppendLine("备注：" + e.Comment);
 
             sb.AppendLine();
-            sb.AppendLine("SESSION");
-            sb.AppendLine("Runtime: " + TestResultDisplay.FormatRuntime(e.RuntimeSeconds));
-            sb.AppendLine("Termination: " + TerminationText(e));
-            if (e.ExitCode != null) sb.AppendLine("Exit code: " + TestResultDisplay.FormatExitCode(e.ExitCode));
-            if (!string.IsNullOrWhiteSpace(e.ExitStatusName)) sb.AppendLine("Status: " + e.ExitStatusName);
-            if (!string.IsNullOrWhiteSpace(e.Error)) sb.AppendLine("Error: " + TrimForDetails(e.Error, 200));
+            sb.AppendLine("会话");
+            sb.AppendLine("运行时：" + TestResultDisplay.FormatRuntime(e.RuntimeSeconds));
+            sb.AppendLine("结束方式：" + TerminationText(e));
+            if (e.ExitCode != null) sb.AppendLine("退出码：" + TestResultDisplay.FormatExitCode(e.ExitCode));
+            if (!string.IsNullOrWhiteSpace(e.ExitStatusName)) sb.AppendLine("状态：" + e.ExitStatusName);
+            if (!string.IsNullOrWhiteSpace(e.Error)) sb.AppendLine("错误：" + TrimForDetails(e.Error, 200));
 
             sb.AppendLine();
-            sb.AppendLine("GAME");
-            if (!string.IsNullOrWhiteSpace(e.Title)) sb.AppendLine("Title: " + e.Title);
-            if (!string.IsNullOrWhiteSpace(e.TitleId)) sb.AppendLine("Title ID: " + e.TitleId);
-            if (!string.IsNullOrWhiteSpace(e.GameVersion)) sb.AppendLine("App version: " + e.GameVersion);
+            sb.AppendLine("游戏");
+            if (!string.IsNullOrWhiteSpace(e.Title)) sb.AppendLine("标题：" + e.Title);
+            if (!string.IsNullOrWhiteSpace(e.TitleId)) sb.AppendLine("标题 ID：" + e.TitleId);
+            if (!string.IsNullOrWhiteSpace(e.GameVersion)) sb.AppendLine("应用版本：" + e.GameVersion);
 
             sb.AppendLine();
-            sb.AppendLine("SHADPS4");
-            if (!string.IsNullOrWhiteSpace(e.EmulatorVersion)) sb.AppendLine("Version: " + e.EmulatorVersion);
-            if (!string.IsNullOrWhiteSpace(e.CoreCommit)) sb.AppendLine("Commit: " + e.CoreCommit);
-            if (!string.IsNullOrWhiteSpace(e.Core)) sb.AppendLine("Core: " + e.Core);
-            if (!string.IsNullOrWhiteSpace(e.Launcher)) sb.AppendLine("Launcher: " + e.Launcher);
+            sb.AppendLine("shadPS4");
+            if (!string.IsNullOrWhiteSpace(e.EmulatorVersion)) sb.AppendLine("版本：" + e.EmulatorVersion);
+            if (!string.IsNullOrWhiteSpace(e.CoreCommit)) sb.AppendLine("提交：" + e.CoreCommit);
+            if (!string.IsNullOrWhiteSpace(e.Core)) sb.AppendLine("内核：" + e.Core);
+            if (!string.IsNullOrWhiteSpace(e.Launcher)) sb.AppendLine("启动器：" + e.Launcher);
 
             sb.AppendLine();
-            sb.AppendLine("SYSTEM");
-            if (!string.IsNullOrWhiteSpace(e.Os)) sb.AppendLine("OS: " + e.Os);
-            if (!string.IsNullOrWhiteSpace(e.Processor)) sb.AppendLine("CPU: " + e.Processor);
-            if (!string.IsNullOrWhiteSpace(e.GraphicsCard)) sb.AppendLine("GPU: " + e.GraphicsCard);
+            sb.AppendLine("系统");
+            if (!string.IsNullOrWhiteSpace(e.Os)) sb.AppendLine("操作系统：" + e.Os);
+            if (!string.IsNullOrWhiteSpace(e.Processor)) sb.AppendLine("CPU：" + e.Processor);
+            if (!string.IsNullOrWhiteSpace(e.GraphicsCard)) sb.AppendLine("GPU：" + e.GraphicsCard);
 
             sb.AppendLine();
-            sb.AppendLine("LOG");
-            sb.AppendLine(TestResultLogs.Resolve(e) != null ? "Session log preserved" : "Not preserved");
+            sb.AppendLine("日志");
+            sb.AppendLine(TestResultLogs.Resolve(e) != null ? "会话日志已保存" : "未保存");
             return sb.ToString().TrimEnd();
         }
 
         private static string TerminationText(GameFeedbackEntry e)
         {
-            if (e.Crashed) return "Crash";
-            return string.IsNullOrEmpty(e.TerminationKind) ? "Not recorded" : "Normal exit";
+            if (e.Crashed) return "崩溃";
+            return string.IsNullOrEmpty(e.TerminationKind) ? "未记录" : "正常退出";
         }
 
         private static string TrimForDetails(string text, int max)

@@ -107,7 +107,7 @@ namespace PS4PKGTool.Forms.Main
             _lblSource.Name = "_lblSource";
             _lblSource.Size = new System.Drawing.Size(67, 15);
             _lblSource.TabIndex = 0;
-            _lblSource.Text = "Source PKG";
+            _lblSource.Text = "源 PKG";
             // 
             // _txtSource
             // 
@@ -126,7 +126,7 @@ namespace PS4PKGTool.Forms.Main
             _lblTitle.Name = "_lblTitle";
             _lblTitle.Size = new System.Drawing.Size(30, 15);
             _lblTitle.TabIndex = 2;
-            _lblTitle.Text = "Title";
+            _lblTitle.Text = "标题";
             // 
             // _txtTitle
             // 
@@ -145,7 +145,7 @@ namespace PS4PKGTool.Forms.Main
             _lblTitleId.Name = "_lblTitleId";
             _lblTitleId.Size = new System.Drawing.Size(44, 15);
             _lblTitleId.TabIndex = 4;
-            _lblTitleId.Text = "Title ID";
+            _lblTitleId.Text = "标题 ID";
             // 
             // _txtTitleId
             // 
@@ -164,7 +164,7 @@ namespace PS4PKGTool.Forms.Main
             _lblVersion.Name = "_lblVersion";
             _lblVersion.Size = new System.Drawing.Size(45, 15);
             _lblVersion.TabIndex = 6;
-            _lblVersion.Text = "Version";
+            _lblVersion.Text = "版本";
             // 
             // _txtVersion
             // 
@@ -183,7 +183,7 @@ namespace PS4PKGTool.Forms.Main
             _lblOutput.Name = "_lblOutput";
             _lblOutput.Size = new System.Drawing.Size(45, 15);
             _lblOutput.TabIndex = 8;
-            _lblOutput.Text = "Output";
+            _lblOutput.Text = "输出";
             // 
             // _outputPath
             // 
@@ -201,7 +201,7 @@ namespace PS4PKGTool.Forms.Main
             _btnBrowseOutput.Name = "_btnBrowseOutput";
             _btnBrowseOutput.Size = new System.Drawing.Size(82, 28);
             _btnBrowseOutput.TabIndex = 1;
-            _btnBrowseOutput.Text = "Browse...";
+            _btnBrowseOutput.Text = "浏览……";
             _btnBrowseOutput.Click += btnBrowseOutput_Click;
             // 
             // _lblWork
@@ -211,7 +211,7 @@ namespace PS4PKGTool.Forms.Main
             _lblWork.Name = "_lblWork";
             _lblWork.Size = new System.Drawing.Size(81, 15);
             _lblWork.TabIndex = 9;
-            _lblWork.Text = "Work location";
+            _lblWork.Text = "工作目录";
             // 
             // _workParent
             // 
@@ -229,7 +229,7 @@ namespace PS4PKGTool.Forms.Main
             _btnBrowseWork.Name = "_btnBrowseWork";
             _btnBrowseWork.Size = new System.Drawing.Size(82, 28);
             _btnBrowseWork.TabIndex = 3;
-            _btnBrowseWork.Text = "Browse...";
+            _btnBrowseWork.Text = "浏览……";
             _btnBrowseWork.Click += btnBrowseWork_Click;
             // 
             // _validate
@@ -241,7 +241,7 @@ namespace PS4PKGTool.Forms.Main
             _validate.Name = "_validate";
             _validate.Size = new System.Drawing.Size(154, 19);
             _validate.TabIndex = 10;
-            _validate.Text = "Verify FFPFSC after build";
+            _validate.Text = "构建后校验 FFPFSC";
             // 
             // _lblSpaceWarning
             // 
@@ -285,7 +285,7 @@ namespace PS4PKGTool.Forms.Main
             _btnCancel.Name = "_btnCancel";
             _btnCancel.Size = new System.Drawing.Size(82, 30);
             _btnCancel.TabIndex = 0;
-            _btnCancel.Text = "Cancel";
+            _btnCancel.Text = "取消";
             // 
             // _btnConvert
             // 
@@ -293,7 +293,7 @@ namespace PS4PKGTool.Forms.Main
             _btnConvert.Name = "_btnConvert";
             _btnConvert.Size = new System.Drawing.Size(96, 30);
             _btnConvert.TabIndex = 1;
-            _btnConvert.Text = "Convert";
+            _btnConvert.Text = "转换";
             _btnConvert.Click += btnConvert_Click;
             // 
             // FfpfscOptionsForm
@@ -309,7 +309,7 @@ namespace PS4PKGTool.Forms.Main
             MinimizeBox = false;
             Name = "FfpfscOptionsForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Convert PS4 PKG to FFPFSC";
+            Text = "将 PS4 PKG 转换为 FFPFSC";
             _layout.ResumeLayout(false);
             _layout.PerformLayout();
             _buttonsPanel.ResumeLayout(false);

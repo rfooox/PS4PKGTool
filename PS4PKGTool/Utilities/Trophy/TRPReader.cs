@@ -118,17 +118,17 @@ namespace TRPViewer
 
         private void EnsureLoaded()
         {
-            if (_archive == null) throw new InvalidOperationException("No TRP file is loaded.");
+            if (_archive == null) throw new InvalidOperationException("未加载 TRP 文件。");
         }
 
         private static string SafeOutputPath(string directory, string name)
         {
             if (string.IsNullOrWhiteSpace(name) || name != Path.GetFileName(name))
-                throw new InvalidDataException($"TRP entry name '{name}' is not a safe file name.");
+                throw new InvalidDataException($"TRP 条目名 '{name}' 不是安全的文件名。");
             string root = Path.GetFullPath(directory) + Path.DirectorySeparatorChar;
             string target = Path.GetFullPath(Path.Combine(root, name));
             if (!target.StartsWith(root, StringComparison.OrdinalIgnoreCase))
-                throw new InvalidDataException($"TRP entry name '{name}' escapes the extraction directory.");
+                throw new InvalidDataException($"TRP 条目名 '{name}' 越出了解压目录。");
             return target;
         }
 

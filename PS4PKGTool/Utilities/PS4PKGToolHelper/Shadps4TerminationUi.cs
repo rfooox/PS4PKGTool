@@ -63,32 +63,32 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         {
             if (Shadps4ExitStatus.IsErrorStatus(report.Category))
             {
-                string msg = $"shadPS4 terminated with error status {report.ExitCodeText} after {report.RuntimeText}.\n\n";
+                string msg = $"shadPS4 在运行 {report.RuntimeText} 后以错误状态 {report.ExitCodeText} 终止。\n\n";
                 if (!string.IsNullOrEmpty(report.Target))
                     msg += $"Target: {report.Target}\n";
                 msg += $"Core: {report.Executable}\n";
                 if (!string.IsNullOrEmpty(report.CoreVersion))
-                    msg += $"Core version: {report.CoreVersion}\n";
+                    msg += $"核心版本：{report.CoreVersion}\n";
 
                 string? logTail = TrimTailForDialog(report.LogTail);
                 if (logTail != null)
-                    msg += $"\nLast emulator log lines:\n{logTail}\n";
+                    msg += $"\n模拟器日志末尾几行：\n{logTail}\n";
 
                 if (string.IsNullOrWhiteSpace(report.WerReportFolder))
                     return (AppMessageType.Warning, msg, false);
-                msg += "\nA WER report was found for this termination.";
+                msg += "\n已为本次终止找到一份 WER 报告。";
                 if (!string.IsNullOrEmpty(report.DumpFile))
-                    msg += $"\nIt contains a crash dump ({Path.GetFileName(report.DumpFile)}).";
-                msg += "\n\nOpen the WER report folder?";
+                    msg += $"\n其中包含崩溃转储（{Path.GetFileName(report.DumpFile)}）。";
+                msg += "\n\n打开 WER 报告目录？";
                 return (AppMessageType.Warning, msg, true);
             }
 
             // Closed normally (exit 0, user termination) or an unmapped code.
-            string closed = $"shadPS4 closed after {report.RuntimeText}.\n";
+            string closed = $"shadPS4 在运行 {report.RuntimeText} 后关闭。\n";
             if (!string.IsNullOrEmpty(report.Target))
                 closed += $"Target: {report.Target}\n";
             if (report.Category == Shadps4ExitCategory.Unknown)
-                closed += $"Exit code: {report.ExitCodeText}\n";
+                closed += $"退出码：{report.ExitCodeText}\n";
             return (AppMessageType.Info, closed, false);
         }
 

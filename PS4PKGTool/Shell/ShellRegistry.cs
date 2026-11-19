@@ -253,7 +253,7 @@ namespace PS4PKGTool.Shell
             string verbs = root + @"\shell";
 
             // â”€â”€ 01: RENAME â”€â”€ 01a header, 01b formats (key-name sort = display order)
-            Header(verbs + @"\01aHdrRename", "RENAME");
+            Header(verbs + @"\01aHdrRename", "重命名");
             foreach (var (id, format) in PS4PKGTool.Utilities.Constants.PkgRenameFormats.Predefined)
             {
                 if (!ShellRenameFormatIds.Contains(id)) continue; // app-only format
@@ -261,16 +261,16 @@ namespace PS4PKGTool.Shell
                     PS4PKGTool.Utilities.Constants.PkgRenameFormats.DisplayLabel(format), "rename", id.ToString());
             }
             Command(verbs + @"\01bRename" + PS4PKGTool.Utilities.Constants.PkgRenameFormats.CustomFormatId.ToString("00"),
-                "Custom Format", "rename",
+                "自定义格式", "rename",
                 PS4PKGTool.Utilities.Constants.PkgRenameFormats.CustomFormatId.ToString());
 
             // â”€â”€ 02: COPY â”€â”€ 02a header, 02b fields (curated subset)
-            Header(verbs + @"\02aHdrCopy", "COPY");
+            Header(verbs + @"\02aHdrCopy", "复制");
             var copyActions = new (string Display, string Field)[]
             {
-                ("Title", "title"),
-                ("Title ID", "titleid"),
-                ("Content ID", "contentid"),
+                ("标题", "title"),
+                ("标题 ID", "titleid"),
+                ("内容 ID", "contentid"),
             };
             for (int i = 0; i < copyActions.Length; i++)
             {
@@ -279,10 +279,10 @@ namespace PS4PKGTool.Shell
             }
 
             // â”€â”€ 03: PACKAGE â”€â”€ 03a header, 03b operations
-            Header(verbs + @"\03aHdrOps", "PACKAGE");
-            Command(verbs + @"\03bOps01", "Validate PKG", "validate");
-            Command(verbs + @"\03bOps02", "Extract PKG", "extract");
-            Command(verbs + @"\03bOps03", "Install to shadPS4", "install-shadps4");
+            Header(verbs + @"\03aHdrOps", "安装包");
+            Command(verbs + @"\03bOps01", "验证 PKG", "validate");
+            Command(verbs + @"\03bOps02", "提取 PKG", "extract");
+            Command(verbs + @"\03bOps03", "安装到 shadPS4", "install-shadps4");
 
             return entries;
         }
@@ -311,7 +311,7 @@ namespace PS4PKGTool.Shell
             }
             catch (Exception ex)
             {
-                Logger.LogWarning("ShellRegistry: could not write " + entry.KeyPath + " (" + entry.ValueName + "): " + ex.Message);
+                Logger.LogWarning("ShellRegistry：写入失败 " + entry.KeyPath + " (" + entry.ValueName + "): " + ex.Message);
             }
         }
 

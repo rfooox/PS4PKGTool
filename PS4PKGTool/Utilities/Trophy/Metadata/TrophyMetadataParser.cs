@@ -21,7 +21,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             }
             catch (DecoderFallbackException ex)
             {
-                throw new InvalidDataException("Trophy metadata is not valid UTF-8.", ex);
+                throw new InvalidDataException("奖杯元数据不是有效的 UTF-8。", ex);
             }
 
             XDocument document;
@@ -39,16 +39,16 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             }
             catch (XmlException ex)
             {
-                throw new InvalidDataException("Trophy metadata XML is invalid.", ex);
+                throw new InvalidDataException("奖杯元数据 XML 无效。", ex);
             }
 
-            XElement root = document.Root ?? throw new InvalidDataException("Trophy metadata XML has no root element.");
+            XElement root = document.Root ?? throw new InvalidDataException("奖杯元数据 XML 没有根元素。");
             if (!string.Equals(root.Name.LocalName, "trophyconf", StringComparison.OrdinalIgnoreCase))
-                throw new InvalidDataException($"Unsupported trophy metadata root element '{root.Name.LocalName}'.");
+                throw new InvalidDataException($"不支持的奖杯元数据根元素 '{root.Name.LocalName}'。");
 
             string? documentId = Child(root, "npcommid")?.Value.Trim();
             if (expectedNpCommunicationId != null && !string.Equals(documentId, expectedNpCommunicationId, StringComparison.Ordinal))
-                throw new InvalidDataException($"Decrypted metadata NP Communication ID '{documentId}' does not match '{expectedNpCommunicationId}'.");
+                throw new InvalidDataException($"解密后的元数据 NP Communication ID '{documentId}' 与 '{expectedNpCommunicationId}' 不匹配。");
 
             var groups = root.Elements().Where(e => e.Name.LocalName == "group")
                 .Select(e => new { Id = ParseRequiredInt(e, "id"), Name = Child(e, "name")?.Value.Trim() })
@@ -63,7 +63,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
                 int? platinumId = ParseOptionalInt(element.Attribute("pid")?.Value, allowNegativeOne: true);
                 string hidden = element.Attribute("hidden")?.Value ?? "no";
                 if (!hidden.Equals("yes", StringComparison.OrdinalIgnoreCase) && !hidden.Equals("no", StringComparison.OrdinalIgnoreCase))
-                    throw new InvalidDataException($"Trophy {id:000} has invalid hidden value '{hidden}'.");
+                    throw new InvalidDataException($"奖杯 {id:000} 的隐藏值 '{hidden}' 无效。");
 
                 trophies.Add(new TrophyInfo
                 {
@@ -73,15 +73,15 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
                     Grade = ParseGrade(element.Attribute("ttype")?.Value),
                     IsHidden = hidden.Equals("yes", StringComparison.OrdinalIgnoreCase),
                     GroupId = groupId,
-                    GroupName = groupId.HasValue ? groups.GetValueOrDefault(groupId.Value, $"Group {groupId:000}") : "Base Game",
+                    GroupName = groupId.HasValue ? groups.GetValueOrDefault(groupId.Value, $"Group {groupId:000}") : "本体游戏",
                     PlatinumId = platinumId
                 });
             }
 
             if (trophies.Count == 0)
-                throw new InvalidDataException("Trophy metadata contains no trophy definitions.");
+                throw new InvalidDataException("奖杯元数据不包含任何奖杯定义。");
             if (trophies.Select(t => t.Id).Distinct().Count() != trophies.Count)
-                throw new InvalidDataException("Trophy metadata contains duplicate trophy IDs.");
+                throw new InvalidDataException("奖杯元数据包含重复的奖杯 ID。");
             return trophies;
         }
 
@@ -92,7 +92,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         {
             string? value = element.Attribute(attributeName)?.Value;
             if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out int result) || result < 0)
-                throw new InvalidDataException($"Element {element.Name.LocalName} has invalid {attributeName} '{value}'.");
+                throw new InvalidDataException($"元素 {element.Name.LocalName} 的 {attributeName} '{value}' 无效。");
             return result;
         }
 
@@ -100,9 +100,9 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         {
             if (string.IsNullOrWhiteSpace(value)) return null;
             if (!int.TryParse(value, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out int result))
-                throw new InvalidDataException($"Invalid trophy relationship ID '{value}'.");
+                throw new InvalidDataException($"奖杯关系 ID '{value}' 无效。");
             if (allowNegativeOne && result == -1) return null;
-            if (result < 0) throw new InvalidDataException($"Invalid trophy relationship ID '{value}'.");
+            if (result < 0) throw new InvalidDataException($"奖杯关系 ID '{value}' 无效。");
             return result;
         }
 

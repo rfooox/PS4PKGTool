@@ -30,7 +30,7 @@ namespace PS4PKGTool
             darkLabelViewerHeader.Name = "darkLabelViewerHeader";
             darkLabelViewerHeader.Size = new System.Drawing.Size(300, 22);
             darkLabelViewerHeader.TabIndex = 0;
-            darkLabelViewerHeader.Text = "Test History";
+            darkLabelViewerHeader.Text = "测试历史";
             //
             // lstFeedbackEntries
             //
@@ -56,7 +56,7 @@ namespace PS4PKGTool
             btnFeedbackCopyReport.Name = "btnFeedbackCopyReport";
             btnFeedbackCopyReport.Size = new System.Drawing.Size(180, 30);
             btnFeedbackCopyReport.TabIndex = 5;
-            btnFeedbackCopyReport.Text = "Create Compatibility Report";
+            btnFeedbackCopyReport.Text = "创建兼容性报告";
             btnFeedbackCopyReport.Click += btnFeedbackCopyReport_Click;
             //
             // btnFeedbackSetBest
@@ -65,7 +65,7 @@ namespace PS4PKGTool
             btnFeedbackSetBest.Name = "btnFeedbackSetBest";
             btnFeedbackSetBest.Size = new System.Drawing.Size(108, 30);
             btnFeedbackSetBest.TabIndex = 3;
-            btnFeedbackSetBest.Text = "Set as Pinned";
+            btnFeedbackSetBest.Text = "设为置顶";
             btnFeedbackSetBest.Click += btnFeedbackSetBest_Click;
             //
             // btnFeedbackClose
@@ -74,7 +74,7 @@ namespace PS4PKGTool
             btnFeedbackClose.Name = "btnFeedbackClose";
             btnFeedbackClose.Size = new System.Drawing.Size(70, 30);
             btnFeedbackClose.TabIndex = 4;
-            btnFeedbackClose.Text = "Close";
+            btnFeedbackClose.Text = "关闭";
             btnFeedbackClose.Click += btnFeedbackClose_Click;
             //
             // GameFeedbackViewer
@@ -94,7 +94,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "GameFeedbackViewer";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Test History";
+            Text = "测试历史";
             ResumeLayout(false);
         }
 

@@ -84,7 +84,7 @@ public sealed class UnrealPackage
         {
             // Raw BitConverter reads on a truncated/short file land here; surface
             // a structured error instead of an unhandled framework exception.
-            throw new CorruptAssetException("Package summary is malformed or truncated.");
+            throw new CorruptAssetException("安装包摘要格式错误或已截断。");
         }
     }
 
@@ -102,11 +102,11 @@ public sealed class UnrealPackage
         {
             if (BitConverter.ToUInt32(head, i) == PackageMagic) { magicPos = i; break; }
         }
-        if (magicPos < 0) throw new CorruptAssetException("Missing package magic.");
+        if (magicPos < 0) throw new CorruptAssetException("缺少安装包魔数。");
 
         int pos = magicPos + 4;
         int legacy = ReadI32(head, ref pos);          // -7 = modern, unversioned
-        if (legacy >= 0) throw new UnsupportedAssetException($"Legacy UE3 package (version {legacy}) is not supported.");
+        if (legacy >= 0) throw new UnsupportedAssetException($"不支持旧版 UE3 安装包（版本 {legacy}）。");
         _ = ReadI32(head, ref pos);                   // UE3 version
         int ue4ver = ReadI32(head, ref pos);          // UE4 version (0 = unversioned)
         _ = ReadI32(head, ref pos);                   // licensee version
@@ -230,10 +230,10 @@ public sealed class UnrealPackage
     public static List<ObjectExport> ReadExports(IAssetSource source, Summary summary)
     {
         if (summary.ExportCount <= 0) return new List<ObjectExport>();
-        if (summary.ExportOffset < 0) throw new CorruptAssetException("Export table offset is invalid.");
+        if (summary.ExportOffset < 0) throw new CorruptAssetException("导出表偏移无效。");
         long length = (long)summary.ExportCount * 40;
         long need = summary.ExportOffset + length;
-        if (need > source.Length) throw new CorruptAssetException("Export table exceeds the file.");
+        if (need > source.Length) throw new CorruptAssetException("导出表超出文件范围。");
         byte[] data;
         using (var s = source.OpenRead(summary.ExportOffset, length))
         {

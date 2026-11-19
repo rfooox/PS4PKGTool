@@ -29,7 +29,7 @@
             lblPasscodePrompt.Name = "lblPasscodePrompt";
             lblPasscodePrompt.Size = new System.Drawing.Size(394, 44);
             lblPasscodePrompt.TabIndex = 0;
-            lblPasscodePrompt.Text = "This PKG is protected by a custom passcode. Enter the PKG passcode to list its files, or choose \"No passcode\" for official PKGs whose key is unknown.";
+            lblPasscodePrompt.Text = "此 PKG 受自定义通行密码保护。请输入 PKG 通行密码以列出其文件；对于密钥未知的官方 PKG，请选择「无通行密码」。";
             //
             // tbPasscodeInput
             //
@@ -49,7 +49,7 @@
             chkNoPasscode.Name = "chkNoPasscode";
             chkNoPasscode.Size = new System.Drawing.Size(361, 22);
             chkNoPasscode.TabIndex = 2;
-            chkNoPasscode.Text = "No passcode (official PKG)";
+            chkNoPasscode.Text = "无通行密码（官方 PKG）";
             chkNoPasscode.CheckedChanged += chkNoPasscode_CheckedChanged;
             //
             // btnPasscodeOk
@@ -59,7 +59,7 @@
             btnPasscodeOk.Name = "btnPasscodeOk";
             btnPasscodeOk.Size = new System.Drawing.Size(90, 26);
             btnPasscodeOk.TabIndex = 3;
-            btnPasscodeOk.Text = "OK";
+            btnPasscodeOk.Text = "确定";
             btnPasscodeOk.Click += btnPasscodeOk_Click;
             //
             // btnPasscodeCancel
@@ -69,7 +69,7 @@
             btnPasscodeCancel.Name = "btnPasscodeCancel";
             btnPasscodeCancel.Size = new System.Drawing.Size(90, 26);
             btnPasscodeCancel.TabIndex = 4;
-            btnPasscodeCancel.Text = "Cancel";
+            btnPasscodeCancel.Text = "取消";
             //
             // PasscodePromptForm
             //
@@ -87,7 +87,7 @@
             MinimizeBox = false;
             Name = "PasscodePromptForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "PKG Passcode";
+            Text = "PKG 通行密码";
             ResumeLayout(false);
             PerformLayout();
         }

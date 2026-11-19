@@ -16,7 +16,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         public NpCommunicationIdCache(string cachePath)
         {
             if (string.IsNullOrWhiteSpace(cachePath))
-                throw new ArgumentException("A cache path is required.", nameof(cachePath));
+                throw new ArgumentException("必须指定缓存路径。", nameof(cachePath));
             _cachePath = Path.GetFullPath(cachePath);
         }
 
@@ -59,7 +59,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
             string key = NormalizeContentId(contentId);
             string value = npCommunicationId.Trim().ToUpperInvariant();
             if (!_resolver.IsValid(value))
-                throw new ArgumentException("NP Communication ID must match NPWRxxxxx_00.", nameof(npCommunicationId));
+                throw new ArgumentException("NP Communication ID 必须匹配 NPWRxxxxx_00。", nameof(npCommunicationId));
 
             lock (Sync)
             {
@@ -68,7 +68,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
 
                 string? directory = Path.GetDirectoryName(_cachePath);
                 if (directory == null)
-                    throw new InvalidOperationException("The cache path has no parent directory.");
+                    throw new InvalidOperationException("缓存路径没有上级目录。");
                 Directory.CreateDirectory(directory);
 
                 string temporaryPath = _cachePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
@@ -111,7 +111,7 @@ namespace PS4PKGTool.Utilities.TrophyMetadata
         private static string NormalizeContentId(string contentId)
         {
             if (string.IsNullOrWhiteSpace(contentId))
-                throw new ArgumentException("A package Content ID is required.", nameof(contentId));
+                throw new ArgumentException("必须指定安装包 Content ID。", nameof(contentId));
             return contentId.Trim().ToUpperInvariant();
         }
     }

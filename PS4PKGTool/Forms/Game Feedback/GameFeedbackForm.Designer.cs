@@ -103,7 +103,7 @@ namespace PS4PKGTool
             lblFeedbackNotesLabel.Name = "lblFeedbackNotesLabel";
             lblFeedbackNotesLabel.Size = new System.Drawing.Size(120, 16);
             lblFeedbackNotesLabel.TabIndex = 8;
-            lblFeedbackNotesLabel.Text = "Notes";
+            lblFeedbackNotesLabel.Text = "备注";
             //
             // txtFeedbackNotes
             //
@@ -120,7 +120,7 @@ namespace PS4PKGTool
             btnFeedbackSave.Name = "btnFeedbackSave";
             btnFeedbackSave.Size = new System.Drawing.Size(76, 30);
             btnFeedbackSave.TabIndex = 10;
-            btnFeedbackSave.Text = "Save Result";
+            btnFeedbackSave.Text = "保存结果";
             btnFeedbackSave.Click += btnFeedbackSave_Click;
             //
             // btnFeedbackCreateReport
@@ -129,7 +129,7 @@ namespace PS4PKGTool
             btnFeedbackCreateReport.Name = "btnFeedbackCreateReport";
             btnFeedbackCreateReport.Size = new System.Drawing.Size(178, 30);
             btnFeedbackCreateReport.TabIndex = 11;
-            btnFeedbackCreateReport.Text = "Create Compatibility Report";
+            btnFeedbackCreateReport.Text = "创建兼容性报告";
             btnFeedbackCreateReport.Click += btnFeedbackCreateReport_Click;
             //
             // btnFeedbackSkip
@@ -138,7 +138,7 @@ namespace PS4PKGTool
             btnFeedbackSkip.Name = "btnFeedbackSkip";
             btnFeedbackSkip.Size = new System.Drawing.Size(88, 30);
             btnFeedbackSkip.TabIndex = 12;
-            btnFeedbackSkip.Text = "Skip";
+            btnFeedbackSkip.Text = "跳过";
             btnFeedbackSkip.Click += btnFeedbackSkip_Click;
             //
             // GameFeedbackForm
@@ -165,7 +165,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "GameFeedbackForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Add Test Result";
+            Text = "添加测试结果";
             ResumeLayout(false);
             PerformLayout();
         }

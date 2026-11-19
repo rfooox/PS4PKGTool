@@ -25,12 +25,12 @@ public sealed class TextDetector : IAssetDetector
         if (!TextExtensions.Contains(ext)) return null;
 
         double confidence = 0.5;
-        var evidence = new List<string> { $"text extension '{ext}'" };
+        var evidence = new List<string> { $"文本扩展名 '{ext}'" };
 
         if (LooksLikeText(source))
         {
             confidence = 0.8;
-            evidence.Add("printable content");
+            evidence.Add("可打印内容");
         }
 
         return new AssetDetectionResult { Format = "text", Confidence = confidence, Evidence = evidence };

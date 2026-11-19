@@ -109,7 +109,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             string buildId = release.BuildId;
             string finalDir = BuildDirectory(component, buildId);
             if (Directory.Exists(finalDir))
-                throw new InvalidOperationException($"Managed build already exists: {finalDir}");
+                throw new InvalidOperationException($"托管版本已存在：{finalDir}");
 
             string exeName = component == Shadps4Component.Core
                 ? Shadps4EnvironmentResolver.CoreExeFileName
@@ -117,7 +117,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             string expectedExe = Path.Combine(stagingDir, exeName);
             if (!File.Exists(expectedExe))
                 throw new InvalidOperationException(
-                    $"Extracted build does not contain {exeName} - security software may have quarantined it.");
+                    $"解压后的版本中不含 {exeName}——可能被安全软件隔离了。");
 
             var manifest = new Shadps4BuildManifest
             {
@@ -199,7 +199,7 @@ namespace PS4PKGTool.Utilities.Shadps4
             }
             catch (Exception ex)
             {
-                throw new IOException("Could not remove the build folder:\n" + dir + "\n\n" + ex.Message);
+                throw new IOException("无法删除版本目录：\n" + dir + "\n\n" + ex.Message);
             }
         }
 

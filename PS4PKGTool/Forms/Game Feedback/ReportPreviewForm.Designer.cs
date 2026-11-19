@@ -34,7 +34,7 @@ namespace PS4PKGTool
             btnPreviewClose.Name = "btnPreviewClose";
             btnPreviewClose.Size = new System.Drawing.Size(98, 30);
             btnPreviewClose.TabIndex = 1;
-            btnPreviewClose.Text = "Close";
+            btnPreviewClose.Text = "关闭";
             btnPreviewClose.Click += btnPreviewClose_Click;
             // 
             // ReportPreviewForm
@@ -50,7 +50,7 @@ namespace PS4PKGTool
             MinimizeBox = false;
             Name = "ReportPreviewForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "Report Preview";
+            Text = "报告预览";
             Shown += ReportPreviewForm_Shown;
             ResumeLayout(false);
             PerformLayout();

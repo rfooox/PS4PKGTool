@@ -59,7 +59,7 @@ public sealed class TextFileHandler : IAssetHandler, IAssetPreviewProvider
         if (nul > 0) text = text.Substring(nul);
 
         string info = source.Length > PreviewHeadBytes
-            ? $"Showing first {HelperFormatBytes(PreviewHeadBytes)} of {HelperFormatBytes(source.Length)}"
+            ? $"仅显示前 {HelperFormatBytes(PreviewHeadBytes)}（共 {HelperFormatBytes(source.Length)}）"
             : $"{HelperFormatBytes(source.Length)}";
 
         return Task.FromResult<AssetPreview?>(AssetPreview.ForText(text, info));

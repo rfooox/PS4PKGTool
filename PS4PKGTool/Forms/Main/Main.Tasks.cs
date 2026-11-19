@@ -71,10 +71,10 @@ public partial class Main
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Task queue shutdown failed: {ex}");
+            Logger.LogError($"任务队列关闭失败：{ex}");
             Enabled = true;
             _taskQueueShutdownInProgress = false;
-            ShowError("The active task could not be stopped safely. Close it before exiting.", true);
+            ShowError("无法安全停止当前任务。请先关闭它再退出。", true);
         }
     }
 
@@ -224,14 +224,14 @@ public partial class Main
         TimeSpan? elapsed = startedAt is not null && finishedAt is not null && finishedAt >= startedAt ? finishedAt - startedAt : null;
 
         var summary = new List<string>();
-        if (completed > 0) summary.Add($"{completed} completed");
-        if (failed > 0) summary.Add($"{failed} failed");
-        if (cancelled > 0) summary.Add($"{cancelled} cancelled");
-        if (interrupted > 0) summary.Add($"{interrupted} interrupted");
-        string duration = elapsed is null ? "" : $" in {FormatQueueDuration(elapsed.Value)}";
+        if (completed > 0) summary.Add($"{completed} 个已完成");
+        if (failed > 0) summary.Add($"{failed} 个失败");
+        if (cancelled > 0) summary.Add($"{cancelled} 个已取消");
+        if (interrupted > 0) summary.Add($"{interrupted} 个已中断");
+        string duration = elapsed is null ? "" : $"，用时 {FormatQueueDuration(elapsed.Value)}";
         bool allCompleted = completed == tasks.Count;
 
-        AppMessageBox.Show(allCompleted ? "All tasks completed" : "Task queue finished",
+        AppMessageBox.Show(allCompleted ? "所有任务已完成" : "任务队列已结束",
             string.Join(", ", summary) + duration + ".",
             allCompleted ? AppMessageType.Info : AppMessageType.Warning, AppMessageButtons.OK);
     }
@@ -253,14 +253,14 @@ public partial class Main
     private static string FormatQueueProgress(QueuedPackageTask task)
     {
         if (task.Status == QueueTaskStatus.Completed) return FormatCompletedStatus(task);
-        if (task.Status == QueueTaskStatus.Failed) return $"Failed - {task.Message}";
-        if (task.Status == QueueTaskStatus.Cancelled) return $"Cancelled - {task.Message}";
-        if (task.Status == QueueTaskStatus.Interrupted) return "Interrupted during previous session";
+        if (task.Status == QueueTaskStatus.Failed) return $"失败 - {task.Message}";
+        if (task.Status == QueueTaskStatus.Cancelled) return $"已取消 - {task.Message}";
+        if (task.Status == QueueTaskStatus.Interrupted) return "在上一次会话中被中断";
 
         QueueTaskProgress p = task.Progress;
-        if (p.TotalItems > 0) return $"{p.Stage} · {Math.Min(p.CurrentItems, p.TotalItems)}/{p.TotalItems} files";
+        if (p.TotalItems > 0) return $"{p.Stage} · {Math.Min(p.CurrentItems, p.TotalItems)}/{p.TotalItems} 个文件";
         if (p.TotalBytes > 0) return $"{p.Stage} · {p.CurrentBytes / 1048576d:F1}/{p.TotalBytes / 1048576d:F1} MB";
-        return p.TotalSteps > 0 ? $"{p.Stage} · step {p.Step}/{p.TotalSteps}" : task.Message;
+        return p.TotalSteps > 0 ? $"{p.Stage} · 步骤 {p.Step}/{p.TotalSteps}" : task.Message;
     }
 
     private static string FormatCompletedStatus(QueuedPackageTask task)
@@ -270,8 +270,8 @@ public partial class Main
 
         TimeSpan elapsed = completedAt - startedAt;
         return elapsed.TotalHours >= 1
-            ? $"Completed in {(int)elapsed.TotalHours:00}:{elapsed.Minutes:00}:{elapsed.Seconds:00}"
-            : $"Completed in {(int)elapsed.TotalMinutes:00}:{elapsed.Seconds:00}";
+            ? $"完成，用时 {(int)elapsed.TotalHours:00}:{elapsed.Minutes:00}:{elapsed.Seconds:00}"
+            : $"完成，用时 {(int)elapsed.TotalMinutes:00}:{elapsed.Seconds:00}";
     }
 
     private static Color TaskStatusColor(QueueTaskStatus status) => status switch
@@ -288,10 +288,10 @@ public partial class Main
         QueuedPackageTask? task = SelectedTask;
         if (task is null)
         {
-            _taskStageLabel.Text = "Select a task to see details.";
-            _taskProgressLabel.Text = "Current task";
+            _taskStageLabel.Text = "选择任务以查看详情。";
+            _taskProgressLabel.Text = "当前任务";
             SetTaskProgressLabelAppearance(completed: false);
-            _taskOverallLabel.Text = "Overall progress";
+            _taskOverallLabel.Text = "总进度";
             _taskDetailLabel.Text = "";
             SetProgressValue(_taskOverallProgress, 0);
             SetProgressValue(_taskCurrentProgress, 0);
@@ -307,16 +307,16 @@ public partial class Main
         _taskStageLabel.Text = $"{task.Type}: {task.DisplayName} - {task.Status}";
         int overallProgress = CalculateOverallProgress(p, task.Status);
         SetProgressValue(_taskOverallProgress, overallProgress);
-        _taskOverallLabel.Text = $"Overall progress: {overallProgress}%";
+        _taskOverallLabel.Text = $"总进度：{overallProgress}%";
         int currentProgress = completed ? 100 : p.TotalBytes > 0 ? (int)Math.Clamp(p.CurrentBytes * 100 / p.TotalBytes, 0, 100)
             : p.TotalItems > 0 ? Math.Clamp(p.CurrentItems * 100 / p.TotalItems, 0, 100) : 0;
         SetProgressValue(_taskCurrentProgress, currentProgress);
         _taskProgressLabel.Text = completed ? FormatCompletedStatus(task) : p.TotalSteps > 0
-            ? $"Current task - Step {p.Step} of {p.TotalSteps} · {p.Stage}"
-            : $"Current task - {p.Stage}";
+            ? $"当前任务 - 第 {p.Step}/{p.TotalSteps} 步 · {p.Stage}"
+            : $"当前任务 - {p.Stage}";
         SetTaskProgressLabelAppearance(completed);
         _taskDetailLabel.Text = completed ? task.Message :
-            p.TotalItems > 0 ? $"{p.CurrentItems} / {p.TotalItems} files · {p.CurrentFile}" :
+            p.TotalItems > 0 ? $"{p.CurrentItems} / {p.TotalItems} 个文件 · {p.CurrentFile}" :
             p.TotalBytes > 0 ? $"{p.CurrentBytes / 1048576d:F1} MB / {p.TotalBytes / 1048576d:F1} MB · {p.CurrentFile}" :
             string.IsNullOrWhiteSpace(p.CurrentFile) ? task.Message : $"{p.Stage}: {p.CurrentFile}";
         _taskCancel!.Enabled = task.Status is QueueTaskStatus.Queued or QueueTaskStatus.Running;
@@ -374,7 +374,7 @@ public partial class Main
     {
         if (string.IsNullOrEmpty(_taskLogBox.Text)) return;
         try { Clipboard.SetText(_taskLogBox.Text); }
-        catch (Exception ex) { Logger.LogWarning("Copy task log failed: " + ex.Message); }
+        catch (Exception ex) { Logger.LogWarning("复制任务日志失败：" + ex.Message); }
     }
 
     private void SetTaskProgressLabelAppearance(bool completed)
@@ -455,7 +455,7 @@ public partial class Main
             async (queued, ct) =>
             {
                 if (Shadps4Manager.IsInstallationActive)
-                    return new QueueTaskExecutionResult(false, "A direct shadPS4 installation is already running.");
+                    return new QueueTaskExecutionResult(false, "已有一个直接 shadPS4 安装任务正在运行。");
 
                 var stageProgress = new Progress<string>(stage =>
                 {
@@ -465,7 +465,7 @@ public partial class Main
                     queued.Report(new QueueTaskProgress(stage, step, 5));
                 });
                 var fileProgress = new Progress<(int Current, int Total, string CurrentFile)>(p =>
-                    queued.Report(new QueueTaskProgress("Extracting PKG", 2, 5, CurrentItems: p.Current + 1,
+                    queued.Report(new QueueTaskProgress("正在提取 PKG", 2, 5, CurrentItems: p.Current + 1,
                         TotalItems: p.Total, CurrentFile: p.CurrentFile)));
                 Shadps4InstallResult result = await Task.Run(() => new Shadps4InstallService().Install(
                     request.PkgPath, request.TitleId, request.Library, request.Replace, stageProgress, ct,

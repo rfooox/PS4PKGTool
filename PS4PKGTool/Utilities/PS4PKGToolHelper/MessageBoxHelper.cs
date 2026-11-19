@@ -14,7 +14,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         public static DialogResult ShowError(string message, bool logging)
         {
             if (logging) Logger.LogError(message);
-            return AppMessageBox.Show("Error", message, AppMessageType.Error, AppMessageButtons.OK);
+            return AppMessageBox.Show("错误", message, AppMessageType.Error, AppMessageButtons.OK);
         }
 
         public static DialogResult ShowWarning(string message, bool logging)

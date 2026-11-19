@@ -28,7 +28,7 @@ public sealed class UnitySerializedFileDetector : IAssetDetector
                 Format = UnitySerializedFileHandler.FormatId,
                 Engine = "unity",
                 Confidence = 0.8,
-                Evidence = new[] { "serialized file header probe (version 5-22)" },
+                Evidence = new[] { "序列化文件头部探测（版本 5-22）" },
             };
         }
         catch { return null; }

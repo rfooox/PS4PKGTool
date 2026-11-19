@@ -118,13 +118,13 @@ namespace PS4PKGTool.Utilities.PkgInspection
         internal PkgInspectionSnapshot Inspect(string packagePath, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(packagePath))
-                throw new ArgumentException("A package path is required.", nameof(packagePath));
+                throw new ArgumentException("必须指定安装包路径。", nameof(packagePath));
 
             string fullPath = Path.GetFullPath(packagePath);
             cancellationToken.ThrowIfCancellationRequested();
 
             RawPkgInspectionData raw = _reader.Read(fullPath)
-                ?? throw new InvalidDataException("The package reader returned no package metadata.");
+                ?? throw new InvalidDataException("安装包读取器未返回任何安装包元数据。");
 
             cancellationToken.ThrowIfCancellationRequested();
             return Map(fullPath, raw);
@@ -138,7 +138,7 @@ namespace PS4PKGTool.Utilities.PkgInspection
             IReadOnlyList<PkgSfoEntry> entries = raw.SfoEntries ?? Array.Empty<PkgSfoEntry>();
             string packageVersion = FindSfoValue(entries, "VERSION");
             string sdkVersion = PkgBuildInfoParser.Parse(FindSfoValue(entries, "PUBTOOLINFO"))
-                .FirstOrDefault(field => field.Name == "PS4 SDK Version")?.Value;
+                .FirstOrDefault(field => field.Name == "PS4 SDK 版本")?.Value;
             string requiredFirmware = string.IsNullOrWhiteSpace(sdkVersion)
                 ? FormatSystemVersion(FindSfoValue(entries, "SYSTEM_VER"))
                 : PkgSystemVersion.FormatSdkVersion(sdkVersion);

@@ -75,7 +75,7 @@ public sealed class AssetInspectionService
         CancellationToken ct = default)
     {
         if (depth >= MaxDepth)
-            throw new Errors.AssetException($"Container nesting exceeds the depth limit of {MaxDepth}.");
+            throw new Errors.AssetException($"容器嵌套层级超过上限 {MaxDepth}。");
 
         var handler = _handlers.Get(detection.Format);
         if (handler == null || !handler.IsContainer(detection))

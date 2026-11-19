@@ -16,7 +16,7 @@ namespace PS4PKGTool.Assets.Unity;
 /// </summary>
 public sealed class AssetStudioBackend : IUnityAssetBackend
 {
-    public string Name => "AssetStudio-derived layout (self-written)";
+    public string Name => "参考 AssetStudio 的结构（自行实现）";
 
     /// <summary>Parse cache per source (a parse reads the whole file - do it once per source lifetime).</summary>
     private static readonly ConditionalWeakTable<IAssetSource, UnitySerializedFile> ParseCache = new();

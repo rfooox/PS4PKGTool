@@ -31,7 +31,7 @@ public sealed class Atrac9Handler : IAssetHandler, IAssetPreviewProvider
         stream.ReadExactly(head);
 
         if (head.Length < 14 || head[0] != 'A' || head[1] != 'T' || head[2] != '9')
-            throw new CorruptAssetException("Missing ATRAC9 magic.");
+            throw new CorruptAssetException("缺少 ATRAC9 魔数。");
 
         // Sony AT9 header: 3-byte magic, version, flags, config (channels,
         // sample-rate index, bitrate index, superframe/frame sizes).
@@ -71,12 +71,12 @@ public sealed class Atrac9Handler : IAssetHandler, IAssetPreviewProvider
     {
         var descriptor = InspectAsync(source, detection, ct).GetAwaiter().GetResult();
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"ATRAC9 Audio: {descriptor.Metadata.GetValueOrDefault("Channels")} ch, {descriptor.Metadata.GetValueOrDefault("Sample Rate")}");
+        sb.AppendLine($"ATRAC9 音频：{descriptor.Metadata.GetValueOrDefault("Channels")} 声道，{descriptor.Metadata.GetValueOrDefault("Sample Rate")}");
         sb.AppendLine($"Superframe: {descriptor.Metadata.GetValueOrDefault("Superframe Size")} bytes");
         sb.AppendLine($"Frame: {descriptor.Metadata.GetValueOrDefault("Frame Size")} bytes");
-        sb.AppendLine($"Duration (est): {descriptor.Metadata.GetValueOrDefault("Duration")}");
+        sb.AppendLine($"时长（估算）：{descriptor.Metadata.GetValueOrDefault("Duration")}");
         sb.AppendLine();
-        sb.AppendLine("ATRAC9 PCM decode (LibAtrac9 port) arrives in the audio phase.");
+        sb.AppendLine("ATRAC9 PCM 解码（LibAtrac9 移植版）将在音频阶段加入。");
         return Task.FromResult<AssetPreview?>(AssetPreview.ForText(sb.ToString()));
     }
 

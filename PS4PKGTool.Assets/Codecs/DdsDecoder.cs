@@ -23,7 +23,7 @@ public static class DdsDecoder
     public static byte[] DecodeBcPayload(int width, int height, string fourCc, ReadOnlySpan<byte> payload)
     {
         if (payload.Length > int.MaxValue - 128)
-            throw new UnsupportedAssetException($"Texture payload is too large ({payload.Length} bytes).");
+            throw new UnsupportedAssetException($"纹理数据过大（{payload.Length} 字节）。");
         var dds = new byte[128 + payload.Length];
         System.Text.Encoding.ASCII.GetBytes("DDS ").CopyTo(dds, 0);
         BitConverter.GetBytes(124).CopyTo(dds, 4);                          // dwSize
@@ -53,8 +53,8 @@ public static class DdsDecoder
 
     public static DdsInfo ReadHeader(ReadOnlySpan<byte> data)
     {
-        if (data.Length < 128) throw new CorruptAssetException("DDS header too short.");
-        if (!HasDdsMagic(data)) throw new CorruptAssetException("Missing DDS magic.");
+        if (data.Length < 128) throw new CorruptAssetException("DDS 头部过短。");
+        if (!HasDdsMagic(data)) throw new CorruptAssetException("缺少 DDS 魔数。");
 
         int height = BitConverter.ToInt32(data[12..16]);
         int width = BitConverter.ToInt32(data[16..20]);
@@ -94,7 +94,7 @@ public static class DdsDecoder
     /// <summary>Decodes the base mip level to RGBA8. Only BC1/BC2/BC3 are supported.</summary>
     public static (byte[] rgba, bool hasAlpha) Decode(ReadOnlySpan<byte> data, DdsInfo info)
     {
-        if (info.Width <= 0 || info.Height <= 0) throw new CorruptAssetException("DDS has invalid dimensions.");
+        if (info.Width <= 0 || info.Height <= 0) throw new CorruptAssetException("DDS 尺寸无效。");
 
         string fourCc = info.IsDx10 ? (info.Dx10Format ?? info.FourCc) : info.FourCc;
 
@@ -103,7 +103,7 @@ public static class DdsDecoder
             "DXT1" or "BC1 (DXT1)" or "BC1" => (DecodeBc1(data, info.Width, info.Height), true),
             "DXT3" or "BC2 (DXT3)" or "BC2" => (DecodeBc2(data, info.Width, info.Height), true),
             "DXT5" or "BC3 (DXT5)" or "BC3" => (DecodeBc3(data, info.Width, info.Height), true),
-            _ => throw new UnsupportedAssetException($"DDS pixel format '{fourCc}' is not supported yet (BC1/BC2/BC3 only)."),
+            _ => throw new UnsupportedAssetException($"暂不支持 DDS 像素格式 '{fourCc}'（仅支持 BC1/BC2/BC3）。"),
         };
     }
 
@@ -121,7 +121,7 @@ public static class DdsDecoder
     {
         if (width > MaxDimension || height > MaxDimension)
             throw new UnsupportedAssetException(
-                $"Texture {width}x{height} exceeds the maximum supported {MaxDimension}px dimension.");
+                $"纹理 {width}x{height} 超过支持的最大边长 {MaxDimension}px。");
 
         int stride = format == BcFormat.Bc1 ? 8 : 16;
         int blocksW = (width + 3) / 4;
@@ -130,7 +130,7 @@ public static class DdsDecoder
         // check and bypass the truncation guard below.
         long needed = (long)blocksW * blocksH * stride;
         if (data.Length < 128 + needed)
-            throw new CorruptAssetException("DDS data is truncated for the declared dimensions.");
+            throw new CorruptAssetException("DDS 数据长度与声明的尺寸不符（已截断）。");
 
         bool hasAlphaThreshold = format == BcFormat.Bc1;
         var rgba = new byte[width * height * 4];

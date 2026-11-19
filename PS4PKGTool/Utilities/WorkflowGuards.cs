@@ -24,15 +24,15 @@ namespace PS4PKGTool.Utilities
         internal static void VerifyDownloadedPiece(string path, long actualSize, long expectedSize, string expectedSha256)
         {
             if (expectedSize > 0 && actualSize != expectedSize)
-                throw new InvalidDataException($"Downloaded size is {actualSize} bytes; expected {expectedSize} bytes.");
+                throw new InvalidDataException($"下载大小为 {actualSize} 字节；预期 {expectedSize} 字节。");
 
             string expected = new string((expectedSha256 ?? "").Where(Uri.IsHexDigit).ToArray());
             if (expected.Length != 64)
-                throw new InvalidDataException("The update manifest contains an invalid SHA-256 value.");
+                throw new InvalidDataException("更新清单中的 SHA-256 值无效。");
             using var stream = File.OpenRead(path);
             string actual = Convert.ToHexString(SHA256.HashData(stream));
             if (!actual.Equals(expected, StringComparison.OrdinalIgnoreCase))
-                throw new InvalidDataException("Downloaded SHA-256 does not match the update manifest.");
+                throw new InvalidDataException("下载内容的 SHA-256 与更新清单不匹配。");
         }
     }
 }

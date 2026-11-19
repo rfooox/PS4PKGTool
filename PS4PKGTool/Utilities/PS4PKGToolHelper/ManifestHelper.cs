@@ -68,7 +68,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Failed to load manifest: {ex.Message}");
+                Logger.LogError($"加载清单失败：{ex.Message}");
                 return null;
             }
         }
@@ -80,16 +80,16 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
         public static (bool IsValid, string Reason) ValidateManifest(ManifestData manifest, AppSettings currentSettings)
         {
             if (manifest == null)
-                return (false, "Manifest is null.");
+                return (false, "清单为空。");
 
             if (manifest.SchemaVersion != 1)
-                return (false, $"Unsupported manifest schema version: {manifest.SchemaVersion}.");
+                return (false, $"不支持的清单 schema 版本：{manifest.SchemaVersion}。");
 
             if (manifest.PkgDirectories == null || manifest.PkgDirectories.Count == 0)
-                return (false, "Manifest contains no PKG directories.");
+                return (false, "清单中没有任何 PKG 目录。");
 
             if (currentSettings.PkgDirectories == null || currentSettings.PkgDirectories.Count == 0)
-                return (false, "No PKG directories configured in settings.");
+                return (false, "设置中未配置任何 PKG 目录。");
 
             // Compare directory sets (order-independent)
             var manifestDirs = new HashSet<string>(
@@ -100,7 +100,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                 StringComparer.OrdinalIgnoreCase);
 
             if (!manifestDirs.SetEquals(settingsDirs))
-                return (false, "PKG directories have changed since the manifest was created.");
+                return (false, "自清单创建以来，PKG 目录已发生变化。");
 
             if (manifest.ScanRecursive != currentSettings.ScanRecursive)
                 return (false, "Scan recursive setting has changed.");
@@ -143,7 +143,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
             }
 
             if (removed > 0)
-                Logger.LogWarning($"{removed} PKG entries removed from manifest (file missing or modified).");
+                Logger.LogWarning($"已从清单中移除 {removed} 个 PKG 条目（文件缺失或已被修改）。");
 
             return (valid, removed);
         }
@@ -279,7 +279,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
                 Directory.CreateDirectory(manifestDirectory);
 
             File.WriteAllText(manifestFilePath, json);
-            Logger.LogInformation($"Manifest saved: {entries.Count} entries to {manifestFilePath}");
+            Logger.LogInformation($"清单已保存：{entries.Count} 个条目 -> {manifestFilePath}");
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace PS4PKGTool.Utilities.PS4PKGToolHelper
             if (File.Exists(ManifestFilePath))
             {
                 File.Delete(ManifestFilePath);
-                Logger.LogInformation("Manifest deleted.");
+                Logger.LogInformation("清单已删除。");
             }
         }
 

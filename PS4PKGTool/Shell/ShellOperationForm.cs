@@ -21,7 +21,7 @@ namespace PS4PKGTool.Shell
         public bool Cancelled { get; init; }
 
         /// <summary>Convenience factory for a user-cancelled operation.</summary>
-        public static ShellOperationResult CancelledResult(string message = "Cancelled.")
+        public static ShellOperationResult CancelledResult(string message = "已取消。")
             => new(false, message) { Cancelled = true };
     }
 
@@ -104,12 +104,12 @@ namespace PS4PKGTool.Shell
             }
             catch (OperationCanceledException)
             {
-                result = new ShellOperationResult(false, "Cancelled");
+                result = new ShellOperationResult(false, "已取消");
             }
             catch (Exception ex)
             {
-                Logger.LogError("Shell operation failed: " + ex);
-                result = new ShellOperationResult(false, "The operation failed: " + ex.Message, ex.ToString());
+                Logger.LogError("Shell 操作失败：" + ex);
+                result = new ShellOperationResult(false, "操作失败：" + ex.Message, ex.ToString());
             }
 
             _finished = true;
@@ -133,12 +133,12 @@ namespace PS4PKGTool.Shell
 
             if (result.Succeeded)
             {
-                lblShellStage.Text = "Complete";
+                lblShellStage.Text = "完成";
                 lblShellResult.Text = result.Message;
             }
             else
             {
-                lblShellStage.Text = "Failed";
+                lblShellStage.Text = "失败";
                 lblShellStage.ForeColor = System.Drawing.Color.FromArgb(220, 80, 80);
                 lblShellResult.Text = result.Message;
             }
@@ -163,7 +163,7 @@ namespace PS4PKGTool.Shell
             if (_finished) return;
             _cts.Cancel();
             btnShellCancel.Enabled = false;
-            lblShellStage.Text = "Cancelling...";
+            lblShellStage.Text = "正在取消……";
         }
 
         private void btnShellClose_Click(object sender, EventArgs e)
@@ -190,7 +190,7 @@ namespace PS4PKGTool.Shell
             try
             {
                 Clipboard.SetText(string.IsNullOrEmpty(result.Details) ? result.Message : result.Details);
-                btnShellCopyResult.Text = "Copied";
+                btnShellCopyResult.Text = "已复制";
             }
             catch { /* best-effort: clipboard locked by another process */ }
         }

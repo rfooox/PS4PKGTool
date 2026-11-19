@@ -108,7 +108,7 @@ public sealed class TaskQueueService : IDisposable
             else return;
         }
         if (wasQueued)
-            task.MarkCancelled("Cancelled before starting.");
+            task.MarkCancelled("在开始前已取消。");
         else
         {
             task.BeginCancellation();
@@ -185,7 +185,7 @@ public sealed class TaskQueueService : IDisposable
                 // queue and invokes user handlers. Run them outside _gate so we
                 // never perform file I/O or call foreign code while holding it.
                 task.SetStatus(QueueTaskStatus.Running);
-                CoreLog.Info($"Task started: {task.Type} - {task.DisplayName}");
+                CoreLog.Info($"任务已启动：{task.Type} - {task.DisplayName}");
                 RaiseChanged(forcePersistence: true);
                 try
                 {
@@ -193,21 +193,21 @@ public sealed class TaskQueueService : IDisposable
                     if (_shutdown.IsCancellationRequested)
                     {
                         task.MarkInterrupted();
-                        CoreLog.Warn($"Task interrupted: {task.Type} - {task.DisplayName}");
+                        CoreLog.Warn($"任务被中断：{task.Type} - {task.DisplayName}");
                     }
                     else if (task.CancellationRequested)
                     {
                         task.MarkCancelled("Cancelled.");
-                        CoreLog.Warn($"Task cancelled: {task.Type} - {task.DisplayName}");
+                        CoreLog.Warn($"任务已取消：{task.Type} - {task.DisplayName}");
                     }
                     else
                     {
                         task.SetStatus(result.Succeeded ? QueueTaskStatus.Completed : QueueTaskStatus.Failed,
                             result.Message, result.OutputPath);
                         if (result.Succeeded)
-                            CoreLog.Info($"Task finished: {task.Type} - {task.DisplayName}");
+                            CoreLog.Info($"任务完成：{task.Type} - {task.DisplayName}");
                         else
-                            CoreLog.Err($"Task failed: {task.Type} - {task.DisplayName}: {result.Message}");
+                            CoreLog.Err($"任务失败：{task.Type} - {task.DisplayName}：{result.Message}");
                     }
                 }
                 catch (OperationCanceledException)
@@ -215,13 +215,13 @@ public sealed class TaskQueueService : IDisposable
                     if (!_shutdown.IsCancellationRequested)
                     {
                         task.MarkCancelled("Cancelled.");
-                        CoreLog.Warn($"Task cancelled: {task.Type} - {task.DisplayName}");
+                        CoreLog.Warn($"任务已取消：{task.Type} - {task.DisplayName}");
                     }
                 }
                 catch (Exception ex)
                 {
                     task.SetStatus(QueueTaskStatus.Failed, ex.Message);
-                    CoreLog.Err($"Task failed: {task.Type} - {task.DisplayName}: {ex.Message}");
+                    CoreLog.Err($"任务失败：{task.Type} - {task.DisplayName}：{ex.Message}");
                 }
                 RaiseChanged(forcePersistence: true);
                     if (!AutoStart) break;
@@ -447,7 +447,7 @@ public sealed class QueuedPackageTask
         {
             Status = QueueTaskStatus.Interrupted;
             Progress = new QueueTaskProgress("Interrupted");
-            Message = "Interrupted during previous session.";
+            Message = "在之前的会话中被中断。";
             CompletedAtUtc = DateTime.UtcNow;
         }
         Changed?.Invoke(this, EventArgs.Empty);
@@ -458,7 +458,7 @@ public sealed class QueuedPackageTask
         Status = saved.Status is QueueTaskStatus.Running or QueueTaskStatus.Cancelling ? QueueTaskStatus.Interrupted : saved.Status;
         Progress = saved.Progress ?? new QueueTaskProgress("Waiting");
         Message = saved.Status is QueueTaskStatus.Running or QueueTaskStatus.Cancelling
-            ? "Interrupted during previous session."
+            ? "在之前的会话中被中断。"
             : saved.Message ?? "Waiting";
         StartedAtUtc = saved.StartedAtUtc;
         CompletedAtUtc = saved.CompletedAtUtc;

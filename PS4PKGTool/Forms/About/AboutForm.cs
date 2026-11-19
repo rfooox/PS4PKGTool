@@ -10,7 +10,7 @@ namespace PS4PKGTool
         public AboutForm(string version)
         {
             InitializeComponent();
-            lblVersion.Text = "Version " + version;
+            lblVersion.Text = "版本 " + version;
         }
 
         private void btnGitHub_Click(object sender, EventArgs e)

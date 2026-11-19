@@ -13,7 +13,7 @@ public sealed class SliceAssetSource : IAssetSource
     public SliceAssetSource(IAssetSource parent, long offset, long length, string? name = null, string? sourceDescription = null)
     {
         if (offset < 0 || length < 0 || offset + length > parent.Length)
-            throw new ArgumentOutOfRangeException(nameof(length), "Slice must fit within the parent source.");
+            throw new ArgumentOutOfRangeException(nameof(length), "切片必须完全位于父级源内。");
         _parent = parent;
         Offset = offset;
         Length = length;
@@ -31,7 +31,7 @@ public sealed class SliceAssetSource : IAssetSource
     public Stream OpenRead(long offset, long length)
     {
         if (offset < 0 || length < 0 || offset + length > Length)
-            throw new ArgumentOutOfRangeException(nameof(length), "Nested slice must fit within this slice.");
+            throw new ArgumentOutOfRangeException(nameof(length), "嵌套切片必须完全位于本切片内。");
         return _parent.OpenRead(Offset + offset, length);
     }
 }

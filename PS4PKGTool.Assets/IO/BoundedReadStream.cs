@@ -70,7 +70,7 @@ public sealed class BoundedReadStream : Stream
             SeekOrigin.End => _length + offset,
             _ => throw new ArgumentOutOfRangeException(nameof(origin)),
         };
-        if (target < 0) throw new IOException("Cannot seek before the start of the slice.");
+        if (target < 0) throw new IOException("无法定位到切片起点之前。");
         _position = target;
         return _position;
     }

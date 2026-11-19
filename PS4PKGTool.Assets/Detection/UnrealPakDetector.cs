@@ -27,7 +27,7 @@ public sealed class UnrealPakDetector : IAssetDetector
             Format = UnrealPakHandler.FormatId,
             Engine = "unreal",
             Confidence = 1.0,
-            Evidence = new[] { "PAK trailer magic probe (0x5A6F12E1/E2)" },
+            Evidence = new[] { "PAK 尾部魔数探测（0x5A6F12E1/E2）" },
         };
     }
 }

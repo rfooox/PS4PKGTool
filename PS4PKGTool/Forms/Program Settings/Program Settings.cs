@@ -55,7 +55,7 @@ namespace PS4PKGTool
         private void RefreshShellIntegrationStatus()
         {
             bool installed = PS4PKGTool.Shell.ShellRegistry.IsInstalled();
-            lblShellIntegrationStatus.Text = "Status: " + (installed ? "Installed" : "Not installed");
+            lblShellIntegrationStatus.Text = "状态：" + (installed ? "已安装" : "未安装");
             btnShellInstall.Visible = !installed;
             btnShellRemove.Visible = installed;
             appSettings_.ShellIntegrationInstalled = installed;
@@ -68,7 +68,7 @@ namespace PS4PKGTool
             SettingsManager.SaveSettings(appSettings_, SettingFilePath);
             RefreshShellIntegrationStatus();
             MessageBoxHelper.ShowInformation(
-                "File Explorer integration installed.\n\nRight-click a .pkg file and choose PS4 PKG Tool to validate, extract, rename, copy metadata or install to shadPS4.",
+                "已安装资源管理器右键菜单集成。\n\n右键点击 .pkg 文件并选择 PS4 PKG Tool，即可校验、提取、重命名、复制元数据或安装到 shadPS4。",
                 false);
         }
 
@@ -78,7 +78,7 @@ namespace PS4PKGTool
             appSettings_.ShellIntegrationInstalled = false;
             SettingsManager.SaveSettings(appSettings_, SettingFilePath);
             RefreshShellIntegrationStatus();
-            MessageBoxHelper.ShowInformation("File Explorer integration removed.", false);
+            MessageBoxHelper.ShowInformation("已移除资源管理器右键菜单集成。", false);
         }
 
      
@@ -127,7 +127,7 @@ namespace PS4PKGTool
                 "macos" => 2,
                 _ => 0, // windows (default)
             };
-            labelShadps4JsonDate.Text = Shadps4Compat.LastDownload?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? "Not downloaded";
+            labelShadps4JsonDate.Text = Shadps4Compat.LastDownload?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? "未下载";
             Location.Checked = appSettings_.pkgDirectoryColumn;
             Size.Checked = appSettings_.pkgsizeColumn;
             Category.Checked = appSettings_.pkgcategoryColumn;
@@ -196,7 +196,7 @@ namespace PS4PKGTool
 
         private void SaveSettings()
         {
-            Logger.LogInformation("Saving program settings..");
+            Logger.LogInformation("正在保存程序设置……");
 
             appSettings_.PlayBgm = BGM.Checked;
             appSettings_.AutoSortRow = AutoSortRow.Checked;
@@ -261,7 +261,7 @@ namespace PS4PKGTool
         {
             using var dialog = new FolderBrowserDialog
             {
-                Description = "Choose a temporary directory for PKG working files.",
+                Description = "选择用于 PKG 工作文件的临时目录。",
                 ShowNewFolderButton = true
             };
 
@@ -312,7 +312,7 @@ namespace PS4PKGTool
             if (tbPS4IP.Text == string.Empty)
                 return;
 
-            Logger.LogInformation("Checking PS4 connectivity..");
+            Logger.LogInformation("正在检查 PS4 连接……");
             btnPingPs4.Enabled = false;
             bool isPS4Connected;
             try
@@ -327,22 +327,22 @@ namespace PS4PKGTool
 
             if (isPS4Connected)
             {
-                ShowInformation("PS4 detected.", true);
+                ShowInformation("已检测到 PS4。", true);
             }
             else
             {
-                ShowError("PS4 not detected.", true);
+                ShowError("未检测到 PS4。", true);
             }
         }
 
         private async void btnInstallServerModule_Click(object sender, EventArgs e)
         {
-            Logger.LogInformation("Installing http-server module..");
+            Logger.LogInformation("正在安装 http-server 模块……");
             bool nodejsInstalled = Tool.IsAppInstalled("Node.js");
 
             if (!nodejsInstalled)
             {
-                ShowInformation("Please install Node.js before installing the serve module.", true);
+                ShowInformation("请先安装 Node.js，再安装 serve 模块。", true);
                 Tool.OpenWebLink("https://nodejs.org/en/download/");
                 return;
             }
@@ -383,24 +383,24 @@ namespace PS4PKGTool
 
                     if (exitCode == 0)
                     {
-                        Logger.LogInformation("http-server package installed.");
+                        Logger.LogInformation("http-server 包安装完成。");
                         appSettings_.HttpServerInstalled = (Directory.Exists(HttpServerModulePath)) ? true : false;
                     }
                     else
                     {
-                        return $"An error occurred while installing http-server. Exit code: {exitCode}. Try installing http-server manually in Command Prompt.";
+                        return $"安装 http-server 时发生错误。退出码：{exitCode}。可尝试在命令提示符中手动安装 http-server。";
                     }
                 }
                 else
                 {
-                    Logger.LogError("Failed to start the process.");
-                    return "Failed to start the http-server installation process.";
+                    Logger.LogError("启动进程失败。");
+                    return "启动 http-server 安装进程失败。";
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError("An error occurred: " + ex.Message);
-                return "Failed to install http-server: " + ex.Message;
+                Logger.LogError("发生错误：" + ex.Message);
+                return "安装 http-server 失败：" + ex.Message;
             }
             return string.Empty;
         }
@@ -412,7 +412,7 @@ namespace PS4PKGTool
 
         private void btnInstallNodejs_Click(object sender, EventArgs e)
         {
-            Logger.LogInformation("Installing Node.js..");
+            Logger.LogInformation("正在安装 Node.js……");
             Tool.OpenWebLink("https://nodejs.org/en/download/");
         }
 
@@ -493,66 +493,66 @@ namespace PS4PKGTool
                     if (clickedButton == btnAppPkgBackColor)
                         darkLabelAppPkgColorLabel.BackColor = selectedColor;
 
-                    Logger.LogInformation($"Selected {colorValue}.");
+                    Logger.LogInformation($"已选择 {colorValue}。");
                 }
             }
         }
 
         private async void btnDownloadPS5BCJson_Click(object sender, EventArgs e)
         {
-            Logger.LogInformation("Downloading PS5 Backward Compatibility json from github..");
+            Logger.LogInformation("正在从 GitHub 下载 PS5 向后兼容 JSON……");
 
             if (!await Task.Run(() => Tool.CheckForInternetConnection("github.com")))
             {
-                ShowError("Problem occured when try connecting to Github", true);
+                ShowError("连接 GitHub 时出现问题", true);
                 return;
             }
             try
             {
-                ShowTaskbarNotification("PS5 Backward Compatibility Status", "PS5 Backward Compatibility Status is being downloaded..");
+                ShowTaskbarNotification("PS5 向后兼容状态", "正在下载 PS5 向后兼容状态……");
                 await Tool.DownloadFileFromUrlAsync("https://raw.githubusercontent.com/andshrew/supreme-enigma/master/docs/PS5-BC-Status.json", Ps5BcJsonFile);
-                ShowInformation("PS5 Backward Compatibility Status file downloaded to AppData", true);
+                ShowInformation("PS5 向后兼容状态文件已下载到 AppData", true);
                 appSettings_.Ps5BcJsonLastDownloadDate = DateTime.Now;
                 labelPs5BcJsonDownloadDate.Text = appSettings_.Ps5BcJsonLastDownloadDate.ToString("d MMMM yyyy", CultureInfo.InvariantCulture);
             }
             catch (Exception ex)
             {
-                ShowError("Failed to download PS5 Backward Compatibility Status file : " + ex.Message, true);
+                ShowError("下载 PS5 向后兼容状态文件失败：" + ex.Message, true);
             }
         }
 
         private async void btnDownloadShadps4Json_Click(object sender, EventArgs e)
         {
-            Logger.LogInformation("Downloading shadPS4 compatibility data from GitHub..");
+            Logger.LogInformation("正在从 GitHub 下载 shadPS4 兼容数据……");
 
             if (!await Task.Run(() => Tool.CheckForInternetConnection("github.com")))
             {
-                ShowError("Problem occured when try connecting to Github", true);
+                ShowError("连接 GitHub 时出现问题", true);
                 return;
             }
 
             btnDownloadShadps4Json.Enabled = false;
-            btnDownloadShadps4Json.Text = "Downloading...";
+            btnDownloadShadps4Json.Text = "下载中……";
             try
             {
-                var progress = new Progress<string>(s => Logger.LogInformation("shadPS4 compat: " + s));
+                var progress = new Progress<string>(s => Logger.LogInformation("shadPS4 兼容数据：" + s));
                 var (count, error) = await Shadps4Compat.DownloadAsync(progress);
                 if (error != null)
                 {
-                    ShowError("Failed to download shadPS4 compatibility data: " + error, true);
+                    ShowError("下载 shadPS4 兼容数据失败：" + error, true);
                     return;
                 }
-                ShowInformation($"shadPS4 compatibility data downloaded ({count} games).", true);
+                ShowInformation($"shadPS4 兼容数据下载完成（{count} 个游戏）。", true);
                 labelShadps4JsonDate.Text = Shadps4Compat.LastDownload?.ToString("d MMMM yyyy", CultureInfo.InvariantCulture) ?? "..";
             }
             catch (Exception ex)
             {
-                ShowError("Failed to download shadPS4 compatibility data: " + ex.Message, true);
+                ShowError("下载 shadPS4 兼容数据失败：" + ex.Message, true);
             }
             finally
             {
                 btnDownloadShadps4Json.Enabled = true;
-                btnDownloadShadps4Json.Text = "Download compat data";
+                btnDownloadShadps4Json.Text = "下载兼容数据";
             }
         }
 
@@ -639,13 +639,13 @@ namespace PS4PKGTool
 
                 if (lbPkgDirectoryList.Items.Contains(selectedFolder))
                 {
-                    ShowError("Path already added.", false);
+                    ShowError("该路径已添加。", false);
                     return;
                 }
 
                 if (Tool.IsRootDrive(selectedFolder))
                 {
-                    DialogResult dialogResult = DialogResultYesNo("Scanning the whole drive may take some time. Are you sure you want to proceed?");
+                    DialogResult dialogResult = DialogResultYesNo("扫描整个磁盘可能需要一些时间。确定要继续吗？");
                     if (dialogResult == DialogResult.No)
                     {
                         return;
@@ -674,7 +674,7 @@ namespace PS4PKGTool
             if (btnBuildTrophyCache != null && !btnBuildTrophyCache.Enabled)
             {
                 trophyCacheCancellation?.Cancel();
-                lblTrophyCacheStatus.Text = "Cancelling trophy metadata cache build...";
+                lblTrophyCacheStatus.Text = "正在取消奖杯元数据缓存构建……";
                 e.Cancel = true;
             }
         }
@@ -684,7 +684,7 @@ namespace PS4PKGTool
             List<string> directories = lbPkgDirectoryList.Items.Cast<string>().ToList();
             if (directories.Count == 0)
             {
-                ShowWarning("Add at least one PKG directory before building the trophy metadata cache.", false);
+                ShowWarning("请先添加至少一个 PKG 目录，然后再构建奖杯元数据缓存。", false);
                 return;
             }
 
@@ -694,7 +694,7 @@ namespace PS4PKGTool
             btnClearTrophyCache.Enabled = false;
             btnCancelTrophyCache.Enabled = true;
             btnSaveClose.Enabled = false;
-            lblTrophyCacheStatus.Text = "Scanning all configured PKG directories...";
+            lblTrophyCacheStatus.Text = "正在扫描所有已配置的 PKG 目录……";
             pbTrophyCacheProgress.Value = 0;
 
             var progress = new Progress<TrophyCacheProgress>(value =>
@@ -708,7 +708,7 @@ namespace PS4PKGTool
 
             try
             {
-                Logger.LogInformation("Building trophy metadata cache from configured PKG directories...");
+                Logger.LogInformation("正在从已配置的 PKG 目录构建奖杯元数据缓存……");
                 var builder = new TrophyMetadataCacheBuilder();
                 // The cache must include packages stored below the configured roots,
                 // independently of the normal library scan setting.
@@ -719,20 +719,20 @@ namespace PS4PKGTool
                     progress: progress,
                     cancellationToken: trophyCacheCancellation.Token);
 
-                string summary = $"PKGs: {result.TotalPackages} | Added: {result.Added} | Cached: {result.AlreadyCached} | " +
-                    $"No trophies: {result.WithoutTrophies} | Duplicates: {result.DuplicateContentIds} | Failed: {result.Failed}";
-                lblTrophyCacheStatus.Text = (result.Cancelled ? "Cancelled. " : "Complete. ") + summary;
-                Logger.LogInformation("Trophy metadata cache: " + lblTrophyCacheStatus.Text);
+                string summary = $"PKG 数：{result.TotalPackages} | 新增：{result.Added} | 已缓存：{result.AlreadyCached} | " +
+                    $"无奖杯：{result.WithoutTrophies} | 重复：{result.DuplicateContentIds} | 失败：{result.Failed}";
+                lblTrophyCacheStatus.Text = (result.Cancelled ? "已取消。 " : "完成。 ") + summary;
+                Logger.LogInformation("奖杯元数据缓存：" + lblTrophyCacheStatus.Text);
                 foreach (string error in result.Errors)
-                    Logger.LogWarning("Trophy cache: " + error);
+                    Logger.LogWarning("奖杯缓存：" + error);
 
                 if (!result.Cancelled)
                     ShowInformation(summary, true);
             }
             catch (Exception ex)
             {
-                lblTrophyCacheStatus.Text = "Cache build failed: " + ex.Message;
-                Logger.LogError("Failed to build trophy metadata cache", ex);
+                lblTrophyCacheStatus.Text = "缓存构建失败：" + ex.Message;
+                Logger.LogError("构建奖杯元数据缓存失败", ex);
                 ShowError(lblTrophyCacheStatus.Text, true);
             }
             finally
@@ -751,17 +751,17 @@ namespace PS4PKGTool
 
         private void btnClearTrophyCache_Click(object sender, EventArgs e)
         {
-            if (DialogResultYesNo("Clear every cached NP Communication ID?") != DialogResult.Yes)
+            if (DialogResultYesNo("清除所有已缓存的 NP Communication ID？") != DialogResult.Yes)
                 return;
             try
             {
                 new NpCommunicationIdCache(TrophyCachePath).Clear();
                 UpdateTrophyCacheStatus();
-                Logger.LogInformation("Trophy metadata cache cleared.");
+                Logger.LogInformation("奖杯元数据缓存已清除。");
             }
             catch (Exception ex)
             {
-                ShowError("Failed to clear trophy metadata cache: " + ex.Message, true);
+                ShowError("清除奖杯元数据缓存失败：" + ex.Message, true);
             }
         }
 
@@ -770,11 +770,11 @@ namespace PS4PKGTool
             try
             {
                 int count = new NpCommunicationIdCache(TrophyCachePath).Count;
-                lblTrophyCacheStatus.Text = $"Cached NP Communication IDs: {count}";
+                lblTrophyCacheStatus.Text = $"已缓存的 NP Communication ID：{count}";
             }
             catch (Exception ex)
             {
-                lblTrophyCacheStatus.Text = "Cache unavailable: " + ex.Message;
+                lblTrophyCacheStatus.Text = "缓存不可用：" + ex.Message;
             }
         }
     }
