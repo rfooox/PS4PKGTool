@@ -39,6 +39,7 @@
 
 | 版本 | 说明 |
 |---|---|
+| [**中文版 Release（v1.9.2-zh）**](https://github.com/rfooox/PS4PKGTool/releases/tag/v1.9.2-zh) | 自包含版 **126.8 MB**（免运行时）/ 框架依赖版 **16.2 MB**（需 .NET 10 Desktop Runtime） |
 | [上游官方 Release（英文界面）](https://github.com/pearlxcore/PS4-PKG-Tool/releases/latest) | 由上游作者发布的官方版本 |
 | **本仓库源码** | 完整中文界面，可自行构建，见 [自行构建](#自行构建) |
 
